@@ -1,3 +1,25 @@
 {
+  "item.resourceslimes.raw_citrine": "Raw Citrine",
+  "item.resourceslimes.cut_citrine": "Cut Citrine",
 
+  "item.resourceslimes.raw_zircon": "Raw Zircon",
+  "item.resourceslimes.cut_zircon": "Cut Zircon",
+
+  "item.resourceslimes.raw_tanzanite": "Raw Tanzanite",
+  "item.resourceslimes.cut_tanzanite": "Cut Tanzanite",
+
+  "item.resourceslimes.raw_black_opal": "Raw Black Opal",
+  "item.resourceslimes.cut_black_opal": "Cut Black Opal",
+
+  "item.resourceslimes.red_slime_pearl": "Red Slime Pearl",
+
+
+
+
+  "block.resourceslimes.citrine_ore": "Citrine Ore",
+  "block.resourceslimes.zircon_ore": "Zircon Ore",
+  "block.resourceslimes.tanzanite_ore": "Tanzanite Ore",
+  "block.resourceslimes.black_opal_ore": "Black Opal Ore",
+
+  "itemGroup.resourceslimes.resourceslimestab": "Resource Slimes Tab"
 }
