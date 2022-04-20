@@ -12,6 +12,7 @@
   "item.resourceslimes.cut_black_opal": "Cut Black Opal",
 
   "item.resourceslimes.red_slime_pearl": "Red Slime Pearl",
+  "item.resourceslimes.resource_slime_spawn_egg": "Resource Slime Spawn Egg",
 
 
 
@@ -21,5 +22,5 @@
   "block.resourceslimes.tanzanite_ore": "Tanzanite Ore",
   "block.resourceslimes.black_opal_ore": "Black Opal Ore",
 
-  "itemGroup.resourceslimes.resourceslimestab": "Resource Slimes Tab"
+  "itemGroup.resourceslimestab": "Resource Slimes Tab"
 }

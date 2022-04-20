@@ -1,7 +1,9 @@
 package net.kaupenjoe.resourceslimes.item;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
+import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -33,6 +35,12 @@ public class ModItems {
 
     public static final RegistryObject<Item> RED_SLIME_PEARL = ITEMS.register("red_slime_pearl",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+
+
+    public static final RegistryObject<Item> RESOURCE_SLIME_SPAWN_EGG = ITEMS.register("resource_slime_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.RESOURCE_SLIME,0x948e8d, 0x3b3635,
+                    new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

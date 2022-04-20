@@ -2,7 +2,11 @@ package net.kaupenjoe.resourceslimes;
 
 import com.mojang.logging.LogUtils;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
+import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
+import net.kaupenjoe.resourceslimes.entity.client.ResourceSlimeRenderer;
 import net.kaupenjoe.resourceslimes.item.ModItems;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.SlimeRenderer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -22,6 +26,8 @@ public class ResourceSlimes {
         ModItems.register(eventBus);
         ModBlocks.register(eventBus);
 
+        ModEntityTypes.register(eventBus);
+
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
 
@@ -33,6 +39,8 @@ public class ResourceSlimes {
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-
+        event.enqueueWork(() -> {
+            EntityRenderers.register(ModEntityTypes.RESOURCE_SLIME.get(), ResourceSlimeRenderer::new);
+        });
     }
 }
