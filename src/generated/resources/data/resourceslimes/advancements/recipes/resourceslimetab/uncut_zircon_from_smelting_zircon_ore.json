@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:uncut_zircon_from_smelting_zircon_ore"
+    ]
+  },
+  "criteria": {
+    "has_zircon_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:zircon_ore"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:uncut_zircon_from_smelting_zircon_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_zircon_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

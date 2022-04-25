@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "resourceslimes:item/black_opal_slime_fluid_bucket"
+  }
+}

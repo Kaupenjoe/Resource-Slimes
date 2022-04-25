@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:uncut_tanzanite_from_blasting_raw_tanzanite"
+    ]
+  },
+  "criteria": {
+    "has_raw_tanzanite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:raw_tanzanite"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:uncut_tanzanite_from_blasting_raw_tanzanite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_tanzanite",
+      "has_the_recipe"
+    ]
+  ]
+}

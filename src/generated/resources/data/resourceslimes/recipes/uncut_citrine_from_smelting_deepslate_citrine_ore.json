@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "citrine",
+  "ingredient": {
+    "item": "resourceslimes:deepslate_citrine_ore"
+  },
+  "result": "resourceslimes:uncut_citrine",
+  "experience": 0.35,
+  "cookingtime": 200
+}

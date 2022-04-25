@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "black_opal",
+  "ingredient": {
+    "item": "resourceslimes:raw_black_opal"
+  },
+  "result": "resourceslimes:uncut_black_opal",
+  "experience": 1.15,
+  "cookingtime": 200
+}

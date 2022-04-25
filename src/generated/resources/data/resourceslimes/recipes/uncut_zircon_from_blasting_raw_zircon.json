@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "zircon",
+  "ingredient": {
+    "item": "resourceslimes:raw_zircon"
+  },
+  "result": "resourceslimes:uncut_zircon",
+  "experience": 0.5,
+  "cookingtime": 100
+}

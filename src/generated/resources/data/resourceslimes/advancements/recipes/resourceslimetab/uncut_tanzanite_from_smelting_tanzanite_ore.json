@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:uncut_tanzanite_from_smelting_tanzanite_ore"
+    ]
+  },
+  "criteria": {
+    "has_tanzanite_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:tanzanite_ore"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:uncut_tanzanite_from_smelting_tanzanite_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tanzanite_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

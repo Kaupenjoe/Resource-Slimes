@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "resourceslimes:block/deepslate_black_opal_ore"
+  }
+}

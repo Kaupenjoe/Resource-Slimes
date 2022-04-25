@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "citrine",
+  "ingredient": {
+    "item": "resourceslimes:citrine_ore"
+  },
+  "result": "resourceslimes:uncut_citrine",
+  "experience": 0.35,
+  "cookingtime": 100
+}

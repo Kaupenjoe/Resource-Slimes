@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:uncut_black_opal_from_blasting_raw_black_opal"
+    ]
+  },
+  "criteria": {
+    "has_raw_black_opal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:raw_black_opal"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:uncut_black_opal_from_blasting_raw_black_opal"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_black_opal",
+      "has_the_recipe"
+    ]
+  ]
+}
