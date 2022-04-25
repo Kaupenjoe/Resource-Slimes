@@ -1,13 +1,17 @@
 {
+  "item.resourceslimes.uncut_citrine": "Uncut Citrine",
   "item.resourceslimes.raw_citrine": "Raw Citrine",
   "item.resourceslimes.cut_citrine": "Cut Citrine",
 
+  "item.resourceslimes.uncut_zircon": "Uncut Zircon",
   "item.resourceslimes.raw_zircon": "Raw Zircon",
   "item.resourceslimes.cut_zircon": "Cut Zircon",
 
+  "item.resourceslimes.uncut_tanzanite": "Uncut Tanzanite",
   "item.resourceslimes.raw_tanzanite": "Raw Tanzanite",
   "item.resourceslimes.cut_tanzanite": "Cut Tanzanite",
 
+  "item.resourceslimes.uncut_black_opal": "Uncut Black Opal",
   "item.resourceslimes.raw_black_opal": "Raw Black Opal",
   "item.resourceslimes.cut_black_opal": "Cut Black Opal",
 
@@ -15,12 +19,26 @@
   "item.resourceslimes.resource_slime_spawn_egg": "Resource Slime Spawn Egg",
 
 
+  "item.resourceslimes.citrine_slime_fluid_bucket": "Citrine Slime Fluid Bucket",
+  "item.resourceslimes.zircon_slime_fluid_bucket": "Zircon Slime Fluid Bucket",
+  "item.resourceslimes.diamond_slime_fluid_bucket": "Diamond Slime Fluid Bucket",
+  "item.resourceslimes.emerald_slime_fluid_bucket": "Emerald Slime Fluid Bucket",
+  "item.resourceslimes.tanzanite_slime_fluid_bucket": "Tanzanite Slime Fluid Bucket",
+  "item.resourceslimes.black_opal_slime_fluid_bucket": "Black Opal Slime Fluid Bucket",
+  "item.resourceslimes.red_slime_pearl_slime_fluid_bucket": "Red Slime Pearl Slime Fluid Bucket",
 
 
+
+
+  "block.resourceslimes.deepslate_citrine_ore": "Deepslate Citrine Ore",
   "block.resourceslimes.citrine_ore": "Citrine Ore",
+  "block.resourceslimes.deepslate_zircon_ore": "Deepslate Zircon Ore",
   "block.resourceslimes.zircon_ore": "Zircon Ore",
+  "block.resourceslimes.deepslate_tanzanite_ore": "Deepslate Tanzanite Ore",
   "block.resourceslimes.tanzanite_ore": "Tanzanite Ore",
+  "block.resourceslimes.deepslate_black_opal_ore": "Deepslate Black Opal Ore",
+  "block.resourceslimes.end_black_opal_ore": "End Black Opal Ore",
   "block.resourceslimes.black_opal_ore": "Black Opal Ore",
 
-  "itemGroup.resourceslimestab": "Resource Slimes Tab"
+  "itemGroup.resourceslimetab": "Resource Slimes Tab"
 }

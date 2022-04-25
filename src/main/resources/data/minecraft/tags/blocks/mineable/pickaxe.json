@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "resourceslimes:citrine_ore",
+    "resourceslimes:zircon_ore",
+    "resourceslimes:tanzanite_ore",
+    "resourceslimes:black_opal_ore"
+  ]
+}

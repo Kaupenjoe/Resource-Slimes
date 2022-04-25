@@ -1,6 +1,7 @@
 package net.kaupenjoe.resourceslimes.block;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
+import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModCreativeModeTab;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.minecraft.network.chat.Component;
@@ -8,6 +9,7 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,16 +28,56 @@ public class ModBlocks {
     public static final RegistryObject<Block> CITRINE_ORE = registerBlock("citrine_ore",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(4f).requiresCorrectToolForDrops()), ModCreativeModeTab.RESOURCE_SLIMES);
+    public static final RegistryObject<Block> DEEPSLATE_CITRINE_ORE = registerBlock("deepslate_citrine_ore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(5.5f).requiresCorrectToolForDrops()), ModCreativeModeTab.RESOURCE_SLIMES);
+
     public static final RegistryObject<Block> ZIRCON_ORE = registerBlock("zircon_ore",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.RESOURCE_SLIMES);
+    public static final RegistryObject<Block> DEEPSLATE_ZIRCON_ORE = registerBlock("deepslate_zircon_ore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(7.5f).requiresCorrectToolForDrops()), ModCreativeModeTab.RESOURCE_SLIMES);
+
     public static final RegistryObject<Block> TANZANITE_ORE = registerBlock("tanzanite_ore",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(9f).requiresCorrectToolForDrops()), ModCreativeModeTab.RESOURCE_SLIMES);
+    public static final RegistryObject<Block> DEEPSLATE_TANZANITE_ORE = registerBlock("deepslate_tanzanite_ore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(10.5f).requiresCorrectToolForDrops()), ModCreativeModeTab.RESOURCE_SLIMES);
+
     public static final RegistryObject<Block> BLACK_OPAL_ORE = registerBlock("black_opal_ore",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(11f).requiresCorrectToolForDrops()), ModCreativeModeTab.RESOURCE_SLIMES);
+    public static final RegistryObject<Block> DEEPSLATE_BLACK_OPAL_ORE = registerBlock("deepslate_black_opal_ore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(12.5f).requiresCorrectToolForDrops()), ModCreativeModeTab.RESOURCE_SLIMES);
+    public static final RegistryObject<Block> END_BLACK_OPAL_ORE = registerBlock("end_black_opal_ore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(12.5f).requiresCorrectToolForDrops()), ModCreativeModeTab.RESOURCE_SLIMES);
 
+
+    public static final RegistryObject<LiquidBlock> CITRINE_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("citrine_slime_fluid_block",
+            () -> new LiquidBlock(() -> ModFluids.CITRINE_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
+                    .noCollission().strength(100f).noDrops()));
+    public static final RegistryObject<LiquidBlock> ZIRCON_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("zircon_slime_fluid_block",
+            () -> new LiquidBlock(() -> ModFluids.ZIRCON_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
+                    .noCollission().strength(100f).noDrops()));
+    public static final RegistryObject<LiquidBlock> DIAMOND_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("diamond_slime_fluid_block",
+            () -> new LiquidBlock(() -> ModFluids.DIAMOND_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
+                    .noCollission().strength(100f).noDrops()));
+    public static final RegistryObject<LiquidBlock> EMERALD_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("emerald_slime_fluid_block",
+            () -> new LiquidBlock(() -> ModFluids.EMERALD_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
+                    .noCollission().strength(100f).noDrops()));
+    public static final RegistryObject<LiquidBlock> TANZANITE_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("tanzanite_slime_fluid_block",
+            () -> new LiquidBlock(() -> ModFluids.TANZANITE_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
+                    .noCollission().strength(100f).noDrops()));
+    public static final RegistryObject<LiquidBlock> BLACK_OPAL_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("black_opal_slime_fluid_block",
+            () -> new LiquidBlock(() -> ModFluids.BLACK_OPAL_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
+                    .noCollission().strength(100f).noDrops()));
+    public static final RegistryObject<LiquidBlock> RED_SLIME_PEARL_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("red_slime_pearl_slime_fluid_block",
+            () -> new LiquidBlock(() -> ModFluids.RED_SLIME_PEARL_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
+                    .noCollission().strength(100f).noDrops()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {

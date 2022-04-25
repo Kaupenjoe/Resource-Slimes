@@ -19,7 +19,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 
-version = '0.0.0-1.18.2'
+version = '0.0.7-1.18.2'
 group = 'net.kaupenjoe.resourceslimes' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'resourceslimes'
 

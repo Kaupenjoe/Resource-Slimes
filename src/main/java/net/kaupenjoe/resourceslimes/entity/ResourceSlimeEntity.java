@@ -1,6 +1,8 @@
 package net.kaupenjoe.resourceslimes.entity;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
+import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
+import net.minecraft.Util;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -47,7 +49,6 @@ public class ResourceSlimeEntity extends Slime {
         if(!pPlayer.getLevel().isClientSide() && pHand == InteractionHand.MAIN_HAND) {
             harvestResource(pPlayer);
 
-
             if(pPlayer.isCrouching()) {
                 outputInfo(pPlayer);
             }
@@ -66,15 +67,17 @@ public class ResourceSlimeEntity extends Slime {
         pPlayer.sendMessage(new TextComponent("Resource: " + this.entityData.get(RESOURCE)), pPlayer.getUUID());
         pPlayer.sendMessage(new TextComponent("Size: " + this.entityData.get(ID_SIZE)), pPlayer.getUUID());
         pPlayer.sendMessage(new TextComponent("Counter: " + this.entityData.get(GROWTH_COUNTER)), pPlayer.getUUID());
+        pPlayer.sendMessage(new TextComponent("Tier: " +
+                SlimeResource.getResourceByItem(this.entityData.get(RESOURCE).getItem())), pPlayer.getUUID());
     }
 
     // TODO: Generalize the Resources
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_146746_, DifficultyInstance p_146747_,
                                         MobSpawnType p_146748_, @Nullable SpawnGroupData p_146749_,
                                         @Nullable CompoundTag p_146750_) {
-        ItemStack stack = this.random.nextFloat() > 0.5 ? new ItemStack(Items.GOLD_INGOT) :
-                new ItemStack(Items.IRON_INGOT);
-        this.setResource(stack);
+        SlimeResource resource = Util.getRandom(SlimeResource.values(), this.random);
+        this.setResource(new ItemStack(resource.getItem().get()));
+
         return super.finalizeSpawn(p_146746_, p_146747_, p_146748_, p_146749_, p_146750_);
     }
 
@@ -185,12 +188,16 @@ public class ResourceSlimeEntity extends Slime {
     }
 
     // Makes the Slimes non-splittable atm
+    // TODO: I got "zombie slimes" twice... idk weird bug!
     @Override
     public void remove(Entity.RemovalReason pReason) {
         this.setRemoved(pReason);
         if (pReason == Entity.RemovalReason.KILLED) {
             this.gameEvent(GameEvent.ENTITY_KILLED);
         }
+
+        // Drops all remaining resources
+        this.spawnAtLocation(this.entityData.get(RESOURCE));
 
         this.invalidateCaps();
     }
