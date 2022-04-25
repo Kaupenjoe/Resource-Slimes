@@ -1,6 +1,7 @@
 package net.kaupenjoe.resourceslimes.entity;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
+import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -77,10 +78,9 @@ public class ResourceSlimeEntity extends Slime {
         return super.finalizeSpawn(p_146746_, p_146747_, p_146748_, p_146749_, p_146750_);
     }
 
-    // TODO: Custom Particles for different Resources
     @Override
     protected ParticleOptions getParticleType() {
-        return ParticleTypes.ITEM_SLIME;
+        return new ItemParticleOption(ParticleTypes.ITEM, this.entityData.get(RESOURCE));
     }
 
     @Override
