@@ -1,5 +1,8 @@
 package net.kaupenjoe.resourceslimes.util.resources;
 
+import net.kaupenjoe.resourceslimes.ResourceSlimes;
+import net.minecraft.resources.ResourceLocation;
+
 public enum ResourceTier {
     CITRINE(0, "citrine"),
     ZIRCON(1, "zircon"),
@@ -23,6 +26,11 @@ public enum ResourceTier {
 
     public String getTierName() {
         return tierName;
+    }
+
+    public ResourceLocation getTextureLocation() {
+        return new ResourceLocation(ResourceSlimes.MOD_ID,"textures/entity/resource_slime/tiers/tier_"
+                + this.tierId + "_" + this.getTierName() + ".png");
     }
 
     public static ResourceTier getTierById(int i) {
