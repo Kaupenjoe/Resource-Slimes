@@ -13,7 +13,7 @@ public enum SlimeResource {
     IRON(() -> Items.IRON_INGOT, ResourceTier.CITRINE,
             new ResourceLocation("textures/block/iron_ore.png")),
     GOLD(() -> Items.GOLD_INGOT, ResourceTier.EMERALD,
-            new ResourceLocation("textures/block/iron_ore.png")),
+            new ResourceLocation("textures/block/gold_ore.png")),
     CITRINE(ModItems.UNCUT_CITRINE, ResourceTier.ZIRCON, new ResourceLocation(ResourceSlimes.MOD_ID,
             "textures/block/citrine_ore.png"));
 
