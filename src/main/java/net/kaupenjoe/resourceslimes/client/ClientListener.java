@@ -39,7 +39,7 @@ public class ClientListener {
 
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.EMERALD_SLIME_FLUID_BLOCK.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.EMERALD_SLIME_FLUID.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.EMERALD_SLIME_FLUID.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.EMERALD_SLIME_FLUID_FLOWING.get(), RenderType.translucent());
 
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.TANZANITE_SLIME_FLUID_BLOCK.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.TANZANITE_SLIME_FLUID.get(), RenderType.translucent());

@@ -165,6 +165,11 @@ public class ResourceSlimeEntity extends Slime {
     }
 
     @Override
+    protected boolean shouldDespawnInPeaceful() {
+        return true;
+    }
+
+    @Override
     public int getSize() {
         return this.entityData.get(ID_SIZE);
     }
