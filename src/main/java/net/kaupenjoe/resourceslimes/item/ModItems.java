@@ -21,6 +21,8 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
     public static final RegistryObject<Item> CUT_CITRINE = ITEMS.register("cut_citrine",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+    public static final RegistryObject<Item> INFUSED_CITRINE = ITEMS.register("infused_citrine",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
     public static final RegistryObject<Item> RAW_ZIRCON = ITEMS.register("raw_zircon",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
@@ -28,12 +30,26 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
     public static final RegistryObject<Item> CUT_ZIRCON = ITEMS.register("cut_zircon",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+    public static final RegistryObject<Item> INFUSED_ZIRCON = ITEMS.register("infused_zircon",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+
+    public static final RegistryObject<Item> CUT_DIAMOND = ITEMS.register("cut_diamond",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+    public static final RegistryObject<Item> INFUSED_DIAMOND = ITEMS.register("infused_diamond",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+
+    public static final RegistryObject<Item> CUT_EMERALD = ITEMS.register("cut_emerald",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+    public static final RegistryObject<Item> INFUSED_EMERALD = ITEMS.register("infused_emerald",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
     public static final RegistryObject<Item> RAW_TANZANITE = ITEMS.register("raw_tanzanite",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
     public static final RegistryObject<Item> UNCUT_TANZANITE = ITEMS.register("uncut_tanzanite",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
     public static final RegistryObject<Item> CUT_TANZANITE = ITEMS.register("cut_tanzanite",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+    public static final RegistryObject<Item> INFUSED_TANZANITE = ITEMS.register("infused_tanzanite",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
     public static final RegistryObject<Item> RAW_BLACK_OPAL = ITEMS.register("raw_black_opal",
@@ -44,6 +60,8 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
     public static final RegistryObject<Item> RED_SLIME_PEARL = ITEMS.register("red_slime_pearl",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+    public static final RegistryObject<Item> INFUSED_RED_SLIME_PEARL = ITEMS.register("infused_red_slime_pearl",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
 

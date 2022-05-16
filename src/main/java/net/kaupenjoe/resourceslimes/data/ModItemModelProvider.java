@@ -25,20 +25,30 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_CITRINE.get());
         simpleItem(ModItems.UNCUT_CITRINE.get());
         simpleItem(ModItems.CUT_CITRINE.get());
+        simpleItem(ModItems.INFUSED_CITRINE.get());
 
         simpleItem(ModItems.RAW_ZIRCON.get());
         simpleItem(ModItems.UNCUT_ZIRCON.get());
         simpleItem(ModItems.CUT_ZIRCON.get());
+        simpleItem(ModItems.INFUSED_ZIRCON.get());
+
+        simpleItem(ModItems.CUT_DIAMOND.get());
+        simpleItem(ModItems.INFUSED_DIAMOND.get());
+
+        simpleItem(ModItems.CUT_EMERALD.get());
+        simpleItem(ModItems.INFUSED_EMERALD.get());
 
         simpleItem(ModItems.RAW_TANZANITE.get());
         simpleItem(ModItems.UNCUT_TANZANITE.get());
         simpleItem(ModItems.CUT_TANZANITE.get());
+        simpleItem(ModItems.INFUSED_TANZANITE.get());
 
         simpleItem(ModItems.RAW_BLACK_OPAL.get());
         simpleItem(ModItems.UNCUT_BLACK_OPAL.get());
         simpleItem(ModItems.CUT_BLACK_OPAL.get());
 
         simpleItem(ModItems.RED_SLIME_PEARL.get());
+        simpleItem(ModItems.INFUSED_RED_SLIME_PEARL.get());
 
         spawnEgg(ModItems.RESOURCE_SLIME_SPAWN_EGG.get());
 
