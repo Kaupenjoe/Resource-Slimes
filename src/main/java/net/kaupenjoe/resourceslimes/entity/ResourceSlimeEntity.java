@@ -14,10 +14,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
@@ -29,6 +26,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
+// TODO: Using Slime as it super class mean it has TWO size values
 public class ResourceSlimeEntity extends Slime {
     private static final EntityDataAccessor<ItemStack> RESOURCE =
             SynchedEntityData.defineId(ResourceSlimeEntity.class, EntityDataSerializers.ITEM_STACK);
@@ -51,10 +49,17 @@ public class ResourceSlimeEntity extends Slime {
 
             if(pPlayer.isCrouching()) {
                 outputInfo(pPlayer);
+                changeResourceDEBUG(pPlayer.getItemInHand(pHand));
             }
 
         }
         return super.mobInteract(pPlayer, pHand);
+    }
+
+    private void changeResourceDEBUG(ItemStack stack) {
+        if(SlimeResource.getResourceByItem(stack.getItem()) != SlimeResource.EMPTY && !stack.isEmpty()) {
+            this.setResource(stack);
+        }
     }
 
     private void harvestResource(Player pPlayer) {
@@ -196,14 +201,17 @@ public class ResourceSlimeEntity extends Slime {
     // TODO: I got "zombie slimes" twice... idk weird bug!
     @Override
     public void remove(Entity.RemovalReason pReason) {
-        this.setRemoved(pReason);
-        if (pReason == Entity.RemovalReason.KILLED) {
-            this.gameEvent(GameEvent.ENTITY_KILLED);
+        int i = this.getSize();
+        if (!this.level.isClientSide && i > 1 && this.isDeadOrDying()) {
+            this.setRemoved(pReason);
+            if (pReason == Entity.RemovalReason.KILLED) {
+                this.gameEvent(GameEvent.ENTITY_KILLED);
+            }
+
+            // Drops all remaining resources
+            this.spawnAtLocation(this.entityData.get(RESOURCE));
+
+            this.invalidateCaps();
         }
-
-        // Drops all remaining resources
-        this.spawnAtLocation(this.entityData.get(RESOURCE));
-
-        this.invalidateCaps();
     }
 }

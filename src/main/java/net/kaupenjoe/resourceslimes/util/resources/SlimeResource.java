@@ -5,17 +5,45 @@ import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
 public enum SlimeResource {
-    IRON(() -> Items.IRON_INGOT, ResourceTier.CITRINE,
+    EMPTY(() -> Items.AIR, ResourceTier.CITRINE,
+            new ResourceLocation("textures/block/structure_block.png")),
+
+    STONE(() -> Items.STONE, ResourceTier.CITRINE,
+            new ResourceLocation("textures/block/stone.png")),
+    DIORITE(() -> Items.DIORITE, ResourceTier.CITRINE,
+            new ResourceLocation("textures/block/diorite.png")),
+    ANDESITE(() -> Items.ANDESITE, ResourceTier.CITRINE,
+            new ResourceLocation("textures/block/andesite.png")),
+    GRANITE(() -> Items.GRANITE, ResourceTier.CITRINE,
+            new ResourceLocation("textures/block/granite.png")),
+    TUFF(() -> Items.TUFF, ResourceTier.CITRINE,
+            new ResourceLocation("textures/block/tuff.png")),
+    CALCITE(() -> Items.CALCITE, ResourceTier.CITRINE,
+            new ResourceLocation("textures/block/calcite.png")),
+    DRIPSTONE(() -> Items.DRIPSTONE_BLOCK, ResourceTier.CITRINE,
+            new ResourceLocation("textures/block/dripstone_block.png")),
+    BLACKSTONE(() -> Items.BLACKSTONE, ResourceTier.CITRINE,
+            new ResourceLocation("textures/block/blackstone.png")),
+    SAND(() -> Items.SAND, ResourceTier.CITRINE,
+            new ResourceLocation("textures/block/sand.png")),
+    RED_SAND(() -> Items.RED_SAND, ResourceTier.CITRINE,
+            new ResourceLocation("textures/block/red_sand.png")),
+
+
+    IRON(() -> Items.IRON_INGOT, ResourceTier.ZIRCON,
             new ResourceLocation("textures/block/iron_ore.png")),
-    GOLD(() -> Items.GOLD_INGOT, ResourceTier.EMERALD,
-            new ResourceLocation("textures/block/gold_ore.png")),
+    CLAY(() -> Items.CLAY_BALL, ResourceTier.ZIRCON,
+            new ResourceLocation("textures/block/clay.png")),
     CITRINE(ModItems.UNCUT_CITRINE, ResourceTier.ZIRCON, new ResourceLocation(ResourceSlimes.MOD_ID,
-            "textures/block/citrine_ore.png"));
+            "textures/block/citrine_ore.png")),
+
+
+    GOLD(() -> Items.GOLD_INGOT, ResourceTier.EMERALD,
+            new ResourceLocation("textures/block/gold_ore.png"));
 
     private final Supplier<Item> item;
     private final ResourceTier tier;
@@ -72,7 +100,7 @@ public enum SlimeResource {
             }
         }
         // TODO: possibly add a "dummy" resource
-        return SlimeResource.IRON;
+        return SlimeResource.EMPTY;
     }
 
     @Override
