@@ -5,9 +5,11 @@ import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.client.ResourceSlimeRenderer;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
+import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -52,5 +54,7 @@ public class ClientListener {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.RED_SLIME_PEARL_SLIME_FLUID_BLOCK.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.RED_SLIME_PEARL_SLIME_FLUID.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.RED_SLIME_PEARL_SLIME_FLUID_FLOWING.get(), RenderType.translucent());
+
+
     }
 }

@@ -26,6 +26,8 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 // TODO: Using Slime as it super class mean it has TWO size values
 public class ResourceSlimeEntity extends Slime {
     private static final EntityDataAccessor<ItemStack> RESOURCE =
@@ -44,15 +46,19 @@ public class ResourceSlimeEntity extends Slime {
 
     @Override
     protected InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
-        if(!pPlayer.getLevel().isClientSide() && pHand == InteractionHand.MAIN_HAND) {
-            harvestResource(pPlayer);
-
+        if(pHand == InteractionHand.MAIN_HAND) {
             if(pPlayer.isCrouching()) {
                 outputInfo(pPlayer);
                 changeResourceDEBUG(pPlayer.getItemInHand(pHand));
-            }
 
+                if(pPlayer.getItemInHand(pHand).getItem() == Items.STICK) {
+                    growSlimeDEBUG();
+                }
+            } else {
+                harvestResource(pPlayer);
+            }
         }
+
         return super.mobInteract(pPlayer, pHand);
     }
 
@@ -62,10 +68,27 @@ public class ResourceSlimeEntity extends Slime {
         }
     }
 
+    private void growSlimeDEBUG() {
+        ItemStack stack = this.entityData.get(RESOURCE);
+        stack.setCount(64);
+        this.setResource(stack);
+    }
+
     private void harvestResource(Player pPlayer) {
-        this.spawnAtLocation(this.entityData.get(RESOURCE).copy());
+        if(this.entityData.get(RESOURCE).getCount() > 1) {
+            ItemStack stackToSpawn = this.entityData.get(RESOURCE).copy();
+            stackToSpawn.setCount(stackToSpawn.getCount() - 1);
+
+            this.spawnAtLocation(stackToSpawn);
+            shrinkOnHarvest(stackToSpawn);
+        }
 
         ResourceSlimes.LOGGER.debug(pPlayer.getName() + " harvested: " + this.entityData.get(RESOURCE));
+    }
+
+    // TODO: customize to what size the slime can be reduced to
+    private void shrinkOnHarvest(ItemStack stack) {
+        setResource(new ItemStack(stack.getItem(), 1));
     }
 
     private void outputInfo(Player pPlayer) {
@@ -76,11 +99,11 @@ public class ResourceSlimeEntity extends Slime {
                 SlimeResource.getResourceByItem(this.entityData.get(RESOURCE).getItem())), pPlayer.getUUID());
     }
 
-    // TODO: Generalize the Resources
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_146746_, DifficultyInstance p_146747_,
                                         MobSpawnType p_146748_, @Nullable SpawnGroupData p_146749_,
                                         @Nullable CompoundTag p_146750_) {
-        SlimeResource resource = Util.getRandom(SlimeResource.values(), this.random);
+        SlimeResource resource = Util.getRandom(Arrays.stream(SlimeResource
+                .values()).filter(sr -> !sr.equals(SlimeResource.EMPTY)).toList(), this.random);
         this.setResource(new ItemStack(resource.getItem().get()));
 
         return super.finalizeSpawn(p_146746_, p_146747_, p_146748_, p_146749_, p_146750_);
@@ -96,32 +119,37 @@ public class ResourceSlimeEntity extends Slime {
         super.addAdditionalSaveData(pCompound);
         pCompound.put("resource", this.entityData.get(RESOURCE).serializeNBT());
         pCompound.putInt("growth_counter", this.entityData.get(GROWTH_COUNTER));
+        pCompound.putInt("size", this.entityData.get(ID_SIZE));
 
         ResourceSlimes.LOGGER.debug("Saving Resource: " + this.entityData.get(RESOURCE));
         ResourceSlimes.LOGGER.debug("Saving Growth Counter: " + this.entityData.get(GROWTH_COUNTER));
+        ResourceSlimes.LOGGER.debug("Saving Size: " + this.entityData.get(ID_SIZE));
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.entityData.set(RESOURCE, ItemStack.of(pCompound.getCompound("resource")));
+        this.entityData.set(ID_SIZE, pCompound.getInt("size"));
 
         ResourceSlimes.LOGGER.debug("Reading Resource: " + ItemStack.of(pCompound.getCompound("resource")) +
                 " | " + this.entityData.get(RESOURCE));
         ResourceSlimes.LOGGER.debug("Reading Growth Counter: " + pCompound.getInt("growth_counter"));
+        ResourceSlimes.LOGGER.debug("Reading Size: " + pCompound.getInt("size"));
     }
 
     public void setResource(ItemStack stack) {
         this.entityData.set(RESOURCE, stack);
+        resetGrowthCount();
+        recalculateSize();
     }
 
-    @Nullable
     public Item getResourceItem() {
         if(!this.entityData.get(RESOURCE).isEmpty()) {
             return this.entityData.get(RESOURCE).getItem();
         }
 
-        return null;
+        return Items.AIR;
     }
 
     @Override
@@ -136,11 +164,13 @@ public class ResourceSlimeEntity extends Slime {
     @Override
     public void tick() {
         super.tick();
-        countGrowth();
+        if(!isDeadOrDying()) {
+            countGrowth();
 
-        if(readyForNewResource()) {
-            addResource();
-            resetGrowthCount();
+            if(readyForNewResource()) {
+                addResource();
+                resetGrowthCount();
+            }
         }
     }
 
@@ -171,7 +201,7 @@ public class ResourceSlimeEntity extends Slime {
 
     @Override
     protected boolean shouldDespawnInPeaceful() {
-        return true;
+        return this.getSize() > 0;
     }
 
     @Override
@@ -182,36 +212,34 @@ public class ResourceSlimeEntity extends Slime {
     @Override
     protected void setSize(int pSize, boolean pResetHealth) {
         // Setting the size based on the number of resources
-        // int i = this.entityData.get(RESOURCE).getCount() * 2 - 1; // INSANE GROWTH (64 -> Size 127)
-        int i = (this.entityData.get(RESOURCE).getCount() / 16) + 1; // Normal Growth (64 -> Size   5)
-        this.entityData.set(ID_SIZE, i);
+        // int newSize = this.entityData.get(RESOURCE).getCount() * 2 - 1; // INSANE GROWTH (64 -> Size 127)
+        int newSize = (this.entityData.get(RESOURCE).getCount() / 16) + 1; // Normal Growth (64 -> Size   5)
+        int sizeBefore = this.entityData.get(ID_SIZE);
+        this.entityData.set(ID_SIZE, newSize);
+
         this.reapplyPosition();
         this.refreshDimensions();
-        this.getAttribute(Attributes.MAX_HEALTH).setBaseValue((i * i));
-        this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue((0.2F + 0.1F * (float)i));
-        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(i);
-        if (pResetHealth) {
+        this.getAttribute(Attributes.MAX_HEALTH).setBaseValue((newSize * newSize));
+        this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue((0.2F + 0.1F * (float)newSize));
+        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(newSize);
+        if (sizeBefore != newSize) {
             this.setHealth(this.getMaxHealth());
         }
 
-        this.xpReward = i;
+        this.xpReward = newSize;
     }
 
     // Makes the Slimes non-splittable atm
     // TODO: I got "zombie slimes" twice... idk weird bug!
     @Override
     public void remove(Entity.RemovalReason pReason) {
-        int i = this.getSize();
-        if (!this.level.isClientSide && i > 1 && this.isDeadOrDying()) {
-            this.setRemoved(pReason);
-            if (pReason == Entity.RemovalReason.KILLED) {
-                this.gameEvent(GameEvent.ENTITY_KILLED);
-            }
+        this.setRemoved(pReason);
+        if (pReason == Entity.RemovalReason.KILLED) {
+            this.gameEvent(GameEvent.ENTITY_KILLED);
 
-            // Drops all remaining resources
             this.spawnAtLocation(this.entityData.get(RESOURCE));
-
-            this.invalidateCaps();
         }
+
+        this.invalidateCaps();
     }
 }
