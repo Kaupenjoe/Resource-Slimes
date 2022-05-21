@@ -3,10 +3,12 @@ package net.kaupenjoe.resourceslimes;
 import com.mojang.logging.LogUtils;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.client.ClientListener;
+import net.kaupenjoe.resourceslimes.effect.ModEffects;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.client.ResourceSlimeRenderer;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
+import net.kaupenjoe.resourceslimes.potion.ModPotion;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -31,6 +33,9 @@ public class ResourceSlimes {
 
         ModEntityTypes.register(eventBus);
         ModFluids.register(eventBus);
+
+        ModEffects.register(eventBus);
+        ModPotion.register(eventBus);
 
         eventBus.addListener(this::setup);
 

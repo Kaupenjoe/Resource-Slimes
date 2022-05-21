@@ -35,7 +35,7 @@ public class ResourceSlimeRenderer extends MobRenderer<Slime, SlimeModel<Slime>>
     @Override
     protected void scale(Slime pLivingEntity, PoseStack pMatrixStack, float pPartialTickTime) {
         pMatrixStack.scale(0.999F, 0.999F, 0.999F);
-        pMatrixStack.translate(0.0D, (double)0.001F, 0.0D);
+        pMatrixStack.translate(0.0D, 0.002F, 0.0D);
         float f1 = (float)pLivingEntity.getSize();
         float f2 = Mth.lerp(pPartialTickTime, pLivingEntity.oSquish, pLivingEntity.squish) / (f1 * 0.5F + 1.0F);
         float f3 = 1.0F / (f2 + 1.0F);

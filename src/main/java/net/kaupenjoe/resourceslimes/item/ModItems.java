@@ -86,6 +86,10 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
 
+    public static final RegistryObject<Item> SLIMEY_STONE = ITEMS.register("slimey_stone",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
