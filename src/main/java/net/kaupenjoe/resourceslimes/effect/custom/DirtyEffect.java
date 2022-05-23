@@ -16,12 +16,12 @@ public class DirtyEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        AABB boundingBox = pLivingEntity.getBoundingBox().inflate(pAmplifier);
+        AABB boundingBox = pLivingEntity.getBoundingBox().inflate(pAmplifier + 1);
         List<Entity> entities = pLivingEntity.level.getEntities(pLivingEntity, boundingBox);
 
         for (Entity entity : entities) {
             if(entity instanceof LivingEntity livingEntity) {
-                livingEntity.hurt(DamageSource.GENERIC,0.25f * pAmplifier);
+                livingEntity.hurt(DamageSource.GENERIC,0.25f * (pAmplifier + 1));
             }
         }
 

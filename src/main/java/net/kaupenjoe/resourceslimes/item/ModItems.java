@@ -87,7 +87,6 @@ public class ModItems {
     public static final RegistryObject<Item> RED_SLIME_PEARL_SLIME_FLUID_BUCKET = ITEMS.register("red_slime_pearl_slime_fluid_bucket",
             () -> new BucketItem(ModFluids.RED_SLIME_PEARL_SLIME_FLUID, new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES).stacksTo(1)));
 
-
     public static final RegistryObject<Item> RESOURCE_SLIME_SPAWN_EGG = ITEMS.register("resource_slime_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntityTypes.RESOURCE_SLIME,0x948e8d, 0x3b3635,
                     new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
