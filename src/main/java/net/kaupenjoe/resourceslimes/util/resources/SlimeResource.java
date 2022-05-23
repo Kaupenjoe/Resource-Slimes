@@ -22,7 +22,7 @@ public enum SlimeResource {
     PIG(ResourceTier.ZIRCON, new ResourceLocation("textures/block/coarse_dirt.png"), true),
     CHICKEN(ResourceTier.ZIRCON, new ResourceLocation("textures/block/hay_block.png"), true),
     COAL(ResourceTier.ZIRCON, new ResourceLocation("textures/block/coal_ore.png"), true),
-    BERRY(ResourceTier.ZIRCON, new ResourceLocation("textures/block/sweet_berry_bush_stage_3.png"), true),
+    BERRY(ResourceTier.ZIRCON, new ResourceLocation("textures/block/sweet_berry_bush_stage3.png"), true),
     FISH(ResourceTier.ZIRCON, new ResourceLocation("textures/block/barrel_side.png"), true),
 
 
