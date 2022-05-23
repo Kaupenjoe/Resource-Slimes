@@ -3,13 +3,20 @@ package net.kaupenjoe.resourceslimes.item;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
+import net.kaupenjoe.resourceslimes.item.custom.ExtractItem;
+import net.kaupenjoe.resourceslimes.item.custom.SlimeyExtractItem;
+import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.Arrays;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -85,10 +92,36 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntityTypes.RESOURCE_SLIME,0x948e8d, 0x3b3635,
                     new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
+    /* SLIME RESOURCES */
+    public static void onRegisterItems(IForgeRegistry<Item> registry) {
+        var resources = SlimeResource.values();
 
-    public static final RegistryObject<Item> SLIMEY_STONE = ITEMS.register("slimey_stone",
-            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+        Arrays.stream(resources).filter(sr -> sr != SlimeResource.EMPTY && sr.isEnabled()).forEach(resource -> {
+            var slimeyExtractItem = resource.getExtractItem();
+            var extractItem = resource.getExtractItem();
 
+            if (extractItem == null) {
+                extractItem = new ExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES));
+            }
+
+            if (slimeyExtractItem == null) {
+                slimeyExtractItem = new SlimeyExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES));
+            }
+
+            if(extractItem.getRegistryName() == null) {
+                extractItem.setRegistryName(new ResourceLocation(ResourceSlimes.MOD_ID,resource.name().toLowerCase() + "_extract"));
+                resource.setExtractItem(extractItem);
+            }
+
+            if(slimeyExtractItem.getRegistryName() == null) {
+                slimeyExtractItem.setRegistryName(new ResourceLocation(ResourceSlimes.MOD_ID,"slimey_" + resource.name().toLowerCase() + "_extract"));
+                resource.setSlimeyExtractItem(slimeyExtractItem);
+            }
+
+            registry.register(extractItem);
+            registry.register(slimeyExtractItem);
+        });
+    }
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

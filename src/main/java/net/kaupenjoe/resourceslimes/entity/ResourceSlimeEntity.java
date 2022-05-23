@@ -103,8 +103,8 @@ public class ResourceSlimeEntity extends Slime {
                                         MobSpawnType p_146748_, @Nullable SpawnGroupData p_146749_,
                                         @Nullable CompoundTag p_146750_) {
         SlimeResource resource = Util.getRandom(Arrays.stream(SlimeResource
-                .values()).filter(sr -> !sr.equals(SlimeResource.EMPTY)).toList(), this.random);
-        this.setResource(new ItemStack(resource.getItem().get()));
+                .values()).filter(sr -> sr != SlimeResource.EMPTY && sr.isEnabled()).toList(), this.random);
+        this.setResource(new ItemStack(resource.getSlimeyExtractItem()));
 
         return super.finalizeSpawn(p_146746_, p_146747_, p_146748_, p_146749_, p_146750_);
     }
