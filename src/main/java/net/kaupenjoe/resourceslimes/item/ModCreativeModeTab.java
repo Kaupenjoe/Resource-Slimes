@@ -10,4 +10,11 @@ public class ModCreativeModeTab {
             return new ItemStack(ModItems.CUT_CITRINE.get());
         }
     };
+
+    public static final CreativeModeTab RESOURCE_SLIME_EXTRACTS = new CreativeModeTab("resourceslime_extract_tab") {
+        @Override
+        public ItemStack makeIcon() {
+            return new ItemStack(ModItems.CUT_CITRINE.get());
+        }
+    };
 }

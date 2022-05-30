@@ -61,6 +61,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.BLACK_OPAL_SLIME_FLUID_BUCKET.get());
         simpleItem(ModItems.RED_SLIME_PEARL_SLIME_FLUID_BUCKET.get());
 
+        simpleItem(ModItems.GEM_CUTTER_TOOL.get());
+
 
         simpleBlock(ModBlocks.CITRINE_ORE.get());
         simpleBlock(ModBlocks.DEEPSLATE_CITRINE_ORE.get());
@@ -74,6 +76,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlock(ModBlocks.BLACK_OPAL_ORE.get());
         simpleBlock(ModBlocks.DEEPSLATE_BLACK_OPAL_ORE.get());
         simpleBlock(ModBlocks.END_BLACK_OPAL_ORE.get());
+
+        complexBlock(ModBlocks.GEM_CUTTING_STATION.get());
     }
 
     private ItemModelBuilder simpleItem(Item item) {
@@ -84,6 +88,11 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     private ItemModelBuilder simpleBlock(Block block) {
         return cubeAll(block.getRegistryName().getPath(), new ResourceLocation(ResourceSlimes.MOD_ID,
+                "block/" + block.getRegistryName().getPath()));
+    }
+
+    private ItemModelBuilder complexBlock(Block block) {
+        return withExistingParent(block.getRegistryName().getPath(), new ResourceLocation(ResourceSlimes.MOD_ID,
                 "block/" + block.getRegistryName().getPath()));
     }
 

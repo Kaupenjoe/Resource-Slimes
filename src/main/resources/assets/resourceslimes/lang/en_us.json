@@ -27,7 +27,7 @@
   "item.resourceslimes.black_opal_slime_fluid_bucket": "Black Opal Slime Fluid Bucket",
   "item.resourceslimes.red_slime_pearl_slime_fluid_bucket": "Red Slime Pearl Slime Fluid Bucket",
 
-  "item.resourceslimes.slimey_stone": "Slimey Stone",
+  "item.resourceslimes.gem_cutter_tool": "Gem Cutter Tool",
 
 
 
@@ -41,6 +41,8 @@
   "block.resourceslimes.deepslate_black_opal_ore": "Deepslate Black Opal Ore",
   "block.resourceslimes.end_black_opal_ore": "End Black Opal Ore",
   "block.resourceslimes.black_opal_ore": "Black Opal Ore",
+
+  "block.resourceslimes.gem_cutting_station": "Gem Cutting Station",
 
   "itemGroup.resourceslimetab": "Resource Slimes Tab"
 }

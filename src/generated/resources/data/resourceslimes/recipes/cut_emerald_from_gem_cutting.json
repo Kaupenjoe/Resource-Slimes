@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:gem_cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:emerald"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:cut_emerald"
+  }
+}

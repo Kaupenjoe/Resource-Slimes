@@ -23,7 +23,7 @@ public class ModEffects {
 
     // TODO: Maybe have it have you jump "a little bit"
     public static final RegistryObject<MobEffect> SLIMEY = EFFECTS.register("slimey", () ->
-            new SlimeyEffect(MobEffectCategory.HARMFUL, 0x36ebab).addAttributeModifier(Attributes.MOVEMENT_SPEED,
+            new SlimeyEffect(MobEffectCategory.NEUTRAL, 0x36ebab).addAttributeModifier(Attributes.MOVEMENT_SPEED,
             "7107DE5E-7CE8-4030-940E-514C1F160890", -0.25F, AttributeModifier.Operation.MULTIPLY_TOTAL));
 
     // TODO: With Mixin in future

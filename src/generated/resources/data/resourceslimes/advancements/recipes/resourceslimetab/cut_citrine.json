@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:cut_citrine"
+    ]
+  },
+  "criteria": {
+    "has_uncut_citrine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:uncut_citrine"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:cut_citrine"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_uncut_citrine",
+      "has_the_recipe"
+    ]
+  ]
+}

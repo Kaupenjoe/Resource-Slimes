@@ -2,6 +2,7 @@ package net.kaupenjoe.resourceslimes;
 
 import com.mojang.logging.LogUtils;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
+import net.kaupenjoe.resourceslimes.block.entity.ModBlockEntities;
 import net.kaupenjoe.resourceslimes.client.ClientListener;
 import net.kaupenjoe.resourceslimes.effect.ModEffects;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
@@ -11,6 +12,8 @@ import net.kaupenjoe.resourceslimes.item.ModCreativeModeTab;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.item.custom.SlimeyExtractItem;
 import net.kaupenjoe.resourceslimes.potion.ModPotion;
+import net.kaupenjoe.resourceslimes.recipe.ModRecipes;
+import net.kaupenjoe.resourceslimes.screen.ModMenuTypes;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -46,6 +49,12 @@ public class ResourceSlimes {
 
         ModEffects.register(eventBus);
         ModPotion.register(eventBus);
+
+        ModBlockEntities.register(eventBus);
+        ModMenuTypes.register(eventBus);
+
+        ModRecipes.register(eventBus);
+
 
         eventBus.addListener(this::setup);
 

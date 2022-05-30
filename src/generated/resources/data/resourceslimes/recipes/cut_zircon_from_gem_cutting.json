@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:gem_cutting",
+  "ingredients": [
+    {
+      "item": "resourceslimes:uncut_zircon"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:cut_zircon"
+  }
+}

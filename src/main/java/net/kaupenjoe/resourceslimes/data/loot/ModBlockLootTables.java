@@ -10,6 +10,11 @@ public class ModBlockLootTables extends BlockLoot {
     @Override
     protected void addTables() {
         oreDrops();
+        blockEntityDrops();
+    }
+
+    private void blockEntityDrops() {
+        this.dropSelf(ModBlocks.GEM_CUTTING_STATION.get());
     }
 
     private void oreDrops() {

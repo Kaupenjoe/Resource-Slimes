@@ -20,8 +20,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -74,7 +72,7 @@ public class ResourceSlimeEntity extends Slime {
     }
 
     private void changeResourceDEBUG(ItemStack stack) {
-        if(SlimeResource.getResourceByItem(stack.getItem()) != SlimeResource.EMPTY && !stack.isEmpty()) {
+        if(SlimeResource.getResourceBySlimeyExtractItem(stack.getItem()) != SlimeResource.EMPTY && !stack.isEmpty()) {
             this.setResource(stack);
         }
     }
@@ -123,7 +121,7 @@ public class ResourceSlimeEntity extends Slime {
         pPlayer.sendMessage(new TextComponent("Size: " + this.entityData.get(ID_SIZE)), pPlayer.getUUID());
         pPlayer.sendMessage(new TextComponent("Counter: " + this.entityData.get(GROWTH_COUNTER)), pPlayer.getUUID());
         pPlayer.sendMessage(new TextComponent("Tier: " +
-                SlimeResource.getResourceByItem(this.entityData.get(RESOURCE).getItem())), pPlayer.getUUID());
+                SlimeResource.getResourceBySlimeyExtractItem(this.entityData.get(RESOURCE).getItem())), pPlayer.getUUID());
     }
 
     @Override

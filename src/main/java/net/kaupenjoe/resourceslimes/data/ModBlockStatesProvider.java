@@ -4,6 +4,7 @@ import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class ModBlockStatesProvider extends BlockStateProvider {
@@ -25,5 +26,8 @@ public class ModBlockStatesProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.BLACK_OPAL_ORE.get());
         simpleBlock(ModBlocks.DEEPSLATE_BLACK_OPAL_ORE.get());
         simpleBlock(ModBlocks.END_BLACK_OPAL_ORE.get());
+
+        horizontalBlock(ModBlocks.GEM_CUTTING_STATION.get(),
+                new ModelFile.UncheckedModelFile(modLoc("block/gem_cutting_station")));
     }
 }

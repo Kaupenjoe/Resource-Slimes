@@ -141,9 +141,19 @@ public enum SlimeResource {
         return ResourceTier.CITRINE;
     }
 
-    public static SlimeResource getResourceByItem(Item item) {
+    public static SlimeResource getResourceBySlimeyExtractItem(Item item) {
         for (SlimeResource resource : values()) {
             if(resource.getSlimeyExtractItem() == item) {
+                return resource;
+            }
+        }
+        // TODO: possibly add a "dummy" resource
+        return SlimeResource.EMPTY;
+    }
+
+    public static SlimeResource getResourceByExtractItem(Item item) {
+        for (SlimeResource resource : values()) {
+            if(resource.getExtractItem() == item) {
                 return resource;
             }
         }

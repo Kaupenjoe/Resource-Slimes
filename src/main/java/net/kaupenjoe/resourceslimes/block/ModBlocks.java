@@ -1,6 +1,7 @@
 package net.kaupenjoe.resourceslimes.block;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
+import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModCreativeModeTab;
 import net.kaupenjoe.resourceslimes.item.ModItems;
@@ -78,6 +79,11 @@ public class ModBlocks {
     public static final RegistryObject<LiquidBlock> RED_SLIME_PEARL_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("red_slime_pearl_slime_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.RED_SLIME_PEARL_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
                     .noCollission().strength(100f).noDrops()));
+
+
+    public static final RegistryObject<Block> GEM_CUTTING_STATION = registerBlock("gem_cutting_station",
+            () -> new GemCuttingStationBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),
+            ModCreativeModeTab.RESOURCE_SLIMES);
 
 
     private static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {

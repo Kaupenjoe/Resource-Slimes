@@ -2,11 +2,14 @@ package net.kaupenjoe.resourceslimes.data;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
+import net.kaupenjoe.resourceslimes.data.custom.GemCuttingRecipeBuilder;
 import net.kaupenjoe.resourceslimes.item.ModItems;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
@@ -26,10 +29,31 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
         this.customOreSmeltingRecipes(pFinishedRecipeConsumer);
         this.customOreBlastingRecipes(pFinishedRecipeConsumer);
-
+        this.customGemCuttingRecipes(pFinishedRecipeConsumer);
     }
 
+    private void customGemCuttingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+        new GemCuttingRecipeBuilder(ModItems.UNCUT_CITRINE.get(), ModItems.CUT_CITRINE.get(), 1)
+                .unlockedBy("has_uncut_citrine", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.UNCUT_CITRINE.get()).build())).save(pFinishedRecipeConsumer);
+        new GemCuttingRecipeBuilder(ModItems.UNCUT_ZIRCON.get(), ModItems.CUT_ZIRCON.get(), 1)
+                .unlockedBy("has_uncut_zircon", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.UNCUT_ZIRCON.get()).build())).save(pFinishedRecipeConsumer);
 
+        new GemCuttingRecipeBuilder(Items.DIAMOND, ModItems.CUT_DIAMOND.get(), 1)
+                .unlockedBy("has_diamond", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.DIAMOND).build())).save(pFinishedRecipeConsumer);
+        new GemCuttingRecipeBuilder(Items.EMERALD, ModItems.CUT_EMERALD.get(), 1)
+                .unlockedBy("has_emerald", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.EMERALD).build())).save(pFinishedRecipeConsumer);
+
+        new GemCuttingRecipeBuilder(ModItems.UNCUT_TANZANITE.get(), ModItems.CUT_TANZANITE.get(), 1)
+                .unlockedBy("has_uncut_tanzanite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.UNCUT_TANZANITE.get()).build())).save(pFinishedRecipeConsumer);
+        new GemCuttingRecipeBuilder(ModItems.UNCUT_BLACK_OPAL.get(), ModItems.CUT_BLACK_OPAL.get(), 1)
+                .unlockedBy("has_uncut_black_opal", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.UNCUT_BLACK_OPAL.get()).build())).save(pFinishedRecipeConsumer);
+    }
 
     private void customOreSmeltingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
         oreSmelting(pFinishedRecipeConsumer, List.of(ModBlocks.CITRINE_ORE.get(), ModBlocks.DEEPSLATE_CITRINE_ORE.get(), ModItems.RAW_CITRINE.get()),

@@ -91,6 +91,9 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntityTypes.RESOURCE_SLIME,0x948e8d, 0x3b3635,
                     new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
+    public static final RegistryObject<Item> GEM_CUTTER_TOOL = ITEMS.register("gem_cutter_tool",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES).durability(32)));
+
     /* SLIME RESOURCES */
     public static void onRegisterItems(IForgeRegistry<Item> registry) {
         var resources = SlimeResource.values();
@@ -100,11 +103,11 @@ public class ModItems {
             var extractItem = resource.getExtractItem();
 
             if (extractItem == null) {
-                extractItem = new ExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES));
+                extractItem = new ExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS));
             }
 
             if (slimeyExtractItem == null) {
-                slimeyExtractItem = new SlimeyExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES));
+                slimeyExtractItem = new SlimeyExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS));
             }
 
             if(extractItem.getRegistryName() == null) {
