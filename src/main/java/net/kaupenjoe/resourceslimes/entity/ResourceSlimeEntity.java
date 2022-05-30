@@ -1,6 +1,7 @@
 package net.kaupenjoe.resourceslimes.entity;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
+import net.kaupenjoe.resourceslimes.util.resources.ResourceTier;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.Util;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -14,12 +15,18 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -27,6 +34,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 
 // TODO: Using Slime as it super class mean it has TWO size values
 public class ResourceSlimeEntity extends Slime {
@@ -42,6 +50,7 @@ public class ResourceSlimeEntity extends Slime {
 
     public ResourceSlimeEntity(EntityType<? extends Slime> entityType, Level level) {
         super(entityType, level);
+        this.moveControl = new ResourceSlimeEntity.SlimeMoveControl(this);
     }
 
     @Override
@@ -55,7 +64,9 @@ public class ResourceSlimeEntity extends Slime {
                     growSlimeDEBUG();
                 }
             } else {
-                harvestResource(pPlayer);
+                if(pPlayer.getItemInHand(InteractionHand.MAIN_HAND).getItem() == Items.BUCKET) {
+                    harvestResource(pPlayer, pHand);
+                }
             }
         }
 
@@ -74,11 +85,19 @@ public class ResourceSlimeEntity extends Slime {
         this.setResource(stack);
     }
 
-    private void harvestResource(Player pPlayer) {
-        if(this.entityData.get(RESOURCE).getCount() > 1) {
-            ItemStack stackToSpawn = this.entityData.get(RESOURCE).copy();
-            stackToSpawn.setCount(stackToSpawn.getCount() - 1);
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(1, new ResourceSlimeEntity.SlimeFloatGoal(this));
+        this.goalSelector.addGoal(3, new ResourceSlimeEntity.SlimeRandomDirectionGoal(this));
+        this.goalSelector.addGoal(5, new ResourceSlimeEntity.SlimeKeepOnJumpingGoal(this));
+    }
 
+    private void harvestResource(Player pPlayer, InteractionHand hand) {
+        if(this.entityData.get(RESOURCE).getCount() >= 17) {
+            ItemStack stackToSpawn = this.entityData.get(RESOURCE).copy();
+            stackToSpawn.setCount(16);
+
+            harvestTierFluid(pPlayer, hand);
             this.spawnAtLocation(stackToSpawn);
             shrinkOnHarvest(stackToSpawn);
         }
@@ -86,9 +105,17 @@ public class ResourceSlimeEntity extends Slime {
         ResourceSlimes.LOGGER.debug(pPlayer.getName() + " harvested: " + this.entityData.get(RESOURCE));
     }
 
+    private void harvestTierFluid(Player pPlayer, InteractionHand hand) {
+        ItemStack inHand = pPlayer.getItemInHand(hand);
+        ResourceTier tier = SlimeResource.getTierByItem(this.entityData.get(RESOURCE).getItem());
+
+        ItemStack tierFluid = ItemUtils.createFilledResult(inHand, pPlayer, new ItemStack(ResourceTier.getFluidBucketItem(tier)));
+        pPlayer.setItemInHand(hand, tierFluid);
+    }
+
     // TODO: customize to what size the slime can be reduced to
     private void shrinkOnHarvest(ItemStack stack) {
-        setResource(new ItemStack(stack.getItem(), 1));
+        setResource(new ItemStack(stack.getItem(), this.entityData.get(RESOURCE).getCount() - stack.getCount()));
     }
 
     private void outputInfo(Player pPlayer) {
@@ -97,6 +124,11 @@ public class ResourceSlimeEntity extends Slime {
         pPlayer.sendMessage(new TextComponent("Counter: " + this.entityData.get(GROWTH_COUNTER)), pPlayer.getUUID());
         pPlayer.sendMessage(new TextComponent("Tier: " +
                 SlimeResource.getResourceByItem(this.entityData.get(RESOURCE).getItem())), pPlayer.getUUID());
+    }
+
+    @Override
+    protected boolean isDealsDamage() {
+        return false;
     }
 
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_146746_, DifficultyInstance p_146747_,
@@ -201,7 +233,7 @@ public class ResourceSlimeEntity extends Slime {
 
     @Override
     protected boolean shouldDespawnInPeaceful() {
-        return this.getSize() > 0;
+        return false;
     }
 
     @Override
@@ -241,5 +273,154 @@ public class ResourceSlimeEntity extends Slime {
         }
 
         this.invalidateCaps();
+    }
+
+    float getSoundPitch() {
+        float f = this.isTiny() ? 1.4F : 0.8F;
+        return ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F) * f;
+    }
+
+    static class SlimeFloatGoal extends Goal {
+        private final ResourceSlimeEntity slime;
+
+        public SlimeFloatGoal(ResourceSlimeEntity p_33655_) {
+            this.slime = p_33655_;
+            this.setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
+            p_33655_.getNavigation().setCanFloat(true);
+        }
+
+        /**
+         * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
+         * method as well.
+         */
+        public boolean canUse() {
+            return (this.slime.isInWater() || this.slime.isInLava()) && this.slime.getMoveControl() instanceof ResourceSlimeEntity.SlimeMoveControl;
+        }
+
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+
+        /**
+         * Keep ticking a continuous task that has already been started
+         */
+        public void tick() {
+            if (this.slime.getRandom().nextFloat() < 0.8F) {
+                this.slime.getJumpControl().jump();
+            }
+
+            ((ResourceSlimeEntity.SlimeMoveControl)this.slime.getMoveControl()).setWantedMovement(1.2D);
+        }
+    }
+
+    static class SlimeKeepOnJumpingGoal extends Goal {
+        private final ResourceSlimeEntity slime;
+
+        public SlimeKeepOnJumpingGoal(ResourceSlimeEntity p_33660_) {
+            this.slime = p_33660_;
+            this.setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
+        }
+
+        /**
+         * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
+         * method as well.
+         */
+        public boolean canUse() {
+            return !this.slime.isPassenger();
+        }
+
+        /**
+         * Keep ticking a continuous task that has already been started
+         */
+        public void tick() {
+            ((ResourceSlimeEntity.SlimeMoveControl)this.slime.getMoveControl()).setWantedMovement(1.0D);
+        }
+    }
+
+    static class SlimeMoveControl extends MoveControl {
+        private float yRot;
+        private int jumpDelay;
+        private final ResourceSlimeEntity slime;
+        private boolean isAggressive;
+
+        public SlimeMoveControl(ResourceSlimeEntity p_33668_) {
+            super(p_33668_);
+            this.slime = p_33668_;
+            this.yRot = 180.0F * p_33668_.getYRot() / (float)Math.PI;
+        }
+
+        public void setDirection(float pYRot, boolean pAggressive) {
+            this.yRot = pYRot;
+            this.isAggressive = pAggressive;
+        }
+
+        public void setWantedMovement(double pSpeed) {
+            this.speedModifier = pSpeed;
+            this.operation = MoveControl.Operation.MOVE_TO;
+        }
+
+        public void tick() {
+            this.mob.setYRot(this.rotlerp(this.mob.getYRot(), this.yRot, 90.0F));
+            this.mob.yHeadRot = this.mob.getYRot();
+            this.mob.yBodyRot = this.mob.getYRot();
+            if (this.operation != MoveControl.Operation.MOVE_TO) {
+                this.mob.setZza(0.0F);
+            } else {
+                this.operation = MoveControl.Operation.WAIT;
+                if (this.mob.isOnGround()) {
+                    this.mob.setSpeed((float)(this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
+                    if (this.jumpDelay-- <= 0) {
+                        this.jumpDelay = this.slime.getJumpDelay();
+                        if (this.isAggressive) {
+                            this.jumpDelay /= 3;
+                        }
+
+                        this.slime.getJumpControl().jump();
+                        if (this.slime.doPlayJumpSound()) {
+                            this.slime.playSound(this.slime.getJumpSound(), this.slime.getSoundVolume(), this.slime.getSoundPitch());
+                        }
+                    } else {
+                        this.slime.xxa = 0.0F;
+                        this.slime.zza = 0.0F;
+                        this.mob.setSpeed(0.0F);
+                    }
+                } else {
+                    this.mob.setSpeed((float)(this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
+                }
+
+            }
+        }
+    }
+
+    static class SlimeRandomDirectionGoal extends Goal {
+        private final ResourceSlimeEntity slime;
+        private float chosenDegrees;
+        private int nextRandomizeTime;
+
+        public SlimeRandomDirectionGoal(ResourceSlimeEntity p_33679_) {
+            this.slime = p_33679_;
+            this.setFlags(EnumSet.of(Goal.Flag.LOOK));
+        }
+
+        /**
+         * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
+         * method as well.
+         */
+        public boolean canUse() {
+            return this.slime.getTarget() == null && (this.slime.onGround || this.slime.isInWater() || this.slime.isInLava() ||
+                    this.slime.hasEffect(MobEffects.LEVITATION)) && this.slime.getMoveControl() instanceof ResourceSlimeEntity.SlimeMoveControl;
+        }
+
+        /**
+         * Keep ticking a continuous task that has already been started
+         */
+        public void tick() {
+            if (--this.nextRandomizeTime <= 0) {
+                this.nextRandomizeTime = this.adjustedTickDelay(40 + this.slime.getRandom().nextInt(60));
+                this.chosenDegrees = (float)this.slime.getRandom().nextInt(360);
+            }
+
+            ((ResourceSlimeEntity.SlimeMoveControl)this.slime.getMoveControl()).setDirection(this.chosenDegrees, false);
+        }
     }
 }

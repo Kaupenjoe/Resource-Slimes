@@ -1,7 +1,10 @@
 package net.kaupenjoe.resourceslimes.util.resources;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
+import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 public enum ResourceTier {
     CITRINE(0, "citrine"),
@@ -31,6 +34,18 @@ public enum ResourceTier {
     public ResourceLocation getTextureLocation() {
         return new ResourceLocation(ResourceSlimes.MOD_ID,"textures/entity/resource_slime/tiers/tier_"
                 + this.tierId + "_" + this.getTierName() + ".png");
+    }
+
+    public static Item getFluidBucketItem(ResourceTier tier) {
+        return switch (tier) {
+            case CITRINE -> ModItems.CITRINE_SLIME_FLUID_BUCKET.get();
+            case ZIRCON -> ModItems.ZIRCON_SLIME_FLUID_BUCKET.get();
+            case DIAMOND -> ModItems.DIAMOND_SLIME_FLUID_BUCKET.get();
+            case EMERALD -> ModItems.EMERALD_SLIME_FLUID_BUCKET.get();
+            case TANZANITE -> ModItems.TANZANITE_SLIME_FLUID_BUCKET.get();
+            case BLACK_OPAL -> ModItems.BLACK_OPAL_SLIME_FLUID_BUCKET.get();
+            case RED_SLIME_PEARL -> ModItems.RED_SLIME_PEARL_SLIME_FLUID_BUCKET.get();
+        };
     }
 
     public static ResourceTier getTierById(int i) {
