@@ -18,6 +18,8 @@
   "item.resourceslimes.red_slime_pearl": "Red Slime Pearl",
   "item.resourceslimes.resource_slime_spawn_egg": "Resource Slime Spawn Egg",
 
+  "item.resourceslimes.extract": "%s Extract",
+  "item.resourceslimes.slimey_extract": "Slimey %s Extract",
 
   "item.resourceslimes.citrine_slime_fluid_bucket": "Citrine Slime Fluid Bucket",
   "item.resourceslimes.zircon_slime_fluid_bucket": "Zircon Slime Fluid Bucket",
@@ -44,5 +46,68 @@
 
   "block.resourceslimes.gem_cutting_station": "Gem Cutting Station",
 
-  "itemGroup.resourceslimetab": "Resource Slimes Tab"
+  "itemGroup.resourceslimetab": "Resource Slimes Tab",
+
+
+  "extract.resourceslimes.stone": "Stone",
+  "extract.resourceslimes.dirt": "Dirt",
+  "extract.resourceslimes.water": "Water",
+  "extract.resourceslimes.sand": "Sand",
+  "extract.resourceslimes.gravel": "Gravel",
+
+  "extract.resourceslimes.wood": "Wood",
+  "extract.resourceslimes.grass": "Grass",
+  "extract.resourceslimes.flower": "Flower",
+  "extract.resourceslimes.sheep": "Sheep",
+  "extract.resourceslimes.cow": "Cow",
+  "extract.resourceslimes.pig": "Pig",
+  "extract.resourceslimes.chicken": "Chicken",
+  "extract.resourceslimes.coal": "Coal",
+  "extract.resourceslimes.berry": "Berry",
+  "extract.resourceslimes.fish": "Fish",
+
+  "extract.resourceslimes.iron": "Iron",
+  "extract.resourceslimes.lapis": "Lapis",
+  "extract.resourceslimes.quartz": "Quartz",
+  "extract.resourceslimes.aquatic": "Aquatic",
+  "extract.resourceslimes.nether": "Nether",
+  "extract.resourceslimes.zombie": "Zombie",
+  "extract.resourceslimes.ice": "Ice",
+  "extract.resourceslimes.fire": "Fire",
+  "extract.resourceslimes.deepslate": "Deepslate",
+  "extract.resourceslimes.crop": "Crop",
+  "extract.resourceslimes.lessergem": "Lesser Gem",
+
+  "extract.resourceslimes.gold": "Gold",
+  "extract.resourceslimes.redstone": "Redstone",
+  "extract.resourceslimes.glowstone": "Glowstone",
+  "extract.resourceslimes.skeleton": "Skeleton",
+  "extract.resourceslimes.prismarine": "Prismarine",
+  "extract.resourceslimes.creeper": "Creeper",
+  "extract.resourceslimes.spider": "Spider",
+  "extract.resourceslimes.slime": "Slime",
+  "extract.resourceslimes.phantom": "Phantom",
+  "extract.resourceslimes.alchemy": "Alchemy",
+
+  "extract.resourceslimes.enderpearl": "Ender Pearl",
+  "extract.resourceslimes.diamond": "Diamond",
+  "extract.resourceslimes.honey": "Honey",
+  "extract.resourceslimes.experience": "Experience",
+  "extract.resourceslimes.music": "Music",
+  "extract.resourceslimes.obsidian": "Obsidian",
+  "extract.resourceslimes.blaze": "Blaze",
+  "extract.resourceslimes.witherskeletons": "Wither Skeletons",
+  "extract.resourceslimes.illagers": "Illagers",
+  "extract.resourceslimes.ghast": "Ghast",
+
+  "extract.resourceslimes.netherite": "Netherite",
+  "extract.resourceslimes.magic": "Magic",
+  "extract.resourceslimes.emerald": "Emerald",
+  "extract.resourceslimes.shulkers": "Shulkers",
+
+  "extract.resourceslimes.enderdragon": "Ender Dragon",
+  "extract.resourceslimes.netherstar": "Netherstar",
+  "extract.resourceslimes.greatergem": "Greater Gem",
+  "extract.resourceslimes.endcrystal": "End Crystal"
+
 }
