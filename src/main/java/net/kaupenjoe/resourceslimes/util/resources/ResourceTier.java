@@ -4,7 +4,6 @@ import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 
 public enum ResourceTier {
     CITRINE(0, "citrine"),
@@ -13,7 +12,7 @@ public enum ResourceTier {
     EMERALD(3, "emerald"),
     TANZANITE(4, "tanzanite"),
     BLACK_OPAL(5, "black_opal"),
-    RED_SLIME_PEARL(6, "red_slime_pearl");
+    PINK_SLIME_PEARL(6, "pink_slime_pearl");
 
     private final int tierId;
     private final String tierName;
@@ -44,7 +43,7 @@ public enum ResourceTier {
             case EMERALD -> ModItems.EMERALD_SLIME_FLUID_BUCKET.get();
             case TANZANITE -> ModItems.TANZANITE_SLIME_FLUID_BUCKET.get();
             case BLACK_OPAL -> ModItems.BLACK_OPAL_SLIME_FLUID_BUCKET.get();
-            case RED_SLIME_PEARL -> ModItems.RED_SLIME_PEARL_SLIME_FLUID_BUCKET.get();
+            case PINK_SLIME_PEARL -> ModItems.PINK_SLIME_PEARL_SLIME_FLUID_BUCKET.get();
         };
     }
 

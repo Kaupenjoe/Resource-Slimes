@@ -76,8 +76,8 @@ public class ModBlocks {
     public static final RegistryObject<LiquidBlock> BLACK_OPAL_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("black_opal_slime_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.BLACK_OPAL_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
                     .noCollission().strength(100f).noDrops()));
-    public static final RegistryObject<LiquidBlock> RED_SLIME_PEARL_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("red_slime_pearl_slime_fluid_block",
-            () -> new LiquidBlock(() -> ModFluids.RED_SLIME_PEARL_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
+    public static final RegistryObject<LiquidBlock> PINK_SLIME_PEARL_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("pink_slime_pearl_slime_fluid_block",
+            () -> new LiquidBlock(() -> ModFluids.PINK_SLIME_PEARL_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
                     .noCollission().strength(100f).noDrops()));
 
 

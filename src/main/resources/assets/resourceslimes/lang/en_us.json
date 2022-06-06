@@ -15,11 +15,8 @@
   "item.resourceslimes.raw_black_opal": "Raw Black Opal",
   "item.resourceslimes.cut_black_opal": "Cut Black Opal",
 
-  "item.resourceslimes.red_slime_pearl": "Red Slime Pearl",
+  "item.resourceslimes.pink_slime_pearl": "Red Slime Pearl",
   "item.resourceslimes.resource_slime_spawn_egg": "Resource Slime Spawn Egg",
-
-  "item.resourceslimes.extract": "%s Extract",
-  "item.resourceslimes.slimey_extract": "Slimey %s Extract",
 
   "item.resourceslimes.citrine_slime_fluid_bucket": "Citrine Slime Fluid Bucket",
   "item.resourceslimes.zircon_slime_fluid_bucket": "Zircon Slime Fluid Bucket",
@@ -27,11 +24,12 @@
   "item.resourceslimes.emerald_slime_fluid_bucket": "Emerald Slime Fluid Bucket",
   "item.resourceslimes.tanzanite_slime_fluid_bucket": "Tanzanite Slime Fluid Bucket",
   "item.resourceslimes.black_opal_slime_fluid_bucket": "Black Opal Slime Fluid Bucket",
-  "item.resourceslimes.red_slime_pearl_slime_fluid_bucket": "Red Slime Pearl Slime Fluid Bucket",
+  "item.resourceslimes.pink_slime_pearl_slime_fluid_bucket": "Red Slime Pearl Slime Fluid Bucket",
 
   "item.resourceslimes.gem_cutter_tool": "Gem Cutter Tool",
 
-
+  "item.resourceslimes.extract": "%s Extract",
+  "item.resourceslimes.slimey_extract": "Slimey %s Extract",
 
 
   "block.resourceslimes.deepslate_citrine_ore": "Deepslate Citrine Ore",
@@ -108,6 +106,10 @@
   "extract.resourceslimes.enderdragon": "Ender Dragon",
   "extract.resourceslimes.netherstar": "Netherstar",
   "extract.resourceslimes.greatergem": "Greater Gem",
-  "extract.resourceslimes.endcrystal": "End Crystal"
+  "extract.resourceslimes.endcrystal": "End Crystal",
 
+
+  "effects.resourceslimes.clean": "Clean",
+  "effects.resourceslimes.dirty": "Dirty",
+  "effects.resourceslimes.slimey": "Slimey"
 }

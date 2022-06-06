@@ -47,8 +47,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.UNCUT_BLACK_OPAL.get());
         simpleItem(ModItems.CUT_BLACK_OPAL.get());
 
-        simpleItem(ModItems.RED_SLIME_PEARL.get());
-        simpleItem(ModItems.INFUSED_RED_SLIME_PEARL.get());
+        simpleItem(ModItems.PINK_SLIME_PEARL.get());
+        simpleItem(ModItems.INFUSED_PINK_SLIME_PEARL.get());
 
         spawnEgg(ModItems.RESOURCE_SLIME_SPAWN_EGG.get());
 
@@ -59,7 +59,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.EMERALD_SLIME_FLUID_BUCKET.get());
         simpleItem(ModItems.TANZANITE_SLIME_FLUID_BUCKET.get());
         simpleItem(ModItems.BLACK_OPAL_SLIME_FLUID_BUCKET.get());
-        simpleItem(ModItems.RED_SLIME_PEARL_SLIME_FLUID_BUCKET.get());
+        simpleItem(ModItems.PINK_SLIME_PEARL_SLIME_FLUID_BUCKET.get());
 
         simpleItem(ModItems.GEM_CUTTER_TOOL.get());
 

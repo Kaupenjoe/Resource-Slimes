@@ -70,10 +70,10 @@ public enum SlimeResource {
     SHULKERS(ResourceTier.BLACK_OPAL, new ResourceLocation("textures/block/shulker_box.png"), true),
 
 
-    ENDERDRAGON(ResourceTier.RED_SLIME_PEARL, new ResourceLocation("textures/block/dragon_egg.png"), true),
-    NETHERSTAR(ResourceTier.RED_SLIME_PEARL, new ResourceLocation("textures/block/beacon.png"), true),
-    GREATERGEM(ResourceTier.RED_SLIME_PEARL, new ResourceLocation("textures/block/carved_pumpkin.png"), true),
-    ENDCRYSTAL(ResourceTier.RED_SLIME_PEARL, new ResourceLocation("textures/block/crying_obsidian.png"), true);
+    ENDERDRAGON(ResourceTier.PINK_SLIME_PEARL, new ResourceLocation("textures/block/dragon_egg.png"), true),
+    NETHERSTAR(ResourceTier.PINK_SLIME_PEARL, new ResourceLocation("textures/block/beacon.png"), true),
+    GREATERGEM(ResourceTier.PINK_SLIME_PEARL, new ResourceLocation("textures/block/carved_pumpkin.png"), true),
+    ENDCRYSTAL(ResourceTier.PINK_SLIME_PEARL, new ResourceLocation("textures/block/crying_obsidian.png"), true);
 
 
 

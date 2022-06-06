@@ -53,10 +53,10 @@ public class ModFluids {
     public static final RegistryObject<FlowingFluid> BLACK_OPAL_SLIME_FLUID_FLOWING
             = FLUIDS.register("black_opal_slime_flowing_fluid", () -> new ForgeFlowingFluid.Flowing(ModFluids.BLACK_OPAL_SLIME_FLUID_PROPERTIES));
 
-    public static final RegistryObject<FlowingFluid> RED_SLIME_PEARL_SLIME_FLUID
-            = FLUIDS.register("red_slime_pearl_slime_fluid", () -> new ForgeFlowingFluid.Source(ModFluids.RED_SLIME_PEARL_SLIME_FLUID_PROPERTIES));
-    public static final RegistryObject<FlowingFluid> RED_SLIME_PEARL_SLIME_FLUID_FLOWING
-            = FLUIDS.register("red_slime_pearl_slime_flowing_fluid", () -> new ForgeFlowingFluid.Flowing(ModFluids.RED_SLIME_PEARL_SLIME_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> PINK_SLIME_PEARL_SLIME_FLUID
+            = FLUIDS.register("pink_slime_pearl_slime_fluid", () -> new ForgeFlowingFluid.Source(ModFluids.PINK_SLIME_PEARL_SLIME_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> PINK_SLIME_PEARL_SLIME_FLUID_FLOWING
+            = FLUIDS.register("pink_slime_pearl_slime_flowing_fluid", () -> new ForgeFlowingFluid.Flowing(ModFluids.PINK_SLIME_PEARL_SLIME_FLUID_PROPERTIES));
 
 
 
@@ -102,12 +102,12 @@ public class ModFluids {
                     .color(0xbf1c4766)).slopeFindDistance(2).levelDecreasePerBlock(2)
             .block(ModBlocks.BLACK_OPAL_SLIME_FLUID_BLOCK).bucket(ModItems.BLACK_OPAL_SLIME_FLUID_BUCKET);
 
-    public static final ForgeFlowingFluid.Properties RED_SLIME_PEARL_SLIME_FLUID_PROPERTIES
-            = new ForgeFlowingFluid.Properties(RED_SLIME_PEARL_SLIME_FLUID, RED_SLIME_PEARL_SLIME_FLUID_FLOWING,
+    public static final ForgeFlowingFluid.Properties PINK_SLIME_PEARL_SLIME_FLUID_PROPERTIES
+            = new ForgeFlowingFluid.Properties(PINK_SLIME_PEARL_SLIME_FLUID, PINK_SLIME_PEARL_SLIME_FLUID_FLOWING,
             FluidAttributes.builder(WATER_STILL_RL, WATER_FLOWING_RL)
                     .density(15).luminosity(2).viscosity(5).sound(SoundEvents.HONEY_DRINK).overlay(WATER_OVERLAY_RL)
                     .color(0xbfd41111)).slopeFindDistance(2).levelDecreasePerBlock(2)
-            .block(ModBlocks.RED_SLIME_PEARL_SLIME_FLUID_BLOCK).bucket(ModItems.RED_SLIME_PEARL_SLIME_FLUID_BUCKET);
+            .block(ModBlocks.PINK_SLIME_PEARL_SLIME_FLUID_BLOCK).bucket(ModItems.PINK_SLIME_PEARL_SLIME_FLUID_BUCKET);
 
 
 

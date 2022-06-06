@@ -66,9 +66,9 @@ public class ModItems {
     public static final RegistryObject<Item> CUT_BLACK_OPAL = ITEMS.register("cut_black_opal",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
-    public static final RegistryObject<Item> RED_SLIME_PEARL = ITEMS.register("red_slime_pearl",
+    public static final RegistryObject<Item> PINK_SLIME_PEARL = ITEMS.register("pink_slime_pearl",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
-    public static final RegistryObject<Item> INFUSED_RED_SLIME_PEARL = ITEMS.register("infused_red_slime_pearl",
+    public static final RegistryObject<Item> INFUSED_PINK_SLIME_PEARL = ITEMS.register("infused_pink_slime_pearl",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
 
@@ -84,8 +84,8 @@ public class ModItems {
             () -> new BucketItem(ModFluids.TANZANITE_SLIME_FLUID, new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES).stacksTo(1)));
     public static final RegistryObject<Item> BLACK_OPAL_SLIME_FLUID_BUCKET = ITEMS.register("black_opal_slime_fluid_bucket",
             () -> new BucketItem(ModFluids.BLACK_OPAL_SLIME_FLUID, new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES).stacksTo(1)));
-    public static final RegistryObject<Item> RED_SLIME_PEARL_SLIME_FLUID_BUCKET = ITEMS.register("red_slime_pearl_slime_fluid_bucket",
-            () -> new BucketItem(ModFluids.RED_SLIME_PEARL_SLIME_FLUID, new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES).stacksTo(1)));
+    public static final RegistryObject<Item> PINK_SLIME_PEARL_SLIME_FLUID_BUCKET = ITEMS.register("pink_slime_pearl_slime_fluid_bucket",
+            () -> new BucketItem(ModFluids.PINK_SLIME_PEARL_SLIME_FLUID, new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES).stacksTo(1)));
 
     public static final RegistryObject<Item> RESOURCE_SLIME_SPAWN_EGG = ITEMS.register("resource_slime_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntityTypes.RESOURCE_SLIME,0x948e8d, 0x3b3635,

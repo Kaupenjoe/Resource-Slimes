@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "resourceslimes:item/red_slime_pearl"
+    "layer0": "resourceslimes:item/infused_pink_slime_pearl"
   }
 }

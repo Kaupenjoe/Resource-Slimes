@@ -52,9 +52,9 @@ public class ClientListener {
         ItemBlockRenderTypes.setRenderLayer(ModFluids.BLACK_OPAL_SLIME_FLUID.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.BLACK_OPAL_SLIME_FLUID_FLOWING.get(), RenderType.translucent());
 
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.RED_SLIME_PEARL_SLIME_FLUID_BLOCK.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.RED_SLIME_PEARL_SLIME_FLUID.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.RED_SLIME_PEARL_SLIME_FLUID_FLOWING.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.PINK_SLIME_PEARL_SLIME_FLUID_BLOCK.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.PINK_SLIME_PEARL_SLIME_FLUID.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.PINK_SLIME_PEARL_SLIME_FLUID_FLOWING.get(), RenderType.translucent());
 
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.GEM_CUTTING_STATION.get(), RenderType.translucent());
 
