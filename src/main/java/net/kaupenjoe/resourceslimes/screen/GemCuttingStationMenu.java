@@ -11,11 +11,12 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -23,9 +24,10 @@ public class GemCuttingStationMenu extends AbstractContainerMenu {
     private final GemCuttingStationBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
+    private FluidStack fluid;
 
     public GemCuttingStationMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
     }
 
     public GemCuttingStationMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
@@ -45,6 +47,10 @@ public class GemCuttingStationMenu extends AbstractContainerMenu {
             this.addSlot(new ModResultSlot(handler, 3, 80, 60));
         });
 
+        this.blockEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).ifPresent(handler -> {
+            fluid = handler.getFluidInTank(0);
+        });
+
         addDataSlots(data);
     }
 
@@ -58,6 +64,14 @@ public class GemCuttingStationMenu extends AbstractContainerMenu {
         int progressArrowSize = 27; // This is the height in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+
+    public FluidStack getFluidStack() {
+        return this.fluid;
+    }
+
+    public int getFluidAmount() {
+        return this.data.get(2);
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons

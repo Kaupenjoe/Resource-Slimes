@@ -8,6 +8,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -23,6 +26,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -41,11 +48,21 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
         }
     };
 
+    private final FluidTank fluidTank = new FluidTank(16000) {
+        @Override
+        protected void onContentsChanged() {
+            setChanged();
+            level.setBlock(getBlockPos(), getBlockState(), 2);
+        }
+    };
+
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
 
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 72;
+    private int fluidFillAmount = 0;
 
     public GemCuttingStationBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(ModBlockEntities.GEM_CUTTING_STATION_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
@@ -54,6 +71,7 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
                 switch (index) {
                     case 0: return GemCuttingStationBlockEntity.this.progress;
                     case 1: return GemCuttingStationBlockEntity.this.maxProgress;
+                    case 2: return GemCuttingStationBlockEntity.this.fluidFillAmount;
                     default: return 0;
                 }
             }
@@ -62,11 +80,12 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
                 switch(index) {
                     case 0: GemCuttingStationBlockEntity.this.progress = value; break;
                     case 1: GemCuttingStationBlockEntity.this.maxProgress = value; break;
+                    case 2: GemCuttingStationBlockEntity.this.fluidFillAmount = value; break;
                 }
             }
 
             public int getCount() {
-                return 2;
+                return 3;
             }
         };
     }
@@ -89,6 +108,10 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
             return lazyItemHandler.cast();
         }
 
+        if(cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+            return lazyFluidHandler.cast();
+        }
+
         return super.getCapability(cap, side);
     }
 
@@ -96,18 +119,22 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
+        lazyFluidHandler = LazyOptional.of(() -> fluidTank);
     }
 
     @Override
     public void invalidateCaps()  {
         super.invalidateCaps();
         lazyItemHandler.invalidate();
+        lazyFluidHandler.invalidate();
     }
 
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
         tag.put("inventory", itemHandler.serializeNBT());
         tag.putInt("gem_cutting_station.progress", progress);
+        tag = fluidTank.writeToNBT(tag);
+
         super.saveAdditional(tag);
     }
 
@@ -116,6 +143,7 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         progress = nbt.getInt("gem_cutting_station.progress");
+        fluidTank.readFromNBT(nbt);
     }
 
     public void drops() {
@@ -138,6 +166,8 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
             pBlockEntity.resetProgress();
             setChanged(pLevel, pPos, pState);
         }
+
+        pBlockEntity.fluidFillAmount = pBlockEntity.fluidTank.getFluidAmount();
     }
 
     private static boolean hasRecipe(GemCuttingStationBlockEntity entity) {
@@ -195,5 +225,19 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
 
     private static boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
         return inventory.getItem(3).getMaxStackSize() > inventory.getItem(3).getCount();
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        CompoundTag compound = saveWithoutMetadata();
+        load(compound);
+
+        return compound;
     }
 }
