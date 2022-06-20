@@ -3,9 +3,8 @@ package net.kaupenjoe.resourceslimes.screen;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.block.entity.GemCuttingStationBlockEntity;
 import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.screen.slot.ModPotionSlot;
-import net.kaupenjoe.resourceslimes.screen.slot.ModRestrictedSlot;
-import net.kaupenjoe.resourceslimes.screen.slot.ModResultSlot;
+import net.kaupenjoe.resourceslimes.screen.slot.*;
+import net.kaupenjoe.resourceslimes.util.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -21,13 +20,13 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class GemCuttingStationMenu extends AbstractContainerMenu {
-    private final GemCuttingStationBlockEntity blockEntity;
+    public final GemCuttingStationBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
     private FluidStack fluid;
 
     public GemCuttingStationMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
+        this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
     public GemCuttingStationMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
@@ -36,22 +35,27 @@ public class GemCuttingStationMenu extends AbstractContainerMenu {
         blockEntity = ((GemCuttingStationBlockEntity) entity);
         this.level = inv.player.level;
         this.data = data;
+        this.fluid = blockEntity.getFluid();
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-            this.addSlot(new ModPotionSlot(handler, 0, 34, 40, () -> Potions.WATER));
-            this.addSlot(new SlotItemHandler(handler, 1, 57, 18));
+            this.addSlot(new ModWaterSourceSlot(handler, 0, 15, 40));
+            this.addSlot(new ModTagRestrictedSlot(handler, 1, 57, 18, () -> ModTags.Items.UNCUT_GEMS));
             this.addSlot(new ModRestrictedSlot(handler, 2, 103, 18, ModItems.GEM_CUTTER_TOOL));
             this.addSlot(new ModResultSlot(handler, 3, 80, 60));
         });
 
-        this.blockEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).ifPresent(handler -> {
-            fluid = handler.getFluidInTank(0);
-        });
-
         addDataSlots(data);
+    }
+
+    public void setFluid(FluidStack fluidStack) {
+        this.fluid = fluidStack;
+    }
+
+    public FluidStack getFluid() {
+        return fluid;
     }
 
     public boolean isCrafting() {
@@ -61,17 +65,9 @@ public class GemCuttingStationMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 27; // This is the height in pixels of your arrow
+        int progressArrowSize = 26; // This is the height in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
-    }
-
-    public FluidStack getFluidStack() {
-        return this.fluid;
-    }
-
-    public int getFluidAmount() {
-        return this.data.get(2);
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons

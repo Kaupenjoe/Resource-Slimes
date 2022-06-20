@@ -2,20 +2,25 @@
   "item.resourceslimes.uncut_citrine": "Uncut Citrine",
   "item.resourceslimes.raw_citrine": "Raw Citrine",
   "item.resourceslimes.cut_citrine": "Cut Citrine",
+  "item.resourceslimes.infused_citrine": "Infused Citrine",
 
   "item.resourceslimes.uncut_zircon": "Uncut Zircon",
   "item.resourceslimes.raw_zircon": "Raw Zircon",
   "item.resourceslimes.cut_zircon": "Cut Zircon",
+  "item.resourceslimes.infused_zircon": "Infused Zircon",
 
   "item.resourceslimes.uncut_tanzanite": "Uncut Tanzanite",
   "item.resourceslimes.raw_tanzanite": "Raw Tanzanite",
   "item.resourceslimes.cut_tanzanite": "Cut Tanzanite",
+  "item.resourceslimes.infused_tanzanite": "Infused Tanzanite",
 
   "item.resourceslimes.uncut_black_opal": "Uncut Black Opal",
   "item.resourceslimes.raw_black_opal": "Raw Black Opal",
   "item.resourceslimes.cut_black_opal": "Cut Black Opal",
+  "item.resourceslimes.infused_black_opal": "Infused Black Opal",
 
   "item.resourceslimes.pink_slime_pearl": "Red Slime Pearl",
+  "item.resourceslimes.infused_pink_slime_pearl": "Infused Red Slime Pearl",
   "item.resourceslimes.resource_slime_spawn_egg": "Resource Slime Spawn Egg",
 
   "item.resourceslimes.citrine_slime_fluid_bucket": "Citrine Slime Fluid Bucket",
@@ -43,6 +48,14 @@
   "block.resourceslimes.black_opal_ore": "Black Opal Ore",
 
   "block.resourceslimes.gem_cutting_station": "Gem Cutting Station",
+
+  "fluid.resourceslimes.citrine_slime_fluid": "Citrine Slime Fluid",
+  "fluid.resourceslimes.zircon_slime_fluid": "Zircon Slime Fluid",
+  "fluid.resourceslimes.diamond_slime_fluid": "Diamond Slime Fluid",
+  "fluid.resourceslimes.emerald_slime_fluid": "Emerald Slime Fluid",
+  "fluid.resourceslimes.tanzanite_slime_fluid": "Tanzanite Slime Fluid",
+  "fluid.resourceslimes.black_opal_slime_fluid": "Black Opal Slime Fluid",
+  "fluid.resourceslimes.pink_slime_pearl_slime_fluid": "Pink Slime Pearl Slime Fluid",
 
   "itemGroup.resourceslimetab": "Resource Slimes Tab",
 
@@ -109,7 +122,7 @@
   "extract.resourceslimes.endcrystal": "End Crystal",
 
 
-  "effects.resourceslimes.clean": "Clean",
-  "effects.resourceslimes.dirty": "Dirty",
+  "effects.resourceslimes.soapy": "Soapy",
+  "effects.resourceslimes.stinky": "Stinky",
   "effects.resourceslimes.slimey": "Slimey"
 }

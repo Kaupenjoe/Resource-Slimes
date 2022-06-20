@@ -15,10 +15,10 @@ public class ModPotion {
 
     public static RegistryObject<Potion> SLIMEY_POTION = POTIONS.register("slimey_potion",
             () -> new Potion(new MobEffectInstance(ModEffects.SLIMEY.get(), 200, 0)));
-    public static RegistryObject<Potion> CLEAN_POTION = POTIONS.register("clean_potion",
-            () -> new Potion(new MobEffectInstance(ModEffects.CLEAN.get(), 200, 0)));
-    public static RegistryObject<Potion> DIRTY_POTION = POTIONS.register("dirty_potion",
-            () -> new Potion(new MobEffectInstance(ModEffects.DIRTY.get(), 200, 0)));
+    public static RegistryObject<Potion> SOAPY_POTION = POTIONS.register("soapy_potion",
+            () -> new Potion(new MobEffectInstance(ModEffects.SOAPY.get(), 200, 0)));
+    public static RegistryObject<Potion> DIRTY_POTION = POTIONS.register("stinky_potion",
+            () -> new Potion(new MobEffectInstance(ModEffects.STINKY.get(), 200, 0)));
 
 
     public static void register(IEventBus eventBus) {

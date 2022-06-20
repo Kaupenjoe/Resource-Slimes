@@ -15,6 +15,7 @@ import net.kaupenjoe.resourceslimes.item.custom.SlimeyExtractItem;
 import net.kaupenjoe.resourceslimes.potion.ModPotion;
 import net.kaupenjoe.resourceslimes.recipe.ModRecipes;
 import net.kaupenjoe.resourceslimes.screen.ModMenuTypes;
+import net.kaupenjoe.resourceslimes.util.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -59,6 +60,7 @@ public class ResourceSlimes {
         ModRecipes.register(eventBus);
 
 
+
         eventBus.addListener(this::setup);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ResourceSlimesCommonConfigs.SPEC, "resourceslimes-common.toml");
@@ -67,6 +69,6 @@ public class ResourceSlimes {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-
+        ModMessages.register();
     }
 }

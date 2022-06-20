@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "resourceslimes:uncut_citrine",
+    "resourceslimes:uncut_zircon",
+    "minecraft:diamond",
+    "minecraft:emerald",
+    "resourceslimes:uncut_tanzanite",
+    "resourceslimes:uncut_black_opal"
+  ]
+}

@@ -1,8 +1,11 @@
 package net.kaupenjoe.resourceslimes.block.entity;
 
+import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;
+import net.kaupenjoe.resourceslimes.util.networking.ModMessages;
+import net.kaupenjoe.resourceslimes.util.networking.packets.PacketSyncFluidStackToClient;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -18,12 +21,16 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -52,7 +59,14 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
         @Override
         protected void onContentsChanged() {
             setChanged();
-            level.setBlock(getBlockPos(), getBlockState(), 2);
+            if(!level.isClientSide()) {
+                ModMessages.sendToClients(new PacketSyncFluidStackToClient(this.fluid, worldPosition));
+            }
+        }
+
+        @Override
+        public boolean isFluidValid(FluidStack stack) {
+            return stack.getFluid() == Fluids.WATER;
         }
     };
 
@@ -61,31 +75,36 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 72;
-    private int fluidFillAmount = 0;
+    private int maxProgress = 78;
+
+    public void setFluid(FluidStack fluidStack) {
+        this.fluidTank.setFluid(fluidStack);
+    }
+
+    public FluidStack getFluid() {
+        return this.fluidTank.getFluid();
+    }
 
     public GemCuttingStationBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(ModBlockEntities.GEM_CUTTING_STATION_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
         this.data = new ContainerData() {
             public int get(int index) {
-                switch (index) {
-                    case 0: return GemCuttingStationBlockEntity.this.progress;
-                    case 1: return GemCuttingStationBlockEntity.this.maxProgress;
-                    case 2: return GemCuttingStationBlockEntity.this.fluidFillAmount;
-                    default: return 0;
-                }
+                return switch (index) {
+                    case 0 -> GemCuttingStationBlockEntity.this.progress;
+                    case 1 -> GemCuttingStationBlockEntity.this.maxProgress;
+                    default -> 0;
+                };
             }
 
             public void set(int index, int value) {
-                switch(index) {
-                    case 0: GemCuttingStationBlockEntity.this.progress = value; break;
-                    case 1: GemCuttingStationBlockEntity.this.maxProgress = value; break;
-                    case 2: GemCuttingStationBlockEntity.this.fluidFillAmount = value; break;
+                switch (index) {
+                    case 0 -> GemCuttingStationBlockEntity.this.progress = value;
+                    case 1 -> GemCuttingStationBlockEntity.this.maxProgress = value;
                 }
             }
 
             public int getCount() {
-                return 3;
+                return 2;
             }
         };
     }
@@ -98,6 +117,7 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
+        ModMessages.sendToClients(new PacketSyncFluidStackToClient(this.fluidTank.getFluid(), worldPosition));
         return new GemCuttingStationMenu(pContainerId, pInventory, this, this.data);
     }
 
@@ -109,7 +129,9 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
         }
 
         if(cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-            return lazyFluidHandler.cast();
+            if(this.getBlockState().getValue(GemCuttingStationBlock.FACING).getClockWise() == side) {
+                return lazyFluidHandler.cast();
+            }
         }
 
         return super.getCapability(cap, side);
@@ -167,7 +189,31 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
             setChanged(pLevel, pPos, pState);
         }
 
-        pBlockEntity.fluidFillAmount = pBlockEntity.fluidTank.getFluidAmount();
+        if(hasWaterSourceInSlot(pBlockEntity)) {
+            transferItemWaterToWaterTank(pBlockEntity);
+        }
+    }
+
+    private static boolean hasWaterSourceInSlot(GemCuttingStationBlockEntity entity) {
+        return entity.itemHandler.getStackInSlot(0).getCount() > 0;
+    }
+
+    private static void transferItemWaterToWaterTank(GemCuttingStationBlockEntity entity) {
+        if(entity.itemHandler.getStackInSlot(0).getItem() instanceof PotionItem
+                && PotionUtils.getPotion(entity.itemHandler.getStackInSlot(0)).equals(Potions.WATER)) {
+            entity.fluidTank.fill(new FluidStack(Fluids.WATER, 250), IFluidHandler.FluidAction.EXECUTE);
+
+            entity.itemHandler.extractItem(0, 1, false);
+            entity.itemHandler.insertItem(0, new ItemStack(Items.GLASS_BOTTLE), false);
+        }
+
+        if(entity.itemHandler.getStackInSlot(0).getItem() instanceof BucketItem bucketItem
+                && bucketItem.getFluid().equals(Fluids.WATER)) {
+            entity.fluidTank.fill(new FluidStack(Fluids.WATER, 1000), IFluidHandler.FluidAction.EXECUTE);
+
+            entity.itemHandler.extractItem(0, 1, false);
+            entity.itemHandler.insertItem(0, new ItemStack(Items.BUCKET), false);
+        }
     }
 
     private static boolean hasRecipe(GemCuttingStationBlockEntity entity) {
@@ -182,11 +228,11 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
 
         return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
                 && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem())
-                && hasWaterInWaterSlot(entity) && hasToolsInToolSlot(entity);
+                && hasWaterInTank(entity, match.get()) && hasToolsInToolSlot(entity);
     }
 
-    private static boolean hasWaterInWaterSlot(GemCuttingStationBlockEntity entity) {
-        return PotionUtils.getPotion(entity.itemHandler.getStackInSlot(0)) == Potions.WATER;
+    private static boolean hasWaterInTank(GemCuttingStationBlockEntity entity, GemCuttingStationRecipe recipe) {
+        return entity.fluidTank.getFluid().getAmount() >= recipe.getWaterAmount();
     }
 
     private static boolean hasToolsInToolSlot(GemCuttingStationBlockEntity entity) {
@@ -204,9 +250,11 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
                 .getRecipeFor(GemCuttingStationRecipe.Type.INSTANCE, inventory, level);
 
         if(match.isPresent()) {
-            entity.itemHandler.extractItem(0,1, false);
+            entity.fluidTank.drain(match.get().getWaterAmount(), IFluidHandler.FluidAction.EXECUTE);
             entity.itemHandler.extractItem(1,1, false);
-            entity.itemHandler.getStackInSlot(2).hurt(1, new Random(), null);
+            if(entity.itemHandler.getStackInSlot(2).hurt(1, new Random(), null)) {
+                entity.itemHandler.extractItem(2,1, false);
+            }
 
             entity.itemHandler.setStackInSlot(3, new ItemStack(match.get().getResultItem().getItem(),
                     entity.itemHandler.getStackInSlot(3).getCount() + 1));

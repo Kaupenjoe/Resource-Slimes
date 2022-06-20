@@ -6,8 +6,8 @@ import net.minecraft.world.entity.LivingEntity;
 
 // TODO: Possibly add Mixin for the Slippery Effect:
 // https://github.com/samedifferent/Ecologics/blob/master/src/main/java/samebutdifferent/ecologics/mixin/MixinLivingEntity.java
-public class CleanEffect extends MobEffect {
-    public CleanEffect(MobEffectCategory mobEffectCategory, int color) {
+public class SoapyEffect extends MobEffect {
+    public SoapyEffect(MobEffectCategory mobEffectCategory, int color) {
         super(mobEffectCategory, color);
     }
 

@@ -35,7 +35,7 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
     private static final int TEXTURE_SIZE = 16;
     private static final int MIN_FLUID_HEIGHT = 1; // ensure tiny amounts of fluid are still visible
 
-    private final int capacityMb;
+    public final int capacityMb;
     private final TooltipMode tooltipMode;
     /**
      * we shouldn't draw an overlay like this anymore,

@@ -9,8 +9,8 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
-public class DirtyEffect extends MobEffect {
-    public DirtyEffect(MobEffectCategory mobEffectCategory, int color) {
+public class StinkyEffect extends MobEffect {
+    public StinkyEffect(MobEffectCategory mobEffectCategory, int color) {
         super(mobEffectCategory, color);
     }
 

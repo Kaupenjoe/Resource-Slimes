@@ -5,6 +5,7 @@
       "item": "minecraft:diamond"
     }
   ],
+  "waterAmount": 500,
   "output": {
     "item": "resourceslimes:cut_diamond"
   }

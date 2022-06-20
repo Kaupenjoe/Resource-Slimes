@@ -21,7 +21,7 @@ public abstract class MixinLivingEntity extends Entity {
 
     @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getFriction(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)F"))
     private float onTravel(BlockState state, LevelReader level, BlockPos pos, Entity entity) {
-        if (entity instanceof LivingEntity living && living.hasEffect(ModEffects.CLEAN.get())) {
+        if (entity instanceof LivingEntity living && living.hasEffect(ModEffects.SOAPY.get())) {
             return 0.95F;
         }
         return state.getFriction(level, pos, entity);
@@ -29,7 +29,7 @@ public abstract class MixinLivingEntity extends Entity {
 
     @Inject(method = "getBlockSpeedFactor", at = @At("HEAD"), cancellable = true)
     private void onGetBlockSpeedFactor(CallbackInfoReturnable<Float> cir) {
-        if (((Object)this) instanceof LivingEntity living && living.hasEffect(ModEffects.CLEAN.get())) {
+        if (((Object)this) instanceof LivingEntity living && living.hasEffect(ModEffects.SOAPY.get())) {
             cir.setReturnValue(1.01F);
         }
     }

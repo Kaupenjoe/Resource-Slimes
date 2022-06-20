@@ -18,17 +18,23 @@ public class GemCuttingStationRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
+    private final int waterAmount;
 
     public GemCuttingStationRecipe(ResourceLocation id, ItemStack output,
-                                   NonNullList<Ingredient> recipeItems) {
+                                   NonNullList<Ingredient> recipeItems, int waterAmount) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
+        this.waterAmount = waterAmount;
     }
 
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         return recipeItems.get(0).test(pContainer.getItem(1));
+    }
+
+    public int getWaterAmount() {
+        return waterAmount;
     }
 
     @Override
@@ -83,29 +89,32 @@ public class GemCuttingStationRecipe implements Recipe<SimpleContainer> {
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
+            int water = GsonHelper.getAsInt(json, "waterAmount");
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new GemCuttingStationRecipe(id, output, inputs);
+            return new GemCuttingStationRecipe(id, output, inputs, water);
         }
 
         @Override
         public GemCuttingStationRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
+            int waterAmount = buf.readInt();
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromNetwork(buf));
             }
 
             ItemStack output = buf.readItem();
-            return new GemCuttingStationRecipe(id, output, inputs);
+            return new GemCuttingStationRecipe(id, output, inputs, waterAmount);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buf, GemCuttingStationRecipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
+            buf.writeInt(recipe.getWaterAmount());
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
             }

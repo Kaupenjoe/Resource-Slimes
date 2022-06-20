@@ -5,6 +5,7 @@
       "item": "resourceslimes:uncut_black_opal"
     }
   ],
+  "waterAmount": 1000,
   "output": {
     "item": "resourceslimes:cut_black_opal"
   }

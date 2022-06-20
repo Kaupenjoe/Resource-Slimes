@@ -24,12 +24,14 @@ public class GemCuttingRecipeBuilder implements RecipeBuilder {
     private final Item result;
     private final Ingredient ingredient;
     private final int count;
+    private final int water;
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
-    public GemCuttingRecipeBuilder(ItemLike ingredient, ItemLike result, int count) {
+    public GemCuttingRecipeBuilder(ItemLike ingredient, ItemLike result, int count, int water) {
         this.ingredient = Ingredient.of(ingredient);
         this.result = result.asItem();
         this.count = count;
+        this.water = water;
     }
 
     @Override
@@ -57,7 +59,7 @@ public class GemCuttingRecipeBuilder implements RecipeBuilder {
 
         pFinishedRecipeConsumer.accept(new Result(pRecipeId, this.result, this.count, this.ingredient,
                 this.advancement, new ResourceLocation(pRecipeId.getNamespace(), "recipes/" +
-                this.result.getItemCategory().getRecipeFolderName() + "/" + pRecipeId.getPath())));
+                this.result.getItemCategory().getRecipeFolderName() + "/" + pRecipeId.getPath()), this.water));
 
     }
 
@@ -66,17 +68,19 @@ public class GemCuttingRecipeBuilder implements RecipeBuilder {
         private final Item result;
         private final Ingredient ingredient;
         private final int count;
+        private final int water;
         private final Advancement.Builder advancement;
         private final ResourceLocation advancementId;
 
         public Result(ResourceLocation pId, Item pResult, int pCount, Ingredient ingredient, Advancement.Builder pAdvancement,
-                      ResourceLocation pAdvancementId) {
+                      ResourceLocation pAdvancementId, int water) {
             this.id = pId;
             this.result = pResult;
             this.count = pCount;
             this.ingredient = ingredient;
             this.advancement = pAdvancement;
             this.advancementId = pAdvancementId;
+            this.water = water;
         }
 
         @Override
@@ -85,6 +89,7 @@ public class GemCuttingRecipeBuilder implements RecipeBuilder {
             jsonarray.add(ingredient.toJson());
 
             pJson.add("ingredients", jsonarray);
+            pJson.addProperty("waterAmount", this.water);
             JsonObject jsonobject = new JsonObject();
             jsonobject.addProperty("item", this.result.getRegistryName().toString());
             if (this.count > 1) {

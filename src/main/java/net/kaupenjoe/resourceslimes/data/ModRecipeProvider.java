@@ -33,24 +33,24 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     }
 
     private void customGemCuttingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
-        new GemCuttingRecipeBuilder(ModItems.UNCUT_CITRINE.get(), ModItems.CUT_CITRINE.get(), 1)
+        new GemCuttingRecipeBuilder(ModItems.UNCUT_CITRINE.get(), ModItems.CUT_CITRINE.get(), 1, 250)
                 .unlockedBy("has_uncut_citrine", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.UNCUT_CITRINE.get()).build())).save(pFinishedRecipeConsumer);
-        new GemCuttingRecipeBuilder(ModItems.UNCUT_ZIRCON.get(), ModItems.CUT_ZIRCON.get(), 1)
+        new GemCuttingRecipeBuilder(ModItems.UNCUT_ZIRCON.get(), ModItems.CUT_ZIRCON.get(), 1, 250)
                 .unlockedBy("has_uncut_zircon", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.UNCUT_ZIRCON.get()).build())).save(pFinishedRecipeConsumer);
 
-        new GemCuttingRecipeBuilder(Items.DIAMOND, ModItems.CUT_DIAMOND.get(), 1)
+        new GemCuttingRecipeBuilder(Items.DIAMOND, ModItems.CUT_DIAMOND.get(), 1, 500)
                 .unlockedBy("has_diamond", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(Items.DIAMOND).build())).save(pFinishedRecipeConsumer);
-        new GemCuttingRecipeBuilder(Items.EMERALD, ModItems.CUT_EMERALD.get(), 1)
+        new GemCuttingRecipeBuilder(Items.EMERALD, ModItems.CUT_EMERALD.get(), 1, 500)
                 .unlockedBy("has_emerald", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(Items.EMERALD).build())).save(pFinishedRecipeConsumer);
 
-        new GemCuttingRecipeBuilder(ModItems.UNCUT_TANZANITE.get(), ModItems.CUT_TANZANITE.get(), 1)
+        new GemCuttingRecipeBuilder(ModItems.UNCUT_TANZANITE.get(), ModItems.CUT_TANZANITE.get(), 1, 1000)
                 .unlockedBy("has_uncut_tanzanite", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.UNCUT_TANZANITE.get()).build())).save(pFinishedRecipeConsumer);
-        new GemCuttingRecipeBuilder(ModItems.UNCUT_BLACK_OPAL.get(), ModItems.CUT_BLACK_OPAL.get(), 1)
+        new GemCuttingRecipeBuilder(ModItems.UNCUT_BLACK_OPAL.get(), ModItems.CUT_BLACK_OPAL.get(), 1, 1000)
                 .unlockedBy("has_uncut_black_opal", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.UNCUT_BLACK_OPAL.get()).build())).save(pFinishedRecipeConsumer);
     }
