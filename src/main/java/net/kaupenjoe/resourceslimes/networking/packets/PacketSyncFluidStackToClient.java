@@ -1,4 +1,4 @@
-package net.kaupenjoe.resourceslimes.util.networking.packets;
+package net.kaupenjoe.resourceslimes.networking.packets;
 
 import net.kaupenjoe.resourceslimes.block.entity.GemCuttingStationBlockEntity;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;

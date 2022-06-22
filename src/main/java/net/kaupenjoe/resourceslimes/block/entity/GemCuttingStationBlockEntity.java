@@ -4,8 +4,8 @@ import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;
-import net.kaupenjoe.resourceslimes.util.networking.ModMessages;
-import net.kaupenjoe.resourceslimes.util.networking.packets.PacketSyncFluidStackToClient;
+import net.kaupenjoe.resourceslimes.networking.ModMessages;
+import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -178,6 +178,10 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, GemCuttingStationBlockEntity pBlockEntity) {
+        if(pLevel.isClientSide()) {
+            return;
+        }
+
         if(hasRecipe(pBlockEntity)) {
             pBlockEntity.progress++;
             setChanged(pLevel, pPos, pState);

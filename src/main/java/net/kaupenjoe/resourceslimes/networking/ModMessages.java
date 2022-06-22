@@ -1,7 +1,7 @@
-package net.kaupenjoe.resourceslimes.util.networking;
+package net.kaupenjoe.resourceslimes.networking;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
-import net.kaupenjoe.resourceslimes.util.networking.packets.PacketSyncFluidStackToClient;
+import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
