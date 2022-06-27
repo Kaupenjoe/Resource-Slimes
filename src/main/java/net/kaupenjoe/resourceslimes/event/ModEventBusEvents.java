@@ -18,6 +18,7 @@ public class ModEventBusEvents {
     @SubscribeEvent
     public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
         event.put(ModEntityTypes.RESOURCE_SLIME.get(), Monster.createMonsterAttributes().build());
+        event.put(ModEntityTypes.ENERGY_SLIME.get(), Monster.createMonsterAttributes().build());
     }
 
     @SubscribeEvent

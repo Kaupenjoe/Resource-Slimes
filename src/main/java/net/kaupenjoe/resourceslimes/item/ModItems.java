@@ -91,6 +91,10 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntityTypes.RESOURCE_SLIME,0x948e8d, 0x3b3635,
                     new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
+    public static final RegistryObject<Item> ENERGY_SLIME_SPAWN_EGG = ITEMS.register("energy_slime_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.ENERGY_SLIME,0xdbdb40, 0x3b140c,
+                    new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+
     public static final RegistryObject<Item> GEM_CUTTER_TOOL = ITEMS.register("gem_cutter_tool",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES).durability(32)));
 

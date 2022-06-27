@@ -5,13 +5,17 @@ import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.client.ResourceSlimeRenderer;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
+import net.kaupenjoe.resourceslimes.particle.EnergyParticle;
+import net.kaupenjoe.resourceslimes.particle.ModParticles;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationScreen;
 import net.kaupenjoe.resourceslimes.screen.ModMenuTypes;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -22,9 +26,16 @@ public class ClientListener {
     public static void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             EntityRenderers.register(ModEntityTypes.RESOURCE_SLIME.get(), ResourceSlimeRenderer::new);
+            EntityRenderers.register(ModEntityTypes.ENERGY_SLIME.get(), ResourceSlimeRenderer::new);
 
             setFluidRenderLayer();
         });
+    }
+
+    @SubscribeEvent
+    public static void registerParticleFactories(final ParticleFactoryRegisterEvent event) {
+        Minecraft.getInstance().particleEngine.register(ModParticles.ENERGY_PARTICLES.get(),
+                EnergyParticle.Provider::new);
     }
 
     private static void setFluidRenderLayer() {

@@ -8,6 +8,7 @@ import net.kaupenjoe.resourceslimes.effect.ModEffects;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
+import net.kaupenjoe.resourceslimes.particle.ModParticles;
 import net.kaupenjoe.resourceslimes.potion.ModPotion;
 import net.kaupenjoe.resourceslimes.recipe.ModRecipes;
 import net.kaupenjoe.resourceslimes.screen.ModMenuTypes;
@@ -42,7 +43,7 @@ public class ResourceSlimes {
         ModMenuTypes.register(eventBus);
 
         ModRecipes.register(eventBus);
-
+        ModParticles.register(eventBus);
 
 
         eventBus.addListener(this::setup);

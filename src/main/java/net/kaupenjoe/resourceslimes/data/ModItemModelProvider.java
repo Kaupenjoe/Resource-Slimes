@@ -51,6 +51,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.INFUSED_PINK_SLIME_PEARL.get());
 
         spawnEgg(ModItems.RESOURCE_SLIME_SPAWN_EGG.get());
+        spawnEgg(ModItems.ENERGY_SLIME_SPAWN_EGG.get());
 
 
         simpleItem(ModItems.CITRINE_SLIME_FLUID_BUCKET.get());
