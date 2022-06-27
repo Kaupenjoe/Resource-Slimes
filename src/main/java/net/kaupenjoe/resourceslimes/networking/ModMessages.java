@@ -1,6 +1,7 @@
 package net.kaupenjoe.resourceslimes.networking;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
+import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkDirection;
@@ -30,6 +31,12 @@ public class ModMessages {
                 .decoder(PacketSyncFluidStackToClient::new)
                 .encoder(PacketSyncFluidStackToClient::toBytes)
                 .consumer(PacketSyncFluidStackToClient::handle)
+                .add();
+
+        net.messageBuilder(PacketSyncEnergyToClient.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(PacketSyncEnergyToClient::new)
+                .encoder(PacketSyncEnergyToClient::toBytes)
+                .consumer(PacketSyncEnergyToClient::handle)
                 .add();
     }
 

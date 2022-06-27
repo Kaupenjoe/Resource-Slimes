@@ -2,10 +2,12 @@ package net.kaupenjoe.resourceslimes.block.entity;
 
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.item.ModItems;
+import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
 import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;
 import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
+import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -21,10 +23,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
@@ -33,6 +32,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -70,8 +72,17 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
         }
     };
 
+    public final KaupenEnergyStorage energyStorage = new KaupenEnergyStorage(60000, 200) {
+        @Override
+        public void onEnergyChanged() {
+            setChanged();
+            ModMessages.sendToClients(new PacketSyncEnergyToClient(this.energy, worldPosition));
+        }
+    };
+
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
+    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
 
     protected final ContainerData data;
     private int progress = 0;
@@ -83,6 +94,10 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
 
     public FluidStack getFluid() {
         return this.fluidTank.getFluid();
+    }
+
+    public void setEnergyLevel(int energyLevel) {
+        this.energyStorage.setEnergy(energyLevel);
     }
 
     public GemCuttingStationBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
@@ -124,6 +139,10 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @javax.annotation.Nullable Direction side) {
+        if(cap == CapabilityEnergy.ENERGY) {
+            return lazyEnergyHandler.cast();
+        }
+
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return lazyItemHandler.cast();
         }
@@ -142,6 +161,7 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
         lazyFluidHandler = LazyOptional.of(() -> fluidTank);
+        lazyEnergyHandler = LazyOptional.of(() -> energyStorage);
     }
 
     @Override
@@ -149,6 +169,7 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
         super.invalidateCaps();
         lazyItemHandler.invalidate();
         lazyFluidHandler.invalidate();
+        lazyEnergyHandler.invalidate();
     }
 
     @Override
@@ -156,6 +177,7 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
         tag.put("inventory", itemHandler.serializeNBT());
         tag.putInt("gem_cutting_station.progress", progress);
         tag = fluidTank.writeToNBT(tag);
+        tag.putInt("energy", energyStorage.getEnergyStored());
 
         super.saveAdditional(tag);
     }
@@ -166,6 +188,7 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         progress = nbt.getInt("gem_cutting_station.progress");
         fluidTank.readFromNBT(nbt);
+        energyStorage.setEnergy(nbt.getInt("energy"));
     }
 
     public void drops() {
@@ -182,8 +205,9 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
             return;
         }
 
-        if(hasRecipe(pBlockEntity)) {
+        if(hasRecipe(pBlockEntity) && hasEnoughEnergy(pBlockEntity)) {
             pBlockEntity.progress++;
+            extractEnergy(pBlockEntity);
             setChanged(pLevel, pPos, pState);
             if(pBlockEntity.progress >= pBlockEntity.maxProgress) {
                 craftItem(pBlockEntity);
@@ -198,26 +222,43 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements MenuPro
         }
     }
 
+    private static void extractEnergy(GemCuttingStationBlockEntity entity) {
+        entity.energyStorage.extractEnergy(100, false);
+    }
+
+    private static boolean hasEnoughEnergy(GemCuttingStationBlockEntity entity) {
+        return entity.energyStorage.getEnergyStored() >= 100;
+    }
+
     private static boolean hasWaterSourceInSlot(GemCuttingStationBlockEntity entity) {
         return entity.itemHandler.getStackInSlot(0).getCount() > 0;
+    }
+
+    private static boolean hasSpaceInTank(GemCuttingStationBlockEntity entity, int fillAmount) {
+        return entity.fluidTank.getSpace() >= fillAmount;
     }
 
     private static void transferItemWaterToWaterTank(GemCuttingStationBlockEntity entity) {
         if(entity.itemHandler.getStackInSlot(0).getItem() instanceof PotionItem
                 && PotionUtils.getPotion(entity.itemHandler.getStackInSlot(0)).equals(Potions.WATER)) {
-            entity.fluidTank.fill(new FluidStack(Fluids.WATER, 250), IFluidHandler.FluidAction.EXECUTE);
-
-            entity.itemHandler.extractItem(0, 1, false);
-            entity.itemHandler.insertItem(0, new ItemStack(Items.GLASS_BOTTLE), false);
+            if(hasSpaceInTank(entity, 250)) {
+                fillTankWithWater(entity, 250, Items.GLASS_BOTTLE);
+            }
         }
 
         if(entity.itemHandler.getStackInSlot(0).getItem() instanceof BucketItem bucketItem
                 && bucketItem.getFluid().equals(Fluids.WATER)) {
-            entity.fluidTank.fill(new FluidStack(Fluids.WATER, 1000), IFluidHandler.FluidAction.EXECUTE);
-
-            entity.itemHandler.extractItem(0, 1, false);
-            entity.itemHandler.insertItem(0, new ItemStack(Items.BUCKET), false);
+            if(hasSpaceInTank(entity, 1000)) {
+                fillTankWithWater(entity, 1000, Items.BUCKET);
+            }
         }
+    }
+
+    private static void fillTankWithWater(GemCuttingStationBlockEntity entity, int amount, Item bucket) {
+        entity.fluidTank.fill(new FluidStack(Fluids.WATER, amount), IFluidHandler.FluidAction.EXECUTE);
+
+        entity.itemHandler.extractItem(0, 1, false);
+        entity.itemHandler.insertItem(0, new ItemStack(bucket), false);
     }
 
     private static boolean hasRecipe(GemCuttingStationBlockEntity entity) {

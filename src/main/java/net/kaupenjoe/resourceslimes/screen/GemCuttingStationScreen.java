@@ -3,6 +3,7 @@ package net.kaupenjoe.resourceslimes.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
+import net.kaupenjoe.resourceslimes.screen.renderer.EnergyInfoArea;
 import net.kaupenjoe.resourceslimes.screen.renderer.FluidStackRenderer;
 import net.kaupenjoe.resourceslimes.util.MouseUtil;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -18,6 +19,7 @@ public class GemCuttingStationScreen extends AbstractContainerScreen<GemCuttingS
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(ResourceSlimes.MOD_ID,"textures/gui/gem_cutting_station_with_water_gui.png");
     private FluidStackRenderer renderer;
+    private EnergyInfoArea energyInfoArea;
 
     public GemCuttingStationScreen(GemCuttingStationMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -27,6 +29,8 @@ public class GemCuttingStationScreen extends AbstractContainerScreen<GemCuttingS
     protected void init() {
         super.init();
         assignFluidRenderer();
+        energyInfoArea = new EnergyInfoArea(((width - imageWidth) / 2) +  156,
+                ((height - imageHeight) / 2) + 13, menu.blockEntity.energyStorage);
     }
 
     @Override
@@ -34,8 +38,13 @@ public class GemCuttingStationScreen extends AbstractContainerScreen<GemCuttingS
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y)) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 55, 45)) {
             renderTooltip(pPoseStack, renderer.getTooltip(menu.getFluid(), TooltipFlag.Default.NORMAL),
+                    Optional.empty(),pMouseX - x, pMouseY - y);
+        }
+
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 13, 8, 64)) {
+            renderTooltip(pPoseStack, energyInfoArea.getTooltips(),
                     Optional.empty(),pMouseX - x, pMouseY - y);
         }
     }
@@ -55,6 +64,7 @@ public class GemCuttingStationScreen extends AbstractContainerScreen<GemCuttingS
         }
 
         renderer.render(pPoseStack, x + 55,y + 45, menu.getFluid());
+        energyInfoArea.draw(pPoseStack);
     }
 
     @Override
@@ -68,7 +78,11 @@ public class GemCuttingStationScreen extends AbstractContainerScreen<GemCuttingS
         renderer = new FluidStackRenderer(16000,true,16, 32);
     }
 
-    private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y) {
-        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + 55, y + 45, renderer.getWidth(), renderer.getHeight());
+    private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY) {
+        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, renderer.getWidth(), renderer.getHeight());
+    }
+
+    private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
+        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }
 }
