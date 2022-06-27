@@ -29,8 +29,7 @@ public class GemCuttingStationScreen extends AbstractContainerScreen<GemCuttingS
     protected void init() {
         super.init();
         assignFluidRenderer();
-        energyInfoArea = new EnergyInfoArea(((width - imageWidth) / 2) +  156,
-                ((height - imageHeight) / 2) + 13, menu.blockEntity.energyStorage);
+        assignEnergyInfoArea();
     }
 
     @Override
@@ -76,6 +75,11 @@ public class GemCuttingStationScreen extends AbstractContainerScreen<GemCuttingS
 
     private void assignFluidRenderer() {
         renderer = new FluidStackRenderer(16000,true,16, 32);
+    }
+
+    private void assignEnergyInfoArea() {
+        energyInfoArea = new EnergyInfoArea(((width - imageWidth) / 2) +  156,
+                ((height - imageHeight) / 2) + 13, menu.blockEntity.energyStorage);
     }
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY) {
