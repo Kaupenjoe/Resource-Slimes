@@ -1,7 +1,9 @@
 package net.kaupenjoe.resourceslimes.networking.packets;
 
 import net.kaupenjoe.resourceslimes.block.entity.GemCuttingStationBlockEntity;
+import net.kaupenjoe.resourceslimes.block.entity.IEnergyHandlingBlockEntity;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;
+import net.kaupenjoe.resourceslimes.screen.IEnergyMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Position;
@@ -34,11 +36,11 @@ public class PacketSyncEnergyToClient {
         NetworkEvent.Context context = contextSupplier.get();
         context.enqueueWork(() -> {
             // HERE WE ARE ON THE CLIENT YES
-            if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof GemCuttingStationBlockEntity blockEntity) {
+            if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof IEnergyHandlingBlockEntity blockEntity) {
                 blockEntity.setEnergyLevel(energy);
 
-                if(Minecraft.getInstance().player.containerMenu instanceof GemCuttingStationMenu menu &&
-                menu.blockEntity.getBlockPos().equals(pos)) {
+                if(Minecraft.getInstance().player.containerMenu instanceof IEnergyMenu menu &&
+                menu.getBlockEntity().getBlockPos().equals(pos)) {
                     blockEntity.setEnergyLevel(energy);
                 }
             }

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:infused_tanzanite"
+    ]
+  },
+  "criteria": {
+    "has_cut_diamond": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:cut_tanzanite"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:infused_tanzanite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cut_diamond",
+      "has_the_recipe"
+    ]
+  ]
+}

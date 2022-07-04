@@ -1,0 +1,12 @@
+{
+  "type": "resourceslimes:gem_infusing",
+  "ingredients": [
+    {
+      "item": "resourceslimes:cut_zircon"
+    }
+  ],
+  "waterAmount": 500,
+  "output": {
+    "item": "resourceslimes:infused_zircon"
+  }
+}

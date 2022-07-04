@@ -1,38 +1,36 @@
 package net.kaupenjoe.resourceslimes.screen;
 
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
-import net.kaupenjoe.resourceslimes.block.entity.GemCuttingStationBlockEntity;
-import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.screen.slot.*;
+import net.kaupenjoe.resourceslimes.block.entity.GemInfusingStationBlockEntity;
+import net.kaupenjoe.resourceslimes.fluid.ModFluids;
+import net.kaupenjoe.resourceslimes.screen.slot.ModFluidSourceSlot;
+import net.kaupenjoe.resourceslimes.screen.slot.ModResultSlot;
+import net.kaupenjoe.resourceslimes.screen.slot.ModTagRestrictedSlot;
 import net.kaupenjoe.resourceslimes.util.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 
-public class GemCuttingStationMenu extends AbstractContainerMenu implements IFluidMenu, IEnergyMenu {
-    public final GemCuttingStationBlockEntity blockEntity;
+public class GemInfusingStationMenu extends AbstractContainerMenu implements IFluidMenu, IEnergyMenu  {
+    public final GemInfusingStationBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
     private FluidStack fluid;
 
-    public GemCuttingStationMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+    public GemInfusingStationMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
-    public GemCuttingStationMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.GEM_CUTTING_STATION_MENU.get(), pContainerId);
-        checkContainerSize(inv, 4);
-        blockEntity = ((GemCuttingStationBlockEntity) entity);
+    public GemInfusingStationMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(ModMenuTypes.GEM_INFUSING_STATION_MENU.get(), pContainerId);
+        checkContainerSize(inv, 3);
+        blockEntity = ((GemInfusingStationBlockEntity) entity);
         this.level = inv.player.level;
         this.data = data;
         this.fluid = blockEntity.getFluid();
@@ -41,10 +39,9 @@ public class GemCuttingStationMenu extends AbstractContainerMenu implements IFlu
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-            this.addSlot(new ModWaterSourceSlot(handler, 0, 15, 40));
-            this.addSlot(new ModTagRestrictedSlot(handler, 1, 57, 18, () -> ModTags.Items.UNCUT_GEMS));
-            this.addSlot(new ModRestrictedSlot(handler, 2, 103, 18, ModItems.GEM_CUTTER_TOOL));
-            this.addSlot(new ModResultSlot(handler, 3, 80, 60));
+            this.addSlot(new ModFluidSourceSlot(handler, 0, 12, 15, ModFluids.CITRINE_SLIME_FLUID::get));
+            this.addSlot(new ModTagRestrictedSlot(handler, 1, 86, 15, () -> ModTags.Items.CUT_GEMS));
+            this.addSlot(new ModResultSlot(handler, 2, 86, 60));
         });
 
         addDataSlots(data);
@@ -91,7 +88,7 @@ public class GemCuttingStationMenu extends AbstractContainerMenu implements IFlu
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
@@ -129,7 +126,7 @@ public class GemCuttingStationMenu extends AbstractContainerMenu implements IFlu
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.GEM_CUTTING_STATION.get());
+                pPlayer, ModBlocks.GEM_INFUSING_STATION.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

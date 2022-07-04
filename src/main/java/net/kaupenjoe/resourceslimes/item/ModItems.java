@@ -65,6 +65,8 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
     public static final RegistryObject<Item> CUT_BLACK_OPAL = ITEMS.register("cut_black_opal",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+    public static final RegistryObject<Item> INFUSED_BLACK_OPAL = ITEMS.register("infused_black_opal",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
     public static final RegistryObject<Item> PINK_SLIME_PEARL = ITEMS.register("pink_slime_pearl",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:infused_zircon"
+    ]
+  },
+  "criteria": {
+    "has_cut_zircon": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:cut_zircon"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:infused_zircon"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cut_zircon",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -3,6 +3,7 @@ package net.kaupenjoe.resourceslimes.data;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.data.custom.GemCuttingRecipeBuilder;
+import net.kaupenjoe.resourceslimes.data.custom.GemInfusingRecipeBuilder;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
@@ -30,6 +31,34 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         this.customOreSmeltingRecipes(pFinishedRecipeConsumer);
         this.customOreBlastingRecipes(pFinishedRecipeConsumer);
         this.customGemCuttingRecipes(pFinishedRecipeConsumer);
+        this.customGemInfusingRecipes(pFinishedRecipeConsumer);
+    }
+
+    private void customGemInfusingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+        new GemInfusingRecipeBuilder(ModItems.CUT_CITRINE.get(), ModItems.INFUSED_CITRINE.get(), 1, 500)
+                .unlockedBy("has_cut_citrine", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.CUT_CITRINE.get()).build())).save(pFinishedRecipeConsumer);
+        new GemInfusingRecipeBuilder(ModItems.CUT_ZIRCON.get(), ModItems.INFUSED_ZIRCON.get(), 1, 500)
+                .unlockedBy("has_cut_zircon", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.CUT_ZIRCON.get()).build())).save(pFinishedRecipeConsumer);
+
+        new GemInfusingRecipeBuilder(ModItems.CUT_DIAMOND.get(), ModItems.INFUSED_DIAMOND.get(), 1, 500)
+                .unlockedBy("has_cut_diamond", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.CUT_DIAMOND.get()).build())).save(pFinishedRecipeConsumer);
+        new GemInfusingRecipeBuilder(ModItems.CUT_EMERALD.get(), ModItems.INFUSED_EMERALD.get(), 1, 500)
+                .unlockedBy("has_cut_emerald", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.CUT_DIAMOND.get()).build())).save(pFinishedRecipeConsumer);
+
+        new GemInfusingRecipeBuilder(ModItems.CUT_TANZANITE.get(), ModItems.INFUSED_TANZANITE.get(), 1, 500)
+                .unlockedBy("has_cut_diamond", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.CUT_TANZANITE.get()).build())).save(pFinishedRecipeConsumer);
+        new GemInfusingRecipeBuilder(ModItems.CUT_BLACK_OPAL.get(), ModItems.INFUSED_BLACK_OPAL.get(), 1, 500)
+                .unlockedBy("has_cut_black_opal", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.CUT_BLACK_OPAL.get()).build())).save(pFinishedRecipeConsumer);
+
+        new GemInfusingRecipeBuilder(ModItems.PINK_SLIME_PEARL.get(), ModItems.INFUSED_PINK_SLIME_PEARL.get(), 1, 500)
+                .unlockedBy("has_pink_slime_pearl", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.PINK_SLIME_PEARL.get()).build())).save(pFinishedRecipeConsumer);
     }
 
     private void customGemCuttingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {

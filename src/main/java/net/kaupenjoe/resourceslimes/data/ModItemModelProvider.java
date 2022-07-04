@@ -46,6 +46,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_BLACK_OPAL.get());
         simpleItem(ModItems.UNCUT_BLACK_OPAL.get());
         simpleItem(ModItems.CUT_BLACK_OPAL.get());
+        simpleItem(ModItems.INFUSED_BLACK_OPAL.get());
 
         simpleItem(ModItems.PINK_SLIME_PEARL.get());
         simpleItem(ModItems.INFUSED_PINK_SLIME_PEARL.get());

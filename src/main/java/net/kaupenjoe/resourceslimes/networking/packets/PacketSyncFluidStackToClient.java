@@ -1,8 +1,10 @@
 package net.kaupenjoe.resourceslimes.networking.packets;
 
 import net.kaupenjoe.resourceslimes.block.entity.GemCuttingStationBlockEntity;
+import net.kaupenjoe.resourceslimes.block.entity.IFluidHandlingBlockEntity;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationScreen;
+import net.kaupenjoe.resourceslimes.screen.IFluidMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -34,11 +36,11 @@ public class PacketSyncFluidStackToClient {
         NetworkEvent.Context context = contextSupplier.get();
         context.enqueueWork(() -> {
             // HERE WE ARE ON THE CLIENT YES
-            if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof GemCuttingStationBlockEntity blockEntity) {
+            if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof IFluidHandlingBlockEntity blockEntity) {
                 blockEntity.setFluid(this.fluidStack);
 
-                if(Minecraft.getInstance().player.containerMenu instanceof GemCuttingStationMenu menu &&
-                menu.blockEntity.getBlockPos().equals(pos)) {
+                if(Minecraft.getInstance().player.containerMenu instanceof IFluidMenu menu &&
+                menu.getBlockEntity().getBlockPos().equals(pos)) {
                     menu.setFluid(this.fluidStack);
                 }
             }

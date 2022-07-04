@@ -2,6 +2,7 @@ package net.kaupenjoe.resourceslimes.block.entity;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
+import net.kaupenjoe.resourceslimes.block.custom.GemInfusingStationBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -16,6 +17,11 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("gem_cutting_station_block_entity", () ->
                     BlockEntityType.Builder.of(GemCuttingStationBlockEntity::new,
                             ModBlocks.GEM_CUTTING_STATION.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<GemInfusingStationBlockEntity>> GEM_INFUSING_STATION_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("gem_infusing_station_block_entity", () ->
+                    BlockEntityType.Builder.of(GemInfusingStationBlockEntity::new,
+                            ModBlocks.GEM_INFUSING_STATION.get()).build(null));
 
 
     public static void register(IEventBus eventBus) {

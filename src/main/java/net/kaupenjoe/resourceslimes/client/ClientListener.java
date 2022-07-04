@@ -8,6 +8,7 @@ import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.particle.EnergyParticle;
 import net.kaupenjoe.resourceslimes.particle.ModParticles;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationScreen;
+import net.kaupenjoe.resourceslimes.screen.GemInfusingStationScreen;
 import net.kaupenjoe.resourceslimes.screen.ModMenuTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -29,6 +30,9 @@ public class ClientListener {
             EntityRenderers.register(ModEntityTypes.ENERGY_SLIME.get(), ResourceSlimeRenderer::new);
 
             setFluidRenderLayer();
+
+            MenuScreens.register(ModMenuTypes.GEM_CUTTING_STATION_MENU.get(), GemCuttingStationScreen::new);
+            MenuScreens.register(ModMenuTypes.GEM_INFUSING_STATION_MENU.get(), GemInfusingStationScreen::new);
         });
     }
 
@@ -68,8 +72,5 @@ public class ClientListener {
         ItemBlockRenderTypes.setRenderLayer(ModFluids.PINK_SLIME_PEARL_SLIME_FLUID_FLOWING.get(), RenderType.translucent());
 
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.GEM_CUTTING_STATION.get(), RenderType.translucent());
-
-
-        MenuScreens.register(ModMenuTypes.GEM_CUTTING_STATION_MENU.get(), GemCuttingStationScreen::new);
     }
 }

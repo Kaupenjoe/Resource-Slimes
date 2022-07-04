@@ -1,0 +1,12 @@
+{
+  "type": "resourceslimes:gem_infusing",
+  "ingredients": [
+    {
+      "item": "resourceslimes:cut_black_opal"
+    }
+  ],
+  "waterAmount": 500,
+  "output": {
+    "item": "resourceslimes:infused_black_opal"
+  }
+}

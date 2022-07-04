@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:infused_pink_slime_pearl"
+    ]
+  },
+  "criteria": {
+    "has_pink_slime_pearl": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:pink_slime_pearl"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:infused_pink_slime_pearl"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pink_slime_pearl",
+      "has_the_recipe"
+    ]
+  ]
+}

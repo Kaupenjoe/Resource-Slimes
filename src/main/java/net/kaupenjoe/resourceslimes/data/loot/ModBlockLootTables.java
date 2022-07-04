@@ -15,6 +15,7 @@ public class ModBlockLootTables extends BlockLoot {
 
     private void blockEntityDrops() {
         this.dropSelf(ModBlocks.GEM_CUTTING_STATION.get());
+        this.dropSelf(ModBlocks.GEM_INFUSING_STATION.get());
     }
 
     private void oreDrops() {

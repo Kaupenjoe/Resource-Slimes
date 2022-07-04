@@ -2,11 +2,11 @@ package net.kaupenjoe.resourceslimes.block.entity;
 
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.item.ModItems;
+import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
+import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
 import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;
-import net.kaupenjoe.resourceslimes.networking.ModMessages;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -33,7 +33,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -49,8 +48,7 @@ import javax.annotation.Nonnull;
 import java.util.Optional;
 import java.util.Random;
 
-public class GemCuttingStationBlockEntity extends BlockEntity implements
-        MenuProvider, IFluidHandlingBlockEntity, IEnergyHandlingBlockEntity {
+public class SlimeCleaningStationBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -101,21 +99,21 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements
         this.energyStorage.setEnergy(energyLevel);
     }
 
-    public GemCuttingStationBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
+    public SlimeCleaningStationBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(ModBlockEntities.GEM_CUTTING_STATION_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
         this.data = new ContainerData() {
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> GemCuttingStationBlockEntity.this.progress;
-                    case 1 -> GemCuttingStationBlockEntity.this.maxProgress;
+                    case 0 -> SlimeCleaningStationBlockEntity.this.progress;
+                    case 1 -> SlimeCleaningStationBlockEntity.this.maxProgress;
                     default -> 0;
                 };
             }
 
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> GemCuttingStationBlockEntity.this.progress = value;
-                    case 1 -> GemCuttingStationBlockEntity.this.maxProgress = value;
+                    case 0 -> SlimeCleaningStationBlockEntity.this.progress = value;
+                    case 1 -> SlimeCleaningStationBlockEntity.this.maxProgress = value;
                 }
             }
 
@@ -176,7 +174,7 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
         tag.put("inventory", itemHandler.serializeNBT());
-        tag.putInt("gem_cutting_station.progress", progress);
+        tag.putInt("slime_cleaning_station.progress", progress);
         tag = fluidTank.writeToNBT(tag);
         tag.putInt("energy", energyStorage.getEnergyStored());
 
@@ -187,7 +185,7 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements
     public void load(CompoundTag nbt) {
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
-        progress = nbt.getInt("gem_cutting_station.progress");
+        progress = nbt.getInt("slime_cleaning_station.progress");
         fluidTank.readFromNBT(nbt);
         energyStorage.setEnergy(nbt.getInt("energy"));
     }
@@ -201,7 +199,7 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, GemCuttingStationBlockEntity pBlockEntity) {
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, SlimeCleaningStationBlockEntity pBlockEntity) {
         if(pLevel.isClientSide()) {
             return;
         }
@@ -223,23 +221,23 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements
         }
     }
 
-    private static void extractEnergy(GemCuttingStationBlockEntity entity) {
+    private static void extractEnergy(SlimeCleaningStationBlockEntity entity) {
         entity.energyStorage.extractEnergy(100, false);
     }
 
-    private static boolean hasEnoughEnergy(GemCuttingStationBlockEntity entity) {
+    private static boolean hasEnoughEnergy(SlimeCleaningStationBlockEntity entity) {
         return entity.energyStorage.getEnergyStored() >= 100;
     }
 
-    private static boolean hasWaterSourceInSlot(GemCuttingStationBlockEntity entity) {
+    private static boolean hasWaterSourceInSlot(SlimeCleaningStationBlockEntity entity) {
         return entity.itemHandler.getStackInSlot(0).getCount() > 0;
     }
 
-    private static boolean hasSpaceInTank(GemCuttingStationBlockEntity entity, int fillAmount) {
+    private static boolean hasSpaceInTank(SlimeCleaningStationBlockEntity entity, int fillAmount) {
         return entity.fluidTank.getSpace() >= fillAmount;
     }
 
-    private static void transferItemWaterToWaterTank(GemCuttingStationBlockEntity entity) {
+    private static void transferItemWaterToWaterTank(SlimeCleaningStationBlockEntity entity) {
         if(entity.itemHandler.getStackInSlot(0).getItem() instanceof PotionItem
                 && PotionUtils.getPotion(entity.itemHandler.getStackInSlot(0)).equals(Potions.WATER)) {
             if(hasSpaceInTank(entity, 250)) {
@@ -255,14 +253,14 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements
         }
     }
 
-    private static void fillTankWithWater(GemCuttingStationBlockEntity entity, int amount, Item bucket) {
+    private static void fillTankWithWater(SlimeCleaningStationBlockEntity entity, int amount, Item bucket) {
         entity.fluidTank.fill(new FluidStack(Fluids.WATER, amount), IFluidHandler.FluidAction.EXECUTE);
 
         entity.itemHandler.extractItem(0, 1, false);
         entity.itemHandler.insertItem(0, new ItemStack(bucket), false);
     }
 
-    private static boolean hasRecipe(GemCuttingStationBlockEntity entity) {
+    private static boolean hasRecipe(SlimeCleaningStationBlockEntity entity) {
         Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
@@ -277,15 +275,15 @@ public class GemCuttingStationBlockEntity extends BlockEntity implements
                 && hasWaterInTank(entity, match.get()) && hasToolsInToolSlot(entity);
     }
 
-    private static boolean hasWaterInTank(GemCuttingStationBlockEntity entity, GemCuttingStationRecipe recipe) {
+    private static boolean hasWaterInTank(SlimeCleaningStationBlockEntity entity, GemCuttingStationRecipe recipe) {
         return entity.fluidTank.getFluid().getAmount() >= recipe.getWaterAmount();
     }
 
-    private static boolean hasToolsInToolSlot(GemCuttingStationBlockEntity entity) {
+    private static boolean hasToolsInToolSlot(SlimeCleaningStationBlockEntity entity) {
         return entity.itemHandler.getStackInSlot(2).getItem() == ModItems.GEM_CUTTER_TOOL.get();
     }
 
-    private static void craftItem(GemCuttingStationBlockEntity entity) {
+    private static void craftItem(SlimeCleaningStationBlockEntity entity) {
         Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
