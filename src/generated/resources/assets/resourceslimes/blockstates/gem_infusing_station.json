@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resourceslimes:block/gem_infusing_station"
+    },
+    "facing=south": {
+      "model": "resourceslimes:block/gem_infusing_station",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "resourceslimes:block/gem_infusing_station",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "resourceslimes:block/gem_infusing_station",
+      "y": 90
+    }
+  }
+}

@@ -29,5 +29,7 @@ public class ModBlockStatesProvider extends BlockStateProvider {
 
         horizontalBlock(ModBlocks.GEM_CUTTING_STATION.get(),
                 new ModelFile.UncheckedModelFile(modLoc("block/gem_cutting_station")));
+        horizontalBlock(ModBlocks.GEM_INFUSING_STATION.get(),
+                new ModelFile.UncheckedModelFile(modLoc("block/gem_infusing_station")));
     }
 }

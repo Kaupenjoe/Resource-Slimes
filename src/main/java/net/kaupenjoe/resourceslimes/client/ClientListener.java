@@ -2,6 +2,9 @@ package net.kaupenjoe.resourceslimes.client;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
+import net.kaupenjoe.resourceslimes.block.entity.ModBlockEntities;
+import net.kaupenjoe.resourceslimes.block.entity.client.GemCuttingStationBlockEntityRenderer;
+import net.kaupenjoe.resourceslimes.block.entity.client.GemInfusingStationBlockEntityRenderer;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.client.ResourceSlimeRenderer;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
@@ -16,6 +19,7 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -72,5 +76,13 @@ public class ClientListener {
         ItemBlockRenderTypes.setRenderLayer(ModFluids.PINK_SLIME_PEARL_SLIME_FLUID_FLOWING.get(), RenderType.translucent());
 
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.GEM_CUTTING_STATION.get(), RenderType.translucent());
+    }
+
+    @SubscribeEvent
+    public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ModBlockEntities.GEM_INFUSING_STATION_BLOCK_ENTITY.get(),
+                GemInfusingStationBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.GEM_CUTTING_STATION_BLOCK_ENTITY.get(),
+                GemCuttingStationBlockEntityRenderer::new);
     }
 }

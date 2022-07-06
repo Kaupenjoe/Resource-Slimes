@@ -80,6 +80,9 @@ public class ModBlocks {
     public static final RegistryObject<LiquidBlock> PINK_SLIME_PEARL_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("pink_slime_pearl_slime_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.PINK_SLIME_PEARL_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
                     .noCollission().strength(100f).noDrops()));
+    public static final RegistryObject<LiquidBlock> SOAPY_WATER_BLOCK = registerBlockWithoutBlockItem("soapy_fluid_block",
+            () -> new LiquidBlock(() -> ModFluids.SOAPY_WATER_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
+                    .noCollission().strength(100f).noDrops()));
 
 
     public static final RegistryObject<Block> GEM_CUTTING_STATION = registerBlock("gem_cutting_station",

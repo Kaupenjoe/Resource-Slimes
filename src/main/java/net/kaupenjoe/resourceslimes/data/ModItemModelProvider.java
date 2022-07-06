@@ -80,6 +80,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlock(ModBlocks.END_BLACK_OPAL_ORE.get());
 
         complexBlock(ModBlocks.GEM_CUTTING_STATION.get());
+        complexBlock(ModBlocks.GEM_INFUSING_STATION.get());
     }
 
     private ItemModelBuilder simpleItem(Item item) {

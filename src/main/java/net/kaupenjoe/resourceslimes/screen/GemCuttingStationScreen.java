@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class GemCuttingStationScreen extends AbstractContainerScreen<GemCuttingStationMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(ResourceSlimes.MOD_ID,"textures/gui/gem_cutting_station_with_water_gui.png");
+            new ResourceLocation(ResourceSlimes.MOD_ID,"textures/gui/gem_cutting_station_gui.png");
     private FluidStackRenderer renderer;
     private EnergyInfoArea energyInfoArea;
 

@@ -5,6 +5,7 @@ import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
+import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
 import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.GemInfusingStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
@@ -48,13 +49,28 @@ import javax.annotation.Nonnull;
 import java.util.Optional;
 
 public class GemInfusingStationBlockEntity extends BlockEntity implements
-        MenuProvider, IFluidHandlingBlockEntity, IEnergyHandlingBlockEntity {
+        MenuProvider, IFluidHandlingBlockEntity, IEnergyHandlingBlockEntity, IInventoryHandlingBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            if(!level.isClientSide()) {
+                ModMessages.sendToClients(new PacketSyncItemStackToClient(this, worldPosition));
+            }
         }
     };
+
+    public ItemStack getRenderStack() {
+        ItemStack stack;
+
+        if(!itemHandler.getStackInSlot(2).isEmpty()) {
+            stack = itemHandler.getStackInSlot(2);
+        } else {
+            stack = itemHandler.getStackInSlot(1);
+        }
+
+        return stack;
+    }
 
     private final FluidTank fluidTank = new FluidTank(64000) {
         @Override
@@ -86,6 +102,22 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 78;
+
+    @Override
+    public void setHandler(ItemStackHandler handler) {
+        copyHandlerContents(handler);
+    }
+
+    private void copyHandlerContents(ItemStackHandler handler) {
+        for (int i = 0; i < handler.getSlots(); i++) {
+            itemHandler.setStackInSlot(i, handler.getStackInSlot(i));
+        }
+    }
+
+    @Override
+    public ItemStackHandler getItemStackHandler() {
+        return this.itemHandler;
+    }
 
     public void setFluid(FluidStack fluidStack) {
         this.fluidTank.setFluid(fluidStack);
