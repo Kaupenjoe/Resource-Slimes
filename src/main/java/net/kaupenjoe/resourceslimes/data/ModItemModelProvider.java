@@ -81,6 +81,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         complexBlock(ModBlocks.GEM_CUTTING_STATION.get());
         complexBlock(ModBlocks.GEM_INFUSING_STATION.get());
+        complexBlock(ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get());
+        complexBlock(ModBlocks.SLIME_INCUBATION_STATION.get());
     }
 
     private ItemModelBuilder simpleItem(Item item) {

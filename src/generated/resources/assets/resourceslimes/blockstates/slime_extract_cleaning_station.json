@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resourceslimes:block/slime_extract_cleaning_station"
+    },
+    "facing=south": {
+      "model": "resourceslimes:block/slime_extract_cleaning_station",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "resourceslimes:block/slime_extract_cleaning_station",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "resourceslimes:block/slime_extract_cleaning_station",
+      "y": 90
+    }
+  }
+}

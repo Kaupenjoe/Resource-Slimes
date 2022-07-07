@@ -88,8 +88,13 @@ public class ModBlocks {
     public static final RegistryObject<Block> GEM_CUTTING_STATION = registerBlock("gem_cutting_station",
             () -> new GemCuttingStationBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),
             ModCreativeModeTab.RESOURCE_SLIMES);
-
     public static final RegistryObject<Block> GEM_INFUSING_STATION = registerBlock("gem_infusing_station",
+            () -> new GemInfusingStationBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),
+            ModCreativeModeTab.RESOURCE_SLIMES);
+    public static final RegistryObject<Block> SLIME_EXTRACT_CLEANING_STATION = registerBlock("slime_extract_cleaning_station",
+            () -> new GemInfusingStationBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),
+            ModCreativeModeTab.RESOURCE_SLIMES);
+    public static final RegistryObject<Block> SLIME_INCUBATION_STATION = registerBlock("slime_incubation_station",
             () -> new GemInfusingStationBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),
             ModCreativeModeTab.RESOURCE_SLIMES);
 
