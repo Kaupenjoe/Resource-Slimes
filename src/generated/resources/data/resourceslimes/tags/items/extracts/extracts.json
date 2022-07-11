@@ -1,0 +1,229 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "resourceslimes:empty_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:stone_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:dirt_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:water_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:sand_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:gravel_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:wood_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:grass_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:flower_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:sheep_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:cow_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:pig_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:chicken_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:coal_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:berry_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:fish_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:iron_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:lapis_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:quartz_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:aquatic_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:nether_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:zombie_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:ice_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:copper_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:fire_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:deepslate_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:crop_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:lessergem_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:gold_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:redstone_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:glowstone_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:skeleton_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:prismarine_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:creeper_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:spider_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slime_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:phantom_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:alchemy_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:enderpearl_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:diamond_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:honey_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:experience_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:music_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:obsidian_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:blaze_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:witherskeletons_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:illagers_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:ghast_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:netherite_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:magic_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:emerald_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:shulkers_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:enderdragon_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:netherstar_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:greatergem_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:endcrystal_extract",
+      "required": false
+    }
+  ]
+}

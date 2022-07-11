@@ -5,7 +5,10 @@
       "item": "resourceslimes:cut_emerald"
     }
   ],
-  "waterAmount": 500,
+  "fluid": {
+    "FluidName": "resourceslimes:emerald_slime_fluid",
+    "Amount": 500
+  },
   "output": {
     "item": "resourceslimes:infused_emerald"
   }

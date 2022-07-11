@@ -3,8 +3,8 @@ package net.kaupenjoe.resourceslimes.data.custom;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
-import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
 import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
+import net.kaupenjoe.resourceslimes.util.FluidJSONUtil;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -17,6 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -25,14 +26,14 @@ public class GemInfusingRecipeBuilder implements RecipeBuilder {
     private final Item result;
     private final Ingredient ingredient;
     private final int count;
-    private final int water;
+    private final FluidStack fluidStack;
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
-    public GemInfusingRecipeBuilder(ItemLike ingredient, ItemLike result, int count, int water) {
+    public GemInfusingRecipeBuilder(ItemLike ingredient, ItemLike result, int count, FluidStack fluidStack) {
         this.ingredient = Ingredient.of(ingredient);
         this.result = result.asItem();
         this.count = count;
-        this.water = water;
+        this.fluidStack = fluidStack;
     }
 
     @Override
@@ -60,7 +61,7 @@ public class GemInfusingRecipeBuilder implements RecipeBuilder {
 
         pFinishedRecipeConsumer.accept(new Result(pRecipeId, this.result, this.count, this.ingredient,
                 this.advancement, new ResourceLocation(pRecipeId.getNamespace(), "recipes/" +
-                this.result.getItemCategory().getRecipeFolderName() + "/" + pRecipeId.getPath()), this.water));
+                this.result.getItemCategory().getRecipeFolderName() + "/" + pRecipeId.getPath()), this.fluidStack));
 
     }
 
@@ -69,19 +70,19 @@ public class GemInfusingRecipeBuilder implements RecipeBuilder {
         private final Item result;
         private final Ingredient ingredient;
         private final int count;
-        private final int water;
+        private final FluidStack stack;
         private final Advancement.Builder advancement;
         private final ResourceLocation advancementId;
 
         public Result(ResourceLocation pId, Item pResult, int pCount, Ingredient ingredient, Advancement.Builder pAdvancement,
-                      ResourceLocation pAdvancementId, int water) {
+                      ResourceLocation pAdvancementId, FluidStack stack) {
             this.id = pId;
             this.result = pResult;
             this.count = pCount;
             this.ingredient = ingredient;
             this.advancement = pAdvancement;
             this.advancementId = pAdvancementId;
-            this.water = water;
+            this.stack = stack;
         }
 
         @Override
@@ -90,7 +91,8 @@ public class GemInfusingRecipeBuilder implements RecipeBuilder {
             jsonarray.add(ingredient.toJson());
 
             pJson.add("ingredients", jsonarray);
-            pJson.addProperty("waterAmount", this.water);
+            pJson.add("fluid", FluidJSONUtil.toJson(stack));
+            
             JsonObject jsonobject = new JsonObject();
             jsonobject.addProperty("item", this.result.getRegistryName().toString());
             if (this.count > 1) {

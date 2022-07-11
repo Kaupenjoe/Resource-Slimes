@@ -15,14 +15,15 @@ import net.minecraft.world.item.TooltipFlag;
 
 import java.util.Optional;
 
-public class GemInfusingStationScreen extends AbstractContainerScreen<GemInfusingStationMenu> {
+public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<SlimeExtractCleaningStationMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(ResourceSlimes.MOD_ID,"textures/gui/gem_infusing_station_gui.png");
+            new ResourceLocation(ResourceSlimes.MOD_ID,"textures/gui/slime_extract_cleaning_station_gui.png");
     private FluidStackRenderer renderer;
+    private FluidStackRenderer wasteRenderer;
     private EnergyInfoArea energyInfoArea;
 
 
-    public GemInfusingStationScreen(GemInfusingStationMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+    public SlimeExtractCleaningStationScreen(SlimeExtractCleaningStationMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
 
@@ -69,6 +70,7 @@ public class GemInfusingStationScreen extends AbstractContainerScreen<GemInfusin
         renderProgressArrow(pPoseStack, x, y);
 
         renderer.render(pPoseStack, x + 55,y + 15, menu.getFluid());
+        renderer.render(pPoseStack, x + 55,y + 15, menu.getFluid());
         energyInfoArea.draw(pPoseStack);
     }
 
@@ -87,6 +89,7 @@ public class GemInfusingStationScreen extends AbstractContainerScreen<GemInfusin
 
     private void assignFluidRenderer() {
         renderer = new FluidStackRenderer(64000,true,16, 61);
+        wasteRenderer = new FluidStackRenderer(32000,true,16, 32);
     }
 
     private void assignEnergyInfoArea() {

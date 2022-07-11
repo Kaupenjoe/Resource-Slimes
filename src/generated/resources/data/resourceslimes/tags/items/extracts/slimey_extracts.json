@@ -1,0 +1,229 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "resourceslimes:slimey_empty_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_stone_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_dirt_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_water_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_sand_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_gravel_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_wood_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_grass_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_flower_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_sheep_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_cow_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_pig_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_chicken_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_coal_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_berry_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_fish_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_iron_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_lapis_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_quartz_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_aquatic_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_nether_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_zombie_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_ice_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_copper_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_fire_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_deepslate_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_crop_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_lessergem_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_gold_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_redstone_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_glowstone_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_skeleton_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_prismarine_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_creeper_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_spider_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_slime_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_phantom_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_alchemy_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_enderpearl_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_diamond_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_honey_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_experience_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_music_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_obsidian_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_blaze_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_witherskeletons_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_illagers_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_ghast_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_netherite_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_magic_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_emerald_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_shulkers_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_enderdragon_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_netherstar_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_greatergem_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_endcrystal_extract",
+      "required": false
+    }
+  ]
+}

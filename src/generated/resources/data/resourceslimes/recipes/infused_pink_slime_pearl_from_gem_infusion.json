@@ -5,7 +5,10 @@
       "item": "resourceslimes:pink_slime_pearl"
     }
   ],
-  "waterAmount": 500,
+  "fluid": {
+    "FluidName": "resourceslimes:pink_slime_pearl_slime_fluid",
+    "Amount": 500
+  },
   "output": {
     "item": "resourceslimes:infused_pink_slime_pearl"
   }

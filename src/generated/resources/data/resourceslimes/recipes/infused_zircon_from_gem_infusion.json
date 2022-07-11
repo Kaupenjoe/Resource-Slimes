@@ -5,7 +5,10 @@
       "item": "resourceslimes:cut_zircon"
     }
   ],
-  "waterAmount": 500,
+  "fluid": {
+    "FluidName": "resourceslimes:zircon_slime_fluid",
+    "Amount": 500
+  },
   "output": {
     "item": "resourceslimes:infused_zircon"
   }

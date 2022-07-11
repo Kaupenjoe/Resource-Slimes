@@ -69,7 +69,6 @@ public enum SlimeResource {
     EMERALD(ResourceTier.BLACK_OPAL, new ResourceLocation("textures/block/emerald_ore.png"), true),
     SHULKERS(ResourceTier.BLACK_OPAL, new ResourceLocation("textures/block/shulker_box.png"), true),
 
-
     ENDERDRAGON(ResourceTier.PINK_SLIME_PEARL, new ResourceLocation("textures/block/dragon_egg.png"), true),
     NETHERSTAR(ResourceTier.PINK_SLIME_PEARL, new ResourceLocation("textures/block/beacon.png"), true),
     GREATERGEM(ResourceTier.PINK_SLIME_PEARL, new ResourceLocation("textures/block/carved_pumpkin.png"), true),

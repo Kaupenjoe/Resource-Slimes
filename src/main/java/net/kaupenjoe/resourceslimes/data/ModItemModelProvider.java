@@ -64,6 +64,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.PINK_SLIME_PEARL_SLIME_FLUID_BUCKET.get());
 
         simpleItem(ModItems.GEM_CUTTER_TOOL.get());
+        simpleItem(ModItems.SOAPY_WATER_FLUID_BUCKET.get());
+        simpleItem(ModItems.SOAP.get());
 
 
         simpleBlock(ModBlocks.CITRINE_ORE.get());

@@ -9,6 +9,7 @@ import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClie
 import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.GemInfusingStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
+import net.kaupenjoe.resourceslimes.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -18,7 +19,6 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -28,9 +28,7 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -48,8 +46,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
-public class GemInfusingStationBlockEntity extends BlockEntity implements
-        MenuProvider, IFluidHandlingBlockEntity, IEnergyHandlingBlockEntity, IInventoryHandlingBlockEntity {
+public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -59,49 +56,6 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements
             }
         }
     };
-
-    public ItemStack getRenderStack() {
-        ItemStack stack;
-
-        if(!itemHandler.getStackInSlot(2).isEmpty()) {
-            stack = itemHandler.getStackInSlot(2);
-        } else {
-            stack = itemHandler.getStackInSlot(1);
-        }
-
-        return stack;
-    }
-
-    private final FluidTank fluidTank = new FluidTank(64000) {
-        @Override
-        protected void onContentsChanged() {
-            setChanged();
-            if(!level.isClientSide()) {
-                ModMessages.sendToClients(new PacketSyncFluidStackToClient(this.fluid, worldPosition));
-            }
-        }
-
-        @Override
-        public boolean isFluidValid(FluidStack stack) {
-            return stack.getFluid() == ModFluids.CITRINE_SLIME_FLUID.get();
-        }
-    };
-
-    public final KaupenEnergyStorage energyStorage = new KaupenEnergyStorage(60000, 200) {
-        @Override
-        public void onEnergyChanged() {
-            setChanged();
-            ModMessages.sendToClients(new PacketSyncEnergyToClient(this.energy, worldPosition));
-        }
-    };
-
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
-    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
-
-    protected final ContainerData data;
-    private int progress = 0;
-    private int maxProgress = 78;
 
     @Override
     public void setHandler(ItemStackHandler handler) {
@@ -119,17 +73,81 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements
         return this.itemHandler;
     }
 
+    public ItemStack getRenderStack() {
+        ItemStack stack;
+
+        if(!itemHandler.getStackInSlot(2).isEmpty()) {
+            stack = itemHandler.getStackInSlot(2);
+        } else {
+            stack = itemHandler.getStackInSlot(1);
+        }
+
+        return stack;
+    }
+
+    private final FluidTank FLUID_TANK = createFluidTank();
+    private final KaupenEnergyStorage ENERGY_STORAGE = createEnergyStorage();
+
+    @Override
+    public IEnergyStorage getEnergyStorage() {
+        return ENERGY_STORAGE;
+    }
+
+    @NotNull
+    @Override
+    protected FluidTank createFluidTank() {
+        return new FluidTank(64000) {
+            @Override
+            protected void onContentsChanged() {
+                setChanged();
+                if (!level.isClientSide()) {
+                    ModMessages.sendToClients(new PacketSyncFluidStackToClient(this.fluid, worldPosition));
+                }
+            }
+
+            @Override
+            public boolean isFluidValid(FluidStack stack) {
+                return stack.getFluid().is(ModTags.Fluids.SLIME_FLUIDS);
+            }
+        };
+    }
+
+    @Override
     public void setFluid(FluidStack fluidStack) {
-        this.fluidTank.setFluid(fluidStack);
+        this.FLUID_TANK.setFluid(fluidStack);
     }
 
+    @Override
     public FluidStack getFluid() {
-        return this.fluidTank.getFluid();
+        return this.FLUID_TANK.getFluid();
     }
 
-    public void setEnergyLevel(int energyLevel) {
-        this.energyStorage.setEnergy(energyLevel);
+    @NotNull
+    @Override
+    protected KaupenEnergyStorage createEnergyStorage() {
+        return new KaupenEnergyStorage(60000, 200) {
+            @Override
+            public void onEnergyChanged() {
+                setChanged();
+                ModMessages.sendToClients(new PacketSyncEnergyToClient(this.energy, worldPosition));
+            }
+        };
     }
+
+    @Override
+    public void setEnergyLevel(int energyLevel) {
+        this.ENERGY_STORAGE.setEnergy(energyLevel);
+    }
+
+    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
+    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
+
+    protected final ContainerData data;
+    private int progress = 0;
+    private int maxProgress = 78;
+
+
 
     public GemInfusingStationBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(ModBlockEntities.GEM_INFUSING_STATION_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
@@ -163,7 +181,7 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        ModMessages.sendToClients(new PacketSyncFluidStackToClient(this.fluidTank.getFluid(), worldPosition));
+        ModMessages.sendToClients(new PacketSyncFluidStackToClient(this.FLUID_TANK.getFluid(), worldPosition));
         return new GemInfusingStationMenu(pContainerId, pInventory, this, this.data);
     }
 
@@ -191,8 +209,8 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
-        lazyFluidHandler = LazyOptional.of(() -> fluidTank);
-        lazyEnergyHandler = LazyOptional.of(() -> energyStorage);
+        lazyFluidHandler = LazyOptional.of(() -> FLUID_TANK);
+        lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
     }
 
     @Override
@@ -207,8 +225,8 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements
     protected void saveAdditional(@NotNull CompoundTag tag) {
         tag.put("inventory", itemHandler.serializeNBT());
         tag.putInt("gem_infusion_station.progress", progress);
-        tag = fluidTank.writeToNBT(tag);
-        tag.putInt("energy", energyStorage.getEnergyStored());
+        tag = FLUID_TANK.writeToNBT(tag);
+        tag.putInt("energy", ENERGY_STORAGE.getEnergyStored());
 
         super.saveAdditional(tag);
     }
@@ -218,8 +236,8 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         progress = nbt.getInt("gem_infusion_station.progress");
-        fluidTank.readFromNBT(nbt);
-        energyStorage.setEnergy(nbt.getInt("energy"));
+        FLUID_TANK.readFromNBT(nbt);
+        ENERGY_STORAGE.setEnergy(nbt.getInt("energy"));
     }
 
     public void drops() {
@@ -254,11 +272,11 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements
     }
 
     private static void extractEnergy(GemInfusingStationBlockEntity entity) {
-        entity.energyStorage.extractEnergy(100, false);
+        entity.ENERGY_STORAGE.extractEnergy(100, false);
     }
 
     private static boolean hasEnoughEnergy(GemInfusingStationBlockEntity entity) {
-        return entity.energyStorage.getEnergyStored() >= 100;
+        return entity.ENERGY_STORAGE.getEnergyStored() >= 100;
     }
 
     private static boolean hasWaterSourceInSlot(GemInfusingStationBlockEntity entity) {
@@ -266,7 +284,7 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements
     }
 
     private static boolean hasSpaceInTank(GemInfusingStationBlockEntity entity, int fillAmount) {
-        return entity.fluidTank.getSpace() >= fillAmount;
+        return entity.FLUID_TANK.getSpace() >= fillAmount;
     }
 
     private static void transferItemWaterToWaterTank(GemInfusingStationBlockEntity entity) {
@@ -278,7 +296,7 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements
     }
 
     private static void fillTankWithFluid(GemInfusingStationBlockEntity entity, int amount, BucketItem bucket) {
-        entity.fluidTank.fill(new FluidStack(bucket.getFluid(), amount), IFluidHandler.FluidAction.EXECUTE);
+        entity.FLUID_TANK.fill(new FluidStack(bucket.getFluid(), amount), IFluidHandler.FluidAction.EXECUTE);
 
         entity.itemHandler.extractItem(0, 1, false);
         entity.itemHandler.insertItem(0, new ItemStack(Items.BUCKET), false);
@@ -300,7 +318,7 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements
     }
 
     private static boolean hasWaterInTank(GemInfusingStationBlockEntity entity, GemInfusingStationRecipe recipe) {
-        return entity.fluidTank.getFluid().getAmount() >= recipe.getFluidAmount();
+        return entity.FLUID_TANK.getFluid().getAmount() >= recipe.getFluid().getAmount();
     }
 
     private static void craftItem(GemInfusingStationBlockEntity entity) {
@@ -314,7 +332,7 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements
                 .getRecipeFor(GemInfusingStationRecipe.Type.INSTANCE, inventory, level);
 
         if(match.isPresent()) {
-            entity.fluidTank.drain(match.get().getFluidAmount(), IFluidHandler.FluidAction.EXECUTE);
+            entity.FLUID_TANK.drain(match.get().getFluid().getAmount(), IFluidHandler.FluidAction.EXECUTE);
             entity.itemHandler.extractItem(1,1, false);
 
             entity.itemHandler.setStackInSlot(2, new ItemStack(match.get().getResultItem().getItem(),

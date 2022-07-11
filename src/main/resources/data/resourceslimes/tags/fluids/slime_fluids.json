@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "resourceslimes:citrine_slime_fluid",
+    "resourceslimes:zircon_slime_fluid",
+    "resourceslimes:diamond_slime_fluid",
+    "resourceslimes:emerald_slime_fluid",
+    "resourceslimes:tanzanite_slime_fluid",
+    "resourceslimes:black_opal_slime_fluid",
+    "resourceslimes:pink_slime_pearl_slime_fluid"
+  ]
+}

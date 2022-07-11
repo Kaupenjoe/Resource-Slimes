@@ -102,6 +102,10 @@ public class ModItems {
     public static final RegistryObject<Item> GEM_CUTTER_TOOL = ITEMS.register("gem_cutter_tool",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES).durability(32)));
 
+    public static final RegistryObject<Item> SOAP = ITEMS.register("soap",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
+
+
     /* SLIME RESOURCES */
     public static void onRegisterItems(IForgeRegistry<Item> registry) {
         var resources = SlimeResource.values();

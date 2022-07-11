@@ -5,7 +5,10 @@
       "item": "resourceslimes:cut_black_opal"
     }
   ],
-  "waterAmount": 500,
+  "fluid": {
+    "FluidName": "resourceslimes:black_opal_slime_fluid",
+    "Amount": 500
+  },
   "output": {
     "item": "resourceslimes:infused_black_opal"
   }

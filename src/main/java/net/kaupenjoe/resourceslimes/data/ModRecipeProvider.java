@@ -4,6 +4,7 @@ import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.data.custom.GemCuttingRecipeBuilder;
 import net.kaupenjoe.resourceslimes.data.custom.GemInfusingRecipeBuilder;
+import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
+import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -35,28 +37,35 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     }
 
     private void customGemInfusingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
-        new GemInfusingRecipeBuilder(ModItems.CUT_CITRINE.get(), ModItems.INFUSED_CITRINE.get(), 1, 500)
+        new GemInfusingRecipeBuilder(ModItems.CUT_CITRINE.get(), ModItems.INFUSED_CITRINE.get(), 1,
+                new FluidStack(ModFluids.CITRINE_SLIME_FLUID.get(), 500))
                 .unlockedBy("has_cut_citrine", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.CUT_CITRINE.get()).build())).save(pFinishedRecipeConsumer);
-        new GemInfusingRecipeBuilder(ModItems.CUT_ZIRCON.get(), ModItems.INFUSED_ZIRCON.get(), 1, 500)
+        new GemInfusingRecipeBuilder(ModItems.CUT_ZIRCON.get(), ModItems.INFUSED_ZIRCON.get(), 1,
+                new FluidStack(ModFluids.ZIRCON_SLIME_FLUID.get(), 500))
                 .unlockedBy("has_cut_zircon", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.CUT_ZIRCON.get()).build())).save(pFinishedRecipeConsumer);
 
-        new GemInfusingRecipeBuilder(ModItems.CUT_DIAMOND.get(), ModItems.INFUSED_DIAMOND.get(), 1, 500)
+        new GemInfusingRecipeBuilder(ModItems.CUT_DIAMOND.get(), ModItems.INFUSED_DIAMOND.get(), 1,
+                new FluidStack(ModFluids.DIAMOND_SLIME_FLUID.get(), 500))
                 .unlockedBy("has_cut_diamond", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.CUT_DIAMOND.get()).build())).save(pFinishedRecipeConsumer);
-        new GemInfusingRecipeBuilder(ModItems.CUT_EMERALD.get(), ModItems.INFUSED_EMERALD.get(), 1, 500)
+        new GemInfusingRecipeBuilder(ModItems.CUT_EMERALD.get(), ModItems.INFUSED_EMERALD.get(), 1,
+                new FluidStack(ModFluids.EMERALD_SLIME_FLUID.get(), 500))
                 .unlockedBy("has_cut_emerald", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.CUT_DIAMOND.get()).build())).save(pFinishedRecipeConsumer);
 
-        new GemInfusingRecipeBuilder(ModItems.CUT_TANZANITE.get(), ModItems.INFUSED_TANZANITE.get(), 1, 500)
+        new GemInfusingRecipeBuilder(ModItems.CUT_TANZANITE.get(), ModItems.INFUSED_TANZANITE.get(), 1,
+                new FluidStack(ModFluids.TANZANITE_SLIME_FLUID.get(), 500))
                 .unlockedBy("has_cut_diamond", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.CUT_TANZANITE.get()).build())).save(pFinishedRecipeConsumer);
-        new GemInfusingRecipeBuilder(ModItems.CUT_BLACK_OPAL.get(), ModItems.INFUSED_BLACK_OPAL.get(), 1, 500)
+        new GemInfusingRecipeBuilder(ModItems.CUT_BLACK_OPAL.get(), ModItems.INFUSED_BLACK_OPAL.get(), 1,
+                new FluidStack(ModFluids.BLACK_OPAL_SLIME_FLUID.get(), 500))
                 .unlockedBy("has_cut_black_opal", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.CUT_BLACK_OPAL.get()).build())).save(pFinishedRecipeConsumer);
 
-        new GemInfusingRecipeBuilder(ModItems.PINK_SLIME_PEARL.get(), ModItems.INFUSED_PINK_SLIME_PEARL.get(), 1, 500)
+        new GemInfusingRecipeBuilder(ModItems.PINK_SLIME_PEARL.get(), ModItems.INFUSED_PINK_SLIME_PEARL.get(), 1,
+                new FluidStack(ModFluids.PINK_SLIME_PEARL_SLIME_FLUID.get(), 500))
                 .unlockedBy("has_pink_slime_pearl", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.PINK_SLIME_PEARL.get()).build())).save(pFinishedRecipeConsumer);
     }

@@ -3,6 +3,7 @@ package net.kaupenjoe.resourceslimes.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
+import net.kaupenjoe.resourceslimes.util.FluidJSONUtil;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -11,6 +12,10 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 
@@ -18,14 +23,14 @@ public class GemInfusingStationRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
-    private final int fluidAmount;
+    private final FluidStack fluid;
 
     public GemInfusingStationRecipe(ResourceLocation id, ItemStack output,
-                                    NonNullList<Ingredient> recipeItems, int waterAmount) {
+                                    NonNullList<Ingredient> recipeItems, FluidStack fluid) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
-        this.fluidAmount = waterAmount;
+        this.fluid = fluid;
     }
 
     @Override
@@ -33,8 +38,8 @@ public class GemInfusingStationRecipe implements Recipe<SimpleContainer> {
         return recipeItems.get(0).test(pContainer.getItem(1));
     }
 
-    public int getFluidAmount() {
-        return fluidAmount;
+    public FluidStack getFluid() {
+        return fluid;
     }
 
     @Override
@@ -89,32 +94,33 @@ public class GemInfusingStationRecipe implements Recipe<SimpleContainer> {
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
-            int water = GsonHelper.getAsInt(json, "waterAmount");
+            FluidStack fluid = FluidJSONUtil.readFluid(json.get("fluid").getAsJsonObject());
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new GemInfusingStationRecipe(id, output, inputs, water);
+            return new GemInfusingStationRecipe(id, output, inputs, fluid);
         }
 
         @Override
         public GemInfusingStationRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
-            int waterAmount = buf.readInt();
+            FluidStack fluid = buf.readFluidStack();
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromNetwork(buf));
             }
 
             ItemStack output = buf.readItem();
-            return new GemInfusingStationRecipe(id, output, inputs, waterAmount);
+            return new GemInfusingStationRecipe(id, output, inputs, fluid);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buf, GemInfusingStationRecipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
-            buf.writeInt(recipe.getFluidAmount());
+            buf.writeFluidStack(recipe.fluid);
+
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
             }
