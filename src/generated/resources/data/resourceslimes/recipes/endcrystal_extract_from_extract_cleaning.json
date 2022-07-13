@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_endcrystal_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:endcrystal_extract"
+  }
+}

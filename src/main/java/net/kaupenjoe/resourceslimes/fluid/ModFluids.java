@@ -63,6 +63,11 @@ public class ModFluids {
     public static final RegistryObject<FlowingFluid> SOAPY_WATER_FLUID_FLOWING
             = FLUIDS.register("soapy_water_flowing_fluid", () -> new ForgeFlowingFluid.Flowing(ModFluids.SOAPY_WATER_FLUID_PROPERTIES));
 
+    public static final RegistryObject<FlowingFluid> DIRTY_WATER_FLUID
+            = FLUIDS.register("dirty_water_fluid", () -> new ForgeFlowingFluid.Source(ModFluids.DIRTY_WATER_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> DIRTY_WATER_FLUID_FLOWING
+            = FLUIDS.register("dirty_water_flowing_fluid", () -> new ForgeFlowingFluid.Flowing(ModFluids.DIRTY_WATER_FLUID_PROPERTIES));
+
 
 
     public static final ForgeFlowingFluid.Properties CITRINE_SLIME_FLUID_PROPERTIES
@@ -120,6 +125,13 @@ public class ModFluids {
                     .density(15).luminosity(2).viscosity(5).sound(SoundEvents.HONEY_DRINK).overlay(WATER_OVERLAY_RL)
                     .color(0xbffcb6ea)).slopeFindDistance(2).levelDecreasePerBlock(2)
             .block(ModBlocks.SOAPY_WATER_BLOCK).bucket(ModItems.SOAPY_WATER_FLUID_BUCKET);
+
+    public static final ForgeFlowingFluid.Properties DIRTY_WATER_FLUID_PROPERTIES
+            = new ForgeFlowingFluid.Properties(DIRTY_WATER_FLUID, DIRTY_WATER_FLUID_FLOWING,
+            FluidAttributes.builder(WATER_STILL_RL, WATER_FLOWING_RL)
+                    .density(15).luminosity(2).viscosity(5).sound(SoundEvents.HONEY_DRINK).overlay(WATER_OVERLAY_RL)
+                    .color(0xbf99503d)).slopeFindDistance(2).levelDecreasePerBlock(2)
+            .block(ModBlocks.DIRTY_WATER_BLOCK).bucket(ModItems.DIRTY_WATER_FLUID_BUCKET);
 
 
 

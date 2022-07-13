@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_coal_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:coal_extract"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_lapis_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:lapis_extract"
+  }
+}

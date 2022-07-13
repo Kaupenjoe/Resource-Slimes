@@ -13,6 +13,7 @@ import net.kaupenjoe.resourceslimes.particle.ModParticles;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationScreen;
 import net.kaupenjoe.resourceslimes.screen.GemInfusingStationScreen;
 import net.kaupenjoe.resourceslimes.screen.ModMenuTypes;
+import net.kaupenjoe.resourceslimes.screen.SlimeExtractCleaningStationScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -37,6 +38,7 @@ public class ClientListener {
 
             MenuScreens.register(ModMenuTypes.GEM_CUTTING_STATION_MENU.get(), GemCuttingStationScreen::new);
             MenuScreens.register(ModMenuTypes.GEM_INFUSING_STATION_MENU.get(), GemInfusingStationScreen::new);
+            MenuScreens.register(ModMenuTypes.SLIME_EXTRACT_CLEANING_STATION_MENU.get(), SlimeExtractCleaningStationScreen::new);
         });
     }
 
@@ -75,7 +77,18 @@ public class ClientListener {
         ItemBlockRenderTypes.setRenderLayer(ModFluids.PINK_SLIME_PEARL_SLIME_FLUID.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.PINK_SLIME_PEARL_SLIME_FLUID_FLOWING.get(), RenderType.translucent());
 
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.SOAPY_WATER_BLOCK.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.SOAPY_WATER_FLUID.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.SOAPY_WATER_FLUID_FLOWING.get(), RenderType.translucent());
+
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.DIRTY_WATER_BLOCK.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.DIRTY_WATER_FLUID.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.DIRTY_WATER_FLUID_FLOWING.get(), RenderType.translucent());
+
+
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.GEM_CUTTING_STATION.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.GEM_INFUSING_STATION.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get(), RenderType.translucent());
     }
 
     @SubscribeEvent

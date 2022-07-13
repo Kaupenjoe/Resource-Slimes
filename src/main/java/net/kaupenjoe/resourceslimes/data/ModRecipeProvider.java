@@ -4,13 +4,17 @@ import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.data.custom.GemCuttingRecipeBuilder;
 import net.kaupenjoe.resourceslimes.data.custom.GemInfusingRecipeBuilder;
+import net.kaupenjoe.resourceslimes.data.custom.SlimeExtractCleaningRecipeBuilder;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
+import net.kaupenjoe.resourceslimes.util.ModTags;
+import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -18,6 +22,7 @@ import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -32,8 +37,29 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
         this.customOreSmeltingRecipes(pFinishedRecipeConsumer);
         this.customOreBlastingRecipes(pFinishedRecipeConsumer);
+
         this.customGemCuttingRecipes(pFinishedRecipeConsumer);
         this.customGemInfusingRecipes(pFinishedRecipeConsumer);
+        this.customExtractCleaningRecipes(pFinishedRecipeConsumer);
+    }
+
+    private void customExtractCleaningRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+        var resources = SlimeResource.values();
+        for (var resource : resources) {
+            if(resource.equals(SlimeResource.EMPTY)) {
+                continue;
+            }
+            
+            ItemLike input = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                    "slimey_" + resource.name().toLowerCase() + "_extract"));
+            ItemLike output = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                    resource.name().toLowerCase() + "_extract"));
+
+            new SlimeExtractCleaningRecipeBuilder(input, output, 1)
+                    .unlockedBy("has_slimey_" + resource.name().toLowerCase() + "_extract",
+                            inventoryTrigger(ItemPredicate.Builder.item().of(input)
+                                    .build())).save(pFinishedRecipeConsumer);
+        }
     }
 
     private void customGemInfusingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {

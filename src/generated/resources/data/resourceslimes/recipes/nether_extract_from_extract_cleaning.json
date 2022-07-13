@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_nether_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:nether_extract"
+  }
+}

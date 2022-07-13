@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_chicken_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:chicken_extract"
+  }
+}

@@ -3,13 +3,16 @@ package net.kaupenjoe.resourceslimes.data;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.item.ModItems;
+import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
@@ -85,6 +88,34 @@ public class ModItemModelProvider extends ItemModelProvider {
         complexBlock(ModBlocks.GEM_INFUSING_STATION.get());
         complexBlock(ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get());
         complexBlock(ModBlocks.SLIME_INCUBATION_STATION.get());
+
+        var resources = SlimeResource.values();
+        for (var resource : resources) {
+            if (resource.equals(SlimeResource.EMPTY)) {
+                continue;
+            }
+
+            simpleSlimeyExtractItemTemp(new ResourceLocation(ResourceSlimes.MOD_ID, "slimey_" + resource.name().toLowerCase() + "_extract"));
+            simpleExtractItemTemp(new ResourceLocation(ResourceSlimes.MOD_ID,resource.name().toLowerCase() + "_extract"));
+        }
+    }
+
+    private ItemModelBuilder simpleSlimeyExtractItemTemp(ResourceLocation location) {
+        return withExistingParent(location.getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(ResourceSlimes.MOD_ID,"item/" + "slimey_extract_temp"));
+    }
+
+    private ItemModelBuilder simpleExtractItemTemp(ResourceLocation location) {
+        return withExistingParent(location.getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(ResourceSlimes.MOD_ID,"item/" + "extract_temp"));
+    }
+
+    private ItemModelBuilder simpleItem(ResourceLocation location) {
+        return withExistingParent(location.getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(ResourceSlimes.MOD_ID,"item/" + location.getPath()));
     }
 
     private ItemModelBuilder simpleItem(Item item) {

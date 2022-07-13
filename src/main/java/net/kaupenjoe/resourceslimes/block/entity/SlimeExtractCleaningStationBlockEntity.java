@@ -1,14 +1,18 @@
 package net.kaupenjoe.resourceslimes.block.entity;
 
 import net.kaupenjoe.resourceslimes.block.custom.GemInfusingStationBlock;
+import net.kaupenjoe.resourceslimes.block.custom.SlimeExtractCleaningStationBlock;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
+import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncTwoFluidStacksToClient;
 import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
+import net.kaupenjoe.resourceslimes.recipe.SlimeExtractCleaningStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.GemInfusingStationMenu;
+import net.kaupenjoe.resourceslimes.screen.SlimeExtractCleaningStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,6 +24,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -29,13 +34,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.EmptyFluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.common.util.NonNullConsumer;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -102,7 +111,7 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
             protected void onContentsChanged() {
                 setChanged();
                 if (!level.isClientSide()) {
-                    ModMessages.sendToClients(new PacketSyncFluidStackToClient(this.fluid, worldPosition));
+                    ModMessages.sendToClients(new PacketSyncTwoFluidStacksToClient(this.fluid, FLUID_TANK_WASTE.getFluid(), worldPosition));
                 }
             }
 
@@ -120,13 +129,13 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
             protected void onContentsChanged() {
                 setChanged();
                 if (!level.isClientSide()) {
-                    ModMessages.sendToClients(new PacketSyncFluidStackToClient(this.fluid, worldPosition));
+                    ModMessages.sendToClients(new PacketSyncTwoFluidStacksToClient(FLUID_TANK.getFluid(), this.fluid, worldPosition));
                 }
             }
 
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return true;
+                return stack.getFluid() == ModFluids.DIRTY_WATER_FLUID.get();
             }
         };
     }
@@ -139,6 +148,14 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
     @Override
     public FluidStack getFluid() {
         return this.FLUID_TANK.getFluid();
+    }
+
+    public void setWasteFluid(FluidStack fluidStack) {
+        this.FLUID_TANK_WASTE.setFluid(fluidStack);
+    }
+
+    public FluidStack getWasteFluid() {
+        return this.FLUID_TANK_WASTE.getFluid();
     }
 
     @NotNull
@@ -170,7 +187,7 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
 
 
     public SlimeExtractCleaningStationBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModBlockEntities.GEM_INFUSING_STATION_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
+        super(ModBlockEntities.SLIME_EXTRACT_CLEANING_STATION_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
         this.data = new ContainerData() {
             public int get(int index) {
                 return switch (index) {
@@ -195,14 +212,15 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
 
     @Override
     public Component getDisplayName() {
-        return new TextComponent("Gem Infusing Station");
+        return new TextComponent("Slime Extract Cleaning Station");
     }
 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        ModMessages.sendToClients(new PacketSyncFluidStackToClient(this.FLUID_TANK.getFluid(), worldPosition));
-        return new GemInfusingStationMenu(pContainerId, pInventory, this, this.data);
+        ModMessages.sendToClients(new PacketSyncTwoFluidStacksToClient(this.FLUID_TANK.getFluid(), this.FLUID_TANK_WASTE.getFluid(),
+                worldPosition));
+        return new SlimeExtractCleaningStationMenu(pContainerId, pInventory, this, this.data);
     }
 
     @Nonnull
@@ -217,10 +235,10 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
         }
 
         if(cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-            if(this.getBlockState().getValue(GemInfusingStationBlock.FACING).getClockWise() == side) {
+            if(this.getBlockState().getValue(SlimeExtractCleaningStationBlock.FACING).getClockWise() == side) {
                 return lazyFluidHandler.cast();
             }
-            if(this.getBlockState().getValue(GemInfusingStationBlock.FACING).getCounterClockWise() == side) {
+            if(this.getBlockState().getValue(SlimeExtractCleaningStationBlock.FACING).getCounterClockWise() == side) {
                 return lazyWasteFluidHandler.cast();
             }
         }
@@ -319,23 +337,29 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
     }
 
     private static void transferItemWaterToWaterTank(SlimeExtractCleaningStationBlockEntity entity) {
-        if(entity.itemHandler.getStackInSlot(1).getItem() instanceof BucketItem) {
-            if(hasSpaceInTank(entity, 1000) && hasSoapInSlot(entity)) {
-                fillTankWithFluid(entity, 1000);
+        entity.itemHandler.getStackInSlot(1).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(handler -> {
+            int drainAmount = Math.min(entity.FLUID_TANK.getSpace(), 1000);
+
+            if(hasSoapInSlot(entity)) {
+                FluidStack stack = handler.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
+                if(stack.getFluid() == Fluids.WATER) {
+                    stack = handler.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
+                    fillTankWithFluid(entity, stack, handler.getContainer());
+                }
             }
-        }
+        });
     }
 
     private static boolean hasSoapInSlot(SlimeExtractCleaningStationBlockEntity entity) {
         return entity.itemHandler.getStackInSlot(0).getItem() == ModItems.SOAP.get();
     }
 
-    private static void fillTankWithFluid(SlimeExtractCleaningStationBlockEntity entity, int amount) {
-        entity.FLUID_TANK.fill(new FluidStack(ModFluids.SOAPY_WATER_FLUID.get(), amount), IFluidHandler.FluidAction.EXECUTE);
+    private static void fillTankWithFluid(SlimeExtractCleaningStationBlockEntity entity, FluidStack fluidStack, ItemStack stack) {
+        entity.FLUID_TANK.fill(new FluidStack(ModFluids.SOAPY_WATER_FLUID.get(), fluidStack.getAmount()), IFluidHandler.FluidAction.EXECUTE);
 
         entity.itemHandler.extractItem(0, 1, false);
         entity.itemHandler.extractItem(1, 1, false);
-        entity.itemHandler.insertItem(1, new ItemStack(Items.BUCKET), false);
+        entity.itemHandler.insertItem(1, stack, false);
     }
 
     private static boolean hasRecipe(SlimeExtractCleaningStationBlockEntity entity) {
@@ -345,16 +369,16 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<GemInfusingStationRecipe> match = level.getRecipeManager()
-                .getRecipeFor(GemInfusingStationRecipe.Type.INSTANCE, inventory, level);
+        Optional<SlimeExtractCleaningStationRecipe> match = level.getRecipeManager()
+                .getRecipeFor(SlimeExtractCleaningStationRecipe.Type.INSTANCE, inventory, level);
 
         return match.isPresent() && canInsertAmountIntoOutputSlot(inventory) && hasSpaceInTank(entity)
                 && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem())
-                && hasWaterInTank(entity, match.get());
+                && hasWaterInTank(entity);
     }
 
-    private static boolean hasWaterInTank(SlimeExtractCleaningStationBlockEntity entity, GemInfusingStationRecipe recipe) {
-        return entity.FLUID_TANK.getFluid().getAmount() >= recipe.getFluid().getAmount();
+    private static boolean hasWaterInTank(SlimeExtractCleaningStationBlockEntity entity) {
+        return entity.FLUID_TANK.getFluid().getAmount() >= 500;
     }
 
     private static boolean hasSpaceInTank(SlimeExtractCleaningStationBlockEntity entity) {
@@ -368,16 +392,16 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<GemInfusingStationRecipe> match = level.getRecipeManager()
-                .getRecipeFor(GemInfusingStationRecipe.Type.INSTANCE, inventory, level);
+        Optional<SlimeExtractCleaningStationRecipe> match = level.getRecipeManager()
+                .getRecipeFor(SlimeExtractCleaningStationRecipe.Type.INSTANCE, inventory, level);
 
         if(match.isPresent()) {
-            entity.FLUID_TANK.drain(match.get().getFluid().getAmount(), IFluidHandler.FluidAction.EXECUTE);
+            entity.FLUID_TANK.drain(500, IFluidHandler.FluidAction.EXECUTE);
             entity.itemHandler.extractItem(2,1, false);
 
             entity.itemHandler.setStackInSlot(3, new ItemStack(match.get().getResultItem().getItem(),
                     entity.itemHandler.getStackInSlot(3).getCount() + 1));
-            entity.FLUID_TANK_WASTE.fill(new FluidStack(ModFluids.SOAPY_WATER_FLUID.get(), 500), IFluidHandler.FluidAction.EXECUTE);
+            entity.FLUID_TANK_WASTE.fill(new FluidStack(ModFluids.DIRTY_WATER_FLUID.get(), 500), IFluidHandler.FluidAction.EXECUTE);
 
             entity.resetProgress();
         }

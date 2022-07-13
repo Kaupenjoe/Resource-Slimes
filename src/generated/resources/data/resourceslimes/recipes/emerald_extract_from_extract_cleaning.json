@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_emerald_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:emerald_extract"
+  }
+}

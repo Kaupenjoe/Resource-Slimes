@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_glowstone_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:glowstone_extract"
+  }
+}

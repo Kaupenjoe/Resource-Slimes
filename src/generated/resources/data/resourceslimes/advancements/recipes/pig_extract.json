@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:pig_extract"
+    ]
+  },
+  "criteria": {
+    "has_slimey_pig_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_pig_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:pig_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_slimey_pig_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

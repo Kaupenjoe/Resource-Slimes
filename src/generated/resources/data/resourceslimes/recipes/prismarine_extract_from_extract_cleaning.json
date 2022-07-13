@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_prismarine_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:prismarine_extract"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_shulkers_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:shulkers_extract"
+  }
+}

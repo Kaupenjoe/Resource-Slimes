@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:sand_extract"
+    ]
+  },
+  "criteria": {
+    "has_slimey_sand_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_sand_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:sand_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_slimey_sand_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:redstone_extract"
+    ]
+  },
+  "criteria": {
+    "has_slimey_redstone_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_redstone_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:redstone_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_slimey_redstone_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

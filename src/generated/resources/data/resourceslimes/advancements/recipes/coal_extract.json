@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:coal_extract"
+    ]
+  },
+  "criteria": {
+    "has_slimey_coal_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_coal_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:coal_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_slimey_coal_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_ghast_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:ghast_extract"
+  }
+}

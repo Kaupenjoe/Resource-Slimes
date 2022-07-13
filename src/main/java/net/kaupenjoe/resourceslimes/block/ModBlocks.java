@@ -3,6 +3,7 @@ package net.kaupenjoe.resourceslimes.block;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.block.custom.GemInfusingStationBlock;
+import net.kaupenjoe.resourceslimes.block.custom.SlimeExtractCleaningStationBlock;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModCreativeModeTab;
 import net.kaupenjoe.resourceslimes.item.ModItems;
@@ -83,6 +84,9 @@ public class ModBlocks {
     public static final RegistryObject<LiquidBlock> SOAPY_WATER_BLOCK = registerBlockWithoutBlockItem("soapy_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.SOAPY_WATER_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
                     .noCollission().strength(100f).noDrops()));
+    public static final RegistryObject<LiquidBlock> DIRTY_WATER_BLOCK = registerBlockWithoutBlockItem("dirty_fluid_block",
+            () -> new LiquidBlock(() -> ModFluids.DIRTY_WATER_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
+                    .noCollission().strength(100f).noDrops()));
 
 
     public static final RegistryObject<Block> GEM_CUTTING_STATION = registerBlock("gem_cutting_station",
@@ -92,7 +96,7 @@ public class ModBlocks {
             () -> new GemInfusingStationBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),
             ModCreativeModeTab.RESOURCE_SLIMES);
     public static final RegistryObject<Block> SLIME_EXTRACT_CLEANING_STATION = registerBlock("slime_extract_cleaning_station",
-            () -> new GemInfusingStationBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),
+            () -> new SlimeExtractCleaningStationBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),
             ModCreativeModeTab.RESOURCE_SLIMES);
     public static final RegistryObject<Block> SLIME_INCUBATION_STATION = registerBlock("slime_incubation_station",
             () -> new GemInfusingStationBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),

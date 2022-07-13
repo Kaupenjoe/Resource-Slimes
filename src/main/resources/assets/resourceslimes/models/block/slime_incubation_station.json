@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"3": "resourceslimes:machines/slime_extract_cleaning_station_texture"
+		"3": "resourceslimes:machines/slime_extract_cleaning_station_texture",
+		"particle": "resourceslimes:machines/gem_cutting_station_texture"
 	},
 	"elements": [
 		{

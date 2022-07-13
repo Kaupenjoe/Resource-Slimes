@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_crop_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:crop_extract"
+  }
+}

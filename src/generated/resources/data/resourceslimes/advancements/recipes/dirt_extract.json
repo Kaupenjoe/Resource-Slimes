@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:dirt_extract"
+    ]
+  },
+  "criteria": {
+    "has_slimey_dirt_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_dirt_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:dirt_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_slimey_dirt_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

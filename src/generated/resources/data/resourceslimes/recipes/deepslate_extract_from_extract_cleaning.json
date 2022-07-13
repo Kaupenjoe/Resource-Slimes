@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_deepslate_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:deepslate_extract"
+  }
+}

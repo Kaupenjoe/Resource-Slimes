@@ -12,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Optional;
 
@@ -39,13 +40,15 @@ public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<S
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y);
+        renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y, menu.getMainFluid(), 55, 15);
+        renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y, menu.getWasteFluid(), 129, 44);
         renderEnergyArea(pPoseStack, pMouseX, pMouseY, x, y);
     }
 
-    private void renderFluidArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 55, 15)) {
-            renderTooltip(pPoseStack, renderer.getTooltip(menu.getFluid(), TooltipFlag.Default.NORMAL),
+    private void renderFluidArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y,
+                                 FluidStack stack, int offsetX, int offsetY) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, offsetX, offsetY)) {
+            renderTooltip(pPoseStack, renderer.getTooltip(stack, TooltipFlag.Default.NORMAL),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }
@@ -69,8 +72,8 @@ public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<S
 
         renderProgressArrow(pPoseStack, x, y);
 
-        renderer.render(pPoseStack, x + 55,y + 15, menu.getFluid());
-        renderer.render(pPoseStack, x + 55,y + 15, menu.getFluid());
+        renderer.render(pPoseStack, x + 55,y + 15, menu.getMainFluid());
+        wasteRenderer.render(pPoseStack, x + 129,y + 44, menu.getWasteFluid());
         energyInfoArea.draw(pPoseStack);
     }
 

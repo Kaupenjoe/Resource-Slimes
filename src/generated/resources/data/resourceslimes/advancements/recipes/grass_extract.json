@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:grass_extract"
+    ]
+  },
+  "criteria": {
+    "has_slimey_grass_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_grass_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:grass_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_slimey_grass_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

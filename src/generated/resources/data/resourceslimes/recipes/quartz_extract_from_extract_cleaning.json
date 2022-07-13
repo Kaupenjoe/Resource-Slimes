@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_quartz_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:quartz_extract"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_iron_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:iron_extract"
+  }
+}

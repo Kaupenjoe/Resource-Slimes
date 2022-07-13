@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_fish_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:fish_extract"
+  }
+}

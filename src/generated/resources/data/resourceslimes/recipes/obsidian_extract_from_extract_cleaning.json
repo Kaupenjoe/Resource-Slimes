@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_obsidian_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:obsidian_extract"
+  }
+}

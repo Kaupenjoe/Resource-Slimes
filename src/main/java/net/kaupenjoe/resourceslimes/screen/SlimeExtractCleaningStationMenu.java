@@ -18,7 +18,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-public class SlimeExtractCleaningStationMenu extends AbstractContainerMenu implements IFluidMenu, IEnergyMenu  {
+public class SlimeExtractCleaningStationMenu extends AbstractContainerMenu implements IEnergyMenu  {
     public final SlimeExtractCleaningStationBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
@@ -36,13 +36,14 @@ public class SlimeExtractCleaningStationMenu extends AbstractContainerMenu imple
         this.level = inv.player.level;
         this.data = data;
         this.fluid = blockEntity.getFluid();
+        this.wasteFluid = blockEntity.getWasteFluid();
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
             this.addSlot(new ModRestrictedSlot(handler, 0, 12, 15, ModItems.SOAP));
-            this.addSlot(new ModFluidSourceSlot(handler, 1, 12, 15, () -> Fluids.WATER));
+            this.addSlot(new ModFluidSourceSlot(handler, 1, 12, 61, () -> Fluids.WATER));
             this.addSlot(new ModTagRestrictedSlot(handler, 2, 86, 15, () -> ModTags.Items.SLIMEY_EXTRACTS));
             this.addSlot(new ModResultSlot(handler,3, 86, 60));
         });
@@ -50,12 +51,20 @@ public class SlimeExtractCleaningStationMenu extends AbstractContainerMenu imple
         addDataSlots(data);
     }
 
-    public void setFluid(FluidStack fluidStack) {
+    public void setMainFluid(FluidStack fluidStack) {
         this.fluid = fluidStack;
     }
 
-    public FluidStack getFluid() {
+    public FluidStack getMainFluid() {
         return fluid;
+    }
+
+    public void setWasteFluid(FluidStack fluidStack) {
+        this.wasteFluid = fluidStack;
+    }
+
+    public FluidStack getWasteFluid() {
+        return wasteFluid;
     }
 
     @Override
@@ -91,7 +100,7 @@ public class SlimeExtractCleaningStationMenu extends AbstractContainerMenu imple
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
@@ -129,7 +138,7 @@ public class SlimeExtractCleaningStationMenu extends AbstractContainerMenu imple
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.GEM_INFUSING_STATION.get());
+                pPlayer, ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

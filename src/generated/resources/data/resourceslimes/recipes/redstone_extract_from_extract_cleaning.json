@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_redstone_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:redstone_extract"
+  }
+}

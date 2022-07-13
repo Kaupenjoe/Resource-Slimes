@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:cow_extract"
+    ]
+  },
+  "criteria": {
+    "has_slimey_cow_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_cow_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:cow_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_slimey_cow_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

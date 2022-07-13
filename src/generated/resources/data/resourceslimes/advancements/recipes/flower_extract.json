@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:flower_extract"
+    ]
+  },
+  "criteria": {
+    "has_slimey_flower_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_flower_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:flower_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_slimey_flower_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:fish_extract"
+    ]
+  },
+  "criteria": {
+    "has_slimey_fish_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_fish_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:fish_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_slimey_fish_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

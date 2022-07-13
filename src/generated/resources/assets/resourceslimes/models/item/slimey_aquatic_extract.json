@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "resourceslimes:item/slimey_extract_temp"
+  }
+}

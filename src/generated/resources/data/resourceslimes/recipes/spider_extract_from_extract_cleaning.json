@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_spider_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:spider_extract"
+  }
+}

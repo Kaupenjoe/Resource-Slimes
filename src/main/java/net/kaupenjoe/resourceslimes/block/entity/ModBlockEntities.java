@@ -26,7 +26,7 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<SlimeExtractCleaningStationBlockEntity>> SLIME_EXTRACT_CLEANING_STATION_BLOCK_ENTITY =
             BLOCK_ENTITIES.register("slime_extract_cleaning_station_block_entity", () ->
                     BlockEntityType.Builder.of(SlimeExtractCleaningStationBlockEntity::new,
-                            ModBlocks.GEM_INFUSING_STATION.get()).build(null));
+                            ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get()).build(null));
 
 
     public static void register(IEventBus eventBus) {

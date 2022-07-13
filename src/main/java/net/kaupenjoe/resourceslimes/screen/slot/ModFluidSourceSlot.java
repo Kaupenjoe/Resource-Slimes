@@ -1,16 +1,12 @@
 package net.kaupenjoe.resourceslimes.screen.slot;
 
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PotionItem;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
 public class ModFluidSourceSlot extends SlotItemHandler {
@@ -23,16 +19,14 @@ public class ModFluidSourceSlot extends SlotItemHandler {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        boolean toReturn = false;
+        AtomicBoolean toReturn = new AtomicBoolean(false);
 
-        if(stack.getItem() instanceof BucketItem bucketItem) {
+        stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(handler -> {
             for (Supplier<Fluid> fluid : possibleFluids) {
-                toReturn = bucketItem.getFluid().equals(fluid.get());
+                toReturn.set(handler.getFluidInTank(0).getFluid().equals(fluid.get()));
             }
+        });
 
-            return toReturn;
-        }
-
-        return false;
+        return toReturn.get();
     }
 }
