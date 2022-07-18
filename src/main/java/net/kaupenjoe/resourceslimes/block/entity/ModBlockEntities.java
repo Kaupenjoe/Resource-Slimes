@@ -28,6 +28,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(SlimeExtractCleaningStationBlockEntity::new,
                             ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<SlimeIncubationStationBlockEntity>> SLIME_INCUBATION_STATION_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("slime_incubation_station_block_entity", () ->
+                    BlockEntityType.Builder.of(SlimeIncubationStationBlockEntity::new,
+                            ModBlocks.SLIME_INCUBATION_STATION.get()).build(null));
+
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

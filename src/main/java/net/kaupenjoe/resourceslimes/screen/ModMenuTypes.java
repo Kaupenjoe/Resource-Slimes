@@ -23,6 +23,9 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<SlimeExtractCleaningStationMenu>> SLIME_EXTRACT_CLEANING_STATION_MENU =
             registerMenuType(SlimeExtractCleaningStationMenu::new, "slimes_extract_cleaning_station_menu");
 
+    public static final RegistryObject<MenuType<SlimeIncubationStationMenu>> SLIME_INCUBATION_STATION_MENU =
+            registerMenuType(SlimeIncubationStationMenu::new, "slimes_incubation_station_menu");
+
 
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory,
                                                                                                  String name) {

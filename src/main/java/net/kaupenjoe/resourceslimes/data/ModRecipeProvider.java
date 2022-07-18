@@ -5,6 +5,7 @@ import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.data.custom.GemCuttingRecipeBuilder;
 import net.kaupenjoe.resourceslimes.data.custom.GemInfusingRecipeBuilder;
 import net.kaupenjoe.resourceslimes.data.custom.SlimeExtractCleaningRecipeBuilder;
+import net.kaupenjoe.resourceslimes.data.custom.SlimeIncubationRecipeBuilder;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.util.ModTags;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -41,6 +43,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         this.customGemCuttingRecipes(pFinishedRecipeConsumer);
         this.customGemInfusingRecipes(pFinishedRecipeConsumer);
         this.customExtractCleaningRecipes(pFinishedRecipeConsumer);
+        this.customIncubationRecipes(pFinishedRecipeConsumer);
+    }
+
+    private void customIncubationRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+        new SlimeIncubationRecipeBuilder(ModItems.ENERGY_SLIME_SPAWN_EGG.get(), 1,
+                Items.SLIME_BALL, Items.IRON_INGOT, ModItems.CUT_CITRINE.get())
+                .unlockedBy("iron_ingot", has(Items.SLIME_BALL)).save(pFinishedRecipeConsumer);
     }
 
     private void customExtractCleaningRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
@@ -57,11 +66,11 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
             new SlimeExtractCleaningRecipeBuilder(input, output, 1)
                     .unlockedBy("has_slimey_" + resource.name().toLowerCase() + "_extract",
-                            inventoryTrigger(ItemPredicate.Builder.item().of(input)
-                                    .build())).save(pFinishedRecipeConsumer);
+                            has(input)).save(pFinishedRecipeConsumer);
         }
     }
 
+    // TODO: inventoryTrigger -> has
     private void customGemInfusingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
         new GemInfusingRecipeBuilder(ModItems.CUT_CITRINE.get(), ModItems.INFUSED_CITRINE.get(), 1,
                 new FluidStack(ModFluids.CITRINE_SLIME_FLUID.get(), 500))

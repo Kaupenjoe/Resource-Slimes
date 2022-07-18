@@ -4,6 +4,7 @@ import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
+// TODO: Make this a custom Forge Registry!
 public enum SlimeResource {
     EMPTY(ResourceTier.CITRINE,
             new ResourceLocation("textures/block/structure_block.png"), true),

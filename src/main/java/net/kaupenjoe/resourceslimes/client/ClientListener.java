@@ -3,17 +3,16 @@ package net.kaupenjoe.resourceslimes.client;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.block.entity.ModBlockEntities;
+import net.kaupenjoe.resourceslimes.block.entity.SlimeIncubationStationBlockEntity;
 import net.kaupenjoe.resourceslimes.block.entity.client.GemCuttingStationBlockEntityRenderer;
 import net.kaupenjoe.resourceslimes.block.entity.client.GemInfusingStationBlockEntityRenderer;
+import net.kaupenjoe.resourceslimes.block.entity.client.SlimeExtractCleaningStationBlockEntityRenderer;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.client.ResourceSlimeRenderer;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.particle.EnergyParticle;
 import net.kaupenjoe.resourceslimes.particle.ModParticles;
-import net.kaupenjoe.resourceslimes.screen.GemCuttingStationScreen;
-import net.kaupenjoe.resourceslimes.screen.GemInfusingStationScreen;
-import net.kaupenjoe.resourceslimes.screen.ModMenuTypes;
-import net.kaupenjoe.resourceslimes.screen.SlimeExtractCleaningStationScreen;
+import net.kaupenjoe.resourceslimes.screen.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -39,6 +38,7 @@ public class ClientListener {
             MenuScreens.register(ModMenuTypes.GEM_CUTTING_STATION_MENU.get(), GemCuttingStationScreen::new);
             MenuScreens.register(ModMenuTypes.GEM_INFUSING_STATION_MENU.get(), GemInfusingStationScreen::new);
             MenuScreens.register(ModMenuTypes.SLIME_EXTRACT_CLEANING_STATION_MENU.get(), SlimeExtractCleaningStationScreen::new);
+            MenuScreens.register(ModMenuTypes.SLIME_INCUBATION_STATION_MENU.get(), SlimeIncubationStationScreen::new);
         });
     }
 
@@ -97,5 +97,7 @@ public class ClientListener {
                 GemInfusingStationBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.GEM_CUTTING_STATION_BLOCK_ENTITY.get(),
                 GemCuttingStationBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.SLIME_EXTRACT_CLEANING_STATION_BLOCK_ENTITY.get(),
+                SlimeExtractCleaningStationBlockEntityRenderer::new);
     }
 }

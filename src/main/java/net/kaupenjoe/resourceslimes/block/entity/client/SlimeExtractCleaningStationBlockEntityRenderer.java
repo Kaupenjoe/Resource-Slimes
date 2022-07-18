@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.block.entity.GemInfusingStationBlockEntity;
+import net.kaupenjoe.resourceslimes.block.entity.SlimeExtractCleaningStationBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -17,13 +18,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 
-public class GemInfusingStationBlockEntityRenderer implements BlockEntityRenderer<GemInfusingStationBlockEntity> {
-    public GemInfusingStationBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+public class SlimeExtractCleaningStationBlockEntityRenderer implements BlockEntityRenderer<SlimeExtractCleaningStationBlockEntity> {
+    public SlimeExtractCleaningStationBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
 
     }
 
     @Override
-    public void render(GemInfusingStationBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack,
+    public void render(SlimeExtractCleaningStationBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack,
                        MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
 
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();

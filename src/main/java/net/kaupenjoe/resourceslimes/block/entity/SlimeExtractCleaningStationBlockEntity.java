@@ -267,7 +267,7 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
         tag.put("inventory", itemHandler.serializeNBT());
-        tag.putInt("gem_infusion_station.progress", progress);
+        tag.putInt("extract_cleaning_station.progress", progress);
         tag = FLUID_TANK.writeToNBT(tag);
         CompoundTag fluidTag = new CompoundTag();
         fluidTag = FLUID_TANK_WASTE.writeToNBT(fluidTag);
@@ -282,7 +282,7 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
     public void load(CompoundTag nbt) {
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
-        progress = nbt.getInt("gem_infusion_station.progress");
+        progress = nbt.getInt("extract_cleaning_station.progress");
         FLUID_TANK.readFromNBT(nbt);
         FLUID_TANK_WASTE.readFromNBT(nbt.getCompound("wasteFluid"));
 
@@ -330,10 +330,6 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
 
     private static boolean hasWaterSourceInSlot(SlimeExtractCleaningStationBlockEntity entity) {
         return entity.itemHandler.getStackInSlot(1).getCount() > 0;
-    }
-
-    private static boolean hasSpaceInTank(SlimeExtractCleaningStationBlockEntity entity, int fillAmount) {
-        return entity.FLUID_TANK.getSpace() >= fillAmount;
     }
 
     private static void transferItemWaterToWaterTank(SlimeExtractCleaningStationBlockEntity entity) {

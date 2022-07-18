@@ -1,0 +1,17 @@
+{
+  "type": "resourceslimes:gem_infusing",
+  "ingredients": [
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "resourceslimes:cut_citrine"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:energy_slime_spawn_egg"
+  }
+}
