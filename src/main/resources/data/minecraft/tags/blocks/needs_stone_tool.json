@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-
+    "resourceslimes:gem_cutting_station",
+    "resourceslimes:gem_infusing_station",
+    "resourceslimes:slime_extract_cleaning_station",
+    "resourceslimes:slime_incubation_station"
   ]
 }

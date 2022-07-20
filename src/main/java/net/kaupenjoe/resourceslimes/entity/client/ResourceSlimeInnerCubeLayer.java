@@ -56,7 +56,7 @@ public class ResourceSlimeInnerCubeLayer<T extends LivingEntity> extends RenderL
     @Override
     public ResourceLocation getTextureLocation(T pEntity) {
         if(pEntity instanceof ResourceSlimeEntity resourceSlimeEntity) {
-            return SlimeResource.getInnerCubeLocationByItem(resourceSlimeEntity.getResourceItem());
+            return SlimeResource.getInnerCubeLocationByItem(resourceSlimeEntity.getResourceItem().getItem());
         }
 
         return SlimeResource.getInnerCubeLocationByItem(null);

@@ -1,14 +1,18 @@
 package net.kaupenjoe.resourceslimes.entity;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
+import net.kaupenjoe.resourceslimes.item.custom.ExtractItem;
 import net.kaupenjoe.resourceslimes.util.resources.ResourceTier;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.Util;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -29,6 +33,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraftforge.common.ForgeI18n;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -49,6 +54,14 @@ public class ResourceSlimeEntity extends Slime {
     public ResourceSlimeEntity(EntityType<? extends Slime> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new ResourceSlimeEntity.SlimeMoveControl(this);
+    }
+
+    // TODO: MAKE THIS CLEAN! YES PLEASE :D
+    @Override
+    public Component getName() {
+        return new TextComponent(I18n.get((((ExtractItem) SlimeResource.getResourceBySlimeyExtractItem(this.entityData.get(RESOURCE).getItem())
+                .getExtractItem()).getExtractNameKey(new ItemStack(SlimeResource.getResourceBySlimeyExtractItem(this.entityData.get(RESOURCE).getItem()).getExtractItem()))).getKey())
+               + " " + I18n.get("entity.resourceslimes.resource_slime"));
     }
 
     @Override
@@ -174,12 +187,12 @@ public class ResourceSlimeEntity extends Slime {
         recalculateSize();
     }
 
-    public Item getResourceItem() {
+    public ItemStack getResourceItem() {
         if(!this.entityData.get(RESOURCE).isEmpty()) {
-            return this.entityData.get(RESOURCE).getItem();
+            return this.entityData.get(RESOURCE);
         }
 
-        return Items.AIR;
+        return ItemStack.EMPTY;
     }
 
     @Override

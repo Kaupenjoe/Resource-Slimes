@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "resourceslimes:black_opal_ore"
+    "resourceslimes:black_opal_ore",
+    "resourceslimes:deepslate_black_opal_ore",
+    "resourceslimes:end_black_opal_ore"
   ]
 }

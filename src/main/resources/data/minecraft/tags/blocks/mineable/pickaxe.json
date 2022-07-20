@@ -2,8 +2,17 @@
   "replace": false,
   "values": [
     "resourceslimes:citrine_ore",
+    "resourceslimes:deepslate_citrine_ore",
     "resourceslimes:zircon_ore",
+    "resourceslimes:deepslate_zircon_ore",
     "resourceslimes:tanzanite_ore",
-    "resourceslimes:black_opal_ore"
+    "resourceslimes:deepslate_tanzanite_ore",
+    "resourceslimes:black_opal_ore",
+    "resourceslimes:deepslate_black_opal_ore",
+    "resourceslimes:end_black_opal_ore",
+    "resourceslimes:gem_cutting_station",
+    "resourceslimes:gem_infusing_station",
+    "resourceslimes:slime_extract_cleaning_station",
+    "resourceslimes:slime_incubation_station"
   ]
 }

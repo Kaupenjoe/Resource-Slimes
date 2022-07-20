@@ -1,6 +1,7 @@
 package net.kaupenjoe.resourceslimes.block.entity;
 
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
+import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
@@ -284,31 +285,23 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
         return entity.itemHandler.getStackInSlot(0).getCount() > 0;
     }
 
-    private static boolean hasSpaceInTank(GemCuttingStationBlockEntity entity, int fillAmount) {
-        return entity.FLUID_TANK.getSpace() >= fillAmount;
-    }
-
     private static void transferItemWaterToWaterTank(GemCuttingStationBlockEntity entity) {
-        if(entity.itemHandler.getStackInSlot(0).getItem() instanceof PotionItem
-                && PotionUtils.getPotion(entity.itemHandler.getStackInSlot(0)).equals(Potions.WATER)) {
-            if(hasSpaceInTank(entity, 250)) {
-                fillTankWithWater(entity, 250, Items.GLASS_BOTTLE);
-            }
-        }
+        entity.itemHandler.getStackInSlot(0).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(handler -> {
+            int drainAmount = Math.min(entity.FLUID_TANK.getSpace(), 1000);
 
-        if(entity.itemHandler.getStackInSlot(0).getItem() instanceof BucketItem bucketItem
-                && bucketItem.getFluid().equals(Fluids.WATER)) {
-            if(hasSpaceInTank(entity, 1000)) {
-                fillTankWithWater(entity, 1000, Items.BUCKET);
+            FluidStack stack = handler.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
+            if(stack.getFluid() == Fluids.WATER) {
+                stack = handler.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
+                fillTankWithWater(entity, stack, handler.getContainer());
             }
-        }
+        });
     }
 
-    private static void fillTankWithWater(GemCuttingStationBlockEntity entity, int amount, Item bucket) {
-        entity.FLUID_TANK.fill(new FluidStack(Fluids.WATER, amount), IFluidHandler.FluidAction.EXECUTE);
+    private static void fillTankWithWater(GemCuttingStationBlockEntity entity, FluidStack fluidStack, ItemStack stack) {
+        entity.FLUID_TANK.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
 
         entity.itemHandler.extractItem(0, 1, false);
-        entity.itemHandler.insertItem(0, new ItemStack(bucket), false);
+        entity.itemHandler.insertItem(0, stack, false);
     }
 
     private static boolean hasRecipe(GemCuttingStationBlockEntity entity) {

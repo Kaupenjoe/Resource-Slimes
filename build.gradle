@@ -23,7 +23,7 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 
 
-version = '0.2.5-1.18.2'
+version = '0.2.13-1.18.2'
 group = 'net.kaupenjoe.resourceslimes' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'resourceslimes'
 
@@ -161,6 +161,9 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    maven {
+        url "https://maven.k-4u.nl/"
+    }
 }
 
 mixin {
@@ -183,6 +186,8 @@ dependencies {
     // at runtime, use the full JEI jar
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
     runtimeOnly fg.deobf("curse.maven:mekanism-268560:3743835")
+
+    implementation fg.deobf(project.dependencies.create("mcjty.theoneprobe:theoneprobe:1.18-5.1.0-8") { transitive = false })
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

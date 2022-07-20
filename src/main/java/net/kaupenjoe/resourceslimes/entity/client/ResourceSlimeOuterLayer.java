@@ -34,7 +34,7 @@ public class ResourceSlimeOuterLayer<T extends LivingEntity> extends RenderLayer
                 vertexconsumer = pBuffer.getBuffer(RenderType.outline(this.getTextureLocation(pLivingEntity)));
             } else {
                 if(pLivingEntity instanceof ResourceSlimeEntity slime) {
-                    ResourceLocation loc = SlimeResource.getTierByItem(slime.getResourceItem()).getTextureLocation();
+                    ResourceLocation loc = SlimeResource.getTierByItem(slime.getResourceItem().getItem()).getTextureLocation();
                     vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent(loc));
                 } else {
                     ResourceLocation loc = SlimeResource.getTierByItem(null).getTextureLocation();

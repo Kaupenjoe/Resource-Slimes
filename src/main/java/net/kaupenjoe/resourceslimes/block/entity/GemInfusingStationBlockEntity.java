@@ -29,6 +29,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -288,18 +289,22 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
     }
 
     private static void transferItemWaterToWaterTank(GemInfusingStationBlockEntity entity) {
-        if(entity.itemHandler.getStackInSlot(0).getItem() instanceof BucketItem bucketItem) {
-            if(hasSpaceInTank(entity, 1000)) {
-                fillTankWithFluid(entity, 1000, bucketItem);
+        entity.itemHandler.getStackInSlot(0).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(handler -> {
+            int drainAmount = Math.min(entity.FLUID_TANK.getSpace(), 1000);
+
+            FluidStack stack = handler.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
+            if(stack.getFluid() == Fluids.WATER) {
+                stack = handler.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
+                fillTankWithFluid(entity, stack, handler.getContainer());
             }
-        }
+        });
     }
 
-    private static void fillTankWithFluid(GemInfusingStationBlockEntity entity, int amount, BucketItem bucket) {
-        entity.FLUID_TANK.fill(new FluidStack(bucket.getFluid(), amount), IFluidHandler.FluidAction.EXECUTE);
+    private static void fillTankWithFluid(GemInfusingStationBlockEntity entity, FluidStack fluidStack, ItemStack stack) {
+        entity.FLUID_TANK.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
 
         entity.itemHandler.extractItem(0, 1, false);
-        entity.itemHandler.insertItem(0, new ItemStack(Items.BUCKET), false);
+        entity.itemHandler.insertItem(0, stack, false);
     }
 
     private static boolean hasRecipe(GemInfusingStationBlockEntity entity) {

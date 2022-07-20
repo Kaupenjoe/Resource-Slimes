@@ -2,7 +2,10 @@
   "replace": false,
   "values": [
     "resourceslimes:citrine_ore",
+    "resourceslimes:deepslate_citrine_ore",
     "resourceslimes:zircon_ore",
-    "resourceslimes:tanzanite_ore"
+    "resourceslimes:deepslate_zircon_ore",
+    "resourceslimes:tanzanite_ore",
+    "resourceslimes:deepslate_tanzanite_ore"
   ]
 }
