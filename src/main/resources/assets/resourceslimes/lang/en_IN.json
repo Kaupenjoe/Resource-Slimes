@@ -19,8 +19,8 @@
   "item.resourceslimes.raw_black_opal": "Raw Black Opal",
   "item.resourceslimes.cut_black_opal": "Cut Black Opal",
   "item.resourceslimes.infused_black_opal": "Infused Black Opal",
-  "item.resourceslimes.pink_slime_pearl": "Red Slime Pearl",
-  "item.resourceslimes.infused_pink_slime_pearl": "Infused Red Slime Pearl",
+  "item.resourceslimes.pink_slime_pearl": "Pink Slime Pearl",
+  "item.resourceslimes.infused_pink_slime_pearl": "Infused Pink Slime Pearl",
   "item.resourceslimes.resource_slime_spawn_egg": "Resource Slime Spawn Egg",
   "item.resourceslimes.energy_slime_spawn_egg": "Energy Slime Spawn Egg",
   "item.resourceslimes.citrine_slime_fluid_bucket": "Citrine Slime Bucket",
@@ -29,7 +29,7 @@
   "item.resourceslimes.emerald_slime_fluid_bucket": "Emerald Slime Bucket",
   "item.resourceslimes.tanzanite_slime_fluid_bucket": "Tanzanite Slime Bucket",
   "item.resourceslimes.black_opal_slime_fluid_bucket": "Black Opal Slime Bucket",
-  "item.resourceslimes.pink_slime_pearl_slime_fluid_bucket": "Red Slime Pearl Slime Bucket",
+  "item.resourceslimes.pink_slime_pearl_slime_fluid_bucket": "Pink Slime Pearl Slime Bucket",
   "item.resourceslimes.soapy_water_fluid_bucket": "Soapy Water Bucket",
   "item.resourceslimes.dirty_water_fluid_bucket": "Dirty Water Bucket",
   "item.resourceslimes.gem_cutter_tool": "Gem Cutter Tool",
@@ -115,9 +115,9 @@
   "extract.resourceslimes.greatergem": "Greater Gem",
   "extract.resourceslimes.endcrystal": "End Crystal",
   "effect.resourceslimes.soapy": "Soapy",
-  "effect.resourceslimes.stinky": "Stinky",
+  "effect.resourceslimes.stinky": "Smelly",
   "effect.resourceslimes.slimey": "Slimey",
-  "effect.resourceslimes.soapy.description": "Makes you slide around like there's ice on the floor",
-  "effect.resourceslimes.stinky.description": "Causes entities around you to take damage",
-  "effect.resourceslimes.slimey.description": "Slows you down and doesn't let you jump, but allows you to climb walls"
+  "effect.resourceslimes.soapy.description": "Makes floor slippery",
+  "effect.resourceslimes.stinky.description": "Damages entities around you",
+  "effect.resourceslimes.slimey.description": "Slows you down and doesn't let you jump, but let you to climb walls"
 }
