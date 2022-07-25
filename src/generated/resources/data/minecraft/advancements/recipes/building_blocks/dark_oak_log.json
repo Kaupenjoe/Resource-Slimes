@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:dark_oak_log"
+    ]
+  },
+  "criteria": {
+    "has_wood_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:wood_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:dark_oak_log"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_wood_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

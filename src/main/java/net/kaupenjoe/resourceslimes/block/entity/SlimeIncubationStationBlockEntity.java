@@ -124,7 +124,7 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
     }
 
     public SlimeIncubationStationBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModBlockEntities.GEM_CUTTING_STATION_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
+        super(ModBlockEntities.SLIME_INCUBATION_STATION_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
         this.data = new ContainerData() {
             public int get(int index) {
                 return switch (index) {

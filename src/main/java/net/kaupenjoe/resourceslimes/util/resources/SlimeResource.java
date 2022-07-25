@@ -23,8 +23,10 @@ public enum SlimeResource {
     PIG(ResourceTier.ZIRCON, new ResourceLocation("textures/block/coarse_dirt.png"), true),
     CHICKEN(ResourceTier.ZIRCON, new ResourceLocation("textures/block/hay_block.png"), true),
     COAL(ResourceTier.ZIRCON, new ResourceLocation("textures/block/coal_ore.png"), true),
+    FIRE(ResourceTier.ZIRCON, new ResourceLocation("textures/block/fire_0.png"), true),
     BERRY(ResourceTier.ZIRCON, new ResourceLocation("textures/block/sweet_berry_bush_stage3.png"), true),
     FISH(ResourceTier.ZIRCON, new ResourceLocation("textures/block/barrel_side.png"), true),
+    DEEPSLATE(ResourceTier.ZIRCON, new ResourceLocation("textures/block/deepslate.png"), true),
 
 
     IRON(ResourceTier.DIAMOND, new ResourceLocation("textures/block/iron_ore.png"), true),
@@ -35,8 +37,6 @@ public enum SlimeResource {
     ZOMBIE(ResourceTier.DIAMOND, new ResourceLocation("textures/block/carved_pumpkin.png"), true),
     ICE(ResourceTier.DIAMOND, new ResourceLocation("textures/block/ice.png"), true),
     COPPER(ResourceTier.DIAMOND, new ResourceLocation("textures/block/copper_block.png"), true),
-    FIRE(ResourceTier.DIAMOND, new ResourceLocation("textures/block/fire_0.png"), true),
-    DEEPSLATE(ResourceTier.DIAMOND, new ResourceLocation("textures/block/deepslate.png"), true),
     CROP(ResourceTier.DIAMOND, new ResourceLocation("textures/block/deepslate.png"), true),
     LESSERGEM(ResourceTier.DIAMOND, new ResourceLocation("textures/block/carved_pumpkin.png"), true),
 
@@ -48,6 +48,7 @@ public enum SlimeResource {
     PRISMARINE(ResourceTier.EMERALD, new ResourceLocation("textures/block/prismarine.png"), true),
     CREEPER(ResourceTier.EMERALD, new ResourceLocation("textures/block/carved_pumpkin.png"), true),
     SPIDER(ResourceTier.EMERALD, new ResourceLocation("textures/block/cobweb.png"), true),
+    OBSIDIAN(ResourceTier.EMERALD, new ResourceLocation("textures/block/obsidian.png"), true),
     SLIME(ResourceTier.EMERALD, new ResourceLocation("textures/block/slime.png"), true),
     PHANTOM(ResourceTier.EMERALD, new ResourceLocation("textures/block/carved_pumpkin.png"), true),
     ALCHEMY(ResourceTier.EMERALD, new ResourceLocation("textures/block/brewing_stand_base.png"), true),
@@ -58,7 +59,6 @@ public enum SlimeResource {
     HONEY(ResourceTier.TANZANITE, new ResourceLocation("textures/block/honeycomb_block.png"), true),
     EXPERIENCE(ResourceTier.TANZANITE, new ResourceLocation("textures/block/bookshelf.png"), true),
     MUSIC(ResourceTier.TANZANITE, new ResourceLocation("textures/block/note_block.png"), true),
-    OBSIDIAN(ResourceTier.TANZANITE, new ResourceLocation("textures/block/obsidian.png"), true),
     BLAZE(ResourceTier.TANZANITE, new ResourceLocation("textures/block/carved_pumpkin.png"), true),
     WITHERSKELETONS(ResourceTier.TANZANITE, new ResourceLocation("textures/block/carved_pumpkin.png"), true),
     ILLAGERS(ResourceTier.TANZANITE, new ResourceLocation("textures/block/carved_pumpkin.png"), true),

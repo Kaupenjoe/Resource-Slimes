@@ -41,7 +41,7 @@ public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<S
         int y = (height - imageHeight) / 2;
 
         renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y, menu.getMainFluid(), 55, 15);
-        renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y, menu.getWasteFluid(), 129, 44);
+        renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y, menu.getWasteFluid(), 129, 45);
         renderEnergyArea(pPoseStack, pMouseX, pMouseY, x, y);
     }
 
@@ -73,7 +73,7 @@ public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<S
         renderProgressArrow(pPoseStack, x, y);
 
         renderer.render(pPoseStack, x + 55,y + 15, menu.getMainFluid());
-        wasteRenderer.render(pPoseStack, x + 129,y + 44, menu.getWasteFluid());
+        wasteRenderer.render(pPoseStack, x + 129,y + 45, menu.getWasteFluid());
         energyInfoArea.draw(pPoseStack);
     }
 

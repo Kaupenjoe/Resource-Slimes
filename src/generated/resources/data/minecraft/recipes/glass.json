@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FSF",
+    "SFS",
+    "FSF"
+  ],
+  "key": {
+    "S": {
+      "item": "resourceslimes:sand_extract"
+    },
+    "F": {
+      "item": "resourceslimes:fire_extract"
+    }
+  },
+  "result": {
+    "item": "minecraft:glass",
+    "count": 16
+  }
+}

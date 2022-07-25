@@ -58,11 +58,19 @@
       "required": false
     },
     {
+      "id": "resourceslimes:fire_extract",
+      "required": false
+    },
+    {
       "id": "resourceslimes:berry_extract",
       "required": false
     },
     {
       "id": "resourceslimes:fish_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:deepslate_extract",
       "required": false
     },
     {
@@ -95,14 +103,6 @@
     },
     {
       "id": "resourceslimes:copper_extract",
-      "required": false
-    },
-    {
-      "id": "resourceslimes:fire_extract",
-      "required": false
-    },
-    {
-      "id": "resourceslimes:deepslate_extract",
       "required": false
     },
     {
@@ -142,6 +142,10 @@
       "required": false
     },
     {
+      "id": "resourceslimes:obsidian_extract",
+      "required": false
+    },
+    {
       "id": "resourceslimes:slime_extract",
       "required": false
     },
@@ -171,10 +175,6 @@
     },
     {
       "id": "resourceslimes:music_extract",
-      "required": false
-    },
-    {
-      "id": "resourceslimes:obsidian_extract",
       "required": false
     },
     {

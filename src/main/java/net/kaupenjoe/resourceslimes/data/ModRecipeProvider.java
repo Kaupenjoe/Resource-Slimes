@@ -14,6 +14,7 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -21,6 +22,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidStack;
@@ -29,6 +31,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.Consumer;
+
+import static net.kaupenjoe.resourceslimes.data.ExtractRecipes.*;
 
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
     public ModRecipeProvider(DataGenerator pGenerator) {
@@ -44,6 +48,80 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         this.customGemInfusingRecipes(pFinishedRecipeConsumer);
         this.customExtractCleaningRecipes(pFinishedRecipeConsumer);
         this.customIncubationRecipes(pFinishedRecipeConsumer);
+
+        this.extractRecipes(pFinishedRecipeConsumer);
+    }
+
+    private void extractRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+        ItemLike stone_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "stone_extract"));
+        ItemLike dirt_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "dirt_extract"));
+        ItemLike water_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "water_extract"));
+        ItemLike sand_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "sand_extract"));
+        ItemLike gravel_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "gravel_extract"));
+
+        ItemLike wood_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "wood_extract"));
+        ItemLike grass_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "grass_extract"));
+        ItemLike flower_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "flower_extract"));
+        ItemLike sheep_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "sheep_extract"));
+        ItemLike cow_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "cow_extract"));
+
+        ItemLike deepslate_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "deepslate_extract"));
+
+        ItemLike fire_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "fire_extract"));
+
+
+        ItemLike iron_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "iron_extract"));
+        ItemLike lapis_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "lapis_extract"));
+        ItemLike quartz_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "quartz_extract"));
+        ItemLike aquatic_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "aquatic_extract"));
+        ItemLike nether_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "nether_extract"));
+        ItemLike zombie_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "zombie_extract"));
+        ItemLike ice_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "ice_extract"));
+        ItemLike copper_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "copper_extract"));
+        ItemLike crop_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "crop_extract"));
+        ItemLike lesser_gem_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "lessergem_extract"));
+
+        ItemLike gold_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "gold_extract"));
+
+
+
+        stoneExtractRecipes(pFinishedRecipeConsumer, stone_extract, grass_extract);
+        dirtExtractRecipes(pFinishedRecipeConsumer, dirt_extract, grass_extract, fire_extract);
+        waterExtractRecipes(pFinishedRecipeConsumer, water_extract, fire_extract);
+        sandExtractRecipes(pFinishedRecipeConsumer, sand_extract, fire_extract);
+        woodExtractRecipes(pFinishedRecipeConsumer, wood_extract);
+
+        ironExtractRecipes(pFinishedRecipeConsumer, iron_extract);
+        lapisExtractRecipes(pFinishedRecipeConsumer, lapis_extract);
+        copperExtractRecipes(pFinishedRecipeConsumer, copper_extract);
+        quartzExtractRecipes(pFinishedRecipeConsumer, quartz_extract);
+        deepslateExtractRecipes(pFinishedRecipeConsumer, deepslate_extract);
+
+        goldExtractRecipes(pFinishedRecipeConsumer, gold_extract);
+
     }
 
     private void customIncubationRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
