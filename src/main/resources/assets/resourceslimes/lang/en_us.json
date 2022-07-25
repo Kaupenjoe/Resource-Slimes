@@ -137,7 +137,11 @@
   "extract.resourceslimes.endcrystal": "End Crystal",
 
 
-  "effects.resourceslimes.soapy": "Soapy",
-  "effects.resourceslimes.stinky": "Stinky",
-  "effects.resourceslimes.slimey": "Slimey"
+  "effect.resourceslimes.soapy": "Soapy",
+  "effect.resourceslimes.stinky": "Stinky",
+  "effect.resourceslimes.slimey": "Slimey",
+  "effect.resourceslimes.soapy.description": "Makes you slide around like there's ice on the floor",
+  "effect.resourceslimes.stinky.description": "Causes entities around you to take damage",
+  "effect.resourceslimes.slimey.description": "Slows you down and doesn't let you jump, but allows you to climb walls"
+
 }
