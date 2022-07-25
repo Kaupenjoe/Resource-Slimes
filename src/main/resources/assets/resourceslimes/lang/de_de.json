@@ -7,7 +7,7 @@
   "item.resourceslimes.raw_zircon": "Roher Zirkon",
   "item.resourceslimes.cut_zircon": "Geschlieffener Zirkon",
   "item.resourceslimes.infused_zircon": "Infused Zircon",
-  "item.resourceslimes.cut_diamond": "Cut Diamond",
+  "item.resourceslimes.cut_diamond": "Geschliffener Diamant",
   "item.resourceslimes.infused_diamond": "Infused Diamond",
   "item.resourceslimes.cut_emerald": "Cut Emerald",
   "item.resourceslimes.infused_emerald": "Infused Emerald",
@@ -114,7 +114,10 @@
   "extract.resourceslimes.netherstar": "Netherstern",
   "extract.resourceslimes.greatergem": "Großer Edelstein",
   "extract.resourceslimes.endcrystal": "Endkristall",
-  "effects.resourceslimes.soapy": "Soapy",
-  "effects.resourceslimes.stinky": "Stinky",
-  "effects.resourceslimes.slimey": "Schleimig"
+  "effect.resourceslimes.soapy": "Soapy",
+  "effect.resourceslimes.stinky": "Stinky",
+  "effect.resourceslimes.slimey": "Slimey",
+  "effect.resourceslimes.soapy.description": "Makes you slide around like there's ice on the floor",
+  "effect.resourceslimes.stinky.description": "Causes entities around you to take damage",
+  "effect.resourceslimes.slimey.description": "Slows you down and doesn't let you jump, but allows you to climb walls"
 }
