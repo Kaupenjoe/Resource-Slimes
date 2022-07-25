@@ -1,9 +1,9 @@
 {
-  "item.resourceslimes.uncut_citrine": "Uncut Citrine",
+  "item.resourceslimes.uncut_citrine": "Citrine pas coupée",
   "item.resourceslimes.raw_citrine": "Raw Citrine",
   "item.resourceslimes.cut_citrine": "Cut Citrine",
   "item.resourceslimes.infused_citrine": "Infused Citrine",
-  "item.resourceslimes.uncut_zircon": "Uncut Zircon",
+  "item.resourceslimes.uncut_zircon": "Zircon pas coupé",
   "item.resourceslimes.raw_zircon": "Raw Zircon",
   "item.resourceslimes.cut_zircon": "Cut Zircon",
   "item.resourceslimes.infused_zircon": "Infused Zircon",
@@ -11,7 +11,7 @@
   "item.resourceslimes.infused_diamond": "Infused Diamond",
   "item.resourceslimes.cut_emerald": "Cut Emerald",
   "item.resourceslimes.infused_emerald": "Infused Emerald",
-  "item.resourceslimes.uncut_tanzanite": "Uncut Tanzanite",
+  "item.resourceslimes.uncut_tanzanite": "Tanzanite pas coupée",
   "item.resourceslimes.raw_tanzanite": "Raw Tanzanite",
   "item.resourceslimes.cut_tanzanite": "Cut Tanzanite",
   "item.resourceslimes.infused_tanzanite": "Infused Tanzanite",
@@ -114,7 +114,10 @@
   "extract.resourceslimes.netherstar": "Netherstar",
   "extract.resourceslimes.greatergem": "Greater Gem",
   "extract.resourceslimes.endcrystal": "End Crystal",
-  "effects.resourceslimes.soapy": "Soapy",
-  "effects.resourceslimes.stinky": "Stinky",
-  "effects.resourceslimes.slimey": "Slimey"
+  "effect.resourceslimes.soapy": "Soapy",
+  "effect.resourceslimes.stinky": "Stinky",
+  "effect.resourceslimes.slimey": "Slimey",
+  "effect.resourceslimes.soapy.description": "Makes you slide around like there's ice on the floor",
+  "effect.resourceslimes.stinky.description": "Causes entities around you to take damage",
+  "effect.resourceslimes.slimey.description": "Slows you down and doesn't let you jump, but allows you to climb walls"
 }
