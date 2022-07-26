@@ -1,8 +1,11 @@
 package net.kaupenjoe.resourceslimes.entity.client;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.kaupenjoe.resourceslimes.entity.ResourceSlimeEntity;
+
+import net.kaupenjoe.resourceslimes.entity.ResourceSlime;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
@@ -15,12 +18,6 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ResourceSlimeInnerCubeLayer<T extends LivingEntity> extends RenderLayer<T, SlimeModel<T>> {
     private final EntityModel<T> model;
@@ -55,8 +52,8 @@ public class ResourceSlimeInnerCubeLayer<T extends LivingEntity> extends RenderL
     @NotNull
     @Override
     public ResourceLocation getTextureLocation(T pEntity) {
-        if(pEntity instanceof ResourceSlimeEntity resourceSlimeEntity) {
-            return SlimeResource.getInnerCubeLocationByItem(resourceSlimeEntity.getResourceItem().getItem());
+        if(pEntity instanceof ResourceSlime resourceSlime) {
+            return SlimeResource.getInnerCubeLocationByItem(resourceSlime.getResourceItem().getItem());
         }
 
         return SlimeResource.getInnerCubeLocationByItem(null);

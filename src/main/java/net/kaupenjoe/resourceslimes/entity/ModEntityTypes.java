@@ -11,11 +11,11 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModEntityTypes {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
-            DeferredRegister.create(ForgeRegistries.ENTITIES, ResourceSlimes.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ResourceSlimes.MOD_ID);
 
-    public static final RegistryObject<EntityType<ResourceSlimeEntity>> RESOURCE_SLIME =
+    public static final RegistryObject<EntityType<ResourceSlime>> RESOURCE_SLIME =
             ENTITY_TYPES.register("resource_slime",
-            () -> EntityType.Builder.of(ResourceSlimeEntity::new, MobCategory.CREATURE)
+            () -> EntityType.Builder.of(ResourceSlime::new, MobCategory.CREATURE)
                     .sized(2.04F, 2.04F).setTrackingRange(6)
                     .build(new ResourceLocation(ResourceSlimes.MOD_ID, "resource_slime").toString()));
 

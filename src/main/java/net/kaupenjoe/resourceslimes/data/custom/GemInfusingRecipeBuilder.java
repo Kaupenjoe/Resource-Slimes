@@ -18,6 +18,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.ForgeRegistries;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -94,7 +96,7 @@ public class GemInfusingRecipeBuilder implements RecipeBuilder {
             pJson.add("fluid", FluidJSONUtil.toJson(stack));
             
             JsonObject jsonobject = new JsonObject();
-            jsonobject.addProperty("item", this.result.getRegistryName().toString());
+            jsonobject.addProperty("item", ForgeRegistries.ITEMS.getKey(this.result).toString());
             if (this.count > 1) {
                 jsonobject.addProperty("count", this.count);
             }
@@ -105,7 +107,7 @@ public class GemInfusingRecipeBuilder implements RecipeBuilder {
         @Override
         public ResourceLocation getId() {
             return new ResourceLocation(ResourceSlimes.MOD_ID,
-                    this.result.getRegistryName().getPath() + "_from_gem_infusion");
+            		ForgeRegistries.ITEMS.getKey(this.result).getPath() + "_from_gem_infusion");
         }
 
         @Override

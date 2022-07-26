@@ -1,0 +1,10 @@
+{
+	"type": "forge:add_features",
+	"biomes": [
+		"#minecraft:is_mountain"
+	],
+	"features": [
+		"resourceslimes:zircon_ore_placed_triangle",
+		"resourceslimes:zircon_ore_placed_uniform"
+	]
+}

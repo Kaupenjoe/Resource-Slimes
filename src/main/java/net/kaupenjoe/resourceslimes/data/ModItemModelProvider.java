@@ -3,11 +3,11 @@ package net.kaupenjoe.resourceslimes.data;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
+import net.kaupenjoe.resourceslimes.util.ModRegistries;
+import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -89,9 +89,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         complexBlock(ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get());
         complexBlock(ModBlocks.SLIME_INCUBATION_STATION.get());
 
-        var resources = SlimeResource.values();
+        var resources = ModRegistries.SLIME_RESOURCES.get().getValues();
         for (var resource : resources) {
-            if (resource.equals(SlimeResource.EMPTY)) {
+            if (resource.equals(BuiltinSlimeResources.EMPTY)) {
                 continue;
             }
 
@@ -119,22 +119,22 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     private ItemModelBuilder simpleItem(Item item) {
-        return withExistingParent(item.getRegistryName().getPath(),
+        return withExistingParent(ForgeRegistries.ITEMS.getKey(item).getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(ResourceSlimes.MOD_ID,"item/" + item.getRegistryName().getPath()));
+                new ResourceLocation(ResourceSlimes.MOD_ID,"item/" + ForgeRegistries.ITEMS.getKey(item).getPath()));
     }
 
     private ItemModelBuilder simpleBlock(Block block) {
-        return cubeAll(block.getRegistryName().getPath(), new ResourceLocation(ResourceSlimes.MOD_ID,
-                "block/" + block.getRegistryName().getPath()));
+        return cubeAll(ForgeRegistries.BLOCKS.getKey(block).getPath(), new ResourceLocation(ResourceSlimes.MOD_ID,
+                "block/" + ForgeRegistries.BLOCKS.getKey(block).getPath()));
     }
 
     private ItemModelBuilder complexBlock(Block block) {
-        return withExistingParent(block.getRegistryName().getPath(), new ResourceLocation(ResourceSlimes.MOD_ID,
-                "block/" + block.getRegistryName().getPath()));
+        return withExistingParent(ForgeRegistries.BLOCKS.getKey(block).getPath(), new ResourceLocation(ResourceSlimes.MOD_ID,
+                "block/" + ForgeRegistries.BLOCKS.getKey(block).getPath()));
     }
 
     private ItemModelBuilder spawnEgg(Item item) {
-        return withExistingParent(item.getRegistryName().getPath(), ITEM_FOLDER + "/template_spawn_egg");
+        return withExistingParent(ForgeRegistries.ITEMS.getKey(item).getPath(), ITEM_FOLDER + "/template_spawn_egg");
     }
 }

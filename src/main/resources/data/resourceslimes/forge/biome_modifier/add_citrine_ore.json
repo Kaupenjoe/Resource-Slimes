@@ -1,0 +1,8 @@
+{
+	"type": "forge:add_features",
+	"biomes": "#minecraft:is_overworld",
+	"features": [
+		"resourceslimes:citrine_ore_placed_triangle",
+		"resourceslimes:citrine_ore_placed_uniform"
+	]
+}

@@ -85,7 +85,7 @@ public class SlimeIncubationStationBlock extends BaseEntityBlock {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof SlimeIncubationStationBlockEntity) {
-                NetworkHooks.openGui(((ServerPlayer)pPlayer), (SlimeIncubationStationBlockEntity)entity, pPos);
+                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (SlimeIncubationStationBlockEntity)entity, pPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }

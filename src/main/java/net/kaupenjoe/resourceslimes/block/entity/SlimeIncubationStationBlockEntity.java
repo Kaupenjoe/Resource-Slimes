@@ -1,10 +1,15 @@
 package net.kaupenjoe.resourceslimes.block.entity;
 
-import net.kaupenjoe.resourceslimes.item.ModItems;
+import java.util.Optional;
+
+import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
-import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
 import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.SlimeIncubationStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
@@ -12,7 +17,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -34,12 +38,6 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
-import java.util.Optional;
-import java.util.Random;
 
 public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
@@ -149,7 +147,7 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
 
     @Override
     public Component getDisplayName() {
-        return new TextComponent("Slime Incubation Station");
+        return Component.literal("Slime Incubation Station");
     }
 
     @Nullable

@@ -1,0 +1,10 @@
+{
+	"type": "forge:add_features",
+	"biomes": [
+		"#minecraft:is_savanna",
+		"#minecraft:is_desert"
+	],
+	"features": [
+		"resourceslimes:black_opal_ore_placed_low"
+	]
+}
