@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS",
+    "FFF"
+  ],
+  "key": {
+    "S": {
+      "item": "resourceslimes:sand_extract"
+    },
+    "F": {
+      "item": "resourceslimes:fire_extract"
+    }
+  },
+  "result": {
+    "item": "minecraft:sandstone",
+    "count": 32
+  }
+}

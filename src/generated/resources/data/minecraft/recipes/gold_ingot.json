@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "resourceslimes:gold_extract"
+    }
+  },
+  "result": {
+    "item": "minecraft:gold_ingot",
+    "count": 6
+  }
+}

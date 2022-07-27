@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EE ",
+    "E E",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "resourceslimes:stone_extract"
+    }
+  },
+  "result": {
+    "item": "minecraft:granite",
+    "count": 32
+  }
+}

@@ -1,6 +1,5 @@
 package net.kaupenjoe.resourceslimes.block.custom;
 
-import net.kaupenjoe.resourceslimes.block.entity.GemCuttingStationBlockEntity;
 import net.kaupenjoe.resourceslimes.block.entity.ModBlockEntities;
 import net.kaupenjoe.resourceslimes.block.entity.SlimeIncubationStationBlockEntity;
 import net.minecraft.core.BlockPos;

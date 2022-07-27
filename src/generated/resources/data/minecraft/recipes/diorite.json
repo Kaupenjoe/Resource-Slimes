@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EE ",
+    "E E",
+    "EE "
+  ],
+  "key": {
+    "E": {
+      "item": "resourceslimes:stone_extract"
+    }
+  },
+  "result": {
+    "item": "minecraft:diorite",
+    "count": 32
+  }
+}

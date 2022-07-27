@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "EEE",
+    "E E"
+  ],
+  "key": {
+    "E": {
+      "item": "resourceslimes:stone_extract"
+    }
+  },
+  "result": {
+    "item": "minecraft:andesite",
+    "count": 32
+  }
+}
