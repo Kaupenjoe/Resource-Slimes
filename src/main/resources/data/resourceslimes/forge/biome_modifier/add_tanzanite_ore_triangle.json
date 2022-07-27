@@ -1,11 +1,8 @@
 {
 	"type": "forge:add_features",
-	"biomes": [
-		"#minecraft:is_savanna",
-		"#forge:is_plains"
-	],
+	"biomes": "#forge:is_plains",
 	"features": [
-		"resourceslimes:zircon_ore_placed_triangle",
-		"resourceslimes:zircon_ore_placed_uniform"
-	]
+		"resourceslimes:tanzanite_ore_placed_triangle"
+	],
+	"step": "underground_ores"
 }

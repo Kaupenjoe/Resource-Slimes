@@ -1,10 +1,8 @@
 {
 	"type": "forge:add_features",
-	"biomes": [
-		"#minecraft:is_mountain"
-	],
+	"biomes": "#minecraft:is_mountain",
 	"features": [
-		"resourceslimes:zircon_ore_placed_triangle",
-		"resourceslimes:zircon_ore_placed_uniform"
-	]
+		"resourceslimes:tanzanite_ore_placed_triangle_mountains"
+	],
+	"step": "underground_ores"
 }

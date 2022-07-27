@@ -14,44 +14,44 @@ public class ModFluidTypes {
 	public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister
 			.create(ForgeRegistries.Keys.FLUID_TYPES, ResourceSlimes.MOD_ID);
 
-	public static final RegistryObject<FluidType> CITRINE_SLIME_FLUID = register(ModFluids.CITRINE_SLIME_FLUID,
+	public static final RegistryObject<FluidType> CITRINE_SLIME_FLUID = register("citrine_slime_fluid",
 			FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
 					SoundEvents.HONEY_DRINK));
 
-	public static final RegistryObject<FluidType> ZIRCON_SLIME_FLUID = register(ModFluids.ZIRCON_SLIME_FLUID,
+	public static final RegistryObject<FluidType> ZIRCON_SLIME_FLUID = register("zircon_slime_fluid",
 			FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
 					SoundEvents.HONEY_DRINK));
 	
-	public static final RegistryObject<FluidType> DIRTY_WATER_FLUID = register(ModFluids.DIRTY_WATER_FLUID,
+	public static final RegistryObject<FluidType> DIRTY_WATER_FLUID = register("dirty_water_fluid",
 			FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
 					SoundEvents.HONEY_DRINK));
 
-	public static final RegistryObject<FluidType> DIAMOND_SLIME_FLUID = register(ModFluids.DIAMOND_SLIME_FLUID,
+	public static final RegistryObject<FluidType> DIAMOND_SLIME_FLUID = register("diamond_slime_fluid",
 			FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
 					SoundEvents.HONEY_DRINK));
 
-	public static final RegistryObject<FluidType> EMERALD_SLIME_FLUID = register(ModFluids.EMERALD_SLIME_FLUID,
+	public static final RegistryObject<FluidType> EMERALD_SLIME_FLUID = register("emerald_slime_fluid",
 			FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
 					SoundEvents.HONEY_DRINK));
 
-	public static final RegistryObject<FluidType> TANZANITE_SLIME_FLUID = register(ModFluids.TANZANITE_SLIME_FLUID,
+	public static final RegistryObject<FluidType> TANZANITE_SLIME_FLUID = register("tanzanite_slime_fluid",
 			FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
 					SoundEvents.HONEY_DRINK));
 
-	public static final RegistryObject<FluidType> BLACK_OPAL_SLIME_FLUID = register(ModFluids.BLACK_OPAL_SLIME_FLUID,
+	public static final RegistryObject<FluidType> BLACK_OPAL_SLIME_FLUID = register("black_opal_slime_fluid",
 			FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
 					SoundEvents.HONEY_DRINK));
 
 	public static final RegistryObject<FluidType> PINK_SLIME_PEARL_SLIME_FLUID = register(
-			ModFluids.PINK_SLIME_PEARL_SLIME_FLUID, FluidType.Properties.create().lightLevel(2).density(15).viscosity(5)
+			"pink_slime_pearl_slime_fluid", FluidType.Properties.create().lightLevel(2).density(15).viscosity(5)
 					.sound(SoundAction.get("drink"), SoundEvents.HONEY_DRINK));
 
-	public static final RegistryObject<FluidType> SOAPY_WATER_FLUID_PROPERTIES = register(ModFluids.SOAPY_WATER_FLUID,
+	public static final RegistryObject<FluidType> SOAPY_WATER_FLUID_PROPERTIES = register("soapy_water_fluid",
 			FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
 					SoundEvents.HONEY_DRINK));
 
-	private static RegistryObject<FluidType> register(RegistryObject<FlowingFluid> fluid, FluidType.Properties props) {
-		return FLUID_TYPES.register(ForgeRegistries.FLUIDS.getKey(fluid.get()).getPath(), () -> new FluidType(props));
+	private static RegistryObject<FluidType> register(String name, FluidType.Properties props) {
+		return FLUID_TYPES.register(name, () -> new FluidType(props));
 	}
 	
 	public static void register(IEventBus eventBus) {

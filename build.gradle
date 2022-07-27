@@ -161,7 +161,7 @@ dependencies {
     // Specify the version of Minecraft to use. If this is any group other than 'net.minecraft', it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.19-41.0.110'
+    minecraft 'net.minecraftforge:forge:1.19-41.1.0'
 
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 
@@ -170,11 +170,12 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
     // at runtime, use the full JEI jar for Forge
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
-    runtimeOnly fg.deobf("curse.maven:mekanism-268560:3876936")
+    // runtimeOnly fg.deobf("curse.maven:mekanism-268560:3876936")
 
     runtimeOnly fg.deobf("curse.maven:jeed-532286:3843595")
 
-    runtimeOnly fg.deobf("curse.maven:theoneprobe-245211:3871444")
+    // runtimeOnly fg.deobf("curse.maven:theoneprobe-245211:3871444")
+    implementation fg.deobf(project.dependencies.create("mcjty.theoneprobe:theoneprobe:1.19-6.2.0-6") { transitive = false })
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

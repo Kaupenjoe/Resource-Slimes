@@ -7,6 +7,7 @@ import net.kaupenjoe.resourceslimes.item.custom.ExtractItem;
 import net.kaupenjoe.resourceslimes.item.custom.SlimeyExtractItem;
 import net.kaupenjoe.resourceslimes.util.ModRegistries;
 import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -115,36 +116,19 @@ public class ModItems {
 
 	/* SLIME RESOURCES */
 	public static void onRegisterItems(IForgeRegistry<Item> registry) {
-		var resources = ModRegistries.SLIME_RESOURCES.get().getValues();
-
-		resources.stream().filter(sr -> sr != BuiltinSlimeResources.EMPTY.get() && sr.isEnabled()).forEach(resource -> {
-			var slimeyExtractItem = resource.getExtractItem();
-			var extractItem = resource.getExtractItem();
-
-			if (extractItem == null) {
-				extractItem = new ExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS));
-			}
-
-			if (ForgeRegistries.ITEMS.getKey(slimeyExtractItem) == null) {
-				slimeyExtractItem = new SlimeyExtractItem(
-						new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS));
-			}
-
-			if (ForgeRegistries.ITEMS.getKey(extractItem) == null) {
-//				extractItem.setRegistryName(
-//						new ResourceLocation(ResourceSlimes.MOD_ID, resource.name().toLowerCase() + "_extract"));
-//				resource.setExtractItem(extractItem);
-			}
-
-			if (ForgeRegistries.ITEMS.getKey(slimeyExtractItem) == null) {
-//				slimeyExtractItem.setRegistryName(new ResourceLocation(ResourceSlimes.MOD_ID,
-//						"slimey_" + resource.name().toLowerCase() + "_extract"));
-//				resource.setSlimeyExtractItem(slimeyExtractItem);
-			}
-
-			registry.register("", extractItem);
-			registry.register("", slimeyExtractItem);
-		});
+		//var resources = ModRegistries.SLIME_RESOURCES.get().getValues();
+//
+		//resources.stream().filter(sr -> sr != BuiltinSlimeResources.EMPTY.get() && sr.isEnabled()).forEach(resource -> {
+		//	Item extractItem = ;
+		//	Item slimeyExtractItem = new SlimeyExtractItem(
+		//			new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS));
+//
+		//	ITEMS.register(resource.name().toLowerCase() + "_extract", () ->  extractItem);
+		//	// resource.setExtractItem(extractItem);
+//
+		//	ITEMS.register("slimey_" + resource.name().toLowerCase() + "_extract", () -> slimeyExtractItem);
+		//	// resource.setSlimeyExtractItem(slimeyExtractItem);
+		//});
 	}
 
 	public static void register(IEventBus eventBus) {

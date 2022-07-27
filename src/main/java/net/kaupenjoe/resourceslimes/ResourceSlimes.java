@@ -1,9 +1,6 @@
 package net.kaupenjoe.resourceslimes;
 
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.block.entity.ModBlockEntities;
 import net.kaupenjoe.resourceslimes.config.ResourceSlimesCommonConfigs;
@@ -18,7 +15,12 @@ import net.kaupenjoe.resourceslimes.particle.ModParticles;
 import net.kaupenjoe.resourceslimes.potion.ModPotion;
 import net.kaupenjoe.resourceslimes.recipe.ModRecipes;
 import net.kaupenjoe.resourceslimes.screen.ModMenuTypes;
+import net.kaupenjoe.resourceslimes.util.ModRegistries;
 import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
+import net.kaupenjoe.resourceslimes.world.feature.ModConfiguredFeatures;
+import net.kaupenjoe.resourceslimes.world.feature.ModPlacedFeatures;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -26,6 +28,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.slf4j.Logger;
 
 @Mod(ResourceSlimes.MOD_ID)
 public class ResourceSlimes {
@@ -39,8 +43,8 @@ public class ResourceSlimes {
         ModBlocks.register(eventBus);
 
         ModEntityTypes.register(eventBus);
-        ModFluidTypes.register(eventBus);
         ModFluids.register(eventBus);
+        ModFluidTypes.register(eventBus);
 
         ModEffects.register(eventBus);
         ModPotion.register(eventBus);
@@ -52,16 +56,29 @@ public class ResourceSlimes {
         ModParticles.register(eventBus);
 
         BuiltinSlimeResources.register(eventBus);
+        ModConfiguredFeatures.register(eventBus);
+
+        ModPlacedFeatures.register(eventBus);
         
         eventBus.addListener(this::setup);
         eventBus.addListener(ResourceSlimeIntegrations::sendIMCs);
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ResourceSlimesCommonConfigs.SPEC, "resourceslimes-common.toml");
 
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            var resources = ModRegistries.SLIME_RESOURCES.get().getValues();
+
+            resources.stream().filter(sr -> sr != BuiltinSlimeResources.EMPTY.get() && sr.isEnabled()).forEach(resource -> {
+                Item extractItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,resource.name() + "_extract"));
+                resource.setExtractItem(extractItem);
+
+                Item slimeyExtractItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,"slimey_" + resource.name() + "_extract"));
+                resource.setSlimeyExtractItem(slimeyExtractItem);
+            });
+        });
+
         ModMessages.register();
         ResourceSlimeIntegrations.commonSetup();
     }

@@ -18,7 +18,7 @@ public final class ModRegistries {
 	public static final Supplier<IForgeRegistry<SlimeResource>> SLIME_RESOURCES = DEFERRED_SLIME_RESOURCES
 			.makeRegistry(ModRegistries::getSlimeResourceBuilder);
 
-	private static RegistryBuilder<SlimeResource> getSlimeResourceBuilder() {
+	public static RegistryBuilder<SlimeResource> getSlimeResourceBuilder() {
 		return makeRegistry(Keys.SLIME_RESOURCES);
 	}
 
