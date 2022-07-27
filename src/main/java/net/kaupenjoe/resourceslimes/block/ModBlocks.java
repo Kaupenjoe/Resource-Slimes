@@ -9,7 +9,6 @@ import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModCreativeModeTab;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -63,31 +62,31 @@ public class ModBlocks {
 
     public static final RegistryObject<LiquidBlock> CITRINE_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("citrine_slime_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.CITRINE_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
-                    .noCollission().strength(100f).noDrops()));
+                    .noCollission().strength(100f).noLootTable()));
     public static final RegistryObject<LiquidBlock> ZIRCON_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("zircon_slime_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.ZIRCON_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
-                    .noCollission().strength(100f).noDrops()));
+                    .noCollission().strength(100f).noLootTable()));
     public static final RegistryObject<LiquidBlock> DIAMOND_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("diamond_slime_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.DIAMOND_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
-                    .noCollission().strength(100f).noDrops()));
+                    .noCollission().strength(100f).noLootTable()));
     public static final RegistryObject<LiquidBlock> EMERALD_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("emerald_slime_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.EMERALD_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
-                    .noCollission().strength(100f).noDrops()));
+                    .noCollission().strength(100f).noLootTable()));
     public static final RegistryObject<LiquidBlock> TANZANITE_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("tanzanite_slime_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.TANZANITE_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
-                    .noCollission().strength(100f).noDrops()));
+                    .noCollission().strength(100f).noLootTable()));
     public static final RegistryObject<LiquidBlock> BLACK_OPAL_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("black_opal_slime_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.BLACK_OPAL_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
-                    .noCollission().strength(100f).noDrops()));
+                    .noCollission().strength(100f).noLootTable()));
     public static final RegistryObject<LiquidBlock> PINK_SLIME_PEARL_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("pink_slime_pearl_slime_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.PINK_SLIME_PEARL_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
-                    .noCollission().strength(100f).noDrops()));
+                    .noCollission().strength(100f).noLootTable()));
     public static final RegistryObject<LiquidBlock> SOAPY_WATER_BLOCK = registerBlockWithoutBlockItem("soapy_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.SOAPY_WATER_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
-                    .noCollission().strength(100f).noDrops()));
+                    .noCollission().strength(100f).noLootTable()));
     public static final RegistryObject<LiquidBlock> DIRTY_WATER_BLOCK = registerBlockWithoutBlockItem("dirty_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.DIRTY_WATER_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
-                    .noCollission().strength(100f).noDrops()));
+                    .noCollission().strength(100f).noLootTable()));
 
 
     public static final RegistryObject<Block> GEM_CUTTING_STATION = registerBlock("gem_cutting_station",
@@ -121,7 +120,7 @@ public class ModBlocks {
                 new Item.Properties().tab(tab)) {
             @Override
             public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
-                pTooltip.add(new TranslatableComponent(tooltipKey));
+                pTooltip.add(Component.translatable(tooltipKey));
             }
         });
     }

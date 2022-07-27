@@ -1,0 +1,8 @@
+{
+	"type": "forge:add_features",
+	"biomes": "#minecraft:is_end",
+	"features": [
+		"resourceslimes:end_black_opal_ore_placed"
+	],
+	"step": "underground_ores"
+}

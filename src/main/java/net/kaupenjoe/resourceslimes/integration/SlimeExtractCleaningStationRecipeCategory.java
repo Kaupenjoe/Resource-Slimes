@@ -1,5 +1,9 @@
 package net.kaupenjoe.resourceslimes.integration;
 
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -7,23 +11,18 @@ import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
 import net.kaupenjoe.resourceslimes.recipe.SlimeExtractCleaningStationRecipe;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
-
-import javax.annotation.Nonnull;
-import java.util.List;
 
 public class SlimeExtractCleaningStationRecipeCategory implements IRecipeCategory<SlimeExtractCleaningStationRecipe> {
     public final static ResourceLocation UID = new ResourceLocation(ResourceSlimes.MOD_ID, "extract_cleaning");
@@ -35,22 +34,21 @@ public class SlimeExtractCleaningStationRecipeCategory implements IRecipeCategor
 
     public SlimeExtractCleaningStationRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ModBlocks.GEM_INFUSING_STATION.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.GEM_INFUSING_STATION.get()));
+    }
+    
+    @Override
+    public RecipeType<SlimeExtractCleaningStationRecipe> getRecipeType() {
+    	return new RecipeType<>(UID, getRecipeClass());
     }
 
-    @Override
-    public ResourceLocation getUid() {
-        return UID;
-    }
-
-    @Override
     public Class<? extends SlimeExtractCleaningStationRecipe> getRecipeClass() {
         return SlimeExtractCleaningStationRecipe.class;
     }
 
     @Override
     public Component getTitle() {
-        return new TextComponent("Slime Extract Cleaning Station");
+        return Component.literal("Slime Extract Cleaning Station");
     }
 
     @Override

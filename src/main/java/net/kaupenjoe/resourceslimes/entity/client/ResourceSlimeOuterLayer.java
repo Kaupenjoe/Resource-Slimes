@@ -2,7 +2,7 @@ package net.kaupenjoe.resourceslimes.entity.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.kaupenjoe.resourceslimes.entity.ResourceSlimeEntity;
+import net.kaupenjoe.resourceslimes.entity.ResourceSlime;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
@@ -33,7 +33,7 @@ public class ResourceSlimeOuterLayer<T extends LivingEntity> extends RenderLayer
             if (flag) {
                 vertexconsumer = pBuffer.getBuffer(RenderType.outline(this.getTextureLocation(pLivingEntity)));
             } else {
-                if(pLivingEntity instanceof ResourceSlimeEntity slime) {
+                if(pLivingEntity instanceof ResourceSlime slime) {
                     ResourceLocation loc = SlimeResource.getTierByItem(slime.getResourceItem().getItem()).getTextureLocation();
                     vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent(loc));
                 } else {

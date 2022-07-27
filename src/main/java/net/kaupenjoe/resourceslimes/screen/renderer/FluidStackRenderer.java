@@ -1,32 +1,33 @@
 package net.kaupenjoe.resourceslimes.screen.renderer;
 
-import com.google.common.base.Preconditions;
-import com.mojang.blaze3d.vertex.PoseStack;
-
-import com.mojang.blaze3d.vertex.VertexFormat;
 import java.text.NumberFormat;
-
-import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jetbrains.annotations.Nullable;
+
+import com.google.common.base.Preconditions;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.world.inventory.InventoryMenu;
-import com.mojang.math.Matrix4f;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraftforge.fluids.FluidAttributes;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraft.client.Minecraft;
 import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.Tesselator;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.math.Matrix4f;
+
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.Component;
-import net.minecraft.ChatFormatting;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
 
 // CREDIT: https://github.com/mezz/JustEnoughItems by mezz
 // Under MIT-License: https://github.com/mezz/JustEnoughItems/blob/1.18/LICENSE.txt
@@ -56,7 +57,7 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
     }
 
     public FluidStackRenderer() {
-        this(FluidAttributes.BUCKET_VOLUME, TooltipMode.ITEM_LIST, 16, 16, null);
+        this(FluidType.BUCKET_VOLUME, TooltipMode.ITEM_LIST, 16, 16, null);
     }
 
     public FluidStackRenderer(int capacityMb, boolean showCapacity, int width, int height) {
@@ -120,8 +121,8 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
 
         TextureAtlasSprite fluidStillSprite = getStillFluidSprite(fluidStack);
 
-        FluidAttributes attributes = fluid.getAttributes();
-        int fluidColor = attributes.getColor(fluidStack);
+        FluidType attributes = fluid.getFluidType();
+        int fluidColor = IClientFluidTypeExtensions.of(fluid).getTintColor(fluidStack);
 
         int amount = fluidStack.getAmount();
         int scaledAmount = (amount * height) / capacityMb;
@@ -166,8 +167,8 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
     private static TextureAtlasSprite getStillFluidSprite(FluidStack fluidStack) {
         Minecraft minecraft = Minecraft.getInstance();
         Fluid fluid = fluidStack.getFluid();
-        FluidAttributes attributes = fluid.getAttributes();
-        ResourceLocation fluidStill = attributes.getStillTexture(fluidStack);
+        FluidType attributes = fluid.getFluidType();
+        ResourceLocation fluidStill = IClientFluidTypeExtensions.of(fluid).getStillTexture(fluidStack);
         return minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidStill);
     }
 
@@ -213,10 +214,10 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
 
         int amount = fluidStack.getAmount();
         if (tooltipMode == TooltipMode.SHOW_AMOUNT_AND_CAPACITY) {
-            TranslatableComponent amountString = new TranslatableComponent("jei.integration.resourceslimes.tooltip.liquid.amount.with.capacity", nf.format(amount), nf.format(capacityMb));
+            MutableComponent amountString = Component.translatable("jei.integration.resourceslimes.tooltip.liquid.amount.with.capacity", nf.format(amount), nf.format(capacityMb));
             tooltip.add(amountString.withStyle(ChatFormatting.GRAY));
         } else if (tooltipMode == TooltipMode.SHOW_AMOUNT) {
-            TranslatableComponent amountString = new TranslatableComponent("jei.integration.resourceslimes.tooltip.liquid.amount", nf.format(amount));
+            MutableComponent amountString = Component.translatable("jei.integration.resourceslimes.tooltip.liquid.amount", nf.format(amount));
             tooltip.add(amountString.withStyle(ChatFormatting.GRAY));
         }
 

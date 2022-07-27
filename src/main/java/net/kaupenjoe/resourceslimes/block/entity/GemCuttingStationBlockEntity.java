@@ -1,20 +1,25 @@
 package net.kaupenjoe.resourceslimes.block.entity;
 
+import java.util.Optional;
+
+import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
-import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
+import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
+import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
 import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;
-import net.kaupenjoe.resourceslimes.networking.ModMessages;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -24,9 +29,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
@@ -41,12 +44,6 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
-import java.util.Optional;
-import java.util.Random;
 
 public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
@@ -177,7 +174,7 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
 
     @Override
     public Component getDisplayName() {
-        return new TextComponent("Gem Cutting Station");
+        return Component.literal("Gem Cutting Station");
     }
 
     @Nullable
@@ -340,7 +337,7 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
         if(match.isPresent()) {
             entity.FLUID_TANK.drain(match.get().getWaterAmount(), IFluidHandler.FluidAction.EXECUTE);
             entity.itemHandler.extractItem(1,1, false);
-            if(entity.itemHandler.getStackInSlot(2).hurt(1, new Random(), null)) {
+            if(entity.itemHandler.getStackInSlot(2).hurt(1, level.random, null)) {
                 entity.itemHandler.extractItem(2,1, false);
             }
 

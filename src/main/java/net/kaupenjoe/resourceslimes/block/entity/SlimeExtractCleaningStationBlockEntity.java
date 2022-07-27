@@ -1,59 +1,50 @@
 package net.kaupenjoe.resourceslimes.block.entity;
 
-import net.kaupenjoe.resourceslimes.block.custom.GemInfusingStationBlock;
+import java.util.Optional;
+
+import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.kaupenjoe.resourceslimes.block.custom.SlimeExtractCleaningStationBlock;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncTwoFluidStacksToClient;
-import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
 import net.kaupenjoe.resourceslimes.recipe.SlimeExtractCleaningStationRecipe;
-import net.kaupenjoe.resourceslimes.screen.GemInfusingStationMenu;
 import net.kaupenjoe.resourceslimes.screen.SlimeExtractCleaningStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.EmptyFluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.common.util.NonNullConsumer;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
-import java.util.Optional;
 
 public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
@@ -212,7 +203,7 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
 
     @Override
     public Component getDisplayName() {
-        return new TextComponent("Slime Extract Cleaning Station");
+        return Component.literal("Slime Extract Cleaning Station");
     }
 
     @Nullable

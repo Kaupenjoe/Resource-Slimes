@@ -1,0 +1,8 @@
+{
+	"type": "forge:add_features",
+	"biomes": "#minecraft:is_savanna",
+	"features": [
+		"resourceslimes:black_opal_ore_placed_low"
+	],
+	"step": "underground_ores"
+}

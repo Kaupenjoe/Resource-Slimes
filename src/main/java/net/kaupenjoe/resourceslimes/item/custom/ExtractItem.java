@@ -2,8 +2,6 @@ package net.kaupenjoe.resourceslimes.item.custom;
 
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -17,15 +15,15 @@ public class ExtractItem extends Item {
         return "item.resourceslimes.extract";
     }
 
-    public TranslatableComponent getExtractNameKey(ItemStack stack) {
-        return new TranslatableComponent("extract.resourceslimes." + SlimeResource.getResourceByExtractItem(stack.getItem()).name().toLowerCase());
+    public Component getExtractNameKey(ItemStack stack) {
+        return Component.literal("extract.resourceslimes." + SlimeResource.getResourceByExtractItem(stack.getItem()).name().toLowerCase());
     }
 
 
     @Override
     public Component getName(ItemStack stack) {
-        TranslatableComponent extractNameKey = getExtractNameKey(stack);
+        Component extractNameKey = getExtractNameKey(stack);
 
-        return new TranslatableComponent(this.getDescriptionId(stack), extractNameKey);
+        return Component.translatable(this.getDescriptionId(stack), extractNameKey);
     }
 }

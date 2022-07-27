@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
-            DeferredRegister.create(ForgeRegistries.CONTAINERS, ResourceSlimes.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.MENU_TYPES, ResourceSlimes.MOD_ID);
 
     public static final RegistryObject<MenuType<GemCuttingStationMenu>> GEM_CUTTING_STATION_MENU =
             registerMenuType(GemCuttingStationMenu::new, "gem_cutting_station_menu");

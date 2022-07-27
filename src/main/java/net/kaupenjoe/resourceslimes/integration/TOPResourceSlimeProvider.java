@@ -5,7 +5,7 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoEntityProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
-import net.kaupenjoe.resourceslimes.entity.ResourceSlimeEntity;
+import net.kaupenjoe.resourceslimes.entity.ResourceSlime;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -20,7 +20,7 @@ public class TOPResourceSlimeProvider implements IProbeInfoEntityProvider {
 
     @Override
     public void addProbeEntityInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, Player player, Level level, Entity entity, IProbeHitEntityData iProbeHitEntityData) {
-        if(probeMode.equals(ProbeMode.NORMAL) && entity instanceof ResourceSlimeEntity slime) {
+        if(probeMode.equals(ProbeMode.NORMAL) && entity instanceof ResourceSlime slime) {
             iProbeInfo.item(slime.getResourceItem());
         }
     }

@@ -2,16 +2,14 @@ package net.kaupenjoe.resourceslimes.event;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
-import net.kaupenjoe.resourceslimes.entity.client.ModModelLayers;
-import net.kaupenjoe.resourceslimes.entity.client.ResourceSlimeModel;
 import net.kaupenjoe.resourceslimes.item.ModItems;
+import net.kaupenjoe.resourceslimes.util.ModRegistries;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.item.Item;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.NewRegistryEvent;
+import net.minecraftforge.registries.RegisterEvent;
 
 @Mod.EventBusSubscriber(modid = ResourceSlimes.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents {
@@ -20,17 +18,16 @@ public class ModEventBusEvents {
         event.put(ModEntityTypes.RESOURCE_SLIME.get(), Monster.createMonsterAttributes().build());
         event.put(ModEntityTypes.ENERGY_SLIME.get(), Monster.createMonsterAttributes().build());
     }
+    
+    // The missing method here has moved to ClientListener
 
     @SubscribeEvent
-    public static void registerLayers(final EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(ModModelLayers.RES_SLIME_EYES, ResourceSlimeModel::createEyesAndMouthLayer);
-
-        event.registerLayerDefinition(ModModelLayers.RES_SLIME_OUTER_CUBE, ResourceSlimeModel::createOuterBodyLayer);
-        event.registerLayerDefinition(ModModelLayers.RES_SLIME_INNER_CUBE, ResourceSlimeModel::createInnerBodyLayer);
+    public static void onRegisterItems(RegisterEvent event) {
+        ModItems.onRegisterItems(event.getForgeRegistry());
     }
 
     @SubscribeEvent
-    public static void onRegisterItems(RegistryEvent.Register<Item> event) {
-        ModItems.onRegisterItems(event.getRegistry());
+    public static void onNewRegistryEvent(NewRegistryEvent event) {
+        event.create(ModRegistries.getSlimeResourceBuilder());
     }
 }

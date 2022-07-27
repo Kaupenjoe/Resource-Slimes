@@ -1,5 +1,10 @@
 package net.kaupenjoe.resourceslimes.data;
 
+import java.util.List;
+import java.util.function.Consumer;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.data.custom.GemCuttingRecipeBuilder;
@@ -8,8 +13,8 @@ import net.kaupenjoe.resourceslimes.data.custom.SlimeExtractCleaningRecipeBuilde
 import net.kaupenjoe.resourceslimes.data.custom.SlimeIncubationRecipeBuilder;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.util.ModTags;
-import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
+import net.kaupenjoe.resourceslimes.util.ModRegistries;
+import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -22,15 +27,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-import java.util.function.Consumer;
 
 import static net.kaupenjoe.resourceslimes.data.ExtractRecipes.*;
 
@@ -131,9 +130,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     }
 
     private void customExtractCleaningRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
-        var resources = SlimeResource.values();
+        var resources = ModRegistries.SLIME_RESOURCES.get().getValues();
         for (var resource : resources) {
-            if(resource.equals(SlimeResource.EMPTY)) {
+            if(resource.equals(BuiltinSlimeResources.EMPTY.get())) {
                 continue;
             }
             

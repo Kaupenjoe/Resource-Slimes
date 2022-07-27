@@ -1,7 +1,12 @@
 package net.kaupenjoe.resourceslimes.data.custom;
 
+import java.util.function.Consumer;
+
+import org.jetbrains.annotations.Nullable;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
 import net.minecraft.advancements.Advancement;
@@ -16,9 +21,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Consumer;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class GemCuttingRecipeBuilder implements RecipeBuilder {
     private final Item result;
@@ -91,7 +94,7 @@ public class GemCuttingRecipeBuilder implements RecipeBuilder {
             pJson.add("ingredients", jsonarray);
             pJson.addProperty("waterAmount", this.water);
             JsonObject jsonobject = new JsonObject();
-            jsonobject.addProperty("item", this.result.getRegistryName().toString());
+            jsonobject.addProperty("item", ForgeRegistries.ITEMS.getKey(this.result).toString());
             if (this.count > 1) {
                 jsonobject.addProperty("count", this.count);
             }
@@ -102,7 +105,7 @@ public class GemCuttingRecipeBuilder implements RecipeBuilder {
         @Override
         public ResourceLocation getId() {
             return new ResourceLocation(ResourceSlimes.MOD_ID,
-                    this.result.getRegistryName().getPath() + "_from_gem_cutting");
+            		ForgeRegistries.ITEMS.getKey(this.result).getPath() + "_from_gem_cutting");
         }
 
         @Override
