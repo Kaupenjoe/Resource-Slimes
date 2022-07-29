@@ -17,13 +17,13 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 
-public class SlimeIncubationStationRecipe implements Recipe<SimpleContainer> {
+public class SlimeIncubationRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
 
-    public SlimeIncubationStationRecipe(ResourceLocation id, ItemStack output,
-                                        NonNullList<Ingredient> recipeItems) {
+    public SlimeIncubationRecipe(ResourceLocation id, ItemStack output,
+                                 NonNullList<Ingredient> recipeItems) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -79,19 +79,19 @@ public class SlimeIncubationStationRecipe implements Recipe<SimpleContainer> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<SlimeIncubationStationRecipe> {
+    public static class Type implements RecipeType<SlimeIncubationRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
         public static final String ID = "slime_incubation";
     }
 
-    public static class Serializer implements RecipeSerializer<SlimeIncubationStationRecipe> {
+    public static class Serializer implements RecipeSerializer<SlimeIncubationRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
                 new ResourceLocation(ResourceSlimes.MOD_ID,"slime_incubation");
 
         @Override
-        public SlimeIncubationStationRecipe fromJson(ResourceLocation id, JsonObject json) {
+        public SlimeIncubationRecipe fromJson(ResourceLocation id, JsonObject json) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
@@ -101,11 +101,11 @@ public class SlimeIncubationStationRecipe implements Recipe<SimpleContainer> {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new SlimeIncubationStationRecipe(id, output, inputs);
+            return new SlimeIncubationRecipe(id, output, inputs);
         }
 
         @Override
-        public SlimeIncubationStationRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public SlimeIncubationRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
@@ -113,11 +113,11 @@ public class SlimeIncubationStationRecipe implements Recipe<SimpleContainer> {
             }
 
             ItemStack output = buf.readItem();
-            return new SlimeIncubationStationRecipe(id, output, inputs);
+            return new SlimeIncubationRecipe(id, output, inputs);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, SlimeIncubationStationRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buf, SlimeIncubationRecipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
 
             for (Ingredient ing : recipe.getIngredients()) {

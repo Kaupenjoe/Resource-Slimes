@@ -49,7 +49,7 @@ public class ModFluidTypes {
 	public static final RegistryObject<FluidType> SOAPY_WATER_FLUID_PROPERTIES = register("soapy_water_fluid",
 			FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
 					SoundEvents.HONEY_DRINK));
-
+ 
 	private static RegistryObject<FluidType> register(String name, FluidType.Properties props) {
 		return FLUID_TYPES.register(name, () -> new FluidType(props));
 	}

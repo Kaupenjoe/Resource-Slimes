@@ -20,6 +20,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.VisibleForDebug;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -75,10 +76,10 @@ public class ResourceSlime extends Slime {
 		if (pHand == InteractionHand.MAIN_HAND) {
 			if (pPlayer.isCrouching()) {
 				outputInfo(pPlayer);
-				changeResourceDEBUG(pPlayer.getItemInHand(pHand));
+				changeResourceDebug(pPlayer.getItemInHand(pHand));
 
 				if (pPlayer.getItemInHand(pHand).getItem() == Items.STICK) {
-					growSlimeDEBUG();
+					growSlimeDebug();
 				}
 			} else {
 				if (pPlayer.getItemInHand(InteractionHand.MAIN_HAND).getItem() == Items.BUCKET) {
@@ -90,14 +91,16 @@ public class ResourceSlime extends Slime {
 		return super.mobInteract(pPlayer, pHand);
 	}
 
-	private void changeResourceDEBUG(ItemStack stack) {
+	@VisibleForDebug
+	private void changeResourceDebug(ItemStack stack) {
 		if (SlimeResource.getResourceBySlimeyExtractItem(stack.getItem()) != BuiltinSlimeResources.EMPTY.get()
 				&& !stack.isEmpty()) {
 			this.setResource(stack);
 		}
 	}
 
-	private void growSlimeDEBUG() {
+	@VisibleForDebug
+	private void growSlimeDebug() {
 		ItemStack stack = this.entityData.get(RESOURCE);
 		stack.setCount(64);
 		this.setResource(stack);
@@ -132,7 +135,7 @@ public class ResourceSlime extends Slime {
 		pPlayer.setItemInHand(hand, tierFluid);
 	}
 
-	// TODO: customize to what size the slime can be reduced to
+	// @todo: customize to what size the slime can be reduced to
 	private void shrinkOnHarvest(ItemStack stack) {
 		setResource(new ItemStack(stack.getItem(), this.entityData.get(RESOURCE).getCount() - stack.getCount()));
 	}

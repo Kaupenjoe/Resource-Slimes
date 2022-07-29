@@ -3,7 +3,7 @@ package net.kaupenjoe.resourceslimes.data.custom;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
-import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationStationRecipe;
+import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -107,7 +107,7 @@ public class SlimeIncubationRecipeBuilder implements RecipeBuilder {
 
         @Override
         public RecipeSerializer<?> getType() {
-            return SlimeIncubationStationRecipe.Serializer.INSTANCE;
+            return SlimeIncubationRecipe.Serializer.INSTANCE;
         }
 
 

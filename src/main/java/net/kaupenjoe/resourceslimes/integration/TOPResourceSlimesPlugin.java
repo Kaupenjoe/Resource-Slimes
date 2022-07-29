@@ -25,7 +25,8 @@ public class TOPResourceSlimesPlugin implements IProbeInfoProvider, Function<ITh
     }
 
     @Override
-    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, Player player, Level level, BlockState blockState, IProbeHitData iProbeHitData) {
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo,
+                             Player player, Level level, BlockState blockState, IProbeHitData iProbeHitData) {
 
     }
 }

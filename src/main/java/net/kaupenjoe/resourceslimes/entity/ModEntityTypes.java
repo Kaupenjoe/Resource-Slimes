@@ -19,9 +19,9 @@ public class ModEntityTypes {
                     .sized(2.04F, 2.04F).setTrackingRange(6)
                     .build(new ResourceLocation(ResourceSlimes.MOD_ID, "resource_slime").toString()));
 
-    public static final RegistryObject<EntityType<EnergySlimeEntity>> ENERGY_SLIME =
+    public static final RegistryObject<EntityType<EnergySlime>> ENERGY_SLIME =
             ENTITY_TYPES.register("energy_slime",
-            () -> EntityType.Builder.of(EnergySlimeEntity::new, MobCategory.CREATURE)
+            () -> EntityType.Builder.of(EnergySlime::new, MobCategory.CREATURE)
                     .sized(2.04F, 2.04F).setTrackingRange(6)
                     .build(new ResourceLocation(ResourceSlimes.MOD_ID, "energy_slime").toString()));
 

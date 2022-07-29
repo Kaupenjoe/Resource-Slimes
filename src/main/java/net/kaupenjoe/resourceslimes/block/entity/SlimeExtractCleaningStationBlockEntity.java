@@ -46,7 +46,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity {
+public class SlimeExtractCleaningStationBlockEntity extends AbstractRSMachineBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
         @Override
         protected void onContentsChanged(int slot) {

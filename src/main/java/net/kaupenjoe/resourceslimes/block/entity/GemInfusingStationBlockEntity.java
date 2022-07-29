@@ -45,7 +45,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
+public class GemInfusingStationBlockEntity extends AbstractRSMachineBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
         protected void onContentsChanged(int slot) {

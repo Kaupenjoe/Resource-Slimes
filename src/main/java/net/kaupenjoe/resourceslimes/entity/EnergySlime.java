@@ -13,8 +13,8 @@ import net.minecraftforge.energy.CapabilityEnergy;
 
 import java.util.List;
 
-public class EnergySlimeEntity extends Slime {
-    public EnergySlimeEntity(EntityType<? extends Slime> entityType, Level level) {
+public class EnergySlime extends Slime {
+    public EnergySlime(EntityType<? extends Slime> entityType, Level level) {
         super(entityType, level);
     }
 
