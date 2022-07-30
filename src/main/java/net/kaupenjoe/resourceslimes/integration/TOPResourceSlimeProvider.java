@@ -13,6 +13,9 @@ import net.minecraft.world.level.Level;
 public class TOPResourceSlimeProvider implements IProbeInfoEntityProvider {
     static final TOPResourceSlimeProvider INSTANCE = new TOPResourceSlimeProvider();
 
+    private TOPResourceSlimeProvider() {
+    }
+
     @Override
     public String getID() {
         return ResourceSlimes.MOD_ID + "data";

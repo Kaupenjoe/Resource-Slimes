@@ -1,8 +1,6 @@
 {
-	"type": "forge:add_features",
-	"biomes": "#forge:is_plains",
-	"features": [
-		"resourceslimes:tanzanite_ore_placed_triangle"
-	],
-	"step": "underground_ores"
+  "type": "forge:add_features",
+  "biomes": "#forge:is_plains",
+  "features": "resourceslimes:tanzanite_ore_placed_triangle",
+  "step": "underground_ores"
 }

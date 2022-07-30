@@ -6,10 +6,10 @@ import org.jetbrains.annotations.Nullable;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.item.custom.ExtractItem;
-import net.kaupenjoe.resourceslimes.util.ModRegistries;
-import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
-import net.kaupenjoe.resourceslimes.util.resources.ResourceTier;
-import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
+import net.kaupenjoe.resourceslimes.screen.util.ResourceSlimesRegistries;
+import net.kaupenjoe.resourceslimes.screen.util.resources.BuiltinSlimeResources;
+import net.kaupenjoe.resourceslimes.screen.util.resources.ResourceTier;
+import net.kaupenjoe.resourceslimes.screen.util.resources.SlimeResource;
 import net.minecraft.Util;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -155,7 +155,7 @@ public class ResourceSlime extends Slime {
 
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_146746_, DifficultyInstance p_146747_,
 			MobSpawnType p_146748_, @Nullable SpawnGroupData p_146749_, @Nullable CompoundTag p_146750_) {
-		SlimeResource resource = Util.getRandom(ModRegistries.SLIME_RESOURCES.get().getValues().stream()
+		SlimeResource resource = Util.getRandom(ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues().stream()
 				.filter(sr -> sr != BuiltinSlimeResources.EMPTY.get() && sr.isEnabled()).toList(), this.random);
 		this.setResource(new ItemStack(resource.getSlimeyExtractItem()));
 

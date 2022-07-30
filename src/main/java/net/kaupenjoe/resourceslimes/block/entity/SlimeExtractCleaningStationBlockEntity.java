@@ -16,7 +16,7 @@ import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClie
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncTwoFluidStacksToClient;
 import net.kaupenjoe.resourceslimes.recipe.SlimeExtractCleaningStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.SlimeExtractCleaningStationMenu;
-import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
+import net.kaupenjoe.resourceslimes.screen.util.KaupenEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -359,7 +359,7 @@ public class SlimeExtractCleaningStationBlockEntity extends AbstractRSMachineBlo
         Optional<SlimeExtractCleaningStationRecipe> match = level.getRecipeManager()
                 .getRecipeFor(SlimeExtractCleaningStationRecipe.Type.INSTANCE, inventory, level);
 
-        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory) && hasSpaceInTank(entity)
+        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory) && hasSpaceInTank(entity, 500)
                 && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem())
                 && hasWaterInTank(entity);
     }
@@ -368,8 +368,8 @@ public class SlimeExtractCleaningStationBlockEntity extends AbstractRSMachineBlo
         return entity.FLUID_TANK.getFluid().getAmount() >= 500;
     }
 
-    private static boolean hasSpaceInTank(SlimeExtractCleaningStationBlockEntity entity) {
-        return entity.FLUID_TANK_WASTE.getSpace() >= 500; // TODO: Maybe not hardcode it!
+    private static boolean hasSpaceInTank(SlimeExtractCleaningStationBlockEntity entity, int amount) {
+        return entity.FLUID_TANK_WASTE.getSpace() >= amount;
     }
 
     private static void craftItem(SlimeExtractCleaningStationBlockEntity entity) {

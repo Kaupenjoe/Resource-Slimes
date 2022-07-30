@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockLootTables extends BlockLoot {
+
     @Override
     protected void addTables() {
         oreDrops();
@@ -14,15 +15,15 @@ public class ModBlockLootTables extends BlockLoot {
     }
 
     private void blockEntityDrops() {
-        this.dropSelf(ModBlocks.GEM_CUTTING_STATION.get());
-        this.dropSelf(ModBlocks.GEM_INFUSING_STATION.get());
-        this.dropSelf(ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get());
-        this.dropSelf(ModBlocks.SLIME_INCUBATION_STATION.get());
+        this.add(ModBlocks.GEM_CUTTING_STATION.get(), BlockLoot::createNameableBlockEntityTable);
+        this.add(ModBlocks.GEM_INFUSING_STATION.get(), BlockLoot::createNameableBlockEntityTable);
+        this.add(ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get(), BlockLoot::createNameableBlockEntityTable);
+        this.add(ModBlocks.SLIME_INCUBATION_STATION.get(), BlockLoot::createNameableBlockEntityTable);
     }
 
     private void oreDrops() {
         this.add(ModBlocks.CITRINE_ORE.get(),
-                (block) -> createOreDrop(ModBlocks.CITRINE_ORE.get(), ModItems.RAW_CITRINE.get()));
+                (block) -> createOreDrop(block, ModItems.RAW_CITRINE.get()));
         this.add(ModBlocks.DEEPSLATE_CITRINE_ORE.get(),
                 (block) -> createOreDrop(ModBlocks.DEEPSLATE_CITRINE_ORE.get(), ModItems.RAW_CITRINE.get()));
 

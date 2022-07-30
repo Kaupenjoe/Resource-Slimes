@@ -1,4 +1,4 @@
-package net.kaupenjoe.resourceslimes.util;
+package net.kaupenjoe.resourceslimes.screen.util;
 
 public class MouseUtil {
     public static boolean isMouseOver(double mouseX, double mouseY, int x, int y) {

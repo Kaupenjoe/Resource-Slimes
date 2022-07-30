@@ -1,10 +1,7 @@
 package net.kaupenjoe.resourceslimes.block;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
-import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
-import net.kaupenjoe.resourceslimes.block.custom.GemInfusingStationBlock;
-import net.kaupenjoe.resourceslimes.block.custom.SlimeExtractCleaningStationBlock;
-import net.kaupenjoe.resourceslimes.block.custom.SlimeIncubationStationBlock;
+import net.kaupenjoe.resourceslimes.block.custom.*;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModCreativeModeTab;
 import net.kaupenjoe.resourceslimes.item.ModItems;
@@ -12,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -59,6 +57,8 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(12.5f).requiresCorrectToolForDrops()), ModCreativeModeTab.RESOURCE_SLIMES);
 
+    public static final RegistryObject<Block> SLIMEY_DIRT = registerBlock("slimey_dirt",
+            () -> new SlimeyDirtBlock(BlockBehaviour.Properties.copy(Blocks.PODZOL)), ModCreativeModeTab.RESOURCE_SLIMES);
 
     public static final RegistryObject<LiquidBlock> CITRINE_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("citrine_slime_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.CITRINE_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
@@ -87,7 +87,6 @@ public class ModBlocks {
     public static final RegistryObject<LiquidBlock> DIRTY_WATER_BLOCK = registerBlockWithoutBlockItem("dirty_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.DIRTY_WATER_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
                     .noCollission().strength(100f).noLootTable()));
-
 
     public static final RegistryObject<Block> GEM_CUTTING_STATION = registerBlock("gem_cutting_station",
             () -> new GemCuttingStationBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),

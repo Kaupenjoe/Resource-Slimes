@@ -13,13 +13,12 @@ import net.kaupenjoe.resourceslimes.data.custom.SlimeExtractCleaningRecipeBuilde
 import net.kaupenjoe.resourceslimes.data.custom.SlimeIncubationRecipeBuilder;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.util.ModRegistries;
-import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
+import net.kaupenjoe.resourceslimes.screen.util.ResourceSlimesRegistries;
+import net.kaupenjoe.resourceslimes.screen.util.resources.BuiltinSlimeResources;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -130,7 +129,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     }
 
     private void customExtractCleaningRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
-        var resources = ModRegistries.SLIME_RESOURCES.get().getValues();
+        var resources = ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues();
         for (var resource : resources) {
             if(resource.equals(BuiltinSlimeResources.EMPTY.get())) {
                 continue;

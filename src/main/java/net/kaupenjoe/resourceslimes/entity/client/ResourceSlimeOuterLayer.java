@@ -3,7 +3,7 @@ package net.kaupenjoe.resourceslimes.entity.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.kaupenjoe.resourceslimes.entity.ResourceSlime;
-import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
+import net.kaupenjoe.resourceslimes.screen.util.resources.SlimeResource;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.SlimeModel;

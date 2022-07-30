@@ -1,4 +1,4 @@
-package net.kaupenjoe.resourceslimes.util.resources;
+package net.kaupenjoe.resourceslimes.screen.util.resources;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.item.ModItems;

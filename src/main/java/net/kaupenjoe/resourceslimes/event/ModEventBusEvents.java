@@ -3,7 +3,7 @@ package net.kaupenjoe.resourceslimes.event;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.util.ModRegistries;
+import net.kaupenjoe.resourceslimes.screen.util.ResourceSlimesRegistries;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,8 +18,6 @@ public class ModEventBusEvents {
         event.put(ModEntityTypes.RESOURCE_SLIME.get(), Monster.createMonsterAttributes().build());
         event.put(ModEntityTypes.ENERGY_SLIME.get(), Monster.createMonsterAttributes().build());
     }
-    
-    // The missing method here has moved to ClientListener
 
     @SubscribeEvent
     public static void onRegisterItems(RegisterEvent event) {
@@ -28,6 +26,6 @@ public class ModEventBusEvents {
 
     @SubscribeEvent
     public static void onNewRegistryEvent(NewRegistryEvent event) {
-        event.create(ModRegistries.getSlimeResourceBuilder());
+        event.create(ResourceSlimesRegistries.getSlimeResourceBuilder());
     }
 }

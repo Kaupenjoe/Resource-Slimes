@@ -14,8 +14,8 @@ import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToCli
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
 import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.GemInfusingStationMenu;
-import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
-import net.kaupenjoe.resourceslimes.util.ModTags;
+import net.kaupenjoe.resourceslimes.screen.util.KaupenEnergyStorage;
+import net.kaupenjoe.resourceslimes.screen.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

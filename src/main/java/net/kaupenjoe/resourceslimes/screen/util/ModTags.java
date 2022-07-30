@@ -1,4 +1,4 @@
-package net.kaupenjoe.resourceslimes.util;
+package net.kaupenjoe.resourceslimes.screen.util;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.minecraft.resources.ResourceLocation;

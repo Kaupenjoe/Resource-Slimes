@@ -12,6 +12,7 @@ import java.util.function.Supplier;
 public class ModFluidSourceSlot extends SlotItemHandler {
     protected Supplier<Fluid>[] possibleFluids;
 
+    @SafeVarargs
     public ModFluidSourceSlot(IItemHandler itemHandler, int index, int x, int y, Supplier<Fluid>... possibleFluids) {
         super(itemHandler, index, x, y);
         this.possibleFluids = possibleFluids;

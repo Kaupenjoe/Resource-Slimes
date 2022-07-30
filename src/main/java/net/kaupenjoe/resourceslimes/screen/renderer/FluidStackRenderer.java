@@ -38,12 +38,7 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
 
     public final int capacityMb;
     private final TooltipMode tooltipMode;
-    /**
-     * we shouldn't draw an overlay like this anymore,
-     * it is kept for backward compatibility for
-     * {@link mezz.jei.api.gui.ingredient.IGuiFluidStackGroup}
-     */
-    @SuppressWarnings({"removal", "DeprecatedIsStillUsed"})
+    @SuppressWarnings({"DeprecatedIsStillUsed"})
     @Nullable
     @Deprecated
     private final IDrawable overlay;

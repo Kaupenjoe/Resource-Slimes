@@ -1,7 +1,7 @@
-package net.kaupenjoe.resourceslimes.util.resources;
+package net.kaupenjoe.resourceslimes.screen.util.resources;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
-import net.kaupenjoe.resourceslimes.util.ModRegistries;
+import net.kaupenjoe.resourceslimes.screen.util.ResourceSlimesRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,7 +20,7 @@ public class SlimeResource {
     }
     
     public String name() {
-    	return ModRegistries.SLIME_RESOURCES.get().getKey(this).getPath();
+    	return ResourceSlimesRegistries.SLIME_RESOURCES.get().getKey(this).getPath();
     }
 
     public boolean isEnabled() {
@@ -56,7 +56,7 @@ public class SlimeResource {
     }
 
     public static ResourceLocation getInnerCubeLocationByItem(Item item) {
-        for (SlimeResource resource : ModRegistries.SLIME_RESOURCES.get().getValues()) {
+        for (SlimeResource resource : ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues()) {
             if(resource.getSlimeyExtractItem() == item) {
                 return resource.getInnerCubeTextureRes();
             }
@@ -66,7 +66,7 @@ public class SlimeResource {
     }
 
     public static ResourceTier getTierByItem(Item item) {
-        for (SlimeResource resource : ModRegistries.SLIME_RESOURCES.get().getValues()) {
+        for (SlimeResource resource : ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues()) {
             if(resource.getSlimeyExtractItem() == item) {
                 return resource.getTier();
             }
@@ -76,7 +76,7 @@ public class SlimeResource {
     }
 
     public static SlimeResource getResourceBySlimeyExtractItem(Item item) {
-        for (SlimeResource resource : ModRegistries.SLIME_RESOURCES.get().getValues()) {
+        for (SlimeResource resource : ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues()) {
             if(resource.getSlimeyExtractItem() == item) {
                 return resource;
             }
@@ -86,7 +86,7 @@ public class SlimeResource {
     }
 
     public static SlimeResource getResourceByExtractItem(Item item) {
-        for (SlimeResource resource : ModRegistries.SLIME_RESOURCES.get().getValues()) {
+        for (SlimeResource resource : ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues()) {
             if(resource.getExtractItem() == item) {
                 return resource;
             }

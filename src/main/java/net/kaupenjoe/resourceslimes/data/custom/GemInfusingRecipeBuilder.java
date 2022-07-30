@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
-import net.kaupenjoe.resourceslimes.util.FluidJSONUtil;
+import net.kaupenjoe.resourceslimes.screen.util.FluidJSONUtil;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;

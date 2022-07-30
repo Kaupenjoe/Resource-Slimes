@@ -1,4 +1,4 @@
-package net.kaupenjoe.resourceslimes.util;
+package net.kaupenjoe.resourceslimes.screen.util;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

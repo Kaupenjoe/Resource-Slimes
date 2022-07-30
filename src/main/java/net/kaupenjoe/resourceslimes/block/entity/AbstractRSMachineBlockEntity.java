@@ -1,6 +1,6 @@
 package net.kaupenjoe.resourceslimes.block.entity;
 
-import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
+import net.kaupenjoe.resourceslimes.screen.util.KaupenEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.level.block.entity.BlockEntity;

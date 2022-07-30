@@ -1,11 +1,11 @@
-package net.kaupenjoe.resourceslimes.util.resources;
+package net.kaupenjoe.resourceslimes.screen.util.resources;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.item.ModCreativeModeTab;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.item.custom.ExtractItem;
 import net.kaupenjoe.resourceslimes.item.custom.SlimeyExtractItem;
-import net.kaupenjoe.resourceslimes.util.ModRegistries;
+import net.kaupenjoe.resourceslimes.screen.util.ResourceSlimesRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 
 public class BuiltinSlimeResources {
 	public static final DeferredRegister<SlimeResource> SLIME_RESOURCES = DeferredRegister
-			.create(ModRegistries.Keys.SLIME_RESOURCES, ResourceSlimes.MOD_ID);
+			.create(ResourceSlimesRegistries.Keys.SLIME_RESOURCES, ResourceSlimes.MOD_ID);
 	
     public static final RegistryObject<SlimeResource> EMPTY = register("empty", () -> new SlimeResource(ResourceTier.CITRINE, new ResourceLocation("textures/block/structure_block.png"), true));
     public static final RegistryObject<SlimeResource> STONE = register("stone", () -> new SlimeResource(ResourceTier.CITRINE, new ResourceLocation("textures/block/stone.png"), true));
