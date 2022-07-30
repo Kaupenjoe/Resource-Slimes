@@ -10,6 +10,7 @@ public class ModBlockLootTables extends BlockLoot {
 
     @Override
     protected void addTables() {
+        dropSelf(ModBlocks.SLIMEY_DIRT.get());
         oreDrops();
         blockEntityDrops();
     }

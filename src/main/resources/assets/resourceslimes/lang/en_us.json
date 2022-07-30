@@ -45,7 +45,6 @@
   "item.resourceslimes.extract": "%s Extract",
   "item.resourceslimes.slimey_extract": "Slimey %s Extract",
 
-
   "block.resourceslimes.deepslate_citrine_ore": "Deepslate Citrine Ore",
   "block.resourceslimes.citrine_ore": "Citrine Ore",
   "block.resourceslimes.deepslate_zircon_ore": "Deepslate Zircon Ore",
@@ -55,6 +54,9 @@
   "block.resourceslimes.deepslate_black_opal_ore": "Deepslate Black Opal Ore",
   "block.resourceslimes.end_black_opal_ore": "End Black Opal Ore",
   "block.resourceslimes.black_opal_ore": "Black Opal Ore",
+
+  "block.resourceslimes.slimey_dirt": "Slimey Dirt",
+  "tooltip.resourceslimes.slimey_dirt": "Farm Slime :)",
 
   "block.resourceslimes.gem_cutting_station": "Gem Cutting Station",
   "block.resourceslimes.gem_infusing_station": "Gem Infusing Station",

@@ -58,7 +58,8 @@ public class ModBlocks {
                     .strength(12.5f).requiresCorrectToolForDrops()), ModCreativeModeTab.RESOURCE_SLIMES);
 
     public static final RegistryObject<Block> SLIMEY_DIRT = registerBlock("slimey_dirt",
-            () -> new SlimeyDirtBlock(BlockBehaviour.Properties.copy(Blocks.PODZOL)), ModCreativeModeTab.RESOURCE_SLIMES);
+            () -> new SlimeyDirtBlock(BlockBehaviour.Properties.copy(Blocks.PODZOL)), ModCreativeModeTab.RESOURCE_SLIMES
+    , "tooltip." + ResourceSlimes.MOD_ID + ".slimey_dirt");
 
     public static final RegistryObject<LiquidBlock> CITRINE_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("citrine_slime_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.CITRINE_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
@@ -126,14 +127,8 @@ public class ModBlocks {
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
-        registerBlockItem(name, toReturn, tab);
+        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),  new Item.Properties().tab(tab)));
         return toReturn;
-    }
-
-    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block,
-                                                                            CreativeModeTab tab) {
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
-                new Item.Properties().tab(tab)));
     }
 
     public static void register(IEventBus eventBus) {
