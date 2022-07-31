@@ -2,6 +2,7 @@ package net.kaupenjoe.resourceslimes.entity;
 
 import java.util.EnumSet;
 
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
@@ -53,13 +54,18 @@ public class ResourceSlime extends Slime {
 
 	// TODO: Should be based on Resource / Tier
 	public static final int GROWTH_TIME = 400; // 20 Seconds for each growth
+	private final RegistryObject<SlimeResource> resource;
 
-	public ResourceSlime(EntityType<? extends Slime> entityType, Level level) {
+	public ResourceSlime(RegistryObject<SlimeResource> resource, EntityType<? extends Slime> entityType, Level level) {
 		super(entityType, level);
+		this.resource = resource;
 		this.moveControl = new ResourceSlime.SlimeMoveControl(this);
 	}
 
-	// TODO: MAKE THIS CLEAN! YES PLEASE :D
+	public ResourceSlime(EntityType<ResourceSlime> entityType, Level level) {
+		this(BuiltinSlimeResources.EMPTY, entityType, level);
+	}
+
 	@Override
 	public Component getName() {
 		final String string = I18n.get("entity.resourceslimes.resource_slime");
@@ -191,10 +197,11 @@ public class ResourceSlime extends Slime {
 		ResourceSlimes.LOGGER.debug("Reading Size: " + pCompound.getInt("size"));
 	}
 
-	public void setResource(ItemStack stack) {
+	public ResourceSlime setResource(ItemStack stack) {
 		this.entityData.set(RESOURCE, stack);
 		resetGrowthCount();
 		recalculateSize();
+		return this;
 	}
 
 	public ItemStack getResourceItem() {
@@ -283,7 +290,7 @@ public class ResourceSlime extends Slime {
 		this.xpReward = newSize;
 	}
 
-	// Makes the Slimes non-splittable atm
+	// TODO: Makes the Slimes non-splittable atm
 	// TODO: I got "zombie slimes" twice... idk weird bug!
 	@Override
 	public void remove(Entity.RemovalReason pReason) {

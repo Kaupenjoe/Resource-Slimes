@@ -6,7 +6,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-version = '0.3.2-1.19'
+version = '0.3.3-1.19'
 group = 'net.kaupenjoe.resourceslimes' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'resourceslimes'
 
