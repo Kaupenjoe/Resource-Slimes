@@ -25,6 +25,12 @@ public class ModEntityTypes {
                     .sized(2.04F, 2.04F).setTrackingRange(6)
                     .build(new ResourceLocation(ResourceSlimes.MOD_ID, "energy_slime").toString()));
 
+    public static final RegistryObject<EntityType<GeneticSlime>> GENETIC_SLIME =
+            ENTITY_TYPES.register("genetic_slime",
+            () -> EntityType.Builder.of(GeneticSlime::new, MobCategory.CREATURE)
+                    .sized(2.04F, 2.04F).setTrackingRange(6)
+                    .build(new ResourceLocation(ResourceSlimes.MOD_ID, "genetic_slime").toString()));
+
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
