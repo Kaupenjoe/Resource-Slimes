@@ -20,11 +20,11 @@ public final class ResourceSlimesRegistries {
             .makeRegistry(SlimeResource.class, ResourceSlimesRegistries::getSlimeResourceBuilder);
 
     public static RegistryBuilder<SlimeResource> getSlimeResourceBuilder() {
-        return makeRegistry(Keys.SLIME_RESOURCES);
+        return makeRegistry(Keys.SLIME_RESOURCES, SlimeResource.class);
     }
 
-    private static <T extends IForgeRegistryEntry<T>> RegistryBuilder<T> makeRegistry(ResourceKey<? extends Registry<T>> key) {
-        return new RegistryBuilder<T>().setName(key.location()).setMaxID(Integer.MAX_VALUE - 1);
+    private static <T extends IForgeRegistryEntry<T>> RegistryBuilder<T> makeRegistry(ResourceKey<? extends Registry<T>> key, Class<T> type) {
+        return new RegistryBuilder<T>().setName(key.location()).setType(type);
     }
 
     public static class Keys {

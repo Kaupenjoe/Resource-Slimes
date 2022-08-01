@@ -8,7 +8,10 @@ import net.kaupenjoe.resourceslimes.effect.ModEffects;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.integration.ResourceSlimeIntegrations;
+import net.kaupenjoe.resourceslimes.item.ModCreativeModeTab;
 import net.kaupenjoe.resourceslimes.item.ModItems;
+import net.kaupenjoe.resourceslimes.item.custom.ExtractItem;
+import net.kaupenjoe.resourceslimes.item.custom.SlimeyExtractItem;
 import net.kaupenjoe.resourceslimes.particle.ModParticles;
 import net.kaupenjoe.resourceslimes.potion.ModPotion;
 import net.kaupenjoe.resourceslimes.recipe.ModRecipes;
@@ -28,6 +31,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.slf4j.Logger;
 
 @Mod(ResourceSlimes.MOD_ID)
@@ -73,12 +77,11 @@ public class ResourceSlimes {
 
     private void settingResourceItemsOnSlimeResources() {
         var resources = ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues();
-
         resources.stream().filter(sr -> sr != BuiltinSlimeResources.EMPTY.get() && sr.isEnabled()).forEach(resource -> {
-            Item extractItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,resource.name() + "_extract"));
-            resource.setExtractItem(extractItem);
+            var slimeyExtractItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,"slimey_" +  resource.name().toLowerCase() + "_extract"));
+            var extractItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,resource.name().toLowerCase() + "_extract"));
 
-            Item slimeyExtractItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,"slimey_" + resource.name() + "_extract"));
+            resource.setExtractItem(extractItem);
             resource.setSlimeyExtractItem(slimeyExtractItem);
         });
     }

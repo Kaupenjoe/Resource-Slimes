@@ -5,7 +5,8 @@ import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.custom.ExtractItem;
 import net.kaupenjoe.resourceslimes.item.custom.SlimeyExtractItem;
-import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
+import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
+import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
@@ -15,8 +16,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.Arrays;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -107,6 +106,35 @@ public class ModItems {
     public static final RegistryObject<Item> SOAP = ITEMS.register("soap",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
+    /* SLIME RESOURCES */
+    public static void onSlimeResourceRegister(IForgeRegistry<Item> registry) {
+        var resources = ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues();
+        resources.stream().filter(sr -> sr != BuiltinSlimeResources.EMPTY.get() && sr.isEnabled()).forEach(resource -> {
+            var slimeyExtractItem = resource.getExtractItem();
+            var extractItem = resource.getExtractItem();
+
+            if (extractItem == null) {
+                extractItem = new ExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS));
+            }
+
+            if (slimeyExtractItem == null) {
+                slimeyExtractItem = new SlimeyExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS));
+            }
+
+            if(extractItem.getRegistryName() == null) {
+                extractItem.setRegistryName(new ResourceLocation(ResourceSlimes.MOD_ID,resource.name().toLowerCase() + "_extract"));
+                resource.setExtractItem(extractItem);
+            }
+
+            if(slimeyExtractItem.getRegistryName() == null) {
+                slimeyExtractItem.setRegistryName(new ResourceLocation(ResourceSlimes.MOD_ID,"slimey_" + resource.name().toLowerCase() + "_extract"));
+                resource.setSlimeyExtractItem(slimeyExtractItem);
+            }
+
+            registry.register(extractItem);
+            registry.register(slimeyExtractItem);
+        });
+    }
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
