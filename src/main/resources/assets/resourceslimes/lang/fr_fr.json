@@ -35,7 +35,7 @@
   "item.resourceslimes.gem_cutter_tool": "Tailleur de pierres précieuses",
   "item.resourceslimes.soap": "Savon",
   "item.resourceslimes.extract": "Extrait de %s",
-  "item.resourceslimes.slimey_extract": "Extrait de %s gluant",
+  "item.resourceslimes.slimey_extract": "Extrait gluant de %s",
   "block.resourceslimes.deepslate_citrine_ore": "Minerai de citrine des abîmes",
   "block.resourceslimes.citrine_ore": "Minerai de citrine",
   "block.resourceslimes.deepslate_zircon_ore": "Minerai de zircon des abîmes",
