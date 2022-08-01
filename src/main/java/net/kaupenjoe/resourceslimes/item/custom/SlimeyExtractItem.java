@@ -1,6 +1,6 @@
 package net.kaupenjoe.resourceslimes.item.custom;
 
-import net.kaupenjoe.resourceslimes.screen.util.resources.SlimeResource;
+import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

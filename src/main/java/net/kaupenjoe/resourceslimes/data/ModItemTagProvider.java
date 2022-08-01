@@ -3,8 +3,8 @@ package net.kaupenjoe.resourceslimes.data;
 import org.jetbrains.annotations.Nullable;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
-import net.kaupenjoe.resourceslimes.screen.util.ResourceSlimesRegistries;
-import net.kaupenjoe.resourceslimes.screen.util.ModTags;
+import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
+import net.kaupenjoe.resourceslimes.util.ModTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;

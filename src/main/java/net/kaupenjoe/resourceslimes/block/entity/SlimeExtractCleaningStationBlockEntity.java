@@ -16,7 +16,7 @@ import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClie
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncTwoFluidStacksToClient;
 import net.kaupenjoe.resourceslimes.recipe.SlimeExtractCleaningStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.SlimeExtractCleaningStationMenu;
-import net.kaupenjoe.resourceslimes.screen.util.KaupenEnergyStorage;
+import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

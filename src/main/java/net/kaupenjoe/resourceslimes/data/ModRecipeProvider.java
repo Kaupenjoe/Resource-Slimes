@@ -13,8 +13,8 @@ import net.kaupenjoe.resourceslimes.data.custom.SlimeExtractCleaningRecipeBuilde
 import net.kaupenjoe.resourceslimes.data.custom.SlimeIncubationRecipeBuilder;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.screen.util.ResourceSlimesRegistries;
-import net.kaupenjoe.resourceslimes.screen.util.resources.BuiltinSlimeResources;
+import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
+import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;

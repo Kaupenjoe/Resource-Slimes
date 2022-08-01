@@ -6,7 +6,7 @@ import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.screen.slot.ModFluidSourceSlot;
 import net.kaupenjoe.resourceslimes.screen.slot.ModResultSlot;
 import net.kaupenjoe.resourceslimes.screen.slot.ModTagRestrictedSlot;
-import net.kaupenjoe.resourceslimes.screen.util.ModTags;
+import net.kaupenjoe.resourceslimes.util.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

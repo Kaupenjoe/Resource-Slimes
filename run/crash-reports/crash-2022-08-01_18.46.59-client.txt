@@ -1,0 +1,166 @@
+---- Minecraft Crash Report ----
+// Daisy, daisy...
+
+Time: 2022-08-01 18:46:59
+Description: Rendering overlay
+
+java.lang.IllegalStateException: Some intrusive holders were not added to registry: [Reference{null=Block{minecraft:air}}]
+	at net.minecraftforge.registries.NamespacedHolderHelper.freeze(NamespacedHolderHelper.java:181) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23180%23187!/:?] {re:classloading}
+	at net.minecraftforge.registries.NamespacedDefaultedWrapper.freeze(NamespacedDefaultedWrapper.java:209) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23180%23187!/:?] {re:classloading}
+	at net.minecraftforge.registries.GameData.lambda$freezeData$7(GameData.java:249) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23180%23187!/:?] {re:classloading}
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183) ~[?:?] {}
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[?:?] {}
+	at java.util.Iterator.forEachRemaining(Iterator.java:133) ~[?:?] {}
+	at java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1845) ~[?:?] {}
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[?:?] {}
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[?:?] {}
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150) ~[?:?] {}
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173) ~[?:?] {}
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:?] {}
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596) ~[?:?] {}
+	at net.minecraftforge.registries.GameData.freezeData(GameData.java:249) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23180%23187!/:?] {re:classloading}
+	at net.minecraftforge.common.ForgeStatesProvider.lambda$new$5(ForgeStatesProvider.java:26) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23180%23187!/:?] {re:classloading}
+	at net.minecraftforge.fml.ModLoader.lambda$dispatchAndHandleError$23(ModLoader.java:207) ~[fmlcore-1.19.1-42.0.1.jar%23185!/:?] {}
+	at java.util.Optional.ifPresent(Optional.java:178) ~[?:?] {}
+	at net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:207) ~[fmlcore-1.19.1-42.0.1.jar%23185!/:?] {}
+	at net.minecraftforge.fml.ModLoader.lambda$finishMods$20(ModLoader.java:197) ~[fmlcore-1.19.1-42.0.1.jar%23185!/:?] {}
+	at java.lang.Iterable.forEach(Iterable.java:75) ~[?:?] {}
+	at net.minecraftforge.fml.ModLoader.finishMods(ModLoader.java:197) ~[fmlcore-1.19.1-42.0.1.jar%23185!/:?] {}
+	at net.minecraftforge.client.loading.ClientModLoader.lambda$finishModLoading$6(ClientModLoader.java:125) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23180%23187!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:111) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23180%23187!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraftforge.client.loading.ClientModLoader.finishModLoading(ClientModLoader.java:125) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23180%23187!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraftforge.client.loading.ClientModLoader.lambda$onResourceReload$3(ClientModLoader.java:104) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23180%23187!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at java.util.concurrent.CompletableFuture$UniRun.tryFire(CompletableFuture.java:787) ~[?:?] {}
+	at java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:483) ~[?:?] {}
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) ~[?:?] {}
+	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) ~[?:?] {}
+	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?] {}
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?] {}
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at net.minecraftforge.registries.NamespacedHolderHelper.freeze(NamespacedHolderHelper.java:181) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23180%23187!/:?] {re:classloading}
+	at net.minecraftforge.registries.NamespacedDefaultedWrapper.freeze(NamespacedDefaultedWrapper.java:209) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23180%23187!/:?] {re:classloading}
+	at net.minecraftforge.registries.GameData.lambda$freezeData$7(GameData.java:249) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23180%23187!/:?] {re:classloading}
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183) ~[?:?] {}
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[?:?] {}
+	at java.util.Iterator.forEachRemaining(Iterator.java:133) ~[?:?] {}
+	at java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1845) ~[?:?] {}
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[?:?] {}
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[?:?] {}
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150) ~[?:?] {}
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173) ~[?:?] {}
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:?] {}
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596) ~[?:?] {}
+	at net.minecraftforge.registries.GameData.freezeData(GameData.java:249) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23180%23187!/:?] {re:classloading}
+-- Overlay render details --
+Details:
+	Overlay name: net.minecraft.client.gui.screens.LoadingOverlay
+Stacktrace:
+	at net.minecraft.client.renderer.GameRenderer.render(GameRenderer.java:900) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23181!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1138) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23181!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.client.Minecraft.run(Minecraft.java:702) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23181!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.client.main.Main.m_239872_(Main.java:212) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23181!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.client.main.Main.main(Main.java:51) ~[forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.07.17-1.19-recomp.jar%23181!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?] {}
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?] {}
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?] {}
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?] {}
+	at net.minecraftforge.fml.loading.targets.ForgeClientUserdevLaunchHandler.lambda$launchService$0(ForgeClientUserdevLaunchHandler.java:25) ~[fmlloader-1.19.1-42.0.1.jar%2394!/:?] {}
+	at cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-10.0.8.jar%23106!/:?] {}
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-10.0.8.jar%23106!/:?] {}
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-10.0.8.jar%23106!/:?] {}
+	at cpw.mods.modlauncher.Launcher.run(Launcher.java:106) [modlauncher-10.0.8.jar%23106!/:?] {}
+	at cpw.mods.modlauncher.Launcher.main(Launcher.java:77) [modlauncher-10.0.8.jar%23106!/:?] {}
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-10.0.8.jar%23106!/:?] {}
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-10.0.8.jar%23106!/:?] {}
+	at cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:141) [bootstraplauncher-1.1.2.jar:?] {}
+
+
+-- Last reload --
+Details:
+	Reload number: 1
+	Reload reason: initial
+	Finished: No
+	Packs: Default, Mod Resources
+
+-- System Details --
+Details:
+	Minecraft Version: 1.19.1
+	Minecraft Version ID: 1.19.1
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 17.0.1, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 1113592752 bytes (1062 MiB) / 1409286144 bytes (1344 MiB) up to 8568963072 bytes (8172 MiB)
+	CPUs: 24
+	Processor Vendor: AuthenticAMD
+	Processor Name: AMD Ryzen 9 3900X 12-Core Processor            
+	Identifier: AuthenticAMD Family 23 Model 113 Stepping 0
+	Microarchitecture: Zen 2
+	Frequency (GHz): 3.79
+	Number of physical packages: 1
+	Number of physical CPUs: 12
+	Number of logical CPUs: 24
+	Graphics card #0 name: NVIDIA GeForce RTX 2080
+	Graphics card #0 vendor: NVIDIA (0x10de)
+	Graphics card #0 VRAM (MB): 4095.00
+	Graphics card #0 deviceId: 0x1e87
+	Graphics card #0 versionInfo: DriverVersion=30.0.14.7196
+	Memory slot #0 capacity (MB): 16384.00
+	Memory slot #0 clockSpeed (GHz): 2.13
+	Memory slot #0 type: DDR4
+	Memory slot #1 capacity (MB): 16384.00
+	Memory slot #1 clockSpeed (GHz): 2.13
+	Memory slot #1 type: DDR4
+	Virtual memory max (MB): 37546.02
+	Virtual memory used (MB): 29530.28
+	Swap memory total (MB): 4864.00
+	Swap memory used (MB): 64.78
+	JVM Flags: 1 total; -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump
+	Launched Version: MOD_DEV
+	Backend library: LWJGL version 3.3.1 build 7
+	Backend API: NVIDIA GeForce RTX 2080/PCIe/SSE2 GL version 3.2.0 NVIDIA 471.96, NVIDIA Corporation
+	Window size: 854x480
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: 
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'forge'
+	Type: Client (map_client.txt)
+	Graphics mode: fancy
+	Resource Packs: 
+	Current Language: English (US)
+	CPU: 24x AMD Ryzen 9 3900X 12-Core Processor 
+	ModLauncher: 10.0.8+10.0.8+main.0ef7e830
+	ModLauncher launch target: forgeclientuserdev
+	ModLauncher naming: mcp
+	ModLauncher services: 
+		mixin-0.8.5.jar mixin PLUGINSERVICE 
+		eventbus-6.0.0.jar eventbus PLUGINSERVICE 
+		fmlloader-1.19.1-42.0.1.jar slf4jfixer PLUGINSERVICE 
+		fmlloader-1.19.1-42.0.1.jar object_holder_definalize PLUGINSERVICE 
+		fmlloader-1.19.1-42.0.1.jar runtime_enum_extender PLUGINSERVICE 
+		fmlloader-1.19.1-42.0.1.jar capability_token_subclass PLUGINSERVICE 
+		accesstransformers-8.0.4.jar accesstransformer PLUGINSERVICE 
+		fmlloader-1.19.1-42.0.1.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-10.0.8.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-10.0.8.jar fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		minecraft@1.0
+		lowcodefml@null
+		javafml@null
+	Mod List: 
+		forge-1.19.1-42.0.1_mapped_parchment_1.18.2-2022.0|Minecraft                     |minecraft                     |1.19.1              |DONE      |Manifest: a1:d4:5e:04:4f:d3:d6:e0:7b:37:97:cf:77:b0:de:ad:4a:47:ce:8c:96:49:5f:0a:cf:8c:ae:b2:6d:4b:8a:3f
+		theoneprobe-245211-3871444_mapped_parchment_1.18.2|The One Probe                 |theoneprobe                   |1.19-6.2.0          |DONE      |Manifest: NOSIGNATURE
+		                                                  |Forge                         |forge                         |42.0.1              |DONE      |Manifest: NOSIGNATURE
+		main                                              |Resource Slimes               |resourceslimes                |0.2.13-1.18.2       |DONE      |Manifest: NOSIGNATURE
+		jeed-532286-3843595_mapped_parchment_1.18.2-2022.0|Just Enough Effect Description|jeed                          |1.19-1.14           |DONE      |Manifest: NOSIGNATURE
+		jei-1.19-forge-11.0.0.227_mapped_parchment_1.18.2-|Just Enough Items             |jei                           |11.0.0.227          |DONE      |Manifest: NOSIGNATURE
+	Crash Report UUID: df187fcd-37cc-49cd-9835-0a2b45df10a6
+	FML: 42.0
+	Forge: net.minecraftforge:42.0.1

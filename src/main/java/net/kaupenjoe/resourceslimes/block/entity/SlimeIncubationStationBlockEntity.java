@@ -12,7 +12,7 @@ import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
 import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationRecipe;
 import net.kaupenjoe.resourceslimes.screen.SlimeIncubationStationMenu;
-import net.kaupenjoe.resourceslimes.screen.util.KaupenEnergyStorage;
+import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

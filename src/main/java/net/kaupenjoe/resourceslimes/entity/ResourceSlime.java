@@ -7,10 +7,10 @@ import org.jetbrains.annotations.Nullable;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.item.custom.ExtractItem;
-import net.kaupenjoe.resourceslimes.screen.util.ResourceSlimesRegistries;
-import net.kaupenjoe.resourceslimes.screen.util.resources.BuiltinSlimeResources;
-import net.kaupenjoe.resourceslimes.screen.util.resources.ResourceTier;
-import net.kaupenjoe.resourceslimes.screen.util.resources.SlimeResource;
+import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
+import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
+import net.kaupenjoe.resourceslimes.util.resources.ResourceTier;
+import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.Util;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.particles.ItemParticleOption;
