@@ -108,37 +108,6 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
 
-    /* SLIME RESOURCES */
-    public static void onRegisterItems(IForgeRegistry<Item> registry) {
-        var resources = SlimeResource.values();
-
-        Arrays.stream(resources).filter(sr -> sr != SlimeResource.EMPTY && sr.isEnabled()).forEach(resource -> {
-            var slimeyExtractItem = resource.getExtractItem();
-            var extractItem = resource.getExtractItem();
-
-            if (extractItem == null) {
-                extractItem = new ExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS));
-            }
-
-            if (slimeyExtractItem == null) {
-                slimeyExtractItem = new SlimeyExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS));
-            }
-
-            if(extractItem.getRegistryName() == null) {
-                extractItem.setRegistryName(new ResourceLocation(ResourceSlimes.MOD_ID,resource.name().toLowerCase() + "_extract"));
-                resource.setExtractItem(extractItem);
-            }
-
-            if(slimeyExtractItem.getRegistryName() == null) {
-                slimeyExtractItem.setRegistryName(new ResourceLocation(ResourceSlimes.MOD_ID,"slimey_" + resource.name().toLowerCase() + "_extract"));
-                resource.setSlimeyExtractItem(slimeyExtractItem);
-            }
-
-            registry.register(extractItem);
-            registry.register(slimeyExtractItem);
-        });
-    }
-
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

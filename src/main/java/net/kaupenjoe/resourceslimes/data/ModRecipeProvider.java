@@ -9,6 +9,8 @@ import net.kaupenjoe.resourceslimes.data.custom.SlimeIncubationRecipeBuilder;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.util.ModTags;
+import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
+import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
@@ -131,12 +133,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     }
 
     private void customExtractCleaningRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
-        var resources = SlimeResource.values();
+        var resources = ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues();
         for (var resource : resources) {
-            if(resource.equals(SlimeResource.EMPTY)) {
+            if(resource.equals(BuiltinSlimeResources.EMPTY.get())) {
                 continue;
             }
-            
+
             ItemLike input = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
                     "slimey_" + resource.name().toLowerCase() + "_extract"));
             ItemLike output = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,

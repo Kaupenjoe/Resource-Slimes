@@ -2,6 +2,8 @@ package net.kaupenjoe.resourceslimes.entity;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.item.custom.ExtractItem;
+import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
+import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
 import net.kaupenjoe.resourceslimes.util.resources.ResourceTier;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.Util;
@@ -85,7 +87,7 @@ public class ResourceSlimeEntity extends Slime {
     }
 
     private void changeResourceDEBUG(ItemStack stack) {
-        if(SlimeResource.getResourceBySlimeyExtractItem(stack.getItem()) != SlimeResource.EMPTY && !stack.isEmpty()) {
+        if(SlimeResource.getResourceBySlimeyExtractItem(stack.getItem()) != BuiltinSlimeResources.EMPTY.get() && !stack.isEmpty()) {
             this.setResource(stack);
         }
     }
@@ -145,8 +147,8 @@ public class ResourceSlimeEntity extends Slime {
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_146746_, DifficultyInstance p_146747_,
                                         MobSpawnType p_146748_, @Nullable SpawnGroupData p_146749_,
                                         @Nullable CompoundTag p_146750_) {
-        SlimeResource resource = Util.getRandom(Arrays.stream(SlimeResource
-                .values()).filter(sr -> sr != SlimeResource.EMPTY && sr.isEnabled()).toList(), this.random);
+        SlimeResource resource = Util.getRandom(ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues().stream()
+                        .filter(sr -> sr != BuiltinSlimeResources.EMPTY.get() && sr.isEnabled()).toList(), this.random);
         this.setResource(new ItemStack(resource.getSlimeyExtractItem()));
 
         return super.finalizeSpawn(p_146746_, p_146747_, p_146748_, p_146749_, p_146750_);

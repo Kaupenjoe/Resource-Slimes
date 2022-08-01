@@ -3,6 +3,8 @@ package net.kaupenjoe.resourceslimes.data;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.item.ModItems;
+import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
+import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -89,14 +91,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         complexBlock(ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get());
         complexBlock(ModBlocks.SLIME_INCUBATION_STATION.get());
 
-        var resources = SlimeResource.values();
+        var resources = ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues();
         for (var resource : resources) {
-            if (resource.equals(SlimeResource.EMPTY)) {
+            if (resource.equals(BuiltinSlimeResources.EMPTY.get())) {
                 continue;
             }
 
-            simpleSlimeyExtractItemTemp(new ResourceLocation(ResourceSlimes.MOD_ID, "slimey_" + resource.name().toLowerCase() + "_extract"));
-            simpleExtractItemTemp(new ResourceLocation(ResourceSlimes.MOD_ID,resource.name().toLowerCase() + "_extract"));
+            simpleSlimeyExtractItemTemp(modLoc( "slimey_" + resource.name().toLowerCase() + "_extract"));
+            simpleExtractItemTemp(modLoc(resource.name().toLowerCase() + "_extract"));
         }
     }
 
