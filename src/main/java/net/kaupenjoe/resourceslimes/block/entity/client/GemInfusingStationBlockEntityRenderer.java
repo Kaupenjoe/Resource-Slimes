@@ -3,6 +3,7 @@ package net.kaupenjoe.resourceslimes.block.entity.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
+import net.kaupenjoe.resourceslimes.block.custom.GemInfusingStationBlock;
 import net.kaupenjoe.resourceslimes.block.entity.GemInfusingStationBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
@@ -34,7 +35,7 @@ public class GemInfusingStationBlockEntityRenderer implements BlockEntityRendere
         pPoseStack.scale(0.35f, 0.35f, 0.35f);
         pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
 
-        switch (pBlockEntity.getBlockState().getValue(GemCuttingStationBlock.FACING)) {
+        switch (pBlockEntity.getBlockState().getValue(GemInfusingStationBlock.FACING)) {
             case NORTH -> pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(0));
             case EAST -> pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(90));
             case SOUTH -> pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(180));
