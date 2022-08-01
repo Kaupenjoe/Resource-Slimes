@@ -102,7 +102,7 @@
   "extract.resourceslimes.fire": "Fire",
   "extract.resourceslimes.deepslate": "Deepslate",
   "extract.resourceslimes.crop": "Crop",
-  "extract.resourceslimes.lessergem": "Lesser Gem",
+  "extract.resourceslimes.lesser_gem": "Lesser Gem",
 
   "extract.resourceslimes.gold": "Gold",
   "extract.resourceslimes.redstone": "Redstone",
@@ -115,14 +115,14 @@
   "extract.resourceslimes.phantom": "Phantom",
   "extract.resourceslimes.alchemy": "Alchemy",
 
-  "extract.resourceslimes.enderpearl": "Ender Pearl",
+  "extract.resourceslimes.ender_pearl": "Ender Pearl",
   "extract.resourceslimes.diamond": "Diamond",
   "extract.resourceslimes.honey": "Honey",
   "extract.resourceslimes.experience": "Experience",
   "extract.resourceslimes.music": "Music",
   "extract.resourceslimes.obsidian": "Obsidian",
   "extract.resourceslimes.blaze": "Blaze",
-  "extract.resourceslimes.witherskeletons": "Wither Skeletons",
+  "extract.resourceslimes.wither_skeletons": "Wither Skeletons",
   "extract.resourceslimes.illagers": "Illagers",
   "extract.resourceslimes.ghast": "Ghast",
 
@@ -131,10 +131,10 @@
   "extract.resourceslimes.emerald": "Emerald",
   "extract.resourceslimes.shulkers": "Shulkers",
 
-  "extract.resourceslimes.enderdragon": "Ender Dragon",
-  "extract.resourceslimes.netherstar": "Netherstar",
-  "extract.resourceslimes.greatergem": "Greater Gem",
-  "extract.resourceslimes.endcrystal": "End Crystal",
+  "extract.resourceslimes.ender_dragon": "Ender Dragon",
+  "extract.resourceslimes.nether_star": "Netherstar",
+  "extract.resourceslimes.greater_gem": "Greater Gem",
+  "extract.resourceslimes.end_crystal": "End Crystal",
 
 
   "effect.resourceslimes.soapy": "Soapy",

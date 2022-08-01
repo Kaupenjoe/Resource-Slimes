@@ -40,14 +40,14 @@ public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<S
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y, menu.getMainFluid(), 55, 15);
-        renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y, menu.getWasteFluid(), 129, 45);
+        renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y, menu.getMainFluid(), 55, 15, renderer);
+        renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y, menu.getWasteFluid(), 129, 45, wasteRenderer);
         renderEnergyArea(pPoseStack, pMouseX, pMouseY, x, y);
     }
 
     private void renderFluidArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y,
-                                 FluidStack stack, int offsetX, int offsetY) {
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y, offsetX, offsetY)) {
+                                 FluidStack stack, int offsetX, int offsetY, FluidStackRenderer renderer) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, offsetX, offsetY, renderer)) {
             renderTooltip(pPoseStack, renderer.getTooltip(stack, TooltipFlag.Default.NORMAL),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
@@ -100,7 +100,7 @@ public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<S
                 ((height - imageHeight) / 2) + 13, menu.blockEntity.getEnergyStorage());
     }
 
-    private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY) {
+    private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, FluidStackRenderer renderer) {
         return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, renderer.getWidth(), renderer.getHeight());
     }
 

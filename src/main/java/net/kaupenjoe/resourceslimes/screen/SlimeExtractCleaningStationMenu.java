@@ -42,7 +42,7 @@ public class SlimeExtractCleaningStationMenu extends AbstractContainerMenu imple
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-            this.addSlot(new ModRestrictedSlot(handler, 0, 12, 15, ModItems.SOAP));
+            this.addSlot(new ModRestrictedSlot(handler, 0, 12, 16, ModItems.SOAP));
             this.addSlot(new ModFluidSourceSlot(handler, 1, 12, 61, () -> Fluids.WATER));
             this.addSlot(new ModTagRestrictedSlot(handler, 2, 86, 16, () -> ModTags.Items.SLIMEY_EXTRACTS));
             this.addSlot(new ModResultSlot(handler,3, 86, 61));

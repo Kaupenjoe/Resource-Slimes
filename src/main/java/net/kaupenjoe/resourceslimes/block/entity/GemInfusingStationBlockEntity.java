@@ -293,7 +293,7 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
             int drainAmount = Math.min(entity.FLUID_TANK.getSpace(), 1000);
 
             FluidStack stack = handler.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
-            if(stack.getFluid() == Fluids.WATER) {
+            if(stack.getFluid().is(ModTags.Fluids.SLIME_FLUIDS)) {
                 stack = handler.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
                 fillTankWithFluid(entity, stack, handler.getContainer());
             }
