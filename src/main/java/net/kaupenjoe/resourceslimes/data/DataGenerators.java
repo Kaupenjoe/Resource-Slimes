@@ -21,5 +21,7 @@ public class DataGenerators {
         generator.addProvider(event.includeClient(), new ModItemModelProvider(generator, existingFileHelper));
 
         generator.addProvider(event.includeServer(), new ModItemTagProvider(generator, existingFileHelper));
+
+        generator.addProvider(event.includeClient(), new ModEnUdProvider(generator));
     }
 }
