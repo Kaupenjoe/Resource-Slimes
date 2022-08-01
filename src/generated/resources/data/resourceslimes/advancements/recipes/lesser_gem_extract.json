@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_slimey_lesser_gem_extract": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_lesser_gem_extract"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "resourceslimes:lesser_gem_extract"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_slimey_lesser_gem_extract",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "resourceslimes:lesser_gem_extract"
+    ]
+  }
+}

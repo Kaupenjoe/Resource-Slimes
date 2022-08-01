@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "FFF",
-    "DDD",
-    "DDD"
-  ],
   "key": {
     "D": {
       "item": "resourceslimes:dirt_extract"
@@ -13,8 +8,13 @@
       "item": "resourceslimes:fire_extract"
     }
   },
+  "pattern": [
+    "FFF",
+    "DDD",
+    "DDD"
+  ],
   "result": {
-    "item": "minecraft:podzol",
-    "count": 32
+    "count": 32,
+    "item": "minecraft:podzol"
   }
 }

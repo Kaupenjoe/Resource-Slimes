@@ -1,10 +1,10 @@
 {
   "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.35,
   "group": "citrine",
   "ingredient": {
     "item": "resourceslimes:raw_citrine"
   },
-  "result": "resourceslimes:uncut_citrine",
-  "experience": 0.35,
-  "cookingtime": 200
+  "result": "resourceslimes:uncut_citrine"
 }

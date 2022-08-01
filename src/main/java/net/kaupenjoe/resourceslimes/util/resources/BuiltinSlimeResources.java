@@ -77,8 +77,12 @@ public class BuiltinSlimeResources {
 
     public static RegistryObject<SlimeResource> register(String name, Supplier<? extends SlimeResource> supplier) {
         final RegistryObject<SlimeResource> reg = SLIME_RESOURCES.register(name, supplier);
-        ModItems.ITEMS.register("slimey_" + name + "_extract", () -> new SlimeyExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS)));
-        ModItems.ITEMS.register(name + "_extract", () -> new ExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS)));
+
+        if(!name.equals("empty")) {
+            ModItems.ITEMS.register("slimey_" + name + "_extract", () -> new SlimeyExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS)));
+            ModItems.ITEMS.register(name + "_extract", () -> new ExtractItem(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS)));
+        }
+
         return reg;
     }
 

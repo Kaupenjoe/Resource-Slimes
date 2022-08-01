@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " W ",
-    "W W",
-    "WWW"
-  ],
   "key": {
     "W": {
       "item": "resourceslimes:wood_extract"
     }
   },
+  "pattern": [
+    " W ",
+    "W W",
+    "WWW"
+  ],
   "result": {
-    "item": "minecraft:oak_log",
-    "count": 16
+    "count": 16,
+    "item": "minecraft:oak_log"
   }
 }

@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "CCC",
-    "CCC"
-  ],
   "key": {
     "C": {
       "item": "resourceslimes:copper_extract"
     }
   },
+  "pattern": [
+    "CCC",
+    "CCC"
+  ],
   "result": {
-    "item": "minecraft:copper_ingot",
-    "count": 8
+    "count": 8,
+    "item": "minecraft:copper_ingot"
   }
 }

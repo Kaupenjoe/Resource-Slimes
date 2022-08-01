@@ -80,7 +80,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlock(ModBlocks.DEEPSLATE_BLACK_OPAL_ORE.get());
         simpleBlock(ModBlocks.END_BLACK_OPAL_ORE.get());
 
-        cube(ForgeRegistries.BLOCKS.getKey(ModBlocks.SLIMEY_DIRT.get()).getPath(), mcLoc("block/dirt"), modLoc(""), mcLoc("block/dirt"), mcLoc("block/dirt"), mcLoc("block/dirt"), mcLoc("block/dirt"));
+        // cube(ForgeRegistries.BLOCKS.getKey(ModBlocks.SLIMEY_DIRT.get()).getPath(),
+        //         mcLoc("block/dirt"),
+        //         modLoc(""),
+        //         mcLoc("block/dirt"),
+        //         mcLoc("block/dirt"),
+        //         mcLoc("block/dirt"),
+        //         mcLoc("block/dirt"));
 
         complexBlock(ModBlocks.GEM_CUTTING_STATION.get());
         complexBlock(ModBlocks.GEM_INFUSING_STATION.get());

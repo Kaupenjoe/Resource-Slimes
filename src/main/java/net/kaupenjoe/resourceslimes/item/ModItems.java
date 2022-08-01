@@ -109,23 +109,6 @@ public class ModItems {
 	public static final RegistryObject<Item> SOAP = ITEMS.register("soap",
 			() -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
-	/* SLIME RESOURCES */
-	public static void onRegisterItems(IForgeRegistry<Item> registry) {
-		//var resources = ModRegistries.SLIME_RESOURCES.get().getValues();
-//
-		//resources.stream().filter(sr -> sr != BuiltinSlimeResources.EMPTY.get() && sr.isEnabled()).forEach(resource -> {
-		//	Item extractItem = ;
-		//	Item slimeyExtractItem = new SlimeyExtractItem(
-		//			new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS));
-//
-		//	ITEMS.register(resource.name().toLowerCase() + "_extract", () ->  extractItem);
-		//	// resource.setExtractItem(extractItem);
-//
-		//	ITEMS.register("slimey_" + resource.name().toLowerCase() + "_extract", () -> slimeyExtractItem);
-		//	// resource.setSlimeyExtractItem(slimeyExtractItem);
-		//});
-	}
-
 	public static void register(IEventBus eventBus) {
 		ITEMS.register(eventBus);
 	}

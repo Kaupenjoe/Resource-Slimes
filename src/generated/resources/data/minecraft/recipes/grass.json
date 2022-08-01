@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "GGG",
-    "DDD",
-    "DDD"
-  ],
   "key": {
     "D": {
       "item": "resourceslimes:dirt_extract"
@@ -13,8 +8,13 @@
       "item": "resourceslimes:grass_extract"
     }
   },
+  "pattern": [
+    "GGG",
+    "DDD",
+    "DDD"
+  ],
   "result": {
-    "item": "minecraft:grass",
-    "count": 32
+    "count": 32,
+    "item": "minecraft:grass"
   }
 }

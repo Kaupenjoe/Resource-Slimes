@@ -1,20 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "F": {
+      "item": "resourceslimes:fire_extract"
+    },
+    "W": {
+      "item": "resourceslimes:water_extract"
+    }
+  },
   "pattern": [
     "FWF",
     "WFW",
     "FWF"
   ],
-  "key": {
-    "W": {
-      "item": "resourceslimes:water_extract"
-    },
-    "F": {
-      "item": "resourceslimes:fire_extract"
-    }
-  },
   "result": {
-    "item": "minecraft:obsidian",
-    "count": 4
+    "count": 4,
+    "item": "minecraft:obsidian"
   }
 }

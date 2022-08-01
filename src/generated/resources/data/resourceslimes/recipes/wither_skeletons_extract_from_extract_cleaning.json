@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_wither_skeletons_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:wither_skeletons_extract"
+  }
+}

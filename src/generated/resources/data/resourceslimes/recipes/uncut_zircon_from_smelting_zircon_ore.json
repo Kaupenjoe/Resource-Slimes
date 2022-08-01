@@ -1,10 +1,10 @@
 {
   "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.5,
   "group": "zircon",
   "ingredient": {
     "item": "resourceslimes:zircon_ore"
   },
-  "result": "resourceslimes:uncut_zircon",
-  "experience": 0.5,
-  "cookingtime": 200
+  "result": "resourceslimes:uncut_zircon"
 }
