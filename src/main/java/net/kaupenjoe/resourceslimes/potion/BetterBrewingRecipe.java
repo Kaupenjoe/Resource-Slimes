@@ -1,27 +1,20 @@
 package net.kaupenjoe.resourceslimes.potion;
 
+import mezz.jei.api.recipe.vanilla.IJeiBrewingRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.common.brewing.IBrewingRecipe;
+import org.jetbrains.annotations.NotNull;
 
 // BetterBrewingRecipe Class by CAS-ual-TY from https://github.com/CAS-ual-TY/Extra-Potions (GPL-3.0 License)
 // https://github.com/CAS-ual-TY/Extra-Potions/blob/main/LICENSE
-public class BetterBrewingRecipe implements IBrewingRecipe {
-    private final Potion input;
-    private final Item ingredient;
-    private final Potion output;
-
-    public BetterBrewingRecipe(Potion input, Item ingredient, Potion output) {
-        this.input = input;
-        this.ingredient = ingredient;
-        this.output = output;
-    }
+public record BetterBrewingRecipe(Potion input, Item ingredient, Potion output) implements IBrewingRecipe {
 
     @Override
-    public boolean isInput(ItemStack input) {
+    public boolean isInput(@NotNull ItemStack input) {
         return PotionUtils.getPotion(input) == this.input;
     }
 
@@ -31,14 +24,10 @@ public class BetterBrewingRecipe implements IBrewingRecipe {
     }
 
     @Override
-    public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
-        if(!this.isInput(input) || !this.isIngredient(ingredient)) {
-            return ItemStack.EMPTY;
-        }
-
+    public @NotNull ItemStack getOutput(@NotNull ItemStack input, @NotNull ItemStack ingredient) {
         ItemStack itemStack = new ItemStack(input.getItem());
         itemStack.setTag(new CompoundTag());
         PotionUtils.setPotion(itemStack, this.output);
-        return itemStack;
+        return !this.isInput(input) || !this.isIngredient(ingredient) ? ItemStack.EMPTY : itemStack;
     }
 }

@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "GEG",
-    "EGE",
-    "GEG"
-  ],
   "key": {
     "E": {
       "item": "resourceslimes:stone_extract"
@@ -13,8 +8,13 @@
       "item": "resourceslimes:grass_extract"
     }
   },
+  "pattern": [
+    "GEG",
+    "EGE",
+    "GEG"
+  ],
   "result": {
-    "item": "minecraft:mossy_cobblestone",
-    "count": 32
+    "count": 32,
+    "item": "minecraft:mossy_cobblestone"
   }
 }

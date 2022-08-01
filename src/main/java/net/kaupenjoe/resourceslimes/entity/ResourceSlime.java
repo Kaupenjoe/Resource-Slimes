@@ -2,11 +2,12 @@ package net.kaupenjoe.resourceslimes.entity;
 
 import java.util.EnumSet;
 
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.item.custom.ExtractItem;
-import net.kaupenjoe.resourceslimes.util.ModRegistries;
+import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
 import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
 import net.kaupenjoe.resourceslimes.util.resources.ResourceTier;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
@@ -20,6 +21,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.VisibleForDebug;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -52,13 +54,18 @@ public class ResourceSlime extends Slime {
 
 	// TODO: Should be based on Resource / Tier
 	public static final int GROWTH_TIME = 400; // 20 Seconds for each growth
+	private final RegistryObject<SlimeResource> resource;
 
-	public ResourceSlime(EntityType<? extends Slime> entityType, Level level) {
+	public ResourceSlime(RegistryObject<SlimeResource> resource, EntityType<? extends Slime> entityType, Level level) {
 		super(entityType, level);
+		this.resource = resource;
 		this.moveControl = new ResourceSlime.SlimeMoveControl(this);
 	}
 
-	// TODO: MAKE THIS CLEAN! YES PLEASE :D
+	public ResourceSlime(EntityType<ResourceSlime> entityType, Level level) {
+		this(BuiltinSlimeResources.EMPTY, entityType, level);
+	}
+
 	@Override
 	public Component getName() {
 		final String string = I18n.get("entity.resourceslimes.resource_slime");
@@ -75,10 +82,10 @@ public class ResourceSlime extends Slime {
 		if (pHand == InteractionHand.MAIN_HAND) {
 			if (pPlayer.isCrouching()) {
 				outputInfo(pPlayer);
-				changeResourceDEBUG(pPlayer.getItemInHand(pHand));
+				changeResourceDebug(pPlayer.getItemInHand(pHand));
 
 				if (pPlayer.getItemInHand(pHand).getItem() == Items.STICK) {
-					growSlimeDEBUG();
+					growSlimeDebug();
 				}
 			} else {
 				if (pPlayer.getItemInHand(InteractionHand.MAIN_HAND).getItem() == Items.BUCKET) {
@@ -90,14 +97,16 @@ public class ResourceSlime extends Slime {
 		return super.mobInteract(pPlayer, pHand);
 	}
 
-	private void changeResourceDEBUG(ItemStack stack) {
+	@VisibleForDebug
+	private void changeResourceDebug(ItemStack stack) {
 		if (SlimeResource.getResourceBySlimeyExtractItem(stack.getItem()) != BuiltinSlimeResources.EMPTY.get()
 				&& !stack.isEmpty()) {
 			this.setResource(stack);
 		}
 	}
 
-	private void growSlimeDEBUG() {
+	@VisibleForDebug
+	private void growSlimeDebug() {
 		ItemStack stack = this.entityData.get(RESOURCE);
 		stack.setCount(64);
 		this.setResource(stack);
@@ -132,7 +141,7 @@ public class ResourceSlime extends Slime {
 		pPlayer.setItemInHand(hand, tierFluid);
 	}
 
-	// TODO: customize to what size the slime can be reduced to
+	// @todo: customize to what size the slime can be reduced to
 	private void shrinkOnHarvest(ItemStack stack) {
 		setResource(new ItemStack(stack.getItem(), this.entityData.get(RESOURCE).getCount() - stack.getCount()));
 	}
@@ -152,7 +161,7 @@ public class ResourceSlime extends Slime {
 
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_146746_, DifficultyInstance p_146747_,
 			MobSpawnType p_146748_, @Nullable SpawnGroupData p_146749_, @Nullable CompoundTag p_146750_) {
-		SlimeResource resource = Util.getRandom(ModRegistries.SLIME_RESOURCES.get().getValues().stream()
+		SlimeResource resource = Util.getRandom(ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues().stream()
 				.filter(sr -> sr != BuiltinSlimeResources.EMPTY.get() && sr.isEnabled()).toList(), this.random);
 		this.setResource(new ItemStack(resource.getSlimeyExtractItem()));
 
@@ -188,10 +197,11 @@ public class ResourceSlime extends Slime {
 		ResourceSlimes.LOGGER.debug("Reading Size: " + pCompound.getInt("size"));
 	}
 
-	public void setResource(ItemStack stack) {
+	public ResourceSlime setResource(ItemStack stack) {
 		this.entityData.set(RESOURCE, stack);
 		resetGrowthCount();
 		recalculateSize();
+		return this;
 	}
 
 	public ItemStack getResourceItem() {
@@ -280,7 +290,7 @@ public class ResourceSlime extends Slime {
 		this.xpReward = newSize;
 	}
 
-	// Makes the Slimes non-splittable atm
+	// TODO: Makes the Slimes non-splittable atm
 	// TODO: I got "zombie slimes" twice... idk weird bug!
 	@Override
 	public void remove(Entity.RemovalReason pReason) {

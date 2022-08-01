@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "QQQ",
-    "QQQ"
-  ],
   "key": {
     "Q": {
       "item": "resourceslimes:quartz_extract"
     }
   },
+  "pattern": [
+    "QQQ",
+    "QQQ"
+  ],
   "result": {
-    "item": "minecraft:quartz",
-    "count": 16
+    "count": 16,
+    "item": "minecraft:quartz"
   }
 }

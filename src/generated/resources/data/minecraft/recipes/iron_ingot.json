@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "III",
-    "III"
-  ],
   "key": {
     "I": {
       "item": "resourceslimes:iron_extract"
     }
   },
+  "pattern": [
+    "III",
+    "III"
+  ],
   "result": {
-    "item": "minecraft:iron_ingot",
-    "count": 8
+    "count": 8,
+    "item": "minecraft:iron_ingot"
   }
 }

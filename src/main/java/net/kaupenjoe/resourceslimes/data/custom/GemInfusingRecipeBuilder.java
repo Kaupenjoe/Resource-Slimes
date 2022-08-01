@@ -20,6 +20,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -39,7 +40,7 @@ public class GemInfusingRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public RecipeBuilder unlockedBy(String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {
+    public @NotNull RecipeBuilder unlockedBy(@NotNull String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {
         this.advancement.addCriterion(pCriterionName, pCriterionTrigger);
         return this;
     }
@@ -115,12 +116,12 @@ public class GemInfusingRecipeBuilder implements RecipeBuilder {
             return GemInfusingStationRecipe.Serializer.INSTANCE;
         }
 
-        @javax.annotation.Nullable
+        @Nullable
         public JsonObject serializeAdvancement() {
             return this.advancement.serializeToJson();
         }
 
-        @javax.annotation.Nullable
+        @Nullable
         public ResourceLocation getAdvancementId() {
             return this.advancementId;
         }

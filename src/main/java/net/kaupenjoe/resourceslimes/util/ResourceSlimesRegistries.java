@@ -11,12 +11,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 
-public final class ModRegistries {
+public final class ResourceSlimesRegistries {
 	static final DeferredRegister<SlimeResource> DEFERRED_SLIME_RESOURCES = DeferredRegister
 			.create(Keys.SLIME_RESOURCES, Keys.SLIME_RESOURCES.location().getNamespace());
 
 	public static final Supplier<IForgeRegistry<SlimeResource>> SLIME_RESOURCES = DEFERRED_SLIME_RESOURCES
-			.makeRegistry(ModRegistries::getSlimeResourceBuilder);
+			.makeRegistry(ResourceSlimesRegistries::getSlimeResourceBuilder);
 
 	public static RegistryBuilder<SlimeResource> getSlimeResourceBuilder() {
 		return makeRegistry(Keys.SLIME_RESOURCES);

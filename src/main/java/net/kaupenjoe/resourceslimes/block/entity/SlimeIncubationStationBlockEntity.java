@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
-import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationStationRecipe;
+import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationRecipe;
 import net.kaupenjoe.resourceslimes.screen.SlimeIncubationStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.minecraft.core.BlockPos;
@@ -39,7 +39,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
+public class SlimeIncubationStationBlockEntity extends AbstractRSMachineBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -243,8 +243,8 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<SlimeIncubationStationRecipe> match = level.getRecipeManager()
-                .getRecipeFor(SlimeIncubationStationRecipe.Type.INSTANCE, inventory, level);
+        Optional<SlimeIncubationRecipe> match = level.getRecipeManager()
+                .getRecipeFor(SlimeIncubationRecipe.Type.INSTANCE, inventory, level);
 
         return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
                 && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem());
@@ -257,8 +257,8 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<SlimeIncubationStationRecipe> match = level.getRecipeManager()
-                .getRecipeFor(SlimeIncubationStationRecipe.Type.INSTANCE, inventory, level);
+        Optional<SlimeIncubationRecipe> match = level.getRecipeManager()
+                .getRecipeFor(SlimeIncubationRecipe.Type.INSTANCE, inventory, level);
 
         if(match.isPresent()) {
             entity.itemHandler.extractItem(0,1, false);

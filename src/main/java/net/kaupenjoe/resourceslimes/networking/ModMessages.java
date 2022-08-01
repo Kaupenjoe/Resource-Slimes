@@ -1,10 +1,8 @@
 package net.kaupenjoe.resourceslimes.networking;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncTwoFluidStacksToClient;
+import net.kaupenjoe.resourceslimes.networking.packets.*;
+import net.minecraft.network.Connection;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
@@ -32,28 +30,37 @@ public class ModMessages {
         net.messageBuilder(PacketSyncFluidStackToClient.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(PacketSyncFluidStackToClient::new)
                 .encoder(PacketSyncFluidStackToClient::toBytes)
-                .consumer(PacketSyncFluidStackToClient::handle)
+                .consumerMainThread(PacketSyncFluidStackToClient::handle)
                 .add();
 
         net.messageBuilder(PacketSyncEnergyToClient.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(PacketSyncEnergyToClient::new)
                 .encoder(PacketSyncEnergyToClient::toBytes)
-                .consumer(PacketSyncEnergyToClient::handle)
+                .consumerMainThread(PacketSyncEnergyToClient::handle)
                 .add();
 
         net.messageBuilder(PacketSyncItemStackToClient.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(PacketSyncItemStackToClient::new)
                 .encoder(PacketSyncItemStackToClient::toBytes)
-                .consumer(PacketSyncItemStackToClient::handle)
+                .consumerMainThread(PacketSyncItemStackToClient::handle)
                 .add();
 
         net.messageBuilder(PacketSyncTwoFluidStacksToClient.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(PacketSyncTwoFluidStacksToClient::new)
                 .encoder(PacketSyncTwoFluidStacksToClient::toBytes)
-                .consumer(PacketSyncTwoFluidStacksToClient::handle)
+                .consumerMainThread(PacketSyncTwoFluidStacksToClient::handle)
+                .add();
+
+        net.messageBuilder(PacketOpenGeneticsGuide.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(PacketOpenGeneticsGuide::new)
+                .encoder(PacketOpenGeneticsGuide::toBytes)
+                .consumerMainThread(PacketOpenGeneticsGuide::handle)
                 .add();
     }
 
+    public static <MSG> void sendTo(MSG msg, Connection connection, NetworkDirection direction) {
+        INSTANCE.sendTo(msg, connection, direction);
+    }
     public static <MSG> void sendToClients(MSG message) {
         INSTANCE.send(PacketDistributor.ALL.noArg(), message);
     }

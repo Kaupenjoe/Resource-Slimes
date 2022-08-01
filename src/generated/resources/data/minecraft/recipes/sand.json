@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "SSS",
-    "SSS",
-    "SSS"
-  ],
   "key": {
     "S": {
       "item": "resourceslimes:sand_extract"
     }
   },
+  "pattern": [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
   "result": {
-    "item": "minecraft:sand",
-    "count": 32
+    "count": 32,
+    "item": "minecraft:sand"
   }
 }

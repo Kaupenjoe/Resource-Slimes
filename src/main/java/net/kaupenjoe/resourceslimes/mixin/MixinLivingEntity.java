@@ -15,12 +15,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity extends Entity {
-    public MixinLivingEntity(EntityType<?> pEntityType, Level pLevel) {
+    private MixinLivingEntity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
     @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getFriction(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)F"))
-    private float onTravel(BlockState state, LevelReader level, BlockPos pos, Entity entity) {
+    private float onTravel(BlockState state, LevelReader levelReader, BlockPos pos, Entity entity) {
         if (entity instanceof LivingEntity living && living.hasEffect(ModEffects.SOAPY.get())) {
             return 0.95F;
         }
@@ -29,7 +29,7 @@ public abstract class MixinLivingEntity extends Entity {
 
     @Inject(method = "getBlockSpeedFactor", at = @At("HEAD"), cancellable = true)
     private void onGetBlockSpeedFactor(CallbackInfoReturnable<Float> cir) {
-        if (((Object)this) instanceof LivingEntity living && living.hasEffect(ModEffects.SOAPY.get())) {
+        if (((Object) this) instanceof LivingEntity living && living.hasEffect(ModEffects.SOAPY.get())) {
             cir.setReturnValue(1.01F);
         }
     }

@@ -64,8 +64,8 @@ public class GemInfusingStationRecipeCategory implements IRecipeCategory<GemInfu
                 .addIngredients(ForgeTypes.FLUID_STACK, List.of(recipe.getFluid()))
                 .setFluidRenderer(64000, false, 16, 61);
         // TODO: Energy Area
-        // builder.addSlot(RecipeIngredientRole.INPUT, 0, 0)
-        //                 .setOverlay(new EnergyInfoArea(0, 0), 0, 0);
+        //builder.addSlot(RecipeIngredientRole.INPUT, 0, 0)
+        //               .setOverlay(new EnergyInfoArea(0, 0), 0, 0);
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 86, 60).addItemStack(recipe.getResultItem());
     }

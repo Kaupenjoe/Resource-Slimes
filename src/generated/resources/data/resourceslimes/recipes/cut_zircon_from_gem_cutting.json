@@ -5,8 +5,8 @@
       "item": "resourceslimes:uncut_zircon"
     }
   ],
-  "waterAmount": 250,
   "output": {
     "item": "resourceslimes:cut_zircon"
-  }
+  },
+  "waterAmount": 250
 }

@@ -1,14 +1,14 @@
 {
   "type": "resourceslimes:gem_infusing",
+  "fluid": {
+    "Amount": 500,
+    "FluidName": "resourceslimes:diamond_slime_fluid"
+  },
   "ingredients": [
     {
       "item": "resourceslimes:cut_diamond"
     }
   ],
-  "fluid": {
-    "FluidName": "resourceslimes:diamond_slime_fluid",
-    "Amount": 500
-  },
   "output": {
     "item": "resourceslimes:infused_diamond"
   }

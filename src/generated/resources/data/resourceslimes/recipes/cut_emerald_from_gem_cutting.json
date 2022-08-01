@@ -5,8 +5,8 @@
       "item": "minecraft:emerald"
     }
   ],
-  "waterAmount": 500,
   "output": {
     "item": "resourceslimes:cut_emerald"
-  }
+  },
+  "waterAmount": 500
 }

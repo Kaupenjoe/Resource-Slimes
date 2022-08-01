@@ -46,7 +46,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity {
+public class SlimeExtractCleaningStationBlockEntity extends AbstractRSMachineBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -359,7 +359,7 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
         Optional<SlimeExtractCleaningStationRecipe> match = level.getRecipeManager()
                 .getRecipeFor(SlimeExtractCleaningStationRecipe.Type.INSTANCE, inventory, level);
 
-        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory) && hasSpaceInTank(entity)
+        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory) && hasSpaceInTank(entity, 500)
                 && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem())
                 && hasWaterInTank(entity);
     }
@@ -368,8 +368,8 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
         return entity.FLUID_TANK.getFluid().getAmount() >= 500;
     }
 
-    private static boolean hasSpaceInTank(SlimeExtractCleaningStationBlockEntity entity) {
-        return entity.FLUID_TANK_WASTE.getSpace() >= 500; // TODO: Maybe not hardcode it!
+    private static boolean hasSpaceInTank(SlimeExtractCleaningStationBlockEntity entity, int amount) {
+        return entity.FLUID_TANK_WASTE.getSpace() >= amount;
     }
 
     private static void craftItem(SlimeExtractCleaningStationBlockEntity entity) {

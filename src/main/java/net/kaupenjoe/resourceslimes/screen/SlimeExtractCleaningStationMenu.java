@@ -1,9 +1,7 @@
 package net.kaupenjoe.resourceslimes.screen;
 
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
-import net.kaupenjoe.resourceslimes.block.entity.GemInfusingStationBlockEntity;
 import net.kaupenjoe.resourceslimes.block.entity.SlimeExtractCleaningStationBlockEntity;
-import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.screen.slot.*;
 import net.kaupenjoe.resourceslimes.util.ModTags;

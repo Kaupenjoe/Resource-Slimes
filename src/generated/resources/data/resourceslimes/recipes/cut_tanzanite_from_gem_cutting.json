@@ -5,8 +5,8 @@
       "item": "resourceslimes:uncut_tanzanite"
     }
   ],
-  "waterAmount": 1000,
   "output": {
     "item": "resourceslimes:cut_tanzanite"
-  }
+  },
+  "waterAmount": 1000
 }

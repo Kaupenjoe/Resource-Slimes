@@ -15,15 +15,21 @@ public class ModEntityTypes {
 
     public static final RegistryObject<EntityType<ResourceSlime>> RESOURCE_SLIME =
             ENTITY_TYPES.register("resource_slime",
-            () -> EntityType.Builder.of(ResourceSlime::new, MobCategory.CREATURE)
+            () -> EntityType.Builder.<ResourceSlime>of(ResourceSlime::new, MobCategory.CREATURE)
                     .sized(2.04F, 2.04F).setTrackingRange(6)
                     .build(new ResourceLocation(ResourceSlimes.MOD_ID, "resource_slime").toString()));
 
-    public static final RegistryObject<EntityType<EnergySlimeEntity>> ENERGY_SLIME =
+    public static final RegistryObject<EntityType<EnergySlime>> ENERGY_SLIME =
             ENTITY_TYPES.register("energy_slime",
-            () -> EntityType.Builder.of(EnergySlimeEntity::new, MobCategory.CREATURE)
+            () -> EntityType.Builder.of(EnergySlime::new, MobCategory.CREATURE)
                     .sized(2.04F, 2.04F).setTrackingRange(6)
                     .build(new ResourceLocation(ResourceSlimes.MOD_ID, "energy_slime").toString()));
+
+    public static final RegistryObject<EntityType<GeneticSlime>> GENETIC_SLIME =
+            ENTITY_TYPES.register("genetic_slime",
+            () -> EntityType.Builder.of(GeneticSlime::new, MobCategory.CREATURE)
+                    .sized(2.04F, 2.04F).setTrackingRange(6)
+                    .build(new ResourceLocation(ResourceSlimes.MOD_ID, "genetic_slime").toString()));
 
 
     public static void register(IEventBus eventBus) {

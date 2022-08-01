@@ -45,7 +45,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
+public class GemInfusingStationBlockEntity extends AbstractRSMachineBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -291,7 +291,7 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
             int drainAmount = Math.min(entity.FLUID_TANK.getSpace(), 1000);
 
             FluidStack stack = handler.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
-            if(stack.getFluid() == Fluids.WATER) {
+            if(stack.getFluid().is(ModTags.Fluids.SLIME_FLUIDS)) {
                 stack = handler.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
                 fillTankWithFluid(entity, stack, handler.getContainer());
             }

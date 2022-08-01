@@ -3,7 +3,6 @@ package net.kaupenjoe.resourceslimes;
 import com.mojang.logging.LogUtils;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.block.entity.ModBlockEntities;
-import net.kaupenjoe.resourceslimes.config.ResourceSlimesCommonConfigs;
 import net.kaupenjoe.resourceslimes.effect.ModEffects;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.fluid.ModFluidTypes;
@@ -15,7 +14,7 @@ import net.kaupenjoe.resourceslimes.particle.ModParticles;
 import net.kaupenjoe.resourceslimes.potion.ModPotion;
 import net.kaupenjoe.resourceslimes.recipe.ModRecipes;
 import net.kaupenjoe.resourceslimes.screen.ModMenuTypes;
-import net.kaupenjoe.resourceslimes.util.ModRegistries;
+import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
 import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
 import net.kaupenjoe.resourceslimes.world.feature.ModConfiguredFeatures;
 import net.kaupenjoe.resourceslimes.world.feature.ModPlacedFeatures;
@@ -23,9 +22,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -37,38 +34,38 @@ public class ResourceSlimes {
     public static final String MOD_ID = "resourceslimes";
 
     public ResourceSlimes() {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModItems.register(eventBus);
-        ModBlocks.register(eventBus);
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
-        ModEntityTypes.register(eventBus);
-        ModFluids.register(eventBus);
-        ModFluidTypes.register(eventBus);
+        ModEntityTypes.register(modEventBus);
+        ModFluids.register(modEventBus);
+        ModFluidTypes.register(modEventBus);
 
-        ModEffects.register(eventBus);
-        ModPotion.register(eventBus);
+        ModEffects.register(modEventBus);
+        ModPotion.register(modEventBus);
 
-        ModBlockEntities.register(eventBus);
-        ModMenuTypes.register(eventBus);
+        ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
 
-        ModRecipes.register(eventBus);
-        ModParticles.register(eventBus);
+        ModRecipes.register(modEventBus);
+        ModParticles.register(modEventBus);
 
-        BuiltinSlimeResources.register(eventBus);
-        ModConfiguredFeatures.register(eventBus);
+        BuiltinSlimeResources.register(modEventBus);
 
-        ModPlacedFeatures.register(eventBus);
+        ModConfiguredFeatures.register(modEventBus);
+        ModPlacedFeatures.register(modEventBus);
         
-        eventBus.addListener(this::setup);
-        eventBus.addListener(ResourceSlimeIntegrations::sendIMCs);
+        modEventBus.addListener(this::setup);
+        modEventBus.addListener(ResourceSlimeIntegrations::sendIMCs);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            var resources = ModRegistries.SLIME_RESOURCES.get().getValues();
+            var resources = ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues();
 
             resources.stream().filter(sr -> sr != BuiltinSlimeResources.EMPTY.get() && sr.isEnabled()).forEach(resource -> {
                 Item extractItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,resource.name() + "_extract"));

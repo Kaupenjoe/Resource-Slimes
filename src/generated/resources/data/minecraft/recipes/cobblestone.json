@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "EEE",
-    "E E",
-    "EEE"
-  ],
   "key": {
     "E": {
       "item": "resourceslimes:stone_extract"
     }
   },
+  "pattern": [
+    "EEE",
+    "E E",
+    "EEE"
+  ],
   "result": {
-    "item": "minecraft:cobblestone",
-    "count": 64
+    "count": 64,
+    "item": "minecraft:cobblestone"
   }
 }

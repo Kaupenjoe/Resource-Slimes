@@ -47,10 +47,12 @@ public class GemInfusingStationMenu extends AbstractContainerMenu implements IFl
         addDataSlots(data);
     }
 
+    @Override
     public void setFluid(FluidStack fluidStack) {
         this.fluid = fluidStack;
     }
 
+    @Override
     public FluidStack getFluid() {
         return fluid;
     }

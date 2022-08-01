@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "LLL",
-    "LLL"
-  ],
   "key": {
     "L": {
       "item": "resourceslimes:lapis_extract"
     }
   },
+  "pattern": [
+    "LLL",
+    "LLL"
+  ],
   "result": {
-    "item": "minecraft:lapis_lazuli",
-    "count": 8
+    "count": 8,
+    "item": "minecraft:lapis_lazuli"
   }
 }

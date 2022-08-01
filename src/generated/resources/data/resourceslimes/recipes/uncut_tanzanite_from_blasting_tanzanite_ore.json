@@ -1,10 +1,10 @@
 {
   "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 0.75,
   "group": "tanzanite",
   "ingredient": {
     "item": "resourceslimes:tanzanite_ore"
   },
-  "result": "resourceslimes:uncut_tanzanite",
-  "experience": 0.75,
-  "cookingtime": 100
+  "result": "resourceslimes:uncut_tanzanite"
 }

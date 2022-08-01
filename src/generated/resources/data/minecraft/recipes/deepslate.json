@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "DDD",
-    "DDD",
-    "DDD"
-  ],
   "key": {
     "D": {
       "item": "resourceslimes:deepslate_extract"
     }
   },
+  "pattern": [
+    "DDD",
+    "DDD",
+    "DDD"
+  ],
   "result": {
-    "item": "minecraft:deepslate",
-    "count": 16
+    "count": 16,
+    "item": "minecraft:deepslate"
   }
 }

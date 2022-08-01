@@ -1,8 +1,6 @@
 {
-	"type": "forge:add_features",
-	"biomes": "#minecraft:is_mountain",
-	"features": [
-		"resourceslimes:tanzanite_ore_placed_triangle_mountains"
-	],
-	"step": "underground_ores"
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_mountain",
+  "features": "resourceslimes:tanzanite_ore_placed_triangle_mountains",
+  "step": "underground_ores"
 }

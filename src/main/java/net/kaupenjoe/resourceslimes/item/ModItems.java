@@ -3,11 +3,6 @@ package net.kaupenjoe.resourceslimes.item;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
-import net.kaupenjoe.resourceslimes.item.custom.ExtractItem;
-import net.kaupenjoe.resourceslimes.item.custom.SlimeyExtractItem;
-import net.kaupenjoe.resourceslimes.util.ModRegistries;
-import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -113,23 +108,6 @@ public class ModItems {
 
 	public static final RegistryObject<Item> SOAP = ITEMS.register("soap",
 			() -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
-
-	/* SLIME RESOURCES */
-	public static void onRegisterItems(IForgeRegistry<Item> registry) {
-		//var resources = ModRegistries.SLIME_RESOURCES.get().getValues();
-//
-		//resources.stream().filter(sr -> sr != BuiltinSlimeResources.EMPTY.get() && sr.isEnabled()).forEach(resource -> {
-		//	Item extractItem = ;
-		//	Item slimeyExtractItem = new SlimeyExtractItem(
-		//			new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIME_EXTRACTS));
-//
-		//	ITEMS.register(resource.name().toLowerCase() + "_extract", () ->  extractItem);
-		//	// resource.setExtractItem(extractItem);
-//
-		//	ITEMS.register("slimey_" + resource.name().toLowerCase() + "_extract", () -> slimeyExtractItem);
-		//	// resource.setSlimeyExtractItem(slimeyExtractItem);
-		//});
-	}
 
 	public static void register(IEventBus eventBus) {
 		ITEMS.register(eventBus);

@@ -27,6 +27,8 @@ public class ModBlockStatesProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.DEEPSLATE_BLACK_OPAL_ORE.get());
         simpleBlock(ModBlocks.END_BLACK_OPAL_ORE.get());
 
+        simpleBlock(ModBlocks.SLIMEY_DIRT.get());
+
         horizontalBlock(ModBlocks.GEM_CUTTING_STATION.get(),
                 new ModelFile.UncheckedModelFile(modLoc("block/gem_cutting_station")));
         horizontalBlock(ModBlocks.GEM_INFUSING_STATION.get(),

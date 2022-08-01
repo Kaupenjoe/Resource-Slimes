@@ -5,8 +5,8 @@
       "item": "resourceslimes:uncut_citrine"
     }
   ],
-  "waterAmount": 250,
   "output": {
     "item": "resourceslimes:cut_citrine"
-  }
+  },
+  "waterAmount": 250
 }
