@@ -1,0 +1,17 @@
+{
+  "type": "resourceslimes:slime_incubation",
+  "ingredients": [
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:bow"
+    },
+    {
+      "item": "resourceslimes:cut_citrine"
+    }
+  ],
+  "output": {
+    "item": "minecraft:dirt"
+  }
+}

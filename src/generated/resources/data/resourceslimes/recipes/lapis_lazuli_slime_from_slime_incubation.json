@@ -1,0 +1,17 @@
+{
+  "type": "resourceslimes:slime_incubation",
+  "ingredients": [
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "resourceslimes:cut_citrine"
+    }
+  ],
+  "output": {
+    "item": "minecraft:dirt"
+  }
+}

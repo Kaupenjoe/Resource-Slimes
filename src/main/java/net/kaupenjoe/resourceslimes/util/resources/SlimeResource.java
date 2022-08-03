@@ -6,19 +6,22 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Supplier;
 
 public class SlimeResource extends ForgeRegistryEntry<SlimeResource> {
     private Item extractItem;
     private Item slimeyExtractItem;
+    private Supplier<Item> craftingItem;
     private final ResourceTier tier;
     private final ResourceLocation innerCubeTextureRes;
     private boolean enabled;
 
-    SlimeResource(ResourceTier tier, ResourceLocation textureRes, boolean enabled) {
+    SlimeResource(ResourceTier tier, ResourceLocation textureRes, Supplier<Item> craftingItem, boolean enabled) {
         this.tier = tier;
         this.innerCubeTextureRes = textureRes;
         this.enabled = enabled;
+        this.craftingItem = craftingItem;
     }
 
     public String name() {
@@ -27,6 +30,14 @@ public class SlimeResource extends ForgeRegistryEntry<SlimeResource> {
 
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public void setCraftingItem(Supplier<Item> craftingItem) {
+        this.craftingItem = craftingItem;
+    }
+
+    public Supplier<Item> getCraftingItem() {
+        return craftingItem;
     }
 
     public void setEnabled(boolean enabled) {
@@ -90,6 +101,15 @@ public class SlimeResource extends ForgeRegistryEntry<SlimeResource> {
     public static SlimeResource getResourceByExtractItem(Item item) {
         for (SlimeResource resource : ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues()) {
             if(resource.getExtractItem() == item) {
+                return resource;
+            }
+        }
+        return BuiltinSlimeResources.EMPTY.get();
+    }
+
+    public static SlimeResource getResourceByCraftingItem(Item result) {
+        for (SlimeResource resource : ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues()) {
+            if(resource.getCraftingItem().get() == result) {
                 return resource;
             }
         }

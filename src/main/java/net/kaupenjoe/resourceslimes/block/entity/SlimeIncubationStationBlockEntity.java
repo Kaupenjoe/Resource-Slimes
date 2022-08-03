@@ -1,5 +1,7 @@
 package net.kaupenjoe.resourceslimes.block.entity;
 
+import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
+import net.kaupenjoe.resourceslimes.entity.ResourceSlimeEntity;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
@@ -8,6 +10,8 @@ import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
 import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.SlimeIncubationStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
+import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -16,8 +20,10 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -264,13 +270,21 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
 
         if(match.isPresent()) {
             entity.itemHandler.extractItem(0,1, false);
-            entity.itemHandler.extractItem(1,1, false);
+            ItemStack craftingItem = entity.itemHandler.extractItem(1,1, false);
             entity.itemHandler.extractItem(2,1, false);
 
-            entity.itemHandler.setStackInSlot(3, new ItemStack(match.get().getResultItem().getItem(),
-                    entity.itemHandler.getStackInSlot(3).getCount() + 1));
+            spawnSlime(entity, craftingItem);
 
             entity.resetProgress();
+        }
+    }
+
+    private static void spawnSlime(SlimeIncubationStationBlockEntity entity, ItemStack stack) {
+        if(!entity.level.isClientSide()) {
+            ResourceSlimeEntity slime = (ResourceSlimeEntity) ModEntityTypes.RESOURCE_SLIME.get().spawn(
+                    ((ServerLevel) entity.level), null, null,
+                    entity.getBlockPos().above(), MobSpawnType.MOB_SUMMONED, false, true);
+            slime.setResource(new ItemStack(SlimeResource.getResourceByCraftingItem(stack.getItem()).getSlimeyExtractItem()));
         }
     }
 

@@ -72,7 +72,7 @@ public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<S
 
         renderProgressArrow(pPoseStack, x, y);
 
-        renderer.render(pPoseStack, x + 55,y + 15, menu.getMainFluid());
+        renderer.render(pPoseStack, x + 55,y + 16, menu.getMainFluid());
         wasteRenderer.render(pPoseStack, x + 129,y + 45, menu.getWasteFluid());
         energyInfoArea.draw(pPoseStack);
     }

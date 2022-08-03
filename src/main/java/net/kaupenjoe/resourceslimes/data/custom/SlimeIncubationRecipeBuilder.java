@@ -59,7 +59,7 @@ public class SlimeIncubationRecipeBuilder implements RecipeBuilder {
 
         pFinishedRecipeConsumer.accept(new Result(pRecipeId, this.result, this.count, this.ingredients,
                 this.advancement, new ResourceLocation(pRecipeId.getNamespace(), "recipes/" +
-                this.result.getItemCategory().getRecipeFolderName() + "/" + pRecipeId.getPath())));
+                "incubating" + "/" + pRecipeId.getPath())));
 
     }
 
@@ -100,7 +100,7 @@ public class SlimeIncubationRecipeBuilder implements RecipeBuilder {
         @Override
         public ResourceLocation getId() {
             return new ResourceLocation(ResourceSlimes.MOD_ID,
-                    this.result.getRegistryName().getPath() + "_from_slime_incubation");
+                    this.ingredients.get(1).getItems()[0].getItem().getRegistryName().getPath() + "_slime" + "_from_slime_incubation");
         }
 
         @Override

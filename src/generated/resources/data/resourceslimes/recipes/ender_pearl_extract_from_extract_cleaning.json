@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_ender_pearl_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:ender_pearl_extract"
+  }
+}

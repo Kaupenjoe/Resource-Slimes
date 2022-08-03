@@ -10,6 +10,7 @@ import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;
 import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
+import net.kaupenjoe.resourceslimes.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -45,6 +46,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
@@ -56,6 +59,17 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
             if(!level.isClientSide()) {
                 ModMessages.sendToClients(new PacketSyncItemStackToClient(this, worldPosition));
             }
+        }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return switch (slot) {
+                case 0 -> stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent();
+                case 1 -> stack.is(ModTags.Items.UNCUT_GEMS);
+                case 2 -> stack.getItem() == ModItems.GEM_CUTTER_TOOL.get();
+                case 3 -> false;
+                default -> super.isItemValid(slot, stack);
+            };
         }
     };
 
@@ -100,6 +114,17 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
     }
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
+            Map.of(Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 3, (i, s) -> false)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (index) -> index == 1 || index == 2,
+                            (index, stack) -> itemHandler.isItemValid(1, stack) || itemHandler.isItemValid(2, stack))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 3, (i, s) -> false)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2,
+                            (index, stack) -> itemHandler.isItemValid(2, stack))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (index) -> index == 0 || index == 1,
+                            (index, stack) -> itemHandler.isItemValid(0, stack) || itemHandler.isItemValid(1, stack))));
+
+
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
     private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
 
@@ -195,7 +220,24 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
         }
 
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return lazyItemHandler.cast();
+            if(side == null) {
+                return lazyItemHandler.cast();
+            }
+
+            if(directionWrappedHandlerMap.containsKey(side)) {
+                Direction localDir = this.getBlockState().getValue(GemCuttingStationBlock.FACING);
+
+                if(side == Direction.UP || side == Direction.DOWN) {
+                    return directionWrappedHandlerMap.get(side).cast();
+                }
+
+                return switch (localDir) {
+                    default -> directionWrappedHandlerMap.get(side.getOpposite()).cast();
+                    case EAST -> directionWrappedHandlerMap.get(side.getClockWise()).cast();
+                    case SOUTH -> directionWrappedHandlerMap.get(side).cast();
+                    case WEST -> directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
+                };
+            }
         }
 
         if(cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
@@ -221,6 +263,11 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
         lazyItemHandler.invalidate();
         lazyFluidHandler.invalidate();
         lazyEnergyHandler.invalidate();
+        for (Direction dir : Direction.values()) {
+            if(directionWrappedHandlerMap.containsKey(dir)) {
+                directionWrappedHandlerMap.get(dir).invalidate();
+            }
+        }
     }
 
     @Override

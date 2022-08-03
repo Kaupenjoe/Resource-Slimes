@@ -58,19 +58,11 @@
       "required": false
     },
     {
-      "id": "resourceslimes:fire_extract",
-      "required": false
-    },
-    {
       "id": "resourceslimes:berry_extract",
       "required": false
     },
     {
       "id": "resourceslimes:fish_extract",
-      "required": false
-    },
-    {
-      "id": "resourceslimes:deepslate_extract",
       "required": false
     },
     {
@@ -106,11 +98,19 @@
       "required": false
     },
     {
+      "id": "resourceslimes:fire_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:deepslate_extract",
+      "required": false
+    },
+    {
       "id": "resourceslimes:crop_extract",
       "required": false
     },
     {
-      "id": "resourceslimes:lessergem_extract",
+      "id": "resourceslimes:lesser_gem_extract",
       "required": false
     },
     {
@@ -142,10 +142,6 @@
       "required": false
     },
     {
-      "id": "resourceslimes:obsidian_extract",
-      "required": false
-    },
-    {
       "id": "resourceslimes:slime_extract",
       "required": false
     },
@@ -158,7 +154,7 @@
       "required": false
     },
     {
-      "id": "resourceslimes:enderpearl_extract",
+      "id": "resourceslimes:ender_pearl_extract",
       "required": false
     },
     {
@@ -178,11 +174,15 @@
       "required": false
     },
     {
+      "id": "resourceslimes:obsidian_extract",
+      "required": false
+    },
+    {
       "id": "resourceslimes:blaze_extract",
       "required": false
     },
     {
-      "id": "resourceslimes:witherskeletons_extract",
+      "id": "resourceslimes:wither_skeletons_extract",
       "required": false
     },
     {
@@ -210,19 +210,19 @@
       "required": false
     },
     {
-      "id": "resourceslimes:enderdragon_extract",
+      "id": "resourceslimes:ender_dragon_extract",
       "required": false
     },
     {
-      "id": "resourceslimes:netherstar_extract",
+      "id": "resourceslimes:nether_star_extract",
       "required": false
     },
     {
-      "id": "resourceslimes:greatergem_extract",
+      "id": "resourceslimes:greater_gem_extract",
       "required": false
     },
     {
-      "id": "resourceslimes:endcrystal_extract",
+      "id": "resourceslimes:end_crystal_extract",
       "required": false
     }
   ]

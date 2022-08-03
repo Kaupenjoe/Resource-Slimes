@@ -14,6 +14,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -41,7 +42,7 @@ public class GemCuttingStationMenu extends AbstractContainerMenu implements IFlu
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-            this.addSlot(new ModWaterSourceSlot(handler, 0, 15, 40));
+            this.addSlot(new ModFluidSourceSlot(handler, 0, 15, 40, () -> Fluids.WATER));
             this.addSlot(new ModTagRestrictedSlot(handler, 1, 57, 18, () -> ModTags.Items.UNCUT_GEMS));
             this.addSlot(new ModRestrictedSlot(handler, 2, 103, 18, ModItems.GEM_CUTTER_TOOL));
             this.addSlot(new ModResultSlot(handler, 3, 80, 60));

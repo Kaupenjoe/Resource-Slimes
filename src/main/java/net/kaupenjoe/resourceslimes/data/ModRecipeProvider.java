@@ -127,9 +127,18 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     }
 
     private void customIncubationRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
-        new SlimeIncubationRecipeBuilder(ModItems.ENERGY_SLIME_SPAWN_EGG.get(), 1,
-                Items.SLIME_BALL, Items.IRON_INGOT, ModItems.CUT_CITRINE.get())
-                .unlockedBy("iron_ingot", has(Items.SLIME_BALL)).save(pFinishedRecipeConsumer);
+        var resources = ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues();
+        for (var resource : resources) {
+            if(resource.equals(BuiltinSlimeResources.EMPTY.get())) {
+                continue;
+            }
+
+            ItemLike input = resource.getCraftingItem().get();
+
+            new SlimeIncubationRecipeBuilder(Items.DIRT, 1,
+                    Items.SLIME_BALL, input, ModItems.CUT_CITRINE.get())
+                    .unlockedBy("has_whatever", has(Items.SLIME_BALL)).save(pFinishedRecipeConsumer); // TODO
+        }
     }
 
     private void customExtractCleaningRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {

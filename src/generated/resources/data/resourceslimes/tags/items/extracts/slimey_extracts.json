@@ -58,19 +58,11 @@
       "required": false
     },
     {
-      "id": "resourceslimes:slimey_fire_extract",
-      "required": false
-    },
-    {
       "id": "resourceslimes:slimey_berry_extract",
       "required": false
     },
     {
       "id": "resourceslimes:slimey_fish_extract",
-      "required": false
-    },
-    {
-      "id": "resourceslimes:slimey_deepslate_extract",
       "required": false
     },
     {
@@ -106,11 +98,19 @@
       "required": false
     },
     {
+      "id": "resourceslimes:slimey_fire_extract",
+      "required": false
+    },
+    {
+      "id": "resourceslimes:slimey_deepslate_extract",
+      "required": false
+    },
+    {
       "id": "resourceslimes:slimey_crop_extract",
       "required": false
     },
     {
-      "id": "resourceslimes:slimey_lessergem_extract",
+      "id": "resourceslimes:slimey_lesser_gem_extract",
       "required": false
     },
     {
@@ -142,10 +142,6 @@
       "required": false
     },
     {
-      "id": "resourceslimes:slimey_obsidian_extract",
-      "required": false
-    },
-    {
       "id": "resourceslimes:slimey_slime_extract",
       "required": false
     },
@@ -158,7 +154,7 @@
       "required": false
     },
     {
-      "id": "resourceslimes:slimey_enderpearl_extract",
+      "id": "resourceslimes:slimey_ender_pearl_extract",
       "required": false
     },
     {
@@ -178,11 +174,15 @@
       "required": false
     },
     {
+      "id": "resourceslimes:slimey_obsidian_extract",
+      "required": false
+    },
+    {
       "id": "resourceslimes:slimey_blaze_extract",
       "required": false
     },
     {
-      "id": "resourceslimes:slimey_witherskeletons_extract",
+      "id": "resourceslimes:slimey_wither_skeletons_extract",
       "required": false
     },
     {
@@ -210,19 +210,19 @@
       "required": false
     },
     {
-      "id": "resourceslimes:slimey_enderdragon_extract",
+      "id": "resourceslimes:slimey_ender_dragon_extract",
       "required": false
     },
     {
-      "id": "resourceslimes:slimey_netherstar_extract",
+      "id": "resourceslimes:slimey_nether_star_extract",
       "required": false
     },
     {
-      "id": "resourceslimes:slimey_greatergem_extract",
+      "id": "resourceslimes:slimey_greater_gem_extract",
       "required": false
     },
     {
-      "id": "resourceslimes:slimey_endcrystal_extract",
+      "id": "resourceslimes:slimey_end_crystal_extract",
       "required": false
     }
   ]

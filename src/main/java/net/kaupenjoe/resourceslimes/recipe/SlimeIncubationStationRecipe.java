@@ -28,6 +28,10 @@ public class SlimeIncubationStationRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
+        if(pLevel.isClientSide()) {
+            return false;
+        }
+
         if(recipeItems.get(0).test(pContainer.getItem(0)) &&
                 recipeItems.get(1).test(pContainer.getItem(1))) {
             return recipeItems.get(2).test(pContainer.getItem(2));

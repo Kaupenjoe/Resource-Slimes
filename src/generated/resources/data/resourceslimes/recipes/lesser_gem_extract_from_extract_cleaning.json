@@ -1,0 +1,11 @@
+{
+  "type": "resourceslimes:extract_cleaning",
+  "ingredients": [
+    {
+      "item": "resourceslimes:slimey_lesser_gem_extract"
+    }
+  ],
+  "output": {
+    "item": "resourceslimes:lesser_gem_extract"
+  }
+}
