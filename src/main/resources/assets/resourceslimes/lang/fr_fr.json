@@ -23,7 +23,7 @@
   "item.resourceslimes.infused_pink_slime_pearl": "Perle de slime rose infusée",
   "item.resourceslimes.resource_slime_spawn_egg": "Oeuf d'apparition de slime de ressources",
   "item.resourceslimes.energy_slime_spawn_egg": "Oeuf d'apparition de Slime d'Énergie",
-  "item.resourceslimes.citrine_slime_fluid_bucket": "Seau de slime citrine",
+  "item.resourceslimes.citrine_slime_fluid_bucket": "Seau de citrine gluante",
   "item.resourceslimes.zircon_slime_fluid_bucket": "Seau de zircon gluant",
   "item.resourceslimes.diamond_slime_fluid_bucket": "Seau de diamant gluant",
   "item.resourceslimes.emerald_slime_fluid_bucket": "Seau d'émeraude gluante",
@@ -118,6 +118,6 @@
   "effect.resourceslimes.stinky": "Malodorant",
   "effect.resourceslimes.slimey": "Gluant",
   "effect.resourceslimes.soapy.description": "Vous fait glisser comme de la glace sur le sol",
-  "effect.resourceslimes.stinky.description": "Se fait des entités autour de vous subissent des dommages",
-  "effect.resourceslimes.slimey.description": "Vous ralentit et ne vous laisse pas sauter, mais vous laisse d'escalader des murs"
+  "effect.resourceslimes.stinky.description": "Les entités autour de vous subissent des dégâts",
+  "effect.resourceslimes.slimey.description": "Vous ralentit et vous empêche de sauter, mais vous permet de grimper des murs"
 }
