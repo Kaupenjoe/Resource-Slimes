@@ -61,9 +61,17 @@ public class ResourceSlimeEntity extends Slime {
     // TODO: MAKE THIS CLEAN! YES PLEASE :D
     @Override
     public Component getName() {
-        return new TextComponent(I18n.get((((ExtractItem) SlimeResource.getResourceBySlimeyExtractItem(this.entityData.get(RESOURCE).getItem())
-                .getExtractItem()).getExtractNameKey(new ItemStack(SlimeResource.getResourceBySlimeyExtractItem(this.entityData.get(RESOURCE).getItem()).getExtractItem()))).getKey())
-               + " " + I18n.get("entity.resourceslimes.resource_slime"));
+        ExtractItem extractItem = (ExtractItem) SlimeResource.getResourceBySlimeyExtractItem(this.entityData.get(RESOURCE).getItem()).getExtractItem();
+        if(extractItem == null) {
+            return new TextComponent(I18n.get(new TranslatableComponent("extract.resourceslimes.empty")
+                    + " " + I18n.get("entity.resourceslimes.resource_slime")));
+        }
+
+        ItemStack stack = new ItemStack(SlimeResource.getResourceBySlimeyExtractItem(this.entityData.get(RESOURCE).getItem()).getExtractItem());
+        TranslatableComponent component = extractItem.getExtractNameKey(stack);
+
+        return new TextComponent(I18n.get((component.getKey())
+               + " " + I18n.get("entity.resourceslimes.resource_slime")));
     }
 
     @Override

@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class SlimeResource extends ForgeRegistryEntry<SlimeResource> {
@@ -48,6 +49,7 @@ public class SlimeResource extends ForgeRegistryEntry<SlimeResource> {
         this.extractItem = stacks;
     }
 
+    @Nullable
     public Item getExtractItem() {
         return extractItem;
     }
@@ -56,6 +58,7 @@ public class SlimeResource extends ForgeRegistryEntry<SlimeResource> {
         this.slimeyExtractItem = stacks;
     }
 
+    @Nullable
     public Item getSlimeyExtractItem() {
         return slimeyExtractItem;
     }
@@ -94,12 +97,15 @@ public class SlimeResource extends ForgeRegistryEntry<SlimeResource> {
                 return resource;
             }
         }
-        // TODO: possibly add a "dummy" resource
         return BuiltinSlimeResources.EMPTY.get();
     }
 
     public static SlimeResource getResourceByExtractItem(Item item) {
         for (SlimeResource resource : ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues()) {
+            if(resource.getExtractItem() == null) {
+                break;
+            }
+
             if(resource.getExtractItem() == item) {
                 return resource;
             }

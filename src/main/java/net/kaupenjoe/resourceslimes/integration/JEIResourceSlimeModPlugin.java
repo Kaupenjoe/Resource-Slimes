@@ -9,6 +9,7 @@ import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
 import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
 import net.kaupenjoe.resourceslimes.recipe.SlimeExtractCleaningStationRecipe;
+import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationStationRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -31,6 +32,8 @@ public class JEIResourceSlimeModPlugin implements IModPlugin {
                 GemInfusingStationRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new
                 SlimeExtractCleaningStationRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new
+                SlimeIncubationStationRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -44,6 +47,9 @@ public class JEIResourceSlimeModPlugin implements IModPlugin {
 
         List<SlimeExtractCleaningStationRecipe> recipesCleaning = rm.getAllRecipesFor(SlimeExtractCleaningStationRecipe.Type.INSTANCE);
         registration.addRecipes(new RecipeType<>(SlimeExtractCleaningStationRecipeCategory.UID, SlimeExtractCleaningStationRecipe.class), recipesCleaning);
+
+        List<SlimeIncubationStationRecipe> recipesIncubation = rm.getAllRecipesFor(SlimeIncubationStationRecipe.Type.INSTANCE);
+        registration.addRecipes(new RecipeType<>(SlimeIncubationStationRecipeCategory.UID, SlimeIncubationStationRecipe.class), recipesIncubation);
 
     }
 }

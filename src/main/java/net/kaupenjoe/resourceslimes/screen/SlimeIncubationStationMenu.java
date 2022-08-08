@@ -1,14 +1,13 @@
 package net.kaupenjoe.resourceslimes.screen;
 
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
-import net.kaupenjoe.resourceslimes.block.entity.GemCuttingStationBlockEntity;
 import net.kaupenjoe.resourceslimes.block.entity.SlimeIncubationStationBlockEntity;
-import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.screen.slot.ModRestrictedSlot;
+import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
+import net.kaupenjoe.resourceslimes.entity.ResourceSlimeEntity;
 import net.kaupenjoe.resourceslimes.screen.slot.ModResultSlot;
 import net.kaupenjoe.resourceslimes.screen.slot.ModTagRestrictedSlot;
-import net.kaupenjoe.resourceslimes.screen.slot.ModWaterSourceSlot;
 import net.kaupenjoe.resourceslimes.util.ModTags;
+import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -17,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -25,6 +23,7 @@ public class SlimeIncubationStationMenu extends AbstractContainerMenu implements
     public final SlimeIncubationStationBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
+    private ResourceSlimeEntity resourceSlimeEntity;
 
     public SlimeIncubationStationMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()),
@@ -38,6 +37,8 @@ public class SlimeIncubationStationMenu extends AbstractContainerMenu implements
         this.level = inv.player.level;
         this.data = data;
 
+        assignResourceSlimeEntity();
+
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
@@ -49,6 +50,18 @@ public class SlimeIncubationStationMenu extends AbstractContainerMenu implements
         });
 
         addDataSlots(data);
+    }
+
+    public ResourceSlimeEntity getResourceSlimeEntity() {
+        return this.resourceSlimeEntity;
+    }
+
+    private void assignResourceSlimeEntity() {
+        resourceSlimeEntity = ModEntityTypes.RESOURCE_SLIME.get().create(blockEntity.getLevel());
+        SlimeResource resource = SlimeResource.getResourceByCraftingItem
+                (blockEntity.itemHandler.getStackInSlot(1).getItem());
+
+        this.resourceSlimeEntity.setResource(new ItemStack(resource.getSlimeyExtractItem()));
     }
 
     @Override

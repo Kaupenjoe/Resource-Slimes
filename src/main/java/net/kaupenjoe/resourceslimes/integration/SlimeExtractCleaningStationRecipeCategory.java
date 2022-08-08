@@ -10,6 +10,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
+import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
@@ -35,7 +36,7 @@ public class SlimeExtractCleaningStationRecipeCategory implements IRecipeCategor
 
     public SlimeExtractCleaningStationRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ModBlocks.GEM_INFUSING_STATION.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get()));
     }
 
     @Override
@@ -64,7 +65,8 @@ public class SlimeExtractCleaningStationRecipeCategory implements IRecipeCategor
     }
 
     @Override
-    public void setRecipe(@Nonnull IRecipeLayoutBuilder builder, @Nonnull SlimeExtractCleaningStationRecipe recipe, @Nonnull IFocusGroup focusGroup) {
+    public void setRecipe(@Nonnull IRecipeLayoutBuilder builder, @Nonnull SlimeExtractCleaningStationRecipe recipe,
+                          @Nonnull IFocusGroup focusGroup) {
         builder.addSlot(RecipeIngredientRole.INPUT, 12, 16).addIngredients(Ingredient.of(ModItems.SOAP.get()));
         builder.addSlot(RecipeIngredientRole.INPUT, 86, 16).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.INPUT, 55, 16)

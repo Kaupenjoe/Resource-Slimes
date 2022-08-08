@@ -7,6 +7,7 @@ import net.kaupenjoe.resourceslimes.block.entity.SlimeIncubationStationBlockEnti
 import net.kaupenjoe.resourceslimes.block.entity.client.GemCuttingStationBlockEntityRenderer;
 import net.kaupenjoe.resourceslimes.block.entity.client.GemInfusingStationBlockEntityRenderer;
 import net.kaupenjoe.resourceslimes.block.entity.client.SlimeExtractCleaningStationBlockEntityRenderer;
+import net.kaupenjoe.resourceslimes.block.entity.client.SlimeIncubationStationBlockEntityRenderer;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.client.ResourceSlimeRenderer;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
@@ -99,5 +100,7 @@ public class ClientListener {
                 GemCuttingStationBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.SLIME_EXTRACT_CLEANING_STATION_BLOCK_ENTITY.get(),
                 SlimeExtractCleaningStationBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.SLIME_INCUBATION_STATION_BLOCK_ENTITY.get(),
+                SlimeIncubationStationBlockEntityRenderer::new);
     }
 }

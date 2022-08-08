@@ -48,7 +48,7 @@ import java.util.Optional;
 import java.util.Random;
 
 public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
+    public final ItemStackHandler itemHandler = new ItemStackHandler(4) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -89,6 +89,14 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
     private int progress = 0;
     private int maxProgress = 78;
 
+    public float getScaledProgress() {
+        float slimeSize = 0.32f;
+        int progess = data.get(0);
+        int maxProgress = data.get(1);
+
+        return maxProgress != 0 && progess != 0 ? progess * slimeSize / maxProgress : 0;
+    }
+
     public ItemStack getRenderStack() {
         ItemStack stack;
 
@@ -99,6 +107,15 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
         }
 
         return stack;
+    }
+
+    public ResourceSlimeEntity getRenderEntity() {
+        ItemStack stack = itemHandler.getStackInSlot(1);
+        ResourceSlimeEntity entity = ModEntityTypes.RESOURCE_SLIME.get().create(this.getLevel());
+        entity.setResource(new ItemStack(
+                SlimeResource.getResourceByExtractItem(stack.getItem()).getSlimeyExtractItem()));
+
+        return entity;
     }
 
     @Override
@@ -219,9 +236,9 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, SlimeIncubationStationBlockEntity pBlockEntity) {
-        if(pLevel.isClientSide()) {
-            return;
-        }
+        // if(pLevel.isClientSide()) {
+        //     return;
+        // }
 
         if(hasRecipe(pBlockEntity) && hasEnoughEnergy(pBlockEntity)) {
             pBlockEntity.progress++;
