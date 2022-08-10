@@ -2,16 +2,14 @@ package net.kaupenjoe.resourceslimes.block.entity;
 
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.ResourceSlimeEntity;
-import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
-import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
+import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncProgressTimerToClient;
 import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.SlimeIncubationStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -45,10 +43,9 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
-import java.util.Random;
 
 public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
-    public final ItemStackHandler itemHandler = new ItemStackHandler(4) {
+    public final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -89,8 +86,12 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
     private int progress = 0;
     private int maxProgress = 78;
 
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+
     public float getScaledProgress() {
-        float slimeSize = 0.32f;
+        float slimeSize = 1f;
         int progess = data.get(0);
         int maxProgress = data.get(1);
 
@@ -110,12 +111,12 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
     }
 
     public ResourceSlimeEntity getRenderEntity() {
-        ItemStack stack = itemHandler.getStackInSlot(1);
-        ResourceSlimeEntity entity = ModEntityTypes.RESOURCE_SLIME.get().create(this.getLevel());
-        entity.setResource(new ItemStack(
-                SlimeResource.getResourceByExtractItem(stack.getItem()).getSlimeyExtractItem()));
+        ResourceSlimeEntity resourceSlimeEntity = ModEntityTypes.RESOURCE_SLIME.get().create(this.getLevel());
+        SlimeResource resource = SlimeResource.getResourceByCraftingItem
+                (itemHandler.getStackInSlot(1).getItem());
+        resourceSlimeEntity.setResource(new ItemStack(resource.getSlimeyExtractItem()));
 
-        return entity;
+        return resourceSlimeEntity;
     }
 
     @Override
@@ -236,12 +237,12 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, SlimeIncubationStationBlockEntity pBlockEntity) {
-        // if(pLevel.isClientSide()) {
-        //     return;
-        // }
+        if(pLevel.isClientSide()) {
+            return;
+        }
 
         if(hasRecipe(pBlockEntity) && hasEnoughEnergy(pBlockEntity)) {
-            pBlockEntity.progress++;
+            pBlockEntity.updateProgress();
             extractEnergy(pBlockEntity);
             setChanged(pLevel, pPos, pState);
             if(pBlockEntity.progress >= pBlockEntity.maxProgress) {
@@ -252,6 +253,7 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
             setChanged(pLevel, pPos, pState);
         }
     }
+
 
     private static void extractEnergy(SlimeIncubationStationBlockEntity entity) {
         entity.ENERGY_STORAGE.extractEnergy(100, false);
@@ -307,6 +309,12 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
 
     private void resetProgress() {
         this.progress = 0;
+        ModMessages.sendToClients(new PacketSyncProgressTimerToClient(progress, getBlockPos()));
+    }
+
+    private void updateProgress() {
+        progress++;
+        ModMessages.sendToClients(new PacketSyncProgressTimerToClient(progress, getBlockPos()));
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack output) {

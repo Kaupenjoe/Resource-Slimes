@@ -12,6 +12,7 @@ import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
 import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationStationRecipe;
+import net.kaupenjoe.resourceslimes.screen.renderer.EntityInfoArea;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -64,7 +65,11 @@ public class SlimeIncubationStationRecipeCategory implements IRecipeCategory<Sli
         builder.addSlot(RecipeIngredientRole.INPUT, 80, 7).addIngredients(recipe.getIngredients().get(1));
         builder.addSlot(RecipeIngredientRole.INPUT, 116, 22).addIngredients(recipe.getIngredients().get(2));
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT,80, 80)
-                .setOverlay(new EntityDrawable(32, 32, recipe.getIngredients().get(1).getItems()[0].getItem()), 16, 16);
+        // TODO: Display custom tooltip on hover
+        builder.addSlot(RecipeIngredientRole.OUTPUT,88, 72)
+                .setOverlay(new EntityDrawable(32, 32,
+                        recipe.getIngredients().get(1).getItems()[0].getItem()), 0, 0)
+                .setOverlay(new EntityInfoArea(88, 72,
+                                recipe.getIngredients().get(1).getItems()[0].getItem(), 32,32), 0, 0);
     }
 }
