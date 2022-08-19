@@ -36,7 +36,7 @@ public class SlimeIncubationStationBlockEntityRenderer implements BlockEntityRen
                        MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
 
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-        ItemStack itemStack = pBlockEntity.getRenderStack();
+
         EntityRenderDispatcher entityRenderer = Minecraft.getInstance().getEntityRenderDispatcher();
 
         pPoseStack.pushPose();

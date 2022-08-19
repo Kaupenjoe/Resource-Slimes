@@ -74,6 +74,12 @@ public class ResourceSlimeEntity extends Slime {
                + " " + I18n.get("entity.resourceslimes.resource_slime")));
     }
 
+    @Nullable
+    @Override
+    public Component getCustomName() {
+        return super.getCustomName();
+    }
+
     @Override
     protected InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
         if(pHand == InteractionHand.MAIN_HAND) {

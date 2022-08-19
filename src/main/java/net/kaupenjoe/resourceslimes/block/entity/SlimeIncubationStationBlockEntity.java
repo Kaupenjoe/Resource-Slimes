@@ -101,8 +101,8 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
     public ItemStack getRenderStack() {
         ItemStack stack;
 
-        if(!itemHandler.getStackInSlot(3).isEmpty()) {
-            stack = itemHandler.getStackInSlot(3);
+        if(!itemHandler.getStackInSlot(2).isEmpty()) {
+            stack = itemHandler.getStackInSlot(2);
         } else {
             stack = itemHandler.getStackInSlot(1);
         }

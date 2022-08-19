@@ -106,6 +106,9 @@ public class ModItems {
     public static final RegistryObject<Item> SOAP = ITEMS.register("soap",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.RESOURCE_SLIMES)));
 
+    public static final RegistryObject<Item> JOE_WIZARD_HAT = ITEMS.register("joe_wizard_hat",
+            () -> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
