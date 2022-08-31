@@ -2,7 +2,7 @@ package net.kaupenjoe.resourceslimes.screen.slot;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -22,7 +22,7 @@ public class ModFluidSourceSlot extends SlotItemHandler {
     public boolean mayPlace(ItemStack stack) {
         AtomicBoolean toReturn = new AtomicBoolean(false);
 
-        stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(handler -> {
+        stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(handler -> {
             for (Supplier<Fluid> fluid : possibleFluids) {
                 toReturn.set(handler.getFluidInTank(0).getFluid().equals(fluid.get()));
             }

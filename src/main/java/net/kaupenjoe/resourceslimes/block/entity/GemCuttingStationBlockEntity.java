@@ -1,12 +1,6 @@
 package net.kaupenjoe.resourceslimes.block.entity;
 
-import java.util.Optional;
-
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
+import com.google.common.collect.Maps;
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.networking.ModMessages;
@@ -16,6 +10,8 @@ import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClie
 import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
+import net.kaupenjoe.resourceslimes.util.ModTags;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -34,16 +30,20 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
+import java.util.Map;
+import java.util.Optional;
 
 public class GemCuttingStationBlockEntity extends AbstractRSMachineBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
@@ -54,7 +54,27 @@ public class GemCuttingStationBlockEntity extends AbstractRSMachineBlockEntity {
                 ModMessages.sendToClients(new PacketSyncItemStackToClient(this, worldPosition));
             }
         }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack)
+        {
+            return switch (slot) {
+                case 0 -> stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
+                case 1 -> stack.is(ModTags.Items.CUT_GEMS);
+                case 2 -> false;
+                default -> super.isItemValid(slot, stack);
+            };
+        }
     };
+
+    private final Map<Direction, LazyOptional<IItemHandler>> sidedInventories = Util.make(Maps.newHashMap(), map ->
+    {
+        map.put(Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> false)));
+        map.put(Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (index) -> index == 1, (index, stack) -> itemHandler.isItemValid(1, stack))));
+        map.put(Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> false)));
+        map.put(Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (index, stack) -> itemHandler.isItemValid(1, stack))));
+        map.put(Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (index) -> index == 0 || index == 1, (index, stack) -> itemHandler.isItemValid(0, stack) || itemHandler.isItemValid(1, stack))));
+    });
 
     private final FluidTank FLUID_TANK = createFluidTank();
     private final KaupenEnergyStorage ENERGY_STORAGE = createEnergyStorage();
@@ -66,7 +86,7 @@ public class GemCuttingStationBlockEntity extends AbstractRSMachineBlockEntity {
 
     @NotNull
     @Override
-    protected FluidTank createFluidTank() {
+    public FluidTank createFluidTank() {
         return new FluidTank(16000) {
             @Override
             protected void onContentsChanged() {
@@ -86,7 +106,7 @@ public class GemCuttingStationBlockEntity extends AbstractRSMachineBlockEntity {
 
     @NotNull
     @Override
-    protected KaupenEnergyStorage createEnergyStorage() {
+    public KaupenEnergyStorage createEnergyStorage() {
         return new KaupenEnergyStorage(60000, 200) {
             @Override
             public void onEnergyChanged() {
@@ -187,15 +207,32 @@ public class GemCuttingStationBlockEntity extends AbstractRSMachineBlockEntity {
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @javax.annotation.Nullable Direction side) {
-        if(cap == CapabilityEnergy.ENERGY) {
+        if(cap == ForgeCapabilities.ENERGY) {
             return lazyEnergyHandler.cast();
         }
 
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        if (cap == ForgeCapabilities.ITEM_HANDLER) {
+            if(side == null) {
+                return lazyItemHandler.cast();
+            }
+
+            if(sidedInventories.containsKey(side)) {
+                Direction localDir = this.getBlockState().getValue(GemCuttingStationBlock.FACING);
+
+                return side == Direction.UP || side == Direction.DOWN ? sidedInventories.get(side).cast() : switch (localDir) {
+                    default -> sidedInventories.get(side.getOpposite()).cast();
+                    case EAST -> sidedInventories.get(side.getClockWise()).cast();
+                    case SOUTH -> sidedInventories.get(side).cast();
+                    case WEST -> sidedInventories.get(side.getCounterClockWise()).cast();
+                };
+            }
+        }
+
+        if (cap == ForgeCapabilities.ITEM_HANDLER) {
             return lazyItemHandler.cast();
         }
 
-        if(cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+        if(cap == ForgeCapabilities.FLUID_HANDLER) {
             if(this.getBlockState().getValue(GemCuttingStationBlock.FACING).getClockWise() == side) {
                 return lazyFluidHandler.cast();
             }
@@ -283,7 +320,7 @@ public class GemCuttingStationBlockEntity extends AbstractRSMachineBlockEntity {
     }
 
     private static void transferItemWaterToWaterTank(GemCuttingStationBlockEntity entity) {
-        entity.itemHandler.getStackInSlot(0).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(handler -> {
+        entity.itemHandler.getStackInSlot(0).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(handler -> {
             int drainAmount = Math.min(entity.FLUID_TANK.getSpace(), 1000);
 
             FluidStack stack = handler.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);

@@ -20,6 +20,11 @@ public class ModEventBusEvents {
     }
 
     @SubscribeEvent
+    public static void onRegisterItems(RegisterEvent event) {
+        ModItems.onRegisterItems(event.getForgeRegistry());
+    }
+
+    @SubscribeEvent
     public static void onNewRegistryEvent(NewRegistryEvent event) {
         event.create(ResourceSlimesRegistries.getSlimeResourceBuilder());
     }

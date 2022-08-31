@@ -10,7 +10,6 @@ public class ModBlockLootTables extends BlockLoot {
 
     @Override
     protected void addTables() {
-        dropSelf(ModBlocks.SLIMEY_DIRT.get());
         oreDrops();
         blockEntityDrops();
     }
@@ -23,27 +22,18 @@ public class ModBlockLootTables extends BlockLoot {
     }
 
     private void oreDrops() {
-        this.add(ModBlocks.CITRINE_ORE.get(),
-                (block) -> createOreDrop(block, ModItems.RAW_CITRINE.get()));
-        this.add(ModBlocks.DEEPSLATE_CITRINE_ORE.get(),
-                (block) -> createOreDrop(ModBlocks.DEEPSLATE_CITRINE_ORE.get(), ModItems.RAW_CITRINE.get()));
+        this.add(ModBlocks.CITRINE_ORE.get(), (block) -> createOreDrop(block, ModItems.RAW_CITRINE.get()));
+        this.add(ModBlocks.DEEPSLATE_CITRINE_ORE.get(), (block) -> createOreDrop(block, ModItems.RAW_CITRINE.get()));
 
-        this.add(ModBlocks.ZIRCON_ORE.get(),
-                (block) -> createOreDrop(ModBlocks.ZIRCON_ORE.get(), ModItems.RAW_ZIRCON.get()));
-        this.add(ModBlocks.DEEPSLATE_ZIRCON_ORE.get(),
-                (block) -> createOreDrop(ModBlocks.DEEPSLATE_ZIRCON_ORE.get(), ModItems.RAW_ZIRCON.get()));
+        this.add(ModBlocks.ZIRCON_ORE.get(), (block) -> createOreDrop(block, ModItems.RAW_ZIRCON.get()));
+        this.add(ModBlocks.DEEPSLATE_ZIRCON_ORE.get(), (block) -> createOreDrop(block, ModItems.RAW_ZIRCON.get()));
 
-        this.add(ModBlocks.TANZANITE_ORE.get(),
-                (block) -> createOreDrop(ModBlocks.TANZANITE_ORE.get(), ModItems.RAW_TANZANITE.get()));
-        this.add(ModBlocks.DEEPSLATE_TANZANITE_ORE.get(),
-                (block) -> createOreDrop(ModBlocks.DEEPSLATE_TANZANITE_ORE.get(), ModItems.RAW_TANZANITE.get()));
+        this.add(ModBlocks.TANZANITE_ORE.get(), (block) -> createOreDrop(block, ModItems.RAW_TANZANITE.get()));
+        this.add(ModBlocks.DEEPSLATE_TANZANITE_ORE.get(), (block) -> createOreDrop(block, ModItems.RAW_TANZANITE.get()));
 
-        this.add(ModBlocks.BLACK_OPAL_ORE.get(),
-                (block) -> createOreDrop(ModBlocks.BLACK_OPAL_ORE.get(), ModItems.RAW_BLACK_OPAL.get()));
-        this.add(ModBlocks.DEEPSLATE_BLACK_OPAL_ORE.get(),
-                (block) -> createOreDrop(ModBlocks.DEEPSLATE_BLACK_OPAL_ORE.get(), ModItems.RAW_BLACK_OPAL.get()));
-        this.add(ModBlocks.END_BLACK_OPAL_ORE.get(),
-                (block) -> createOreDrop(ModBlocks.END_BLACK_OPAL_ORE.get(), ModItems.RAW_BLACK_OPAL.get()));
+        this.add(ModBlocks.BLACK_OPAL_ORE.get(), (block) -> createOreDrop(block, ModItems.RAW_BLACK_OPAL.get()));
+        this.add(ModBlocks.DEEPSLATE_BLACK_OPAL_ORE.get(), (block) -> createOreDrop(block, ModItems.RAW_BLACK_OPAL.get()));
+        this.add(ModBlocks.END_BLACK_OPAL_ORE.get(), (block) -> createOreDrop(block, ModItems.RAW_BLACK_OPAL.get()));
     }
 
     @Override

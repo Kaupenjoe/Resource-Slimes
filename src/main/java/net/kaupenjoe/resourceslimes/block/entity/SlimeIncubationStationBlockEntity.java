@@ -1,18 +1,18 @@
 package net.kaupenjoe.resourceslimes.block.entity;
 
-import java.util.Optional;
-
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
+import com.google.common.collect.Maps;
+import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
+import net.kaupenjoe.resourceslimes.entity.ResourceSlime;
 import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
+import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncProgressTimerToClient;
 import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationRecipe;
 import net.kaupenjoe.resourceslimes.screen.SlimeIncubationStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
+import net.kaupenjoe.resourceslimes.util.ModTags;
+import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -30,25 +30,41 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
+import java.util.Map;
+import java.util.Optional;
 
 public class SlimeIncubationStationBlockEntity extends AbstractRSMachineBlockEntity {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
+    public final ItemStackHandler itemHandler = new ItemStackHandler(4) {
         @Override
-        protected void onContentsChanged(int slot) {
+        protected void onContentsChanged(int slot)
+        {
             setChanged();
-            if(!level.isClientSide()) {
+            if (!level.isClientSide())
+            {
                 ModMessages.sendToClients(new PacketSyncItemStackToClient(this, worldPosition));
             }
         }
     };
+
+    private final Map<Direction, LazyOptional<IItemHandler>> sidedInventories = Util.make(Maps.newHashMap(), map ->
+    {
+        map.put(Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> false)));
+        map.put(Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (index) -> index == 1, (index, stack) -> itemHandler.isItemValid(1, stack))));
+        map.put(Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> false)));
+        map.put(Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1, (index, stack) -> itemHandler.isItemValid(1, stack))));
+        map.put(Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (index) -> index == 0 || index == 1, (index, stack) -> itemHandler.isItemValid(0, stack) || itemHandler.isItemValid(1, stack))));
+    });
 
     private final KaupenEnergyStorage ENERGY_STORAGE = createEnergyStorage();
 
@@ -58,13 +74,13 @@ public class SlimeIncubationStationBlockEntity extends AbstractRSMachineBlockEnt
     }
 
     @Override
-    FluidTank createFluidTank() {
+    public FluidTank createFluidTank() {
         return null;
     }
 
     @NotNull
     @Override
-    protected KaupenEnergyStorage createEnergyStorage() {
+    public KaupenEnergyStorage createEnergyStorage() {
         return new KaupenEnergyStorage(60000, 200) {
             @Override
             public void onEnergyChanged() {
@@ -91,6 +107,30 @@ public class SlimeIncubationStationBlockEntity extends AbstractRSMachineBlockEnt
         }
 
         return stack;
+    }
+
+    public void setProgress(int progress)
+    {
+        this.progress = progress;
+    }
+
+    public ResourceSlime getRenderEntity() {
+        ResourceSlime resourceSlimeEntity = ModEntityTypes.RESOURCE_SLIME.get().create(this.getLevel());
+        SlimeResource resource = SlimeResource.getResourceByCraftingItem
+                (itemHandler.getStackInSlot(1).getItem());
+        resourceSlimeEntity.setResource(new ItemStack(resource.getSlimeyExtractItem()));
+
+        return resourceSlimeEntity;
+    }
+
+    private void resetProgress() {
+        this.progress = 0;
+        ModMessages.sendToClients(new PacketSyncProgressTimerToClient(progress, getBlockPos()));
+    }
+
+    private void updateProgress() {
+        progress++;
+        ModMessages.sendToClients(new PacketSyncProgressTimerToClient(progress, getBlockPos()));
     }
 
     @Override
@@ -159,11 +199,11 @@ public class SlimeIncubationStationBlockEntity extends AbstractRSMachineBlockEnt
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @javax.annotation.Nullable Direction side) {
-        if(cap == CapabilityEnergy.ENERGY) {
+        if(cap == ForgeCapabilities.ENERGY) {
             return lazyEnergyHandler.cast();
         }
 
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        if (cap == ForgeCapabilities.ITEM_HANDLER) {
             return lazyItemHandler.cast();
         }
 
@@ -270,10 +310,6 @@ public class SlimeIncubationStationBlockEntity extends AbstractRSMachineBlockEnt
 
             entity.resetProgress();
         }
-    }
-
-    private void resetProgress() {
-        this.progress = 0;
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack output) {

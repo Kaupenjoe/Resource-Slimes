@@ -1,7 +1,5 @@
 package net.kaupenjoe.resourceslimes.util;
 
-import java.util.function.Supplier;
-
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.core.Registry;
@@ -10,6 +8,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
+
+import java.util.function.Supplier;
 
 public final class ResourceSlimesRegistries {
 	static final DeferredRegister<SlimeResource> DEFERRED_SLIME_RESOURCES = DeferredRegister
@@ -29,5 +29,6 @@ public final class ResourceSlimesRegistries {
 	public static class Keys {
 		public static final ResourceKey<Registry<SlimeResource>> SLIME_RESOURCES = ResourceKey
 				.createRegistryKey(new ResourceLocation(ResourceSlimes.MOD_ID, "slime_resources"));
+
 	}
 }

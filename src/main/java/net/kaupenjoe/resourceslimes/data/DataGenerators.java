@@ -1,6 +1,7 @@
 package net.kaupenjoe.resourceslimes.data;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
+import net.kaupenjoe.resourceslimes.data.custom.RSBMProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -16,6 +17,7 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(), new ModRecipeProvider(generator));
         generator.addProvider(event.includeServer(), new ModLootTableProvider(generator));
+        generator.addProvider(event.includeServer(), new RSBMProvider(generator));
 
         generator.addProvider(event.includeClient(), new ModBlockStatesProvider(generator, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModItemModelProvider(generator, existingFileHelper));

@@ -1,10 +1,5 @@
 package net.kaupenjoe.resourceslimes.entity;
 
-import java.util.EnumSet;
-
-import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.Nullable;
-
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.item.custom.ExtractItem;
 import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
@@ -42,6 +37,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.EnumSet;
 
 // TODO: Using Slime as it super class mean it has TWO size values
 public class ResourceSlime extends Slime {

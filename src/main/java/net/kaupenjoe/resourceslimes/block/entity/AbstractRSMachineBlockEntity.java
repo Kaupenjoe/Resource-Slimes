@@ -13,6 +13,6 @@ public abstract class AbstractRSMachineBlockEntity extends BlockEntity implement
         super(pType, pWorldPosition, pBlockState);
     }
 
-    abstract FluidTank createFluidTank();
-    abstract KaupenEnergyStorage createEnergyStorage();
+    public abstract FluidTank createFluidTank();
+    public abstract KaupenEnergyStorage createEnergyStorage();
 }

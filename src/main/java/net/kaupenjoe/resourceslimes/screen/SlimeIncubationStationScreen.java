@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.screen.renderer.EnergyInfoArea;
+import net.kaupenjoe.resourceslimes.screen.renderer.EntityInfoArea;
 import net.kaupenjoe.resourceslimes.util.MouseUtil;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -17,6 +18,7 @@ public class SlimeIncubationStationScreen extends AbstractContainerScreen<SlimeI
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(ResourceSlimes.MOD_ID,"textures/gui/slime_incubation_station_gui.png");
     private EnergyInfoArea energyInfoArea;
+    private EntityInfoArea entityInfoArea;
 
 
     public SlimeIncubationStationScreen(SlimeIncubationStationMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
@@ -27,6 +29,19 @@ public class SlimeIncubationStationScreen extends AbstractContainerScreen<SlimeI
     protected void init() {
         super.init();
         assignEnergyInfoArea();
+        assignEntityInfoArea();
+    }
+
+    private void assignEntityInfoArea() {
+        entityInfoArea = new EntityInfoArea(((width - imageWidth) / 2) + 72,
+                ((height - imageHeight) / 2) + 46, menu.getResourceSlimeEntity(), 32, 32);
+    }
+
+    private void renderEntityArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
+        if(menu.isCrafting() && isMouseAboveArea(pMouseX, pMouseY, x, y,73, 47, 32, 32)) {
+            renderTooltip(pPoseStack, entityInfoArea.getTooltips(),
+                    Optional.empty(), pMouseX - x, pMouseY - y);
+        }
     }
 
     @Override
@@ -35,6 +50,7 @@ public class SlimeIncubationStationScreen extends AbstractContainerScreen<SlimeI
         int y = (height - imageHeight) / 2;
 
         renderEnergyArea(pPoseStack, pMouseX, pMouseY, x, y);
+        renderEntityArea(pPoseStack, pMouseX, pMouseY, x, y);
     }
 
     private void renderEnergyArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
@@ -54,15 +70,12 @@ public class SlimeIncubationStationScreen extends AbstractContainerScreen<SlimeI
 
         this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
 
-        renderProgressArrow(pPoseStack, x, y);
 
         energyInfoArea.draw(pPoseStack);
-    }
-
-    private void renderProgressArrow(PoseStack pPoseStack, int x, int y) {
-        if(menu.isCrafting()) {
-            blit(pPoseStack, x + 105, y + 33, 176, 0, 8, menu.getScaledProgress());
+        if(menu.isCrafting() && isMouseAboveArea(pMouseX, pMouseY, x, y,73, 47, 32, 32)) {
+            entityInfoArea.draw(pPoseStack);
         }
+
     }
 
     @Override

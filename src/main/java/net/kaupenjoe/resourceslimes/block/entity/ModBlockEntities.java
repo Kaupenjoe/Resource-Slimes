@@ -32,6 +32,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(SlimeIncubationStationBlockEntity::new,
                             ModBlocks.SLIME_INCUBATION_STATION.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<ExtractLiquidizerBlockEntity>> EXTRACT_LIQUIDIZER =
+            BLOCK_ENTITIES.register("extract_liquidizer", () ->
+                    BlockEntityType.Builder.of(ExtractLiquidizerBlockEntity::new,
+                            ModBlocks.EXTRACT_LIQUIDIZER.get()).build(null));
+
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

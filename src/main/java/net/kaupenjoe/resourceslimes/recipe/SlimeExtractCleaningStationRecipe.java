@@ -17,17 +17,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 
-public class SlimeExtractCleaningStationRecipe implements Recipe<SimpleContainer> {
-    private final ResourceLocation id;
-    private final ItemStack output;
-    private final NonNullList<Ingredient> recipeItems;
-
-    public SlimeExtractCleaningStationRecipe(ResourceLocation id, ItemStack output,
-                                             NonNullList<Ingredient> recipeItems) {
-        this.id = id;
-        this.output = output;
-        this.recipeItems = recipeItems;
-    }
+public record SlimeExtractCleaningStationRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems) implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {

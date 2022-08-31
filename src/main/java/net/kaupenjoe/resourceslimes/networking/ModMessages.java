@@ -3,11 +3,18 @@ package net.kaupenjoe.resourceslimes.networking;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.networking.packets.*;
 import net.minecraft.network.Connection;
+import net.minecraft.network.ConnectionProtocol;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.filters.VanillaPacketSplitter;
 import net.minecraftforge.network.simple.SimpleChannel;
+
+import java.util.ArrayList;
 
 public class ModMessages {
     private static SimpleChannel INSTANCE;
@@ -61,6 +68,14 @@ public class ModMessages {
     public static <MSG> void sendTo(MSG msg, Connection connection, NetworkDirection direction) {
         INSTANCE.sendTo(msg, connection, direction);
     }
+
+    public static <MSG> void sendToSplit(ServerPlayer player, MSG message) {
+        Packet<?> vanillaPacket = INSTANCE.toVanillaPacket(message, NetworkDirection.PLAY_TO_CLIENT);
+        var packets = new ArrayList<Packet<?>>();
+        VanillaPacketSplitter.appendPackets(ConnectionProtocol.PLAY, PacketFlow.CLIENTBOUND, vanillaPacket, packets);
+        packets.forEach(player.connection::send);
+    }
+
     public static <MSG> void sendToClients(MSG message) {
         INSTANCE.send(PacketDistributor.ALL.noArg(), message);
     }

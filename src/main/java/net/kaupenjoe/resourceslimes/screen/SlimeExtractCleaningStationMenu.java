@@ -3,7 +3,10 @@ package net.kaupenjoe.resourceslimes.screen;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.block.entity.SlimeExtractCleaningStationBlockEntity;
 import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.screen.slot.*;
+import net.kaupenjoe.resourceslimes.screen.slot.ModFluidSourceSlot;
+import net.kaupenjoe.resourceslimes.screen.slot.ModRestrictedSlot;
+import net.kaupenjoe.resourceslimes.screen.slot.ModResultSlot;
+import net.kaupenjoe.resourceslimes.screen.slot.ModTagRestrictedSlot;
 import net.kaupenjoe.resourceslimes.util.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,8 +16,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.items.CapabilityItemHandler;
 
 public class SlimeExtractCleaningStationMenu extends AbstractContainerMenu implements IEnergyMenu  {
     public final SlimeExtractCleaningStationBlockEntity blockEntity;
@@ -39,7 +42,7 @@ public class SlimeExtractCleaningStationMenu extends AbstractContainerMenu imple
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
+        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
             this.addSlot(new ModRestrictedSlot(handler, 0, 12, 15, ModItems.SOAP));
             this.addSlot(new ModFluidSourceSlot(handler, 1, 12, 61, () -> Fluids.WATER));
             this.addSlot(new ModTagRestrictedSlot(handler, 2, 86, 16, () -> ModTags.Items.SLIMEY_EXTRACTS));

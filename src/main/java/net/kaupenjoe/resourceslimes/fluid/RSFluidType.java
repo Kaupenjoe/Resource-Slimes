@@ -22,15 +22,15 @@ import java.util.function.Consumer;
  * Change by: Kaupenjoe
  * Added overlayTexture and tintColor as well. Also converts tint color into fog color
  */
-public class BaseFluidType extends FluidType {
+public class RSFluidType extends FluidType {
     private final ResourceLocation stillTexture;
     private final ResourceLocation flowingTexture;
     private final ResourceLocation overlayTexture;
     private final int tintColor;
     private final Vector3f fogColor;
 
-    public BaseFluidType(final ResourceLocation stillTexture, final ResourceLocation flowingTexture, final ResourceLocation overlayTexture,
-                         final int tintColor, final Vector3f fogColor, final Properties properties) {
+    public RSFluidType(final ResourceLocation stillTexture, final ResourceLocation flowingTexture, final ResourceLocation overlayTexture,
+                       final int tintColor, final Vector3f fogColor, final Properties properties) {
         super(properties);
         this.stillTexture = stillTexture;
         this.flowingTexture = flowingTexture;
@@ -39,7 +39,7 @@ public class BaseFluidType extends FluidType {
         this.fogColor = fogColor;
     }
 
-    public BaseFluidType(final int tintColor, final Vector3f fogColor, final Properties properties) {
+    public RSFluidType(final int tintColor, final Vector3f fogColor, final Properties properties) {
         super(properties);
         this.stillTexture = new ResourceLocation("block/water_still");
         this.flowingTexture = new ResourceLocation("block/water_flow");

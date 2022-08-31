@@ -50,13 +50,13 @@ public class ResourceSlimeRenderer extends MobRenderer<Slime, SlimeModel<Slime>>
 
     @Nullable
     @Override
-    protected RenderType getRenderType(Slime pEntity, boolean p_115323_, boolean p_115324_, boolean p_115325_) {
-        if (p_115324_) {
+    protected RenderType getRenderType(Slime pLivingEntity, boolean pBodyVisible, boolean pTranslucent, boolean pGlowing) {
+        if (pTranslucent) {
             return RenderType.itemEntityTranslucentCull(EYES_MOUTH_LOC);
-        } else if (p_115323_) {
+        } else if (pBodyVisible) {
             return this.model.renderType(EYES_MOUTH_LOC);
         } else {
-            return p_115325_ ? RenderType.outline(EYES_MOUTH_LOC) : null;
+            return pGlowing ? RenderType.outline(EYES_MOUTH_LOC) : null;
         }
     }
 }

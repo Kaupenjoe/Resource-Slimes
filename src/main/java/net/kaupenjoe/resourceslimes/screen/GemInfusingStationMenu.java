@@ -14,8 +14,8 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.items.CapabilityItemHandler;
 
 public class GemInfusingStationMenu extends AbstractContainerMenu implements IFluidMenu, IEnergyMenu  {
     public final GemInfusingStationBlockEntity blockEntity;
@@ -38,7 +38,7 @@ public class GemInfusingStationMenu extends AbstractContainerMenu implements IFl
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
+        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
             this.addSlot(new ModFluidSourceSlot(handler, 0, 12, 15, ModFluids.CITRINE_SLIME_FLUID::get));
             this.addSlot(new ModTagRestrictedSlot(handler, 1, 86, 15, () -> ModTags.Items.CUT_GEMS));
             this.addSlot(new ModResultSlot(handler, 2, 86, 60));

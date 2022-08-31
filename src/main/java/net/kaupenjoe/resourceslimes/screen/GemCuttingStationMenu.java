@@ -3,7 +3,10 @@ package net.kaupenjoe.resourceslimes.screen;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.block.entity.GemCuttingStationBlockEntity;
 import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.screen.slot.*;
+import net.kaupenjoe.resourceslimes.screen.slot.ModRestrictedSlot;
+import net.kaupenjoe.resourceslimes.screen.slot.ModResultSlot;
+import net.kaupenjoe.resourceslimes.screen.slot.ModTagRestrictedSlot;
+import net.kaupenjoe.resourceslimes.screen.slot.ModWaterSourceSlot;
 import net.kaupenjoe.resourceslimes.util.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,8 +15,8 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.items.CapabilityItemHandler;
 
 public class GemCuttingStationMenu extends AbstractContainerMenu implements IFluidMenu, IEnergyMenu {
     public final GemCuttingStationBlockEntity blockEntity;
@@ -36,7 +39,7 @@ public class GemCuttingStationMenu extends AbstractContainerMenu implements IFlu
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
+        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
             this.addSlot(new ModWaterSourceSlot(handler, 0, 15, 40));
             this.addSlot(new ModTagRestrictedSlot(handler, 1, 57, 18, () -> ModTags.Items.UNCUT_GEMS));
             this.addSlot(new ModRestrictedSlot(handler, 2, 103, 18, ModItems.GEM_CUTTER_TOOL));

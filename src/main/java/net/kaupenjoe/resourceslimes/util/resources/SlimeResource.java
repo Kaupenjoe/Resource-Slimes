@@ -6,9 +6,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.function.Supplier;
+
 public class SlimeResource {
     private Item extractItem;
     private Item slimeyExtractItem;
+    private Supplier<Item> craftingItem;
     private final ResourceTier tier;
     private final ResourceLocation innerCubeTextureRes;
     private boolean enabled;
@@ -23,12 +26,21 @@ public class SlimeResource {
     	return ResourceSlimesRegistries.SLIME_RESOURCES.get().getKey(this).getPath();
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    public static SlimeResource getResourceByCraftingItem(Item result) {
+        for (SlimeResource resource : ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues()) {
+            if(resource.getCraftingItem().get() == result) {
+                return resource;
+            }
+        }
+        return BuiltinSlimeResources.EMPTY.get();
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public Supplier<Item> getCraftingItem() {
+        return craftingItem;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public void setExtractItem(Item stacks) {

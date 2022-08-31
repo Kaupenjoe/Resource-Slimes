@@ -17,17 +17,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 
-public class SlimeIncubationRecipe implements Recipe<SimpleContainer> {
-    private final ResourceLocation id;
-    private final ItemStack output;
-    private final NonNullList<Ingredient> recipeItems;
-
-    public SlimeIncubationRecipe(ResourceLocation id, ItemStack output,
-                                 NonNullList<Ingredient> recipeItems) {
-        this.id = id;
-        this.output = output;
-        this.recipeItems = recipeItems;
-    }
+public record SlimeIncubationRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems) implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
@@ -123,6 +113,7 @@ public class SlimeIncubationRecipe implements Recipe<SimpleContainer> {
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
             }
+
             buf.writeItemStack(recipe.getResultItem(), false);
         }
     }

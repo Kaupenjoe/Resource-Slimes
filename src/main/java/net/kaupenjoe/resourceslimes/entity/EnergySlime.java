@@ -9,7 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class EnergySlime extends Slime {
             List<BlockEntity> availableEnergyBlockEntities = BlockPos.betweenClosedStream(boundingBox)
                     .filter(p -> level.getBlockState(p).hasBlockEntity())
                     .map(this::getEntityFromState)
-                    .filter(bE -> bE != null && bE.getCapability(CapabilityEnergy.ENERGY).isPresent()).toList();
+                    .filter(bE -> bE != null && bE.getCapability(ForgeCapabilities.ENERGY).isPresent()).toList();
 
             sendEnergy(availableEnergyBlockEntities,20);
         }
@@ -38,7 +38,7 @@ public class EnergySlime extends Slime {
 
     private void sendEnergy(List<BlockEntity> blockEntities, int amount) {
         for (var blockEntity : blockEntities) {
-            blockEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(handler -> {
+            blockEntity.getCapability(ForgeCapabilities.ENERGY).ifPresent(handler -> {
                 if(handler.receiveEnergy(amount, false) > 0) {
                     test(blockEntity.getBlockPos());
                 }

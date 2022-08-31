@@ -17,19 +17,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 
-public class GemCuttingStationRecipe implements Recipe<SimpleContainer> {
-    private final ResourceLocation id;
-    private final ItemStack output;
-    private final NonNullList<Ingredient> recipeItems;
-    private final int waterAmount;
-
-    public GemCuttingStationRecipe(ResourceLocation id, ItemStack output,
-                                   NonNullList<Ingredient> recipeItems, int waterAmount) {
-        this.id = id;
-        this.output = output;
-        this.recipeItems = recipeItems;
-        this.waterAmount = waterAmount;
-    }
+public record GemCuttingStationRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems, int waterAmount) implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {

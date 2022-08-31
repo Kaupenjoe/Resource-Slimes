@@ -13,16 +13,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.fluids.FluidStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
 public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<SlimeExtractCleaningStationMenu> {
-    private static final ResourceLocation TEXTURE =
-            new ResourceLocation(ResourceSlimes.MOD_ID,"textures/gui/slime_extract_cleaning_station_gui.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(ResourceSlimes.MOD_ID,
+            "textures/gui/slime_extract_cleaning_station_gui.png");
     private FluidStackRenderer renderer;
     private FluidStackRenderer wasteRenderer;
     private EnergyInfoArea energyInfoArea;
-
 
     public SlimeExtractCleaningStationScreen(SlimeExtractCleaningStationMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -36,7 +36,7 @@ public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<S
     }
 
     @Override
-    protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
+    protected void renderLabels(@NotNull PoseStack pPoseStack, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 

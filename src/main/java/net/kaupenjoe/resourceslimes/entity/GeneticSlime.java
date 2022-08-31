@@ -224,7 +224,6 @@ public class GeneticSlime extends Animal {
         return false;
     }
 
-    @SuppressWarnings("ReassignedVariable")
     public enum Gene {
         // @todo Kaupenjoe can add more... right kaupen? :)
         NORMAL(0, "normal", false);

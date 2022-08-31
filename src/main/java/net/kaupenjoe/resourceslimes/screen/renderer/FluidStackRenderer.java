@@ -4,6 +4,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.ingredients.IIngredientRenderer;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.base.Preconditions;
@@ -31,7 +33,8 @@ import net.minecraftforge.fluids.FluidType;
 
 // CREDIT: https://github.com/mezz/JustEnoughItems by mezz
 // Under MIT-License: https://github.com/mezz/JustEnoughItems/blob/1.18/LICENSE.txt
-public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
+public class FluidStackRenderer implements IIngredientRenderer<FluidStack>
+{
     private static final NumberFormat nf = NumberFormat.getIntegerInstance();
     private static final int TEXTURE_SIZE = 16;
     private static final int MIN_FLUID_HEIGHT = 1; // ensure tiny amounts of fluid are still visible
@@ -95,8 +98,6 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
         RenderSystem.disableBlend();
     }
 
-    @SuppressWarnings("removal")
-    @Override
     public void render(PoseStack stack, int xPosition, int yPosition, @Nullable FluidStack ingredient) {
         if (ingredient != null) {
             stack.pushPose();

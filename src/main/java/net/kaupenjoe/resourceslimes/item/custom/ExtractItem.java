@@ -2,7 +2,6 @@ package net.kaupenjoe.resourceslimes.item.custom;
 
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -17,7 +16,7 @@ public class ExtractItem extends Item {
     }
 
     public Component getExtractNameKey(ItemStack stack) {
-        return Component.translatable("extract.resourceslimes." + SlimeResource.getResourceByExtractItem(stack.getItem()).name().toLowerCase());
+        return Component.literal("extract.resourceslimes." + SlimeResource.getResourceByExtractItem(stack.getItem()).name().toLowerCase());
     }
 
 

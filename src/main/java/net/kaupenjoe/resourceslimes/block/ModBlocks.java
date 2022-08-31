@@ -9,7 +9,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -57,10 +56,6 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(12.5f).requiresCorrectToolForDrops()), ModCreativeModeTab.RESOURCE_SLIMES);
 
-    public static final RegistryObject<Block> SLIMEY_DIRT = registerBlock("slimey_dirt",
-            () -> new SlimeyDirtBlock(BlockBehaviour.Properties.copy(Blocks.PODZOL)), ModCreativeModeTab.RESOURCE_SLIMES
-    , "tooltip." + ResourceSlimes.MOD_ID + ".slimey_dirt");
-
     public static final RegistryObject<LiquidBlock> CITRINE_SLIME_FLUID_BLOCK = registerBlockWithoutBlockItem("citrine_slime_fluid_block",
             () -> new LiquidBlock(() -> ModFluids.CITRINE_SLIME_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER)
                     .noCollission().strength(100f).noLootTable()));
@@ -100,6 +95,9 @@ public class ModBlocks {
             ModCreativeModeTab.RESOURCE_SLIMES);
     public static final RegistryObject<Block> SLIME_INCUBATION_STATION = registerBlock("slime_incubation_station",
             () -> new SlimeIncubationStationBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),
+            ModCreativeModeTab.RESOURCE_SLIMES);
+    public static final RegistryObject<Block> EXTRACT_LIQUIDIZER = registerBlock("extract_liquidizer",
+            () -> new ExtractLiquidizerBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),
             ModCreativeModeTab.RESOURCE_SLIMES);
 
 

@@ -19,19 +19,7 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
 
-public class GemInfusingStationRecipe implements Recipe<SimpleContainer> {
-    private final ResourceLocation id;
-    private final ItemStack output;
-    private final NonNullList<Ingredient> recipeItems;
-    private final FluidStack fluid;
-
-    public GemInfusingStationRecipe(ResourceLocation id, ItemStack output,
-                                    NonNullList<Ingredient> recipeItems, FluidStack fluid) {
-        this.id = id;
-        this.output = output;
-        this.recipeItems = recipeItems;
-        this.fluid = fluid;
-    }
+public record GemInfusingStationRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems, FluidStack fluid) implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {

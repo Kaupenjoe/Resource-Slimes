@@ -34,9 +34,6 @@ public class ClientListener {
 	@SubscribeEvent
 	public static void clientSetup(final FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
-			EntityRenderers.register(ModEntityTypes.RESOURCE_SLIME.get(), ResourceSlimeRenderer::new);
-			EntityRenderers.register(ModEntityTypes.ENERGY_SLIME.get(), ResourceSlimeRenderer::new);
-
 			setFluidRenderLayer();
 
 			MenuScreens.register(ModMenuTypes.GEM_CUTTING_STATION_MENU.get(), GemCuttingStationScreen::new);
@@ -113,5 +110,8 @@ public class ClientListener {
 				GemCuttingStationBlockEntityRenderer::new);
 		event.registerBlockEntityRenderer(ModBlockEntities.SLIME_EXTRACT_CLEANING_STATION_BLOCK_ENTITY.get(),
 				SlimeExtractCleaningStationBlockEntityRenderer::new);
+
+		event.registerEntityRenderer(ModEntityTypes.RESOURCE_SLIME.get(), ResourceSlimeRenderer::new);
+		event.registerEntityRenderer(ModEntityTypes.ENERGY_SLIME.get(), ResourceSlimeRenderer::new);
 	}
 }

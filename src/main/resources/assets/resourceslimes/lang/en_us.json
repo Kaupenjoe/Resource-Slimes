@@ -1,4 +1,8 @@
 {
+  "item.resourceslimes.guide_book": "ResourceSlimes Guide Book!",
+  "book.resourceslimes.subtitle": "Make sure it doesn't get sticky!",
+  "book.resourceslimes.landing_text": "A very sticky guide <- Cringe title honestly",
+
   "item.resourceslimes.uncut_citrine": "Uncut Citrine",
   "item.resourceslimes.raw_citrine": "Raw Citrine",
   "item.resourceslimes.cut_citrine": "Cut Citrine",
@@ -139,7 +143,8 @@
   "extract.resourceslimes.end_crystal": "End Crystal",
 
   "title.guide_screen": "Resource Slimes Core Topics Guide!",
-  "guide.genetics.content": "Different Types of Genetics: ",
+
+  "guide.genetics.content": "Different Types of Genetics: * {Kaupen May add these}, ",
 
   "effect.resourceslimes.soapy": "Soapy",
   "effect.resourceslimes.stinky": "Stinky",

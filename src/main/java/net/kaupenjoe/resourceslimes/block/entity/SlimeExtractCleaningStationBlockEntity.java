@@ -1,12 +1,5 @@
 package net.kaupenjoe.resourceslimes.block.entity;
 
-import java.util.Optional;
-
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import net.kaupenjoe.resourceslimes.block.custom.SlimeExtractCleaningStationBlock;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
@@ -35,16 +28,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
+import java.util.Optional;
 
 public class SlimeExtractCleaningStationBlockEntity extends AbstractRSMachineBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
@@ -96,7 +92,7 @@ public class SlimeExtractCleaningStationBlockEntity extends AbstractRSMachineBlo
 
     @NotNull
     @Override
-    protected FluidTank createFluidTank() {
+    public FluidTank createFluidTank() {
         return new FluidTank(64000) {
             @Override
             protected void onContentsChanged() {
@@ -151,7 +147,7 @@ public class SlimeExtractCleaningStationBlockEntity extends AbstractRSMachineBlo
 
     @NotNull
     @Override
-    protected KaupenEnergyStorage createEnergyStorage() {
+    public KaupenEnergyStorage createEnergyStorage() {
         return new KaupenEnergyStorage(60000, 200) {
             @Override
             public void onEnergyChanged() {
@@ -217,15 +213,15 @@ public class SlimeExtractCleaningStationBlockEntity extends AbstractRSMachineBlo
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @javax.annotation.Nullable Direction side) {
-        if(cap == CapabilityEnergy.ENERGY) {
+        if(cap == ForgeCapabilities.ENERGY) {
             return lazyEnergyHandler.cast();
         }
 
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        if (cap == ForgeCapabilities.ITEM_HANDLER) {
             return lazyItemHandler.cast();
         }
 
-        if(cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+        if(cap == ForgeCapabilities.FLUID_HANDLER) {
             if(this.getBlockState().getValue(SlimeExtractCleaningStationBlock.FACING).getClockWise() == side) {
                 return lazyFluidHandler.cast();
             }
@@ -324,7 +320,7 @@ public class SlimeExtractCleaningStationBlockEntity extends AbstractRSMachineBlo
     }
 
     private static void transferItemWaterToWaterTank(SlimeExtractCleaningStationBlockEntity entity) {
-        entity.itemHandler.getStackInSlot(1).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(handler -> {
+        entity.itemHandler.getStackInSlot(1).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(handler -> {
             int drainAmount = Math.min(entity.FLUID_TANK.getSpace(), 1000);
 
             if(hasSoapInSlot(entity)) {
