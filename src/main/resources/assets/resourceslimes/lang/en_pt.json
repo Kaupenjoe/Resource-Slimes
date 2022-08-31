@@ -57,6 +57,7 @@
   "fluid.resourceslimes.black_opal_slime_fluid": "Liquid o' rainbow slime",
   "fluid.resourceslimes.pink_slime_pearl_slime_fluid": "Liquid o' pearl o' pink slime",
   "itemGroup.resourceslimetab": "Resource Slime Tab",
+  "itemGroup.resourceslime_extract_tab": "Resource Slimes Extract Tab",
   "jei.integration.resourceslimes.tooltip.liquid.amount.with.capacity": "%s / %s mini pails",
   "jei.integration.resourceslimes.tooltip.liquid.amount": "%s mini pails",
   "entity.resourceslimes.resource_slime": "Resource Slime",
