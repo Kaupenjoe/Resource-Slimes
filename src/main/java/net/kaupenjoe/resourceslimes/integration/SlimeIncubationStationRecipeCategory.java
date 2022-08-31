@@ -11,8 +11,6 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationStationRecipe;
-import net.kaupenjoe.resourceslimes.screen.renderer.JEIEnergyInfoArea;
-import net.kaupenjoe.resourceslimes.util.MouseUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -81,6 +79,13 @@ public class SlimeIncubationStationRecipeCategory implements IRecipeCategory<Sli
 
         builder.addSlot(RecipeIngredientRole.OUTPUT,72, 56)
                 .setOverlay(new EntityDrawable(32, 32, recipe.getIngredients().get(1).getItems()[0].getItem()), 16, 16);
+
+        // TODO: Display custom tooltip on hover
+        builder.addSlot(RecipeIngredientRole.OUTPUT,88, 72)
+                .setOverlay(new EntityDrawable(32, 32,
+                        recipe.getIngredients().get(1).getItems()[0].getItem()), 0, 0)
+                .setOverlay(new EntityInfoArea(88, 72,
+                                recipe.getIngredients().get(1).getItems()[0].getItem(), 32,32), 0, 0);
     }
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {

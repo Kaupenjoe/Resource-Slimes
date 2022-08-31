@@ -1,10 +1,7 @@
 package net.kaupenjoe.resourceslimes.networking;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncTwoFluidStacksToClient;
+import net.kaupenjoe.resourceslimes.networking.packets.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
@@ -51,6 +48,12 @@ public class ModMessages {
                 .decoder(PacketSyncTwoFluidStacksToClient::new)
                 .encoder(PacketSyncTwoFluidStacksToClient::toBytes)
                 .consumer(PacketSyncTwoFluidStacksToClient::handle)
+                .add();
+
+        net.messageBuilder(PacketSyncProgressTimerToClient.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(PacketSyncProgressTimerToClient::new)
+                .encoder(PacketSyncProgressTimerToClient::toBytes)
+                .consumer(PacketSyncProgressTimerToClient::handle)
                 .add();
     }
 

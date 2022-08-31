@@ -32,7 +32,7 @@ public class SlimeIncubationStationMenu extends AbstractContainerMenu implements
 
     public SlimeIncubationStationMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.SLIME_INCUBATION_STATION_MENU.get(), pContainerId);
-        checkContainerSize(inv, 4);
+        checkContainerSize(inv, 3);
         blockEntity = ((SlimeIncubationStationBlockEntity) entity);
         this.level = inv.player.level;
         this.data = data;
@@ -46,13 +46,17 @@ public class SlimeIncubationStationMenu extends AbstractContainerMenu implements
             this.addSlot(new ModTagRestrictedSlot(handler, 0, 44, 22, () -> Tags.Items.SLIMEBALLS));
             this.addSlot(new SlotItemHandler(handler, 1, 80, 7));
             this.addSlot(new ModTagRestrictedSlot(handler, 2, 116, 22, () -> ModTags.Items.CUT_GEMS));
-            this.addSlot(new ModResultSlot(handler, 3, 80, 58));
         });
 
         addDataSlots(data);
     }
 
     public ResourceSlimeEntity getResourceSlimeEntity() {
+        resourceSlimeEntity = ModEntityTypes.RESOURCE_SLIME.get().create(blockEntity.getLevel());
+        SlimeResource resource = SlimeResource.getResourceByCraftingItem
+                (blockEntity.itemHandler.getStackInSlot(1).getItem());
+        this.resourceSlimeEntity.setResource(new ItemStack(resource.getSlimeyExtractItem()));
+
         return this.resourceSlimeEntity;
     }
 
@@ -97,7 +101,7 @@ public class SlimeIncubationStationMenu extends AbstractContainerMenu implements
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {

@@ -7,6 +7,7 @@ import net.kaupenjoe.resourceslimes.block.entity.SlimeIncubationStationBlockEnti
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.ResourceSlimeEntity;
 import net.kaupenjoe.resourceslimes.screen.renderer.EnergyInfoArea;
+import net.kaupenjoe.resourceslimes.screen.renderer.EntityInfoArea;
 import net.kaupenjoe.resourceslimes.screen.renderer.EntityWidget;
 import net.kaupenjoe.resourceslimes.screen.renderer.FluidStackRenderer;
 import net.kaupenjoe.resourceslimes.util.MouseUtil;
@@ -31,6 +32,7 @@ public class SlimeIncubationStationScreen extends AbstractContainerScreen<SlimeI
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(ResourceSlimes.MOD_ID,"textures/gui/slime_incubation_station_gui.png");
     private EnergyInfoArea energyInfoArea;
+    private EntityInfoArea entityInfoArea;
 
 
     public SlimeIncubationStationScreen(SlimeIncubationStationMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
@@ -41,6 +43,12 @@ public class SlimeIncubationStationScreen extends AbstractContainerScreen<SlimeI
     protected void init() {
         super.init();
         assignEnergyInfoArea();
+        assignEntityInfoArea();
+    }
+
+    private void assignEntityInfoArea() {
+        entityInfoArea = new EntityInfoArea(((width - imageWidth) / 2) + 72,
+                ((height - imageHeight) / 2) + 46, menu.getResourceSlimeEntity(), 32, 32);
     }
 
     @Override
@@ -49,6 +57,14 @@ public class SlimeIncubationStationScreen extends AbstractContainerScreen<SlimeI
         int y = (height - imageHeight) / 2;
 
         renderEnergyArea(pPoseStack, pMouseX, pMouseY, x, y);
+        renderEntityArea(pPoseStack,pMouseX, pMouseY, x, y);
+    }
+
+    private void renderEntityArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
+        if(menu.isCrafting() && isMouseAboveArea(pMouseX, pMouseY, x, y,73, 47, 32, 32)) {
+            renderTooltip(pPoseStack, entityInfoArea.getTooltips(),
+                    Optional.empty(), pMouseX - x, pMouseY - y);
+        }
     }
 
     private void renderEnergyArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
@@ -67,11 +83,12 @@ public class SlimeIncubationStationScreen extends AbstractContainerScreen<SlimeI
         int y = (height - imageHeight) / 2;
 
         this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
-
-        renderProgressArrow(pPoseStack, x, y);
-        renderSlime(pPoseStack, x + 88, y + 72);
-
         energyInfoArea.draw(pPoseStack);
+        if(menu.isCrafting() && isMouseAboveArea(pMouseX, pMouseY, x, y,73, 47, 32, 32)) {
+            entityInfoArea.draw(pPoseStack);
+        }
+
+        renderSlime(pPoseStack, x + 88, y + 72);
     }
 
     private void renderSlime(PoseStack pPoseStack, int x, int y) {
@@ -80,12 +97,6 @@ public class SlimeIncubationStationScreen extends AbstractContainerScreen<SlimeI
             Vec3 entitySize = new Vec3(size, size, size);
             EntityWidget.renderEntity(pPoseStack, menu.getResourceSlimeEntity(), new Vec3(15, -225, 0),
                     entitySize, Vec3.ZERO, x, y);
-        }
-    }
-
-    private void renderProgressArrow(PoseStack pPoseStack, int x, int y) {
-        if(menu.isCrafting()) {
-            blit(pPoseStack, x + 105, y + 33, 176, 0, 8, menu.getScaledProgress());
         }
     }
 

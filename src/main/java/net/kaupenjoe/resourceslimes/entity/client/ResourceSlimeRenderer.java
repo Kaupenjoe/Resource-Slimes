@@ -22,6 +22,7 @@ public class ResourceSlimeRenderer extends MobRenderer<Slime, SlimeModel<Slime>>
         super(context, new ResourceSlimeModel<>(context.bakeLayer(ModModelLayers.RES_SLIME_EYES)), 0.25F);
         this.addLayer(new ResourceSlimeInnerCubeLayer<>(this, context.getModelSet()));
         this.addLayer(new ResourceSlimeOuterLayer<>(this, context.getModelSet()));
+        this.addLayer(new ResourceSlimeHatLayer<>(this, context.getModelSet()));
     }
 
     @Override

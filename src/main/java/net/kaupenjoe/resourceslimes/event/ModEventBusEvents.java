@@ -4,6 +4,9 @@ import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.client.ModModelLayers;
 import net.kaupenjoe.resourceslimes.entity.client.ResourceSlimeModel;
+import net.kaupenjoe.resourceslimes.entity.client.models.CatEars;
+import net.kaupenjoe.resourceslimes.entity.client.models.FaceModel;
+import net.kaupenjoe.resourceslimes.entity.client.models.WizardHat;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
 import net.minecraft.world.entity.monster.Monster;
@@ -29,6 +32,9 @@ public class ModEventBusEvents {
 
         event.registerLayerDefinition(ModModelLayers.RES_SLIME_OUTER_CUBE, ResourceSlimeModel::createOuterBodyLayer);
         event.registerLayerDefinition(ModModelLayers.RES_SLIME_INNER_CUBE, ResourceSlimeModel::createInnerBodyLayer);
+        event.registerLayerDefinition(WizardHat.LAYER_LOCATION, WizardHat::createBodyLayer);
+        event.registerLayerDefinition(FaceModel.LAYER_LOCATION, FaceModel::createBodyLayer);
+        event.registerLayerDefinition(CatEars.LAYER_LOCATION, CatEars::createBodyLayer);
     }
 
     @SubscribeEvent
