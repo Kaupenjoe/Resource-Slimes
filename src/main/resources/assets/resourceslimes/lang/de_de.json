@@ -57,6 +57,7 @@
   "fluid.resourceslimes.black_opal_slime_fluid": "Schwarzer Opal Schleimflüssigkeit",
   "fluid.resourceslimes.pink_slime_pearl_slime_fluid": "Pinke Schleimperlen Schleimflüssigkeit",
   "itemGroup.resourceslimetab": "Ressourcen Schleim Tab",
+  "itemGroup.resourceslime_extract_tab": "Resource Slimes Extract Tab",
   "jei.integration.resourceslimes.tooltip.liquid.amount.with.capacity": "%s / %s mB",
   "jei.integration.resourceslimes.tooltip.liquid.amount": "%s mB",
   "entity.resourceslimes.resource_slime": "Ressourcenschleim",
