@@ -57,6 +57,7 @@
   "fluid.resourceslimes.black_opal_slime_fluid": "Чёрно-Опальная Слизь",
   "fluid.resourceslimes.pink_slime_pearl_slime_fluid": "Слизь Из Розовой Слизневой Жемчужины",
   "itemGroup.resourceslimetab": "Вкладка «Ресурсные Слизни»",
+  "itemGroup.resourceslime_extract_tab": "Resource Slimes Extract Tab",
   "jei.integration.resourceslimes.tooltip.liquid.amount.with.capacity": "%s / %s мВ",
   "jei.integration.resourceslimes.tooltip.liquid.amount": "%s мВ",
   "entity.resourceslimes.resource_slime": "Ресурсные Слизни",
