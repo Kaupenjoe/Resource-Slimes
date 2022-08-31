@@ -57,6 +57,7 @@
   "fluid.resourceslimes.black_opal_slime_fluid": "Líquido de Limo de Ópalo Negro",
   "fluid.resourceslimes.pink_slime_pearl_slime_fluid": "Líquido de Limo de Perla de Limo Rosa",
   "itemGroup.resourceslimetab": "Ficha Limos de Recursos",
+  "itemGroup.resourceslime_extract_tab": "Resource Slimes Extract Tab",
   "jei.integration.resourceslimes.tooltip.liquid.amount.with.capacity": "%s / %s mB",
   "jei.integration.resourceslimes.tooltip.liquid.amount": "%s mB",
   "entity.resourceslimes.resource_slime": "Limo de Recurso",
