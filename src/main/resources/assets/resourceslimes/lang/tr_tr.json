@@ -57,6 +57,7 @@
   "fluid.resourceslimes.black_opal_slime_fluid": "Siyah Opal Balçık Sıvısı",
   "fluid.resourceslimes.pink_slime_pearl_slime_fluid": "Pembe Balçık İnci Sıvısı",
   "itemGroup.resourceslimetab": "Kaynak Balçığı Sekmesi",
+  "itemGroup.resourceslime_extract_tab": "Resource Slimes Extract Tab",
   "jei.integration.resourceslimes.tooltip.liquid.amount.with.capacity": "%s / %s mB",
   "jei.integration.resourceslimes.tooltip.liquid.amount": "%s mB",
   "entity.resourceslimes.resource_slime": "Kaynak Balçığı",
