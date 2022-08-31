@@ -253,6 +253,7 @@ public class SlimeExtractCleaningStationBlockEntity extends ModSlimeBlockEntity 
         if(cap == CapabilityEnergy.ENERGY) {
             return lazyEnergyHandler.cast();
         }
+
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if(side == null) {
                 return lazyItemHandler.cast();
