@@ -14,11 +14,9 @@ import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -52,6 +50,83 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         this.customIncubationRecipes(pFinishedRecipeConsumer);
 
         this.extractRecipes(pFinishedRecipeConsumer);
+        this.machineRecipes(pFinishedRecipeConsumer);
+
+        this.itemRecipes(pFinishedRecipeConsumer);
+    }
+
+    private void itemRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+        ShapedRecipeBuilder.shaped(ModItems.GEM_CUTTER_TOOL.get(), 1)
+                .pattern(" I ")
+                .pattern("SUI")
+                .pattern(" S ")
+                .define('U', ModTags.Items.UNCUT_GEMS)
+                .define('I', Items.IRON_INGOT)
+                .define('S', Items.STICK)
+                .unlockedBy("has_uncut_gems", has(ModTags.Items.UNCUT_GEMS))
+                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .unlockedBy("has_stick", has(Items.STICK))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ModItems.SOAP.get(), 16)
+                .pattern("WNW")
+                .pattern("SSS")
+                .pattern("OOO")
+                .define('N', Items.NAUTILUS_SHELL)
+                .define('W', Items.WATER_BUCKET)
+                .define('S', Items.KELP)
+                .define('O', ModTags.Items.OILS)
+                .unlockedBy("has_nautilus", has(Items.NAUTILUS_SHELL))
+                .unlockedBy("has_water_bucket", has(Items.WATER_BUCKET))
+                .unlockedBy("has_kelp", has(Items.KELP))
+                .unlockedBy("has_oils", has(ModTags.Items.OILS))
+                .save(pFinishedRecipeConsumer);
+    }
+
+    private void machineRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+        ShapedRecipeBuilder.shaped(ModBlocks.GEM_CUTTING_STATION.get(), 1)
+                .pattern("G  ")
+                .pattern("BBB")
+                .pattern("I I")
+                .define('G', ModItems.GEM_CUTTER_TOOL.get())
+                .define('B', Blocks.POLISHED_BLACKSTONE)
+                .define('I', Items.IRON_INGOT)
+                .unlockedBy("has_item", has(Blocks.POLISHED_BLACKSTONE))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get(), 1)
+                .pattern("S #")
+                .pattern("BBB")
+                .pattern("I I")
+                .define('S', Items.WATER_BUCKET)
+                .define('#', ModItems.SOAP.get())
+                .define('B', Blocks.POLISHED_BLACKSTONE)
+                .define('I', Items.IRON_INGOT)
+                .unlockedBy("has_item", has(Blocks.POLISHED_BLACKSTONE))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ModBlocks.GEM_INFUSING_STATION.get(), 1)
+                .pattern("GGG")
+                .pattern("BBB")
+                .pattern("I I")
+                .define('G', ModTags.Items.CUT_GEMS)
+                .define('B', Blocks.POLISHED_BLACKSTONE)
+                .define('I', Items.IRON_INGOT)
+                .unlockedBy("has_item", has(Blocks.POLISHED_BLACKSTONE))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ModBlocks.SLIME_INCUBATION_STATION.get(), 1)
+                .pattern("SDS")
+                .pattern("BBB")
+                .pattern("I I")
+                .define('S', Tags.Items.SLIMEBALLS)
+                .define('D', Items.DIAMOND)
+                .define('B', Blocks.POLISHED_BLACKSTONE)
+                .define('I', Items.IRON_INGOT)
+                .unlockedBy("has_item", has(Blocks.POLISHED_BLACKSTONE))
+                .save(pFinishedRecipeConsumer);
+
+
     }
 
     private void extractRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {

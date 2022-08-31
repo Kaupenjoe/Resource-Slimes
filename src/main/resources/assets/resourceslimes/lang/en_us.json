@@ -70,6 +70,8 @@
   "fluid.resourceslimes.pink_slime_pearl_slime_fluid": "Pink Slime Pearl Slime Fluid",
 
   "itemGroup.resourceslimetab": "Resource Slimes Tab",
+  "itemGroup.resourceslime_extract_tab": "Resource Slimes Extract Tab",
+
   "jei.integration.resourceslimes.tooltip.liquid.amount.with.capacity": "%s / %s mB",
   "jei.integration.resourceslimes.tooltip.liquid.amount": "%s mB",
 

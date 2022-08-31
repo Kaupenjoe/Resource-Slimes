@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "resourceslimes:item/extract_temp"
+    "layer0": "resourceslimes:item/extracts/stone"
   }
 }

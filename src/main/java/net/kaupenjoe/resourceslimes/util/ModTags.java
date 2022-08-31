@@ -28,6 +28,8 @@ public class ModTags {
         public static final TagKey<Item> SLIMEY_EXTRACTS = tag("extracts/slimey_extracts");
         public static final TagKey<Item> EXTRACTS = tag("extracts/extracts");
 
+        public static final TagKey<Item> OILS = tag("oils");
+
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(ResourceSlimes.MOD_ID, name));
         }

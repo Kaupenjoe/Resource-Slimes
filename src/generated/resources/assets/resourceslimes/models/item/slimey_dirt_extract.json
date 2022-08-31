@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "resourceslimes:item/slimey_extract_temp"
+    "layer0": "resourceslimes:item/extracts/dirt",
+    "layer1": "resourceslimes:item/overlays/citrine_overlay"
   }
 }

@@ -5,6 +5,7 @@ import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
 import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
+import net.kaupenjoe.resourceslimes.util.resources.ResourceTier;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -96,16 +97,34 @@ public class ModItemModelProvider extends ItemModelProvider {
             if (resource.equals(BuiltinSlimeResources.EMPTY.get())) {
                 continue;
             }
-
-            simpleSlimeyExtractItemTemp(modLoc( "slimey_" + resource.name().toLowerCase() + "_extract"));
-            simpleExtractItemTemp(modLoc(resource.name().toLowerCase() + "_extract"));
+            if(resource.getTier() == ResourceTier.CITRINE) {
+                simpleSlimeyExtractItem(modLoc( "slimey_" + resource.name().toLowerCase() + "_extract"), resource);
+                simpleExtractItem(modLoc(resource.name().toLowerCase() + "_extract"), resource);
+            } else {
+                simpleSlimeyExtractItemTemp(modLoc( "slimey_" + resource.name().toLowerCase() + "_extract"));
+                simpleExtractItemTemp(modLoc(resource.name().toLowerCase() + "_extract"));
+            }
         }
+    }
+
+    private ItemModelBuilder simpleSlimeyExtractItem(ResourceLocation location, SlimeResource resource) {
+        return withExistingParent(location.getPath(),
+                new ResourceLocation("item/generated"))
+                .texture("layer0", new ResourceLocation(ResourceSlimes.MOD_ID,"item/extracts/" + resource.name()))
+                .texture("layer1", new ResourceLocation(ResourceSlimes.MOD_ID,"item/overlays/" + resource.getTier().getTierName() + "_overlay"));
+    }
+
+    private ItemModelBuilder simpleExtractItem(ResourceLocation location, SlimeResource resource) {
+        return withExistingParent(location.getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(ResourceSlimes.MOD_ID, "item/extracts/" + resource.name()));
     }
 
     private ItemModelBuilder simpleSlimeyExtractItemTemp(ResourceLocation location) {
         return withExistingParent(location.getPath(),
-                new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(ResourceSlimes.MOD_ID,"item/" + "slimey_extract_temp"));
+                new ResourceLocation("item/generated"))
+                    .texture("layer0", new ResourceLocation(ResourceSlimes.MOD_ID,"item/" + "slimey_extract_temp"))
+                    .texture("layer0", new ResourceLocation(ResourceSlimes.MOD_ID,"item/" + "slimey_extract_temp"));
     }
 
     private ItemModelBuilder simpleExtractItemTemp(ResourceLocation location) {

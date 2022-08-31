@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WNW",
+    "SSS",
+    "OOO"
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:nautilus_shell"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    },
+    "S": {
+      "item": "minecraft:kelp"
+    },
+    "O": {
+      "tag": "resourceslimes:oils"
+    }
+  },
+  "result": {
+    "item": "resourceslimes:soap",
+    "count": 16
+  }
+}

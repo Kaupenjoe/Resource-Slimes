@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SDS",
+    "BBB",
+    "I I"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:slimeballs"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "B": {
+      "item": "minecraft:polished_blackstone"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "resourceslimes:slime_incubation_station"
+  }
+}

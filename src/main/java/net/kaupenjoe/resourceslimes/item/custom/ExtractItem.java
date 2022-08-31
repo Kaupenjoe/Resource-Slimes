@@ -18,7 +18,8 @@ public class ExtractItem extends Item {
     }
 
     public TranslatableComponent getExtractNameKey(ItemStack stack) {
-        return new TranslatableComponent("extract.resourceslimes." + SlimeResource.getResourceByExtractItem(stack.getItem()).name().toLowerCase());
+        return new TranslatableComponent("extract.resourceslimes." +
+                SlimeResource.getResourceByExtractItem(stack.getItem()).name().toLowerCase());
     }
 
 

@@ -103,7 +103,7 @@ public class SlimeResource extends ForgeRegistryEntry<SlimeResource> {
     public static SlimeResource getResourceByExtractItem(Item item) {
         for (SlimeResource resource : ResourceSlimesRegistries.SLIME_RESOURCES.get().getValues()) {
             if(resource.getExtractItem() == null) {
-                break;
+                continue;
             }
 
             if(resource.getExtractItem() == item) {

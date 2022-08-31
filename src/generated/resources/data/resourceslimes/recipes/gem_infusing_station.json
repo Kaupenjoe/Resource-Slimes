@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "BBB",
+    "I I"
+  ],
+  "key": {
+    "G": {
+      "tag": "resourceslimes:gems/cut_gems"
+    },
+    "B": {
+      "item": "minecraft:polished_blackstone"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "resourceslimes:gem_infusing_station"
+  }
+}

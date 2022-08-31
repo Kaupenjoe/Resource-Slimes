@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S #",
+    "BBB",
+    "I I"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:water_bucket"
+    },
+    "#": {
+      "item": "resourceslimes:soap"
+    },
+    "B": {
+      "item": "minecraft:polished_blackstone"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "resourceslimes:slime_extract_cleaning_station"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "SUI",
+    " S "
+  ],
+  "key": {
+    "U": {
+      "tag": "resourceslimes:gems/uncut_gems"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "resourceslimes:gem_cutter_tool"
+  }
+}

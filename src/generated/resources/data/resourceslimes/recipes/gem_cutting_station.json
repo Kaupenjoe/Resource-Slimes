@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G  ",
+    "BBB",
+    "I I"
+  ],
+  "key": {
+    "G": {
+      "item": "resourceslimes:gem_cutter_tool"
+    },
+    "B": {
+      "item": "minecraft:polished_blackstone"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "resourceslimes:gem_cutting_station"
+  }
+}
