@@ -57,6 +57,7 @@
   "fluid.resourceslimes.black_opal_slime_fluid": "Fluido de slime de opala negra",
   "fluid.resourceslimes.pink_slime_pearl_slime_fluid": "Fluido de slime de pérola de slime rosa",
   "itemGroup.resourceslimetab": "Resource Slimes",
+  "itemGroup.resourceslime_extract_tab": "Resource Slimes Extract Tab",
   "jei.integration.resourceslimes.tooltip.liquid.amount.with.capacity": "%s / %s mB",
   "jei.integration.resourceslimes.tooltip.liquid.amount": "%s mB",
   "entity.resourceslimes.resource_slime": "Slime de recursos",
