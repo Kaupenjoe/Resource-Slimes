@@ -57,6 +57,7 @@
   "fluid.resourceslimes.black_opal_slime_fluid": "Lichid de Opal negru mâzgos",
   "fluid.resourceslimes.pink_slime_pearl_slime_fluid": "Lichid de perlă roz de mâzgă",
   "itemGroup.resourceslimetab": "Resource Slimes",
+  "itemGroup.resourceslime_extract_tab": "Resource Slimes Extract Tab",
   "jei.integration.resourceslimes.tooltip.liquid.amount.with.capacity": "%s / %s mB",
   "jei.integration.resourceslimes.tooltip.liquid.amount": "%s Mb",
   "entity.resourceslimes.resource_slime": "Mâzgă de resurse",
