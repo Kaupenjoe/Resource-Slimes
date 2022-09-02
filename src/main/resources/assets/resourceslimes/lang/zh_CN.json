@@ -57,7 +57,7 @@
   "fluid.resourceslimes.black_opal_slime_fluid": "黑欧泊粘液",
   "fluid.resourceslimes.pink_slime_pearl_slime_fluid": "粉色粘珠粘液",
   "itemGroup.resourceslimetab": "资源史莱姆物品栏",
-  "itemGroup.resourceslime_extract_tab": "Resource Slimes Extract Tab",
+  "itemGroup.resourceslime_extract_tab": "资源史莱姆提取物物品栏",
   "jei.integration.resourceslimes.tooltip.liquid.amount.with.capacity": "%s / %s mB",
   "jei.integration.resourceslimes.tooltip.liquid.amount": "%s mB",
   "entity.resourceslimes.resource_slime": "资源史莱姆",
