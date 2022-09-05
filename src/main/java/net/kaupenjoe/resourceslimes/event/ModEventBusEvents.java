@@ -4,15 +4,10 @@ import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.client.ModModelLayers;
 import net.kaupenjoe.resourceslimes.entity.client.ResourceSlimeModel;
-import net.kaupenjoe.resourceslimes.entity.client.models.CatEars;
-import net.kaupenjoe.resourceslimes.entity.client.models.FaceModel;
-import net.kaupenjoe.resourceslimes.entity.client.models.WizardHat;
-import net.kaupenjoe.resourceslimes.item.ModItems;
+import net.kaupenjoe.resourceslimes.entity.client.models.*;
 import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -35,6 +30,9 @@ public class ModEventBusEvents {
         event.registerLayerDefinition(WizardHat.LAYER_LOCATION, WizardHat::createBodyLayer);
         event.registerLayerDefinition(FaceModel.LAYER_LOCATION, FaceModel::createBodyLayer);
         event.registerLayerDefinition(CatEars.LAYER_LOCATION, CatEars::createBodyLayer);
+        event.registerLayerDefinition(AxolotlHat.LAYER_LOCATION, AxolotlHat::createBodyLayer);
+        event.registerLayerDefinition(ThermalHat.LAYER_LOCATION, ThermalHat::createBodyLayer);
+        event.registerLayerDefinition(HeadphoneHat.LAYER_LOCATION, HeadphoneHat::createBodyLayer);
     }
 
     @SubscribeEvent

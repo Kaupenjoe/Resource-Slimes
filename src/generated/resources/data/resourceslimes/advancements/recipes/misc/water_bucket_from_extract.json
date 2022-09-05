@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:water_bucket_from_extract"
+    ]
+  },
+  "criteria": {
+    "has_water_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:water_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:bucket"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:water_bucket_from_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_water_extract",
+      "has_bucket",
+      "has_the_recipe"
+    ]
+  ]
+}

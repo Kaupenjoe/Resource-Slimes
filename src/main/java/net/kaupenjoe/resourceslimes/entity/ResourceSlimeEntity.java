@@ -28,18 +28,16 @@ import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraftforge.common.ForgeI18n;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.Map;
 
 // TODO: Using Slime as it super class mean it has TWO size values
 public class ResourceSlimeEntity extends Slime {
@@ -51,7 +49,17 @@ public class ResourceSlimeEntity extends Slime {
             SynchedEntityData.defineId(ResourceSlimeEntity.class, EntityDataSerializers.INT);
 
     // TODO: Should be based on Resource / Tier
-    public static final int GROWTH_TIME = 400; // 20 Seconds for each growth
+    public static int growthTime = 99999;
+
+    private static final Map<ResourceTier, Integer> TIER_TO_GROWTH_TIME_MAP
+            = Map.of(ResourceTier.CITRINE,200,              // 10 Mins for 64
+                     ResourceTier.ZIRCON,400,               // 20 Mins for 64
+                     ResourceTier.DIAMOND,600,              // 32 Mins for 64
+                     ResourceTier.EMERALD,800,              // 44 Mins for 64
+                     ResourceTier.TANZANITE,1200,           // 64 Mins for 64
+                     ResourceTier.BLACK_OPAL,1600,          // 85 Mins for 64
+                     ResourceTier.PINK_SLIME_PEARL,2000);   // 1.7 hours for 64
+
 
     public ResourceSlimeEntity(EntityType<? extends Slime> entityType, Level level) {
         super(entityType, level);
@@ -201,6 +209,7 @@ public class ResourceSlimeEntity extends Slime {
         this.entityData.set(RESOURCE, stack);
         resetGrowthCount();
         recalculateSize();
+        growthTime = TIER_TO_GROWTH_TIME_MAP.get(SlimeResource.getTierByItem(this.entityData.get(RESOURCE).getItem()));
     }
 
     public ItemStack getResourceItem() {
@@ -251,7 +260,7 @@ public class ResourceSlimeEntity extends Slime {
     }
 
     private boolean readyForNewResource() {
-        return this.entityData.get(GROWTH_COUNTER) >= GROWTH_TIME;
+        return this.entityData.get(GROWTH_COUNTER) >= growthTime;
     }
 
     private void countGrowth() {

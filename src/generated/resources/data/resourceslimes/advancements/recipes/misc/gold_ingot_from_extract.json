@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:gold_ingot_from_extract"
+    ]
+  },
+  "criteria": {
+    "has_gold_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:gold_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:gold_ingot_from_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gold_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

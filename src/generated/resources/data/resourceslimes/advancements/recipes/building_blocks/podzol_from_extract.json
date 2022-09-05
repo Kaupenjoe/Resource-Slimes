@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:podzol_from_extract"
+    ]
+  },
+  "criteria": {
+    "has_dirt_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:dirt_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_fire_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:fire_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:podzol_from_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dirt_extract",
+      "has_fire_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

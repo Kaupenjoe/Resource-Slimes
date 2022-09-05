@@ -3,10 +3,7 @@ package net.kaupenjoe.resourceslimes.entity.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
-import net.kaupenjoe.resourceslimes.entity.client.models.CatEars;
-import net.kaupenjoe.resourceslimes.entity.client.models.EasterEggData;
-import net.kaupenjoe.resourceslimes.entity.client.models.FaceModel;
-import net.kaupenjoe.resourceslimes.entity.client.models.WizardHat;
+import net.kaupenjoe.resourceslimes.entity.client.models.*;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.SlimeModel;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -35,7 +32,7 @@ public class ResourceSlimeHatLayer<T extends LivingEntity> extends RenderLayer<T
         for (var entry : hats) {
             if(pLivingEntity.hasCustomName() && entry.getName().equals(pLivingEntity.getCustomName().getContents())) {
                 EntityModel<T> model = entry.getModel();
-                VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entitySolid(entry.getModel().getTextureLocation()));
+                VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityCutout(entry.getModel().getTextureLocation()));
                 pMatrixStack.translate(entry.getTranslation().x(), entry.getTranslation().y(), entry.getTranslation().z());
                 pMatrixStack.scale(entry.getScale().x(), entry.getScale().y(), entry.getScale().z());
 
@@ -59,6 +56,18 @@ public class ResourceSlimeHatLayer<T extends LivingEntity> extends RenderLayer<T
                 new Vector3f(0, 0, 0)));
 
         list.add(new EasterEggData<>("KaupenCat", new CatEars<>(modelSet.bakeLayer(CatEars.LAYER_LOCATION)),
+                        new Vector3f(0.0f, 0f, 0), new Vector3f(1f, 1f, 1f),
+                new Vector3f(0, 0, 0)));
+
+        list.add(new EasterEggData<>("Axolotli", new AxolotlHat<>(modelSet.bakeLayer(AxolotlHat.LAYER_LOCATION)),
+                        new Vector3f(0.0f, 0f, 0), new Vector3f(1f, 1f, 1f),
+                new Vector3f(0, 0, 0)));
+
+        list.add(new EasterEggData<>("Thermal", new ThermalHat<>(modelSet.bakeLayer(ThermalHat.LAYER_LOCATION)),
+                        new Vector3f(0.0f, 0f, 0), new Vector3f(1f, 1f, 1f),
+                new Vector3f(0, 0, 0)));
+
+        list.add(new EasterEggData<>("Headphones", new HeadphoneHat<>(modelSet.bakeLayer(HeadphoneHat.LAYER_LOCATION)),
                         new Vector3f(0.0f, 0f, 0), new Vector3f(1f, 1f, 1f),
                 new Vector3f(0, 0, 0)));
 

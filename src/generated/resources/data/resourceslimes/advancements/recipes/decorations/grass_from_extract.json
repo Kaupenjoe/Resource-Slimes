@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:grass_from_extract"
+    ]
+  },
+  "criteria": {
+    "has_dirt_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:dirt_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_grass_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:grass_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:grass_from_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dirt_extract",
+      "has_grass_extract",
+      "has_the_recipe"
+    ]
+  ]
+}
