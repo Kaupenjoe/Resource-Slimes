@@ -57,7 +57,7 @@
   "fluid.resourceslimes.black_opal_slime_fluid": "דלי סליים של אופאל שחור",
   "fluid.resourceslimes.pink_slime_pearl_slime_fluid": "דלי פנינת סליים ורודה",
   "itemGroup.resourceslimetab": "לשונית חומרי סליימים",
-  "itemGroup.resourceslime_extract_tab": "Resource Slimes Extract Tab",
+  "itemGroup.resourceslime_extract_tab": "לשונית הוצאת חומרי סליימים",
   "jei.integration.resourceslimes.tooltip.liquid.amount.with.capacity": "mB",
   "jei.integration.resourceslimes.tooltip.liquid.amount": "mB",
   "entity.resourceslimes.resource_slime": "משאבי סליים",
