@@ -1,6 +1,7 @@
 package net.kaupenjoe.resourceslimes.block.entity;
 
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
+import net.kaupenjoe.resourceslimes.block.custom.SlimeIncubationStationBlock;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.ResourceSlimeEntity;
 import net.kaupenjoe.resourceslimes.item.ModItems;
@@ -13,6 +14,7 @@ import net.kaupenjoe.resourceslimes.screen.SlimeIncubationStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.kaupenjoe.resourceslimes.util.ModTags;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -22,6 +24,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.MobSpawnType;
@@ -32,6 +35,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -343,10 +347,13 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
 
     private static void spawnSlime(SlimeIncubationStationBlockEntity entity, ItemStack stack) {
         if(!entity.level.isClientSide()) {
-            ResourceSlimeEntity slime = (ResourceSlimeEntity) ModEntityTypes.RESOURCE_SLIME.get().spawn(
-                    ((ServerLevel) entity.level), null, null,
-                    entity.getBlockPos().above(), MobSpawnType.MOB_SUMMONED, false, true);
+            ResourceSlimeEntity slime = new ResourceSlimeEntity(ModEntityTypes.RESOURCE_SLIME.get(), entity.level);
+            Vec3 pos = new Vec3(0.0d, 1d, 0.1875d).yRot(-Mth.DEG_TO_RAD * entity.getBlockState().getValue(SlimeIncubationStationBlock.FACING).toYRot()).add(entity.getBlockPos().getX() + 0.5, entity.getBlockPos().getY(), entity.getBlockPos().getZ() + 0.5);
+            slime.setPos(pos);
+            slime.yBodyRot = Mth.wrapDegrees(entity.getBlockState().getValue(SlimeIncubationStationBlock.FACING).toYRot());
+            slime.yHeadRot = Mth.wrapDegrees(entity.getBlockState().getValue(SlimeIncubationStationBlock.FACING).toYRot());
             slime.setResource(new ItemStack(SlimeResource.getResourceByCraftingItem(stack.getItem()).getSlimeyExtractItem()));
+            entity.level.addFreshEntity(slime);
         }
     }
 

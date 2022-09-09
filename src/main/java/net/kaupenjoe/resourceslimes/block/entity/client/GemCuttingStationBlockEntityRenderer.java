@@ -33,28 +33,12 @@ public class GemCuttingStationBlockEntityRenderer implements BlockEntityRenderer
         ItemStack itemStack = pBlockEntity.getRenderStack();
         pPoseStack.pushPose();
         
-        //TODO: rotation/flipping of item stack that is rendered?
-        switch (pBlockEntity.getBlockState().getValue(GemCuttingStationBlock.FACING)) {
-            case NORTH -> {
-                pPoseStack.translate(0.6f, 0.8f, 0.225f);
-                pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
-            }
-            case EAST -> {
-                pPoseStack.translate(0.775f, 0.8f, 0.6f);
-                pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
-                pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(90));
-            }
-            case SOUTH -> {
-                pPoseStack.translate(0.4f, 0.8f, 0.775f);
-                pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
-                pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(180));
-            }
-            case WEST -> {
-                pPoseStack.translate(0.225f, 0.8f, 0.4f);
-                pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
-                pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(270));
-            }
-        }
+        //DONE: rotation/flipping of item stack that is rendered?
+        pPoseStack.translate(0.5f, 0.5f, 0.5f);
+        pPoseStack.mulPose(Vector3f.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(GemCuttingStationBlock.FACING).toYRot()));
+        pPoseStack.pushPose();
+        pPoseStack.translate(-0.1f, 0.3f, 0.275f);
+        pPoseStack.mulPose(Vector3f.XP.rotationDegrees(270));
 
         pPoseStack.scale(0.35f, 0.35f, 0.35f);
         itemRenderer.renderStatic(itemStack, ItemTransforms.TransformType.GUI, getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()),
@@ -64,33 +48,15 @@ public class GemCuttingStationBlockEntityRenderer implements BlockEntityRenderer
 
         if(pBlockEntity.hasGemCuttingTools()) {
             pPoseStack.pushPose();
-            switch (pBlockEntity.getBlockState().getValue(GemCuttingStationBlock.FACING)) {
-                case NORTH -> {
-                    pPoseStack.translate(0.35f, 0.75f, 0.75f);
-                    pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
-                }
-                case EAST -> {
-                    pPoseStack.translate(0.25f, 0.75f, 0.35f);
-                    pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
-                    pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(90));
-                }
-                case SOUTH -> {
-                    pPoseStack.translate(0.65f, 0.75f, 0.25f);
-                    pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
-                    pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(180));
-                }
-                case WEST -> {
-                    pPoseStack.translate(0.75f, 0.75f, 0.65f);
-                    pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
-                    pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(270));
-                }
-            }
-
+            pPoseStack.translate(0.15f, 0.25f, -0.25f);
+            pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
+            pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(180));
             pPoseStack.scale(0.35f, 0.35f, 0.35f);
             itemRenderer.renderStatic(new ItemStack(ModItems.GEM_CUTTER_TOOL.get()), ItemTransforms.TransformType.GUI, getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()),
                     OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, 1);
             pPoseStack.popPose();
         }
+        pPoseStack.popPose();
     }
 
     private int getLightLevel(Level level, BlockPos pos) {

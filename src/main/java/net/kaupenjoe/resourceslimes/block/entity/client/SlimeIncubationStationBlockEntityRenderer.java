@@ -40,19 +40,14 @@ public class SlimeIncubationStationBlockEntityRenderer implements BlockEntityRen
         EntityRenderDispatcher entityRenderer = Minecraft.getInstance().getEntityRenderDispatcher();
 
         pPoseStack.pushPose();
-        pPoseStack.translate(0.5f, 1f, 0.5f);
+        pPoseStack.translate(0.5f, 1.0f, 0.5f);
+        pPoseStack.mulPose(Vector3f.YP.rotationDegrees(-pBlockEntity.getBlockState().getValue(SlimeIncubationStationBlock.FACING).toYRot()));
+        pPoseStack.translate(0.0f, 0.0f, 0.1875f);
         pPoseStack.scale(pBlockEntity.getScaledProgress(), pBlockEntity.getScaledProgress(), pBlockEntity.getScaledProgress());
-        switch (pBlockEntity.getBlockState().getValue(SlimeIncubationStationBlock.FACING)) {
-            case NORTH -> pPoseStack.mulPose(Vector3f.YP.rotationDegrees(180));
-            case EAST -> pPoseStack.mulPose(Vector3f.YP.rotationDegrees(90));
-            case SOUTH -> pPoseStack.mulPose(Vector3f.YP.rotationDegrees(0));
-            case WEST -> pPoseStack.mulPose(Vector3f.YP.rotationDegrees(270));
-        }
 
         ResourceSlimeEntity entity = pBlockEntity.getRenderEntity();
-
-        entityRenderer.render(entity,0,0, 0,
-                0f,0f, pPoseStack, pBufferSource, pPackedLight);
+        entityRenderer.render(entity,0.0d,0.0d, -0.0d,
+                0.0f,0.0f, pPoseStack, pBufferSource, pPackedLight);
 
         // itemRenderer.renderStatic(itemStack, ItemTransforms.TransformType.GUI, getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()),
         //         OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, 1);

@@ -33,15 +33,8 @@ public class GemInfusingStationBlockEntityRenderer implements BlockEntityRendere
         pPoseStack.pushPose();
         pPoseStack.translate(0.5f, 0.75f, 0.5f);
         pPoseStack.scale(0.35f, 0.35f, 0.35f);
-        pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
-
-        switch (pBlockEntity.getBlockState().getValue(GemInfusingStationBlock.FACING)) {
-            case NORTH -> pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(0));
-            case EAST -> pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(90));
-            case SOUTH -> pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(180));
-            case WEST -> pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(270));
-        }
-
+        pPoseStack.mulPose(Vector3f.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(GemInfusingStationBlock.FACING).toYRot()));
+        pPoseStack.mulPose(Vector3f.XP.rotationDegrees(270));
         itemRenderer.renderStatic(itemStack, ItemTransforms.TransformType.GUI, getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()),
                 OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, 1);
         pPoseStack.popPose();
