@@ -39,9 +39,9 @@ public class GemInfusingStationMenu extends AbstractContainerMenu implements IFl
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-            this.addSlot(new ModFluidSourceSlot(handler, 0, 12, 15, ModFluids.CITRINE_SLIME_FLUID::get));
-            this.addSlot(new ModTagRestrictedSlot(handler, 1, 86, 15, () -> ModTags.Items.CUT_GEMS));
-            this.addSlot(new ModResultSlot(handler, 2, 86, 60));
+            this.addSlot(new ModFluidSourceSlot(handler, 0, 12, 13, ModFluids.CITRINE_SLIME_FLUID::get));
+            this.addSlot(new ModTagRestrictedSlot(handler, 1, 86, 13, () -> ModTags.Items.CUT_GEMS));
+            this.addSlot(new ModResultSlot(handler, 2, 86, 58));
         });
 
         addDataSlots(data);
@@ -132,14 +132,14 @@ public class GemInfusingStationMenu extends AbstractContainerMenu implements IFl
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
             }
         }
     }
 
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
 }

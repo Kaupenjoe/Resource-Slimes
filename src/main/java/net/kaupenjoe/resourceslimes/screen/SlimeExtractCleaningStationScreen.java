@@ -40,8 +40,8 @@ public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<S
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y, menu.getMainFluid(), 55, 15, renderer);
-        renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y, menu.getWasteFluid(), 129, 45, wasteRenderer);
+        renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y, menu.getMainFluid(), 55, 13, renderer);
+        renderFluidArea(pPoseStack, pMouseX, pMouseY, x, y, menu.getWasteFluid(), 129, 43, wasteRenderer);
         renderEnergyArea(pPoseStack, pMouseX, pMouseY, x, y);
     }
 
@@ -54,7 +54,7 @@ public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<S
     }
 
     private void renderEnergyArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 13, 8, 64)) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 11, 8, 64)) {
             renderTooltip(pPoseStack, energyInfoArea.getTooltips(),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
@@ -72,14 +72,14 @@ public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<S
 
         renderProgressArrow(pPoseStack, x, y);
 
-        renderer.render(pPoseStack, x + 55,y + 16, menu.getMainFluid());
-        wasteRenderer.render(pPoseStack, x + 129,y + 45, menu.getWasteFluid());
+        renderer.render(pPoseStack, x + 55,y + 14, menu.getMainFluid());
+        wasteRenderer.render(pPoseStack, x + 129,y + 43, menu.getWasteFluid());
         energyInfoArea.draw(pPoseStack);
     }
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y) {
         if(menu.isCrafting()) {
-            blit(pPoseStack, x + 105, y + 33, 176, 0, 8, menu.getScaledProgress());
+            blit(pPoseStack, x + 105, y + 31, 176, 0, 8, menu.getScaledProgress());
         }
     }
 
@@ -97,7 +97,7 @@ public class SlimeExtractCleaningStationScreen extends AbstractContainerScreen<S
 
     private void assignEnergyInfoArea() {
         energyInfoArea = new EnergyInfoArea(((width - imageWidth) / 2) +  156,
-                ((height - imageHeight) / 2) + 13, menu.blockEntity.getEnergyStorage());
+                ((height - imageHeight) / 2) + 11, menu.blockEntity.getEnergyStorage());
     }
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, FluidStackRenderer renderer) {

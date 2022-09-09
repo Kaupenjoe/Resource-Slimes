@@ -42,10 +42,10 @@ public class SlimeExtractCleaningStationMenu extends AbstractContainerMenu imple
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-            this.addSlot(new ModRestrictedSlot(handler, 0, 12, 16, ModItems.SOAP));
-            this.addSlot(new ModFluidSourceSlot(handler, 1, 12, 61, () -> Fluids.WATER));
-            this.addSlot(new ModTagRestrictedSlot(handler, 2, 86, 16, () -> ModTags.Items.SLIMEY_EXTRACTS));
-            this.addSlot(new ModResultSlot(handler,3, 86, 61));
+            this.addSlot(new ModRestrictedSlot(handler, 0, 12, 14, ModItems.SOAP));
+            this.addSlot(new ModFluidSourceSlot(handler, 1, 12, 59, () -> Fluids.WATER));
+            this.addSlot(new ModTagRestrictedSlot(handler, 2, 86, 14, () -> ModTags.Items.SLIMEY_EXTRACTS));
+            this.addSlot(new ModResultSlot(handler,3, 86, 59));
         });
 
         addDataSlots(data);
@@ -144,14 +144,14 @@ public class SlimeExtractCleaningStationMenu extends AbstractContainerMenu imple
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
             }
         }
     }
 
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
 }

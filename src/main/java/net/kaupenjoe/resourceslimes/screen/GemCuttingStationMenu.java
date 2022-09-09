@@ -42,10 +42,10 @@ public class GemCuttingStationMenu extends AbstractContainerMenu implements IFlu
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-            this.addSlot(new ModFluidSourceSlot(handler, 0, 15, 40, () -> Fluids.WATER));
-            this.addSlot(new ModTagRestrictedSlot(handler, 1, 57, 18, () -> ModTags.Items.UNCUT_GEMS));
-            this.addSlot(new ModRestrictedSlot(handler, 2, 103, 18, ModItems.GEM_CUTTER_TOOL));
-            this.addSlot(new ModResultSlot(handler, 3, 80, 60));
+            this.addSlot(new ModFluidSourceSlot(handler, 0, 15, 38, () -> Fluids.WATER));
+            this.addSlot(new ModTagRestrictedSlot(handler, 1, 57, 16, () -> ModTags.Items.UNCUT_GEMS));
+            this.addSlot(new ModRestrictedSlot(handler, 2, 103, 16, ModItems.GEM_CUTTER_TOOL));
+            this.addSlot(new ModResultSlot(handler, 3, 80, 58));
         });
 
         addDataSlots(data);
@@ -136,14 +136,14 @@ public class GemCuttingStationMenu extends AbstractContainerMenu implements IFlu
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
             }
         }
     }
 
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
 }

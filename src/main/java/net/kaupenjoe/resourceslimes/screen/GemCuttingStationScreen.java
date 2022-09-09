@@ -42,14 +42,14 @@ public class GemCuttingStationScreen extends AbstractContainerScreen<GemCuttingS
     }
 
     private void renderFluidArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 55, 45)) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 55, 43)) {
             renderTooltip(pPoseStack, renderer.getTooltip(menu.getFluid(), TooltipFlag.Default.NORMAL),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }
 
     private void renderEnergyArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 13, 8, 64)) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 11, 8, 64)) {
             renderTooltip(pPoseStack, energyInfoArea.getTooltips(),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
@@ -66,10 +66,10 @@ public class GemCuttingStationScreen extends AbstractContainerScreen<GemCuttingS
         this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
 
         if(menu.isCrafting()) {
-            blit(pPoseStack, x + 102, y + 41, 176, 0, 8, menu.getScaledProgress());
+            blit(pPoseStack, x + 102, y + 39, 176, 0, 8, menu.getScaledProgress());
         }
 
-        renderer.render(pPoseStack, x + 55,y + 45, menu.getFluid());
+        renderer.render(pPoseStack, x + 55,y + 43, menu.getFluid());
         energyInfoArea.draw(pPoseStack);
     }
 
@@ -86,7 +86,7 @@ public class GemCuttingStationScreen extends AbstractContainerScreen<GemCuttingS
 
     private void assignEnergyInfoArea() {
         energyInfoArea = new EnergyInfoArea(((width - imageWidth) / 2) +  156,
-                ((height - imageHeight) / 2) + 13, menu.blockEntity.getEnergyStorage());
+                ((height - imageHeight) / 2) + 11, menu.blockEntity.getEnergyStorage());
     }
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY) {

@@ -48,7 +48,7 @@ public class SlimeIncubationStationScreen extends AbstractContainerScreen<SlimeI
 
     private void assignEntityInfoArea() {
         entityInfoArea = new EntityInfoArea(((width - imageWidth) / 2) + 72,
-                ((height - imageHeight) / 2) + 46, menu.getResourceSlimeEntity(), 32, 32);
+                ((height - imageHeight) / 2) + 44, menu.getResourceSlimeEntity(), 32, 32);
     }
 
     @Override
@@ -61,14 +61,14 @@ public class SlimeIncubationStationScreen extends AbstractContainerScreen<SlimeI
     }
 
     private void renderEntityArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
-        if(menu.isCrafting() && isMouseAboveArea(pMouseX, pMouseY, x, y,73, 47, 32, 32)) {
+        if(menu.isCrafting() && isMouseAboveArea(pMouseX, pMouseY, x, y,73, 45, 32, 32)) {
             renderTooltip(pPoseStack, entityInfoArea.getTooltips(),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }
 
     private void renderEnergyArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 13, 8, 64)) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 11, 8, 64)) {
             renderTooltip(pPoseStack, energyInfoArea.getTooltips(),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
@@ -109,7 +109,7 @@ public class SlimeIncubationStationScreen extends AbstractContainerScreen<SlimeI
 
     private void assignEnergyInfoArea() {
         energyInfoArea = new EnergyInfoArea(((width - imageWidth) / 2) +  156,
-                ((height - imageHeight) / 2) + 13, menu.blockEntity.getEnergyStorage());
+                ((height - imageHeight) / 2) + 11, menu.blockEntity.getEnergyStorage());
     }
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
