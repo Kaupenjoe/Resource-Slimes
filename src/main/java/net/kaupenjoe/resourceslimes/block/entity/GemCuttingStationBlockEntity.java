@@ -4,8 +4,6 @@ import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;
-import net.kaupenjoe.resourceslimes.networking.ModMessages;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.kaupenjoe.resourceslimes.util.ModTags;
 import net.minecraft.client.Minecraft;

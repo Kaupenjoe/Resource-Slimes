@@ -1,7 +1,7 @@
 package net.kaupenjoe.resourceslimes.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
 import net.kaupenjoe.resourceslimes.screen.renderer.EnergyInfoArea;
 import net.kaupenjoe.resourceslimes.screen.renderer.FluidStackRenderer;

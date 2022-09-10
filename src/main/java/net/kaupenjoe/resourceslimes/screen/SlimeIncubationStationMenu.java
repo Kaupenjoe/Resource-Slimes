@@ -2,12 +2,9 @@ package net.kaupenjoe.resourceslimes.screen;
 
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.block.entity.SlimeIncubationStationBlockEntity;
-import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.ResourceSlimeEntity;
-import net.kaupenjoe.resourceslimes.screen.slot.ModResultSlot;
 import net.kaupenjoe.resourceslimes.screen.slot.ModTagRestrictedSlot;
 import net.kaupenjoe.resourceslimes.util.ModTags;
-import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

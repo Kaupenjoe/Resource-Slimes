@@ -3,28 +3,16 @@ package net.kaupenjoe.resourceslimes.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
-import net.kaupenjoe.resourceslimes.block.entity.SlimeIncubationStationBlockEntity;
-import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
-import net.kaupenjoe.resourceslimes.entity.ResourceSlimeEntity;
 import net.kaupenjoe.resourceslimes.screen.renderer.EnergyInfoArea;
 import net.kaupenjoe.resourceslimes.screen.renderer.EntityInfoArea;
 import net.kaupenjoe.resourceslimes.screen.renderer.EntityWidget;
-import net.kaupenjoe.resourceslimes.screen.renderer.FluidStackRenderer;
 import net.kaupenjoe.resourceslimes.util.MouseUtil;
-import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
-import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Optional;
 

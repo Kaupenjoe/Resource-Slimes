@@ -2,11 +2,7 @@ package net.kaupenjoe.resourceslimes.block.entity;
 
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.block.custom.GemInfusingStationBlock;
-import net.kaupenjoe.resourceslimes.networking.ModMessages;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
 import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
-import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;
 import net.kaupenjoe.resourceslimes.screen.GemInfusingStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.kaupenjoe.resourceslimes.util.ModTags;

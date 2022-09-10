@@ -1,11 +1,12 @@
 package net.kaupenjoe.resourceslimes.screen;
 
 import net.kaupenjoe.resourceslimes.block.ModBlocks;
-import net.kaupenjoe.resourceslimes.block.entity.GemInfusingStationBlockEntity;
 import net.kaupenjoe.resourceslimes.block.entity.SlimeExtractCleaningStationBlockEntity;
-import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.screen.slot.*;
+import net.kaupenjoe.resourceslimes.screen.slot.ModFluidSourceSlot;
+import net.kaupenjoe.resourceslimes.screen.slot.ModRestrictedSlot;
+import net.kaupenjoe.resourceslimes.screen.slot.ModResultSlot;
+import net.kaupenjoe.resourceslimes.screen.slot.ModTagRestrictedSlot;
 import net.kaupenjoe.resourceslimes.util.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
