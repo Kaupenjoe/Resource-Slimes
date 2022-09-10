@@ -1,6 +1,5 @@
 package net.kaupenjoe.resourceslimes.block.custom;
 
-import net.kaupenjoe.resourceslimes.block.entity.GemInfusingStationBlockEntity;
 import net.kaupenjoe.resourceslimes.block.entity.ModBlockEntities;
 import net.kaupenjoe.resourceslimes.block.entity.SlimeExtractCleaningStationBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -103,7 +102,8 @@ public class SlimeExtractCleaningStationBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        if (pLevel.isClientSide) return null;
         return createTickerHelper(pBlockEntityType, ModBlockEntities.SLIME_EXTRACT_CLEANING_STATION_BLOCK_ENTITY.get(),
-                SlimeExtractCleaningStationBlockEntity::tick);
+                SlimeExtractCleaningStationBlockEntity::serverTick);
     }
 }

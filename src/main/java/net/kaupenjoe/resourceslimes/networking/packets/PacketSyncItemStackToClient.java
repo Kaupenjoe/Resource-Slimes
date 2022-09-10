@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
 
+@Deprecated(forRemoval = true) // Not in use anymore
 public class PacketSyncItemStackToClient {
     private final ItemStackHandler itemStackHandler;
     private final BlockPos pos;

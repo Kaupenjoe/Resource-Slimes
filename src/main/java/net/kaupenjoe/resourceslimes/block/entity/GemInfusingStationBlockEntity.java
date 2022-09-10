@@ -2,19 +2,19 @@ package net.kaupenjoe.resourceslimes.block.entity;
 
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.block.custom.GemInfusingStationBlock;
-import net.kaupenjoe.resourceslimes.fluid.ModFluids;
-import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
 import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
 import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
+import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;
 import net.kaupenjoe.resourceslimes.screen.GemInfusingStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.kaupenjoe.resourceslimes.util.ModTags;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.Packet;
@@ -26,12 +26,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -56,7 +53,7 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
         protected void onContentsChanged(int slot) {
             setChanged();
             if(!level.isClientSide()) {
-                ModMessages.sendToClients(new PacketSyncItemStackToClient(this, worldPosition));
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         }
 
@@ -72,6 +69,7 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
     };
 
     @Override
+    @Deprecated(forRemoval = true)
     public void setHandler(ItemStackHandler handler) {
         copyHandlerContents(handler);
     }
@@ -115,7 +113,7 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
             protected void onContentsChanged() {
                 setChanged();
                 if (!level.isClientSide()) {
-                    ModMessages.sendToClients(new PacketSyncFluidStackToClient(this.fluid, worldPosition));
+                    level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
                 }
             }
 
@@ -143,7 +141,7 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
             @Override
             public void onEnergyChanged() {
                 setChanged();
-                ModMessages.sendToClients(new PacketSyncEnergyToClient(this.energy, worldPosition));
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         };
     }
@@ -206,7 +204,6 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        ModMessages.sendToClients(new PacketSyncFluidStackToClient(this.FLUID_TANK.getFluid(), worldPosition));
         return new GemInfusingStationMenu(pContainerId, pInventory, this, this.data);
     }
 
@@ -291,21 +288,20 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, GemInfusingStationBlockEntity pBlockEntity) {
-        if(pLevel.isClientSide()) {
-            return;
-        }
-
-        if(hasRecipe(pBlockEntity) && hasEnoughEnergy(pBlockEntity)) {
-            pBlockEntity.progress++;
-            extractEnergy(pBlockEntity);
-            setChanged(pLevel, pPos, pState);
-            if(pBlockEntity.progress >= pBlockEntity.maxProgress) {
-                craftItem(pBlockEntity);
+    public static void serverTick(Level pLevel, BlockPos pPos, BlockState pState, GemInfusingStationBlockEntity pBlockEntity) {
+        if (!pBlockEntity.itemHandler.getStackInSlot(1).isEmpty()) {
+            if (hasRecipe(pBlockEntity) && hasEnoughEnergy(pBlockEntity)) {
+                pBlockEntity.progress++;
+                extractEnergy(pBlockEntity);
+                if (pBlockEntity.progress >= pBlockEntity.maxProgress) {
+                    craftItem(pBlockEntity);
+                }
+                setChanged(pLevel, pPos, pState);
+            } else {
+                pBlockEntity.resetProgress();
             }
         } else {
             pBlockEntity.resetProgress();
-            setChanged(pLevel, pPos, pState);
         }
 
         if(hasWaterSourceInSlot(pBlockEntity)) {
@@ -325,6 +321,7 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
         return entity.itemHandler.getStackInSlot(0).getCount() > 0;
     }
 
+    @Deprecated(forRemoval = true)
     private static boolean hasSpaceInTank(GemInfusingStationBlockEntity entity, int fillAmount) {
         return entity.FLUID_TANK.getSpace() >= fillAmount;
     }
@@ -389,7 +386,11 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
     }
 
     private void resetProgress() {
-        this.progress = 0;
+        if (this.progress != 0) {
+            this.progress = 0;
+            setChanged();
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+        }
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack output) {
@@ -408,9 +409,14 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
 
     @Override
     public CompoundTag getUpdateTag() {
-        CompoundTag compound = saveWithoutMetadata();
-        load(compound);
+        return saveWithoutMetadata();
+    }
 
-        return compound;
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+        if (Minecraft.getInstance().player.containerMenu instanceof GemInfusingStationMenu gemInfusingStationMenu && gemInfusingStationMenu.blockEntity == this) {
+            gemInfusingStationMenu.setFluid(getFluid());
+        }
     }
 }

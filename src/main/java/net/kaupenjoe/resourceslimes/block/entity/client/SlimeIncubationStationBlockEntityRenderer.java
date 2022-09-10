@@ -2,27 +2,17 @@ package net.kaupenjoe.resourceslimes.block.entity.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.block.custom.SlimeIncubationStationBlock;
-import net.kaupenjoe.resourceslimes.block.entity.SlimeExtractCleaningStationBlockEntity;
 import net.kaupenjoe.resourceslimes.block.entity.SlimeIncubationStationBlockEntity;
-import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.ResourceSlimeEntity;
-import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 
@@ -46,8 +36,10 @@ public class SlimeIncubationStationBlockEntityRenderer implements BlockEntityRen
         pPoseStack.scale(pBlockEntity.getScaledProgress(), pBlockEntity.getScaledProgress(), pBlockEntity.getScaledProgress());
 
         ResourceSlimeEntity entity = pBlockEntity.getRenderEntity();
-        entityRenderer.render(entity,0.0d,0.0d, -0.0d,
-                0.0f,0.0f, pPoseStack, pBufferSource, pPackedLight);
+        if (entity != null) {
+            entityRenderer.render(entity, 0.0d, 0.0d, -0.0d,
+                    0.0f, 0.0f, pPoseStack, pBufferSource, pPackedLight);
+        }
 
         // itemRenderer.renderStatic(itemStack, ItemTransforms.TransformType.GUI, getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()),
         //         OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, 1);

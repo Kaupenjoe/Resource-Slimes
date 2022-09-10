@@ -23,8 +23,6 @@ public class SlimeIncubationStationMenu extends AbstractContainerMenu implements
     public final SlimeIncubationStationBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
-    private ResourceSlimeEntity resourceSlimeEntity;
-
     public SlimeIncubationStationMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()),
                 new SimpleContainerData(2));
@@ -36,8 +34,6 @@ public class SlimeIncubationStationMenu extends AbstractContainerMenu implements
         blockEntity = ((SlimeIncubationStationBlockEntity) entity);
         this.level = inv.player.level;
         this.data = data;
-
-        assignResourceSlimeEntity();
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
@@ -52,20 +48,7 @@ public class SlimeIncubationStationMenu extends AbstractContainerMenu implements
     }
 
     public ResourceSlimeEntity getResourceSlimeEntity() {
-        resourceSlimeEntity = ModEntityTypes.RESOURCE_SLIME.get().create(blockEntity.getLevel());
-        SlimeResource resource = SlimeResource.getResourceByCraftingItem
-                (blockEntity.itemHandler.getStackInSlot(1).getItem());
-        this.resourceSlimeEntity.setResource(new ItemStack(resource.getSlimeyExtractItem()));
-
-        return this.resourceSlimeEntity;
-    }
-
-    private void assignResourceSlimeEntity() {
-        resourceSlimeEntity = ModEntityTypes.RESOURCE_SLIME.get().create(blockEntity.getLevel());
-        SlimeResource resource = SlimeResource.getResourceByCraftingItem
-                (blockEntity.itemHandler.getStackInSlot(1).getItem());
-
-        this.resourceSlimeEntity.setResource(new ItemStack(resource.getSlimeyExtractItem()));
+        return blockEntity.getSlimeEntity();
     }
 
     @Override

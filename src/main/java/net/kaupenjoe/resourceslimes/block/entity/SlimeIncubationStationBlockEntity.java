@@ -4,30 +4,23 @@ import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.block.custom.SlimeIncubationStationBlock;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.ResourceSlimeEntity;
-import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.networking.ModMessages;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncProgressTimerToClient;
 import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.SlimeIncubationStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.kaupenjoe.resourceslimes.util.ModTags;
 import net.kaupenjoe.resourceslimes.util.resources.SlimeResource;
-import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -42,7 +35,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -60,7 +52,7 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
         protected void onContentsChanged(int slot) {
             setChanged();
             if(!level.isClientSide()) {
-                ModMessages.sendToClients(new PacketSyncItemStackToClient(this, worldPosition));
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         }
 
@@ -94,7 +86,7 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
             @Override
             public void onEnergyChanged() {
                 setChanged();
-                ModMessages.sendToClients(new PacketSyncEnergyToClient(this.energy, worldPosition));
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         };
     }
@@ -140,13 +132,18 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
         return stack;
     }
 
-    public ResourceSlimeEntity getRenderEntity() {
-        ResourceSlimeEntity resourceSlimeEntity = ModEntityTypes.RESOURCE_SLIME.get().create(this.getLevel());
+    private ResourceSlimeEntity slime;
+    public ResourceSlimeEntity getSlimeEntity() {
+        ResourceSlimeEntity resourceSlimeEntity = new ResourceSlimeEntity(ModEntityTypes.RESOURCE_SLIME.get(), level);
         SlimeResource resource = SlimeResource.getResourceByCraftingItem
                 (itemHandler.getStackInSlot(1).getItem());
         resourceSlimeEntity.setResource(new ItemStack(resource.getSlimeyExtractItem()));
 
         return resourceSlimeEntity;
+    }
+
+    public ResourceSlimeEntity getRenderEntity() {
+        return slime;
     }
 
     @Override
@@ -248,6 +245,7 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
         lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
+        slime = new ResourceSlimeEntity(ModEntityTypes.RESOURCE_SLIME.get(), level);
     }
 
     @Override
@@ -284,24 +282,23 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, SlimeIncubationStationBlockEntity pBlockEntity) {
-        if(pLevel.isClientSide()) {
-            return;
-        }
+        if (pLevel.isClientSide) {
+        } else if (!pBlockEntity.itemHandler.getStackInSlot(0).isEmpty() && !pBlockEntity.itemHandler.getStackInSlot(1).isEmpty() && !pBlockEntity.itemHandler.getStackInSlot(2).isEmpty()) {
+            if (hasRecipe(pBlockEntity) && hasEnoughEnergy(pBlockEntity)) {
+                pBlockEntity.updateProgress();
 
-        if(hasRecipe(pBlockEntity) && hasEnoughEnergy(pBlockEntity)) {
-            pBlockEntity.updateProgress();
-            extractEnergy(pBlockEntity);
-            setChanged(pLevel, pPos, pState);
-            if(pBlockEntity.progress >= pBlockEntity.maxProgress) {
-                craftItem(pBlockEntity);
+                extractEnergy(pBlockEntity);
+                setChanged(pLevel, pPos, pState);
+                if (pBlockEntity.progress >= pBlockEntity.maxProgress) {
+                    craftItem(pBlockEntity);
+                }
+            } else {
+                pBlockEntity.resetProgress();
             }
         } else {
             pBlockEntity.resetProgress();
-            setChanged(pLevel, pPos, pState);
         }
     }
-
-
     private static void extractEnergy(SlimeIncubationStationBlockEntity entity) {
         entity.ENERGY_STORAGE.extractEnergy(100, false);
     }
@@ -347,24 +344,28 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
 
     private static void spawnSlime(SlimeIncubationStationBlockEntity entity, ItemStack stack) {
         if(!entity.level.isClientSide()) {
-            ResourceSlimeEntity slime = new ResourceSlimeEntity(ModEntityTypes.RESOURCE_SLIME.get(), entity.level);
-            Vec3 pos = new Vec3(0.0d, 1d, 0.1875d).yRot(-Mth.DEG_TO_RAD * entity.getBlockState().getValue(SlimeIncubationStationBlock.FACING).toYRot()).add(entity.getBlockPos().getX() + 0.5, entity.getBlockPos().getY(), entity.getBlockPos().getZ() + 0.5);
+            ResourceSlimeEntity slime = entity.getSlimeEntity();
+            float rot = entity.getBlockState().getValue(SlimeIncubationStationBlock.FACING).toYRot();
+            Vec3 pos = new Vec3(0.0d, 1d, 0.1875d).yRot(-Mth.DEG_TO_RAD * rot).add(entity.getBlockPos().getX() + 0.5, entity.getBlockPos().getY(), entity.getBlockPos().getZ() + 0.5);
             slime.setPos(pos);
-            slime.yBodyRot = Mth.wrapDegrees(entity.getBlockState().getValue(SlimeIncubationStationBlock.FACING).toYRot());
-            slime.yHeadRot = Mth.wrapDegrees(entity.getBlockState().getValue(SlimeIncubationStationBlock.FACING).toYRot());
+            slime.yBodyRot = Mth.wrapDegrees(rot);
+            slime.yHeadRot = Mth.wrapDegrees(rot);
             slime.setResource(new ItemStack(SlimeResource.getResourceByCraftingItem(stack.getItem()).getSlimeyExtractItem()));
             entity.level.addFreshEntity(slime);
         }
     }
 
     private void resetProgress() {
-        this.progress = 0;
-        ModMessages.sendToClients(new PacketSyncProgressTimerToClient(progress, getBlockPos()));
+        if (progress != 0) {
+            this.progress = 0;
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            setChanged();
+        }
     }
 
     private void updateProgress() {
         progress++;
-        ModMessages.sendToClients(new PacketSyncProgressTimerToClient(progress, getBlockPos()));
+        level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack output) {
@@ -383,9 +384,12 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
 
     @Override
     public CompoundTag getUpdateTag() {
-        CompoundTag compound = saveWithoutMetadata();
-        load(compound);
+        return saveWithoutMetadata();
+    }
 
-        return compound;
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+        this.slime = this.getSlimeEntity();
     }
 }
