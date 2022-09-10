@@ -19,15 +19,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 
 public class SlimeExtractCleaningStationBlockEntityRenderer implements BlockEntityRenderer<SlimeExtractCleaningStationBlockEntity> {
-    public SlimeExtractCleaningStationBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
 
+    private final ItemRenderer itemRenderer;
+
+    public SlimeExtractCleaningStationBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+        itemRenderer = Minecraft.getInstance().getItemRenderer();
     }
 
     @Override
     public void render(SlimeExtractCleaningStationBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack,
                        MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
-
-        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
         ItemStack itemStack = pBlockEntity.getRenderStack();
         pPoseStack.pushPose();

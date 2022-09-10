@@ -20,15 +20,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 
 public class GemCuttingStationBlockEntityRenderer implements BlockEntityRenderer<GemCuttingStationBlockEntity> {
-    public GemCuttingStationBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
 
+    private ItemRenderer itemRenderer;
+
+    public GemCuttingStationBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+        itemRenderer = Minecraft.getInstance().getItemRenderer();
     }
 
     @Override
     public void render(GemCuttingStationBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack,
                        MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
-
-        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
         ItemStack itemStack = pBlockEntity.getRenderStack();
         pPoseStack.pushPose();
