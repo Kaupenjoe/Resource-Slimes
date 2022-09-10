@@ -48,7 +48,7 @@ public class SlimeIncubationStationMenu extends AbstractContainerMenu implements
     }
 
     public ResourceSlimeEntity getResourceSlimeEntity() {
-        return blockEntity.getSlimeEntity();
+        return blockEntity.getRenderEntity();
     }
 
     @Override

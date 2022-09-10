@@ -390,6 +390,8 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         super.onDataPacket(net, pkt);
-        this.slime = this.getSlimeEntity();
+        if (!itemHandler.getStackInSlot(1).isEmpty()) {
+            this.slime = this.getSlimeEntity();
+        }
     }
 }
