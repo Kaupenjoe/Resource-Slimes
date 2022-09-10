@@ -281,9 +281,8 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, SlimeIncubationStationBlockEntity pBlockEntity) {
-        if (pLevel.isClientSide) {
-        } else if (!pBlockEntity.itemHandler.getStackInSlot(0).isEmpty() && !pBlockEntity.itemHandler.getStackInSlot(1).isEmpty() && !pBlockEntity.itemHandler.getStackInSlot(2).isEmpty()) {
+    public static void serverTick(Level pLevel, BlockPos pPos, BlockState pState, SlimeIncubationStationBlockEntity pBlockEntity) {
+        if (!pBlockEntity.itemHandler.getStackInSlot(0).isEmpty() && !pBlockEntity.itemHandler.getStackInSlot(1).isEmpty() && !pBlockEntity.itemHandler.getStackInSlot(2).isEmpty()) {
             if (hasRecipe(pBlockEntity) && hasEnoughEnergy(pBlockEntity)) {
                 pBlockEntity.updateProgress();
 
