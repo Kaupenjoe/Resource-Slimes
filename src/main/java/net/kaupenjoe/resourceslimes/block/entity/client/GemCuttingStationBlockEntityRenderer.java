@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.block.entity.GemCuttingStationBlockEntity;
-import net.kaupenjoe.resourceslimes.block.entity.GemInfusingStationBlockEntity;
 import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;

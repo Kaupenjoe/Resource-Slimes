@@ -40,8 +40,8 @@ public class GemCuttingStationRecipeCategory implements IRecipeCategory<GemCutti
     private JEIEnergyInfoArea energyInfoArea;
 
     public GemCuttingStationRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ModBlocks.GEM_CUTTING_STATION.get()));
+        this.background = helper.createDrawable(TEXTURE, 5, 5, 166, 76);
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.GEM_CUTTING_STATION.get()));
         IDrawableStatic progressArrow = helper.createDrawable(TEXTURE, 176, 0, 8, 26);
         this.animatedProgressArrow = helper.createAnimatedDrawable(progressArrow, 18, IDrawableAnimated.StartDirection.TOP, false);
     }
@@ -73,7 +73,7 @@ public class GemCuttingStationRecipeCategory implements IRecipeCategory<GemCutti
 
     @Override
     public List<Component> getTooltipStrings(GemCuttingStationRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        if(isMouseAboveArea((int) Math.round(mouseX), (int) Math.round(mouseY),0, 0,156, 13, energyInfoArea.getWidth(), energyInfoArea.getHeight())) {
+        if(isMouseAboveArea((int) Math.round(mouseX), (int) Math.round(mouseY),0, 0,151, 6, energyInfoArea.getWidth(), energyInfoArea.getHeight())) {
             return energyInfoArea.getTooltips();
         }
 
@@ -82,22 +82,22 @@ public class GemCuttingStationRecipeCategory implements IRecipeCategory<GemCutti
 
     @Override
     public void setRecipe(@Nonnull IRecipeLayoutBuilder builder, @Nonnull GemCuttingStationRecipe recipe, @Nonnull IFocusGroup focusGroup) {
-        energyInfoArea = new JEIEnergyInfoArea(156, 13, 8, 64, 60000,7800);
+        energyInfoArea = new JEIEnergyInfoArea(151, 6, 8, 64, 60000,7800);
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 57, 18).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.INPUT, 103, 18).addIngredients(Ingredient.of(ModItems.GEM_CUTTER_TOOL.get()));
-        builder.addSlot(RecipeIngredientRole.INPUT, 55, 45)
+        builder.addSlot(RecipeIngredientRole.INPUT, 52, 11).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.INPUT, 98, 11).addIngredients(Ingredient.of(ModItems.GEM_CUTTER_TOOL.get()));
+        builder.addSlot(RecipeIngredientRole.INPUT, 50, 38)
                 .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(Fluids.WATER, recipe.getWaterAmount())))
                 .setFluidRenderer(32000, false, 16, 32);
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 0, 0)
                 .setOverlay(energyInfoArea, 0,0);
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 60).addItemStack(recipe.getResultItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 75, 53).addItemStack(recipe.getResultItem());
     }
 
     @Override
     public void draw(GemCuttingStationRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-        animatedProgressArrow.draw(stack, 102, 41);
+        animatedProgressArrow.draw(stack, 97, 34);
     }
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {

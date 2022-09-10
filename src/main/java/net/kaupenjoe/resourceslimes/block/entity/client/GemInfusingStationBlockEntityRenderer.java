@@ -2,7 +2,6 @@ package net.kaupenjoe.resourceslimes.block.entity.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.block.custom.GemInfusingStationBlock;
 import net.kaupenjoe.resourceslimes.block.entity.GemInfusingStationBlockEntity;
 import net.minecraft.client.Minecraft;
