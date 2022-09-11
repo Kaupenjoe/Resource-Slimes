@@ -4,6 +4,7 @@ import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.block.custom.SlimeIncubationStationBlock;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.entity.ResourceSlimeEntity;
+import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.recipe.SlimeIncubationStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.SlimeIncubationStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
@@ -61,7 +62,7 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
             return switch (slot) {
                 case 0 -> stack.is(Tags.Items.SLIMEBALLS);
                 case 1 -> true;
-                case 2 -> stack.is(ModTags.Items.CUT_GEMS);
+                case 2 -> stack.is(ModTags.Items.CUT_GEMS) || stack.is(ModItems.PINK_SLIME_PEARL.get());
                 default -> super.isItemValid(slot, stack);
             };
         }

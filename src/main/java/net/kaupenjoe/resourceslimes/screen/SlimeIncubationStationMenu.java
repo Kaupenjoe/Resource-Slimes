@@ -38,7 +38,7 @@ public class SlimeIncubationStationMenu extends AbstractContainerMenu implements
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
             this.addSlot(new ModTagRestrictedSlot(handler, 0, 44, 22, () -> Tags.Items.SLIMEBALLS));
             this.addSlot(new SlotItemHandler(handler, 1, 80, 7));
-            this.addSlot(new ModTagRestrictedSlot(handler, 2, 116, 22, () -> ModTags.Items.CUT_GEMS));
+            this.addSlot(new ModTagRestrictedSlot(handler, 2, 116, 22, () -> ModTags.Items.CUT_GEMS, () -> ModTags.Items.SLIME_PEARL));
         });
 
         addDataSlots(data);

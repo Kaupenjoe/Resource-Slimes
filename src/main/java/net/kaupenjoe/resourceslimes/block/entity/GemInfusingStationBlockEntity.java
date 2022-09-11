@@ -358,7 +358,7 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
     }
 
     private static boolean hasWaterInTank(GemInfusingStationBlockEntity entity, GemInfusingStationRecipe recipe) {
-        return entity.FLUID_TANK.getFluid().getAmount() >= recipe.getFluid().getAmount();
+        return entity.FLUID_TANK.getFluid().getAmount() >= recipe.getFluid().getAmount() && entity.FLUID_TANK.getFluid().getFluid().isSame(recipe.getFluid().getFluid());
     }
 
     private static void craftItem(GemInfusingStationBlockEntity entity) {
