@@ -2,6 +2,7 @@ package net.kaupenjoe.resourceslimes.block.entity;
 
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.block.custom.GemInfusingStationBlock;
+import net.kaupenjoe.resourceslimes.item.ModItems;
 import net.kaupenjoe.resourceslimes.recipe.GemInfusingStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.GemInfusingStationMenu;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
@@ -57,7 +58,7 @@ public class GemInfusingStationBlockEntity extends ModSlimeBlockEntity {
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
                 case 0 -> stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent();
-                case 1 -> stack.is(ModTags.Items.CUT_GEMS);
+                case 1 -> stack.is(ModTags.Items.CUT_GEMS) || stack.is(ModItems.PINK_SLIME_PEARL.get());
                 case 2 -> false;
                 default -> super.isItemValid(slot, stack);
             };

@@ -4,6 +4,7 @@ import net.kaupenjoe.resourceslimes.block.ModBlocks;
 import net.kaupenjoe.resourceslimes.block.entity.GemInfusingStationBlockEntity;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.screen.slot.ModFluidSourceSlot;
+import net.kaupenjoe.resourceslimes.screen.slot.ModFluidTagRestrictedSlot;
 import net.kaupenjoe.resourceslimes.screen.slot.ModResultSlot;
 import net.kaupenjoe.resourceslimes.screen.slot.ModTagRestrictedSlot;
 import net.kaupenjoe.resourceslimes.util.ModTags;
@@ -39,8 +40,8 @@ public class GemInfusingStationMenu extends AbstractContainerMenu implements IFl
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-            this.addSlot(new ModFluidSourceSlot(handler, 0, 12, 13, ModFluids.CITRINE_SLIME_FLUID::get));
-            this.addSlot(new ModTagRestrictedSlot(handler, 1, 86, 13, () -> ModTags.Items.CUT_GEMS));
+            this.addSlot(new ModFluidTagRestrictedSlot(handler, 0, 12, 13, () -> ModTags.Fluids.SLIME_FLUIDS));
+            this.addSlot(new ModTagRestrictedSlot(handler, 1, 86, 13, () -> ModTags.Items.CUT_GEMS, () -> ModTags.Items.SLIME_PEARL));
             this.addSlot(new ModResultSlot(handler, 2, 86, 58));
         });
 
