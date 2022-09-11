@@ -1,6 +1,7 @@
 package net.kaupenjoe.resourceslimes.block.entity.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 import net.kaupenjoe.resourceslimes.block.custom.SlimeIncubationStationBlock;
 import net.kaupenjoe.resourceslimes.block.entity.SlimeIncubationStationBlockEntity;
@@ -39,36 +40,37 @@ public class SlimeIncubationStationBlockEntityRenderer implements BlockEntityRen
         pPoseStack.translate(0.5f, 0.75f, 0.5f);
         pPoseStack.mulPose(Vector3f.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(SlimeIncubationStationBlock.FACING).toYRot()));
         pPoseStack.pushPose();
-        pPoseStack.translate(0.0f, 0.25f, 0.1875f);
+        pPoseStack.translate(0.0f, 0.0f, 0.1875f);
         float scaledProgress = pBlockEntity.getScaledProgress();
         pPoseStack.scale(scaledProgress, scaledProgress, scaledProgress);
 
         ResourceSlimeEntity entity = pBlockEntity.getRenderEntity();
         if (entity != null) {
-            entityRenderer.render(entity, 0.0d, 0.0d, -0.0d,
+            entityRenderer.render(entity, 0.0d, 0.0d, 0.0d,
                     0.0f, 0.0f, pPoseStack, pBufferSource, pPackedLight);
         }
         pPoseStack.popPose();
 
+        pPoseStack.mulPose(Vector3f.YN.rotationDegrees(180));
         pPoseStack.pushPose();
-        pPoseStack.translate(-0.3125f, 0.0f, -0.3125f);
+        pPoseStack.translate(0.3125f, 0.0f, 0.3125f);
         pPoseStack.scale(0.25f, 0.25f, 0.25f);
-        pPoseStack.mulPose(Vector3f.XP.rotationDegrees(270));
-        itemRenderer.renderStatic(itemStack[0], ItemTransforms.TransformType.GUI, getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()),
+        pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
+        itemRenderer.renderStatic(itemStack[0], ItemTransforms.TransformType.FIXED, getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()),
         OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, 1);
         pPoseStack.popPose();
         pPoseStack.pushPose();
-        pPoseStack.translate(0.0f, 0.0f, -0.25f);
+        pPoseStack.translate(0.0f, 0.0f, 0.25f);
         pPoseStack.scale(0.25f, 0.25f, 0.25f);
-        pPoseStack.mulPose(Vector3f.XP.rotationDegrees(270));
-        itemRenderer.renderStatic(itemStack[1], ItemTransforms.TransformType.GUI, getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()),
+        pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
+        itemRenderer.renderStatic(itemStack[1], ItemTransforms.TransformType.FIXED, getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()),
         OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, 1);
         pPoseStack.popPose();
         pPoseStack.pushPose();
-        pPoseStack.translate(0.3125f, 0.0f, -0.3125f);
+        pPoseStack.translate(-0.3125f, 0.0f, 0.3125f);
         pPoseStack.scale(0.25f, 0.25f, 0.25f);
-        pPoseStack.mulPose(Vector3f.XP.rotationDegrees(270));
-        itemRenderer.renderStatic(itemStack[2], ItemTransforms.TransformType.GUI, getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()),
+        pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
+        itemRenderer.renderStatic(itemStack[2], ItemTransforms.TransformType.FIXED, getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()),
         OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, 1);
         pPoseStack.popPose();
         pPoseStack.popPose();

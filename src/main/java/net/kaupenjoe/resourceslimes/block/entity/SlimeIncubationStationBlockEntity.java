@@ -345,7 +345,7 @@ public class SlimeIncubationStationBlockEntity extends ModSlimeBlockEntity {
         if(!entity.level.isClientSide()) {
             ResourceSlimeEntity slime = entity.getSlimeEntity();
             float rot = entity.getBlockState().getValue(SlimeIncubationStationBlock.FACING).toYRot();
-            Vec3 pos = new Vec3(0.0d, 1d, 0.1875d).yRot(-Mth.DEG_TO_RAD * rot).add(entity.getBlockPos().getX() + 0.5, entity.getBlockPos().getY(), entity.getBlockPos().getZ() + 0.5);
+            Vec3 pos = new Vec3(0.0d, 0.75d, 0.1875d).yRot(-Mth.DEG_TO_RAD * rot).add(entity.getBlockPos().getX() + 0.5, entity.getBlockPos().getY(), entity.getBlockPos().getZ() + 0.5);
             slime.setPos(pos);
             slime.yBodyRot = Mth.wrapDegrees(rot);
             slime.yHeadRot = Mth.wrapDegrees(rot);
