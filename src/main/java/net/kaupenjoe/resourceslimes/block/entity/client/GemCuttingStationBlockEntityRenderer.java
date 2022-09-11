@@ -20,7 +20,7 @@ import net.minecraft.world.level.LightLayer;
 
 public class GemCuttingStationBlockEntityRenderer implements BlockEntityRenderer<GemCuttingStationBlockEntity> {
 
-    private ItemRenderer itemRenderer;
+    private final ItemRenderer itemRenderer;
 
     public GemCuttingStationBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         itemRenderer = Minecraft.getInstance().getItemRenderer();
