@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "  W",
+    " W "
+  ],
+  "key": {
+    "W": {
+      "item": "resourceslimes:slimey_wood_extract"
+    }
+  },
+  "result": {
+    "item": "minecraft:birch_log",
+    "count": 8
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:cobbled_deepslate_from_slimey_extract"
+    ]
+  },
+  "criteria": {
+    "has_deepslate_slimey_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_deepslate_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:cobbled_deepslate_from_slimey_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_deepslate_slimey_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

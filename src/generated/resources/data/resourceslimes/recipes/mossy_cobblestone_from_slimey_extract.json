@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GEG",
+    "EGE",
+    "GEG"
+  ],
+  "key": {
+    "E": {
+      "item": "resourceslimes:slimey_stone_extract"
+    },
+    "G": {
+      "item": "resourceslimes:slimey_grass_extract"
+    }
+  },
+  "result": {
+    "item": "minecraft:mossy_cobblestone",
+    "count": 16
+  }
+}

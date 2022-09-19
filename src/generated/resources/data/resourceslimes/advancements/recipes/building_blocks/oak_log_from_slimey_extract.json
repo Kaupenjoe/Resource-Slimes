@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:oak_log_from_slimey_extract"
+    ]
+  },
+  "criteria": {
+    "has_wood_slimey_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_wood_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:oak_log_from_slimey_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_wood_slimey_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

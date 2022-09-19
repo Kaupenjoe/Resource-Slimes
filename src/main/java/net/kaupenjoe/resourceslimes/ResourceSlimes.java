@@ -8,30 +8,22 @@ import net.kaupenjoe.resourceslimes.effect.ModEffects;
 import net.kaupenjoe.resourceslimes.entity.ModEntityTypes;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.integration.ResourceSlimeIntegrations;
-import net.kaupenjoe.resourceslimes.item.ModCreativeModeTab;
 import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.item.custom.ExtractItem;
-import net.kaupenjoe.resourceslimes.item.custom.SlimeyExtractItem;
 import net.kaupenjoe.resourceslimes.particle.ModParticles;
 import net.kaupenjoe.resourceslimes.potion.ModPotion;
 import net.kaupenjoe.resourceslimes.recipe.ModRecipes;
 import net.kaupenjoe.resourceslimes.screen.ModMenuTypes;
-import net.kaupenjoe.resourceslimes.networking.ModMessages;
 import net.kaupenjoe.resourceslimes.util.ResourceSlimesRegistries;
 import net.kaupenjoe.resourceslimes.util.resources.BuiltinSlimeResources;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
 import org.slf4j.Logger;
 
 @Mod(ResourceSlimes.MOD_ID)
@@ -69,7 +61,6 @@ public class ResourceSlimes {
 
     private void setup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            ModMessages.register();
             settingResourceItemsOnSlimeResources();
         });
         ResourceSlimeIntegrations.commonSetup();

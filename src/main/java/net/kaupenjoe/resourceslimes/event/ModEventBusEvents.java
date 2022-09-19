@@ -33,6 +33,7 @@ public class ModEventBusEvents {
         event.registerLayerDefinition(AxolotlHat.LAYER_LOCATION, AxolotlHat::createBodyLayer);
         event.registerLayerDefinition(ThermalHat.LAYER_LOCATION, ThermalHat::createBodyLayer);
         event.registerLayerDefinition(HeadphoneHat.LAYER_LOCATION, HeadphoneHat::createBodyLayer);
+        event.registerLayerDefinition(DuckHat.LAYER_LOCATION, DuckHat::createBodyLayer);
     }
 
     @SubscribeEvent

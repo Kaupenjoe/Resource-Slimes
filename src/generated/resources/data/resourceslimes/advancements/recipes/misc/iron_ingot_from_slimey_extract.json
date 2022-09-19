@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:iron_ingot_from_slimey_extract"
+    ]
+  },
+  "criteria": {
+    "has_iron_slimey_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_iron_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:iron_ingot_from_slimey_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_slimey_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

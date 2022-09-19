@@ -33,6 +33,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import static net.kaupenjoe.resourceslimes.data.ExtractRecipes.*;
+import static net.kaupenjoe.resourceslimes.data.SlimeyExtractRecipes.*;
+import static net.kaupenjoe.resourceslimes.data.SlimeyExtractRecipes.lapisSlimeyExtractRecipes;
 
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
     public ModRecipeProvider(DataGenerator pGenerator) {
@@ -184,6 +186,58 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 "gold_extract"));
 
 
+        ItemLike slimey_stone_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_stone_extract"));
+        ItemLike slimey_dirt_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_dirt_extract"));
+        ItemLike slimey_water_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_water_extract"));
+        ItemLike slimey_sand_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_sand_extract"));
+        ItemLike slimey_gravel_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_gravel_extract"));
+
+        ItemLike slimey_wood_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_wood_extract"));
+        ItemLike slimey_grass_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_grass_extract"));
+        ItemLike slimey_flower_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_flower_extract"));
+        ItemLike slimey_sheep_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_sheep_extract"));
+        ItemLike slimey_cow_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_cow_extract"));
+
+        ItemLike slimey_deepslate_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_deepslate_extract"));
+
+        ItemLike slimey_fire_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_fire_extract"));
+
+        ItemLike slimey_iron_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_iron_extract"));
+        ItemLike slimey_lapis_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_lapis_extract"));
+        ItemLike slimey_quartz_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_quartz_extract"));
+        ItemLike slimey_aquatic_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_aquatic_extract"));
+        ItemLike slimey_nether_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_nether_extract"));
+        ItemLike slimey_zombie_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_zombie_extract"));
+        ItemLike slimey_ice_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_ice_extract"));
+        ItemLike slimey_copper_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_copper_extract"));
+        ItemLike slimey_crop_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_crop_extract"));
+        ItemLike slimey_lesser_gem_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_lessergem_extract"));
+
+        ItemLike slimey_gold_extract = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ResourceSlimes.MOD_ID,
+                "slimey_gold_extract"));
+
 
         stoneExtractRecipes(pFinishedRecipeConsumer, stone_extract, grass_extract);
         dirtExtractRecipes(pFinishedRecipeConsumer, dirt_extract, grass_extract, fire_extract);
@@ -199,6 +253,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         goldExtractRecipes(pFinishedRecipeConsumer, gold_extract);
 
+
+        stoneSlimeyExtractRecipes(pFinishedRecipeConsumer, slimey_stone_extract, slimey_grass_extract);
+        dirtSlimeyExtractRecipes(pFinishedRecipeConsumer, slimey_dirt_extract, slimey_grass_extract, slimey_fire_extract);
+        waterSlimeyExtractRecipes(pFinishedRecipeConsumer, slimey_water_extract, slimey_fire_extract);
+        sandSlimeyExtractRecipes(pFinishedRecipeConsumer, slimey_sand_extract, slimey_fire_extract);
+        woodSlimeyExtractRecipes(pFinishedRecipeConsumer, slimey_wood_extract);
+
+        ironSlimeyExtractRecipes(pFinishedRecipeConsumer, slimey_iron_extract);
+        lapisSlimeyExtractRecipes(pFinishedRecipeConsumer, slimey_lapis_extract);
+        copperSlimeyExtractRecipes(pFinishedRecipeConsumer, slimey_copper_extract);
+        quartzSlimeyExtractRecipes(pFinishedRecipeConsumer, slimey_quartz_extract);
+        deepslateSlimeyExtractRecipes(pFinishedRecipeConsumer, slimey_deepslate_extract);
+
+        goldSlimeyExtractRecipes(pFinishedRecipeConsumer, slimey_gold_extract);
     }
 
     private void customIncubationRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " W ",
+    " W ",
+    " B "
+  ],
+  "key": {
+    "W": {
+      "item": "resourceslimes:slimey_water_extract"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "result": {
+    "item": "minecraft:water_bucket"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "EEE",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "resourceslimes:slimey_stone_extract"
+    }
+  },
+  "result": {
+    "item": "minecraft:stone",
+    "count": 8
+  }
+}

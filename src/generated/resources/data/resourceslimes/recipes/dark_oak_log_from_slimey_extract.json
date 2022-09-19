@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " W ",
+    "W  ",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "item": "resourceslimes:slimey_wood_extract"
+    }
+  },
+  "result": {
+    "item": "minecraft:dark_oak_log",
+    "count": 8
+  }
+}

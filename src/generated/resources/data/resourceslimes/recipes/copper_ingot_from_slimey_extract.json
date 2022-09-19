@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "resourceslimes:slimey_copper_extract"
+    }
+  },
+  "result": {
+    "item": "minecraft:copper_ingot",
+    "count": 4
+  }
+}

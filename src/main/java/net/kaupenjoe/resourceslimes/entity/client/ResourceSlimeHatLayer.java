@@ -68,7 +68,11 @@ public class ResourceSlimeHatLayer<T extends LivingEntity> extends RenderLayer<T
                 new Vector3f(0, 0, 0)));
 
         list.add(new EasterEggData<>("Headphones", new HeadphoneHat<>(modelSet.bakeLayer(HeadphoneHat.LAYER_LOCATION)),
-                        new Vector3f(0.0f, 0f, 0), new Vector3f(1f, 1f, 1f),
+                new Vector3f(0.0f, 0f, 0), new Vector3f(1f, 1f, 1f),
+                new Vector3f(0, 0, 0)));
+
+        list.add(new EasterEggData<>("Duck", new DuckHat<>(modelSet.bakeLayer(DuckHat.LAYER_LOCATION)),
+                new Vector3f(0.0f, 0f, 0), new Vector3f(1f, 1f, 1f),
                 new Vector3f(0, 0, 0)));
 
         return list;

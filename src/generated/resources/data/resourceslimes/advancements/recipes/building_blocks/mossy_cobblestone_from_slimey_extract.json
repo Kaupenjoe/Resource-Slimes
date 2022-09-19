@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "resourceslimes:mossy_cobblestone_from_slimey_extract"
+    ]
+  },
+  "criteria": {
+    "has_stone_slimey_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_stone_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_grass_slimey_extract": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "resourceslimes:slimey_grass_extract"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "resourceslimes:mossy_cobblestone_from_slimey_extract"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_stone_slimey_extract",
+      "has_grass_slimey_extract",
+      "has_the_recipe"
+    ]
+  ]
+}

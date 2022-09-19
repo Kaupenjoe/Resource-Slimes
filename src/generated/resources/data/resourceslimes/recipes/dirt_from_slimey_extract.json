@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    "DDD",
+    "DDD"
+  ],
+  "key": {
+    "D": {
+      "item": "resourceslimes:slimey_dirt_extract"
+    }
+  },
+  "result": {
+    "item": "minecraft:dirt",
+    "count": 32
+  }
+}
