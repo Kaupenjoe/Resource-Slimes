@@ -52,13 +52,13 @@ public class ResourceSlimeEntity extends Slime {
     public static int growthTime = 99999;
 
     private static final Map<ResourceTier, Integer> TIER_TO_GROWTH_TIME_MAP
-            = Map.of(ResourceTier.CITRINE,200,              // 10 Mins for 64
-                     ResourceTier.ZIRCON,400,               // 20 Mins for 64
-                     ResourceTier.DIAMOND,600,              // 32 Mins for 64
-                     ResourceTier.EMERALD,800,              // 44 Mins for 64
-                     ResourceTier.TANZANITE,1200,           // 64 Mins for 64
-                     ResourceTier.BLACK_OPAL,1600,          // 85 Mins for 64
-                     ResourceTier.PINK_SLIME_PEARL,2000);   // 1.7 hours for 64
+            = Map.of(ResourceTier.CITRINE,300,               // 16 Mins for 64
+                     ResourceTier.ZIRCON,600,                // 32 Mins for 64
+                     ResourceTier.DIAMOND,1000,              // 55 Mins for 64
+                     ResourceTier.EMERALD,1200,              // 64 Mins for 64
+                     ResourceTier.TANZANITE,1600,            // 85 Mins for 64
+                     ResourceTier.BLACK_OPAL,2000,           // 1.7 Hours for 64
+                     ResourceTier.PINK_SLIME_PEARL,2800);    // 2.5 hours for 64
 
 
     public ResourceSlimeEntity(EntityType<? extends Slime> entityType, Level level) {
