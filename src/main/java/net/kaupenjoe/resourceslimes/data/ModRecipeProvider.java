@@ -211,7 +211,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
             ItemLike input = resource.getCraftingItem().get();
 
             new SlimeIncubationRecipeBuilder(Items.DIRT, 1,
-                    Items.SLIME_BALL, input, ModItems.CUT_CITRINE.get())
+                    Items.SLIME_BALL, input, resource.getTier().getTierItem())
                     .unlockedBy("has_whatever", has(Items.SLIME_BALL)).save(pFinishedRecipeConsumer); // TODO
         }
     }

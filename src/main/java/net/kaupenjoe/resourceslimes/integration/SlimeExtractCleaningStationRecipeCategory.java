@@ -40,8 +40,8 @@ public class SlimeExtractCleaningStationRecipeCategory implements IRecipeCategor
     private JEIEnergyInfoArea energyInfoArea;
 
     public SlimeExtractCleaningStationRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get()));
+        this.background = helper.createDrawable(TEXTURE, 5, 5, 166, 76);
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.SLIME_EXTRACT_CLEANING_STATION.get()));
         IDrawableStatic progressArrow = helper.createDrawable(TEXTURE, 176, 0, 8, 26);
         this.animatedProgressArrow = helper.createAnimatedDrawable(progressArrow, 18, IDrawableAnimated.StartDirection.TOP, false);
     }
@@ -73,7 +73,7 @@ public class SlimeExtractCleaningStationRecipeCategory implements IRecipeCategor
 
     @Override
     public List<Component> getTooltipStrings(SlimeExtractCleaningStationRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        if(isMouseAboveArea((int) Math.round(mouseX), (int) Math.round(mouseY),0, 0,156, 13, energyInfoArea.getWidth(), energyInfoArea.getHeight())) {
+        if(isMouseAboveArea((int) Math.round(mouseX), (int) Math.round(mouseY),0, 0,151, 6, energyInfoArea.getWidth(), energyInfoArea.getHeight())) {
             return energyInfoArea.getTooltips();
         }
 
@@ -83,23 +83,23 @@ public class SlimeExtractCleaningStationRecipeCategory implements IRecipeCategor
     @Override
     public void setRecipe(@Nonnull IRecipeLayoutBuilder builder, @Nonnull SlimeExtractCleaningStationRecipe recipe,
                           @Nonnull IFocusGroup focusGroup) {
-        energyInfoArea = new JEIEnergyInfoArea(156, 13, 8, 64, 60000,7800);
+        energyInfoArea = new JEIEnergyInfoArea(151, 6, 8, 64, 60000,7800);
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 12, 16).addIngredients(Ingredient.of(ModItems.SOAP.get()));
-        builder.addSlot(RecipeIngredientRole.INPUT, 86, 16).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.INPUT, 55, 16)
+        builder.addSlot(RecipeIngredientRole.INPUT, 7, 9).addIngredients(Ingredient.of(ModItems.SOAP.get()));
+        builder.addSlot(RecipeIngredientRole.INPUT, 81, 9).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.INPUT, 50, 9)
                 .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(ModFluids.SOAPY_WATER_FLUID.get(), 500)))
                 .setFluidRenderer(32000, false, 16, 61);
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 0, 0)
                 .setOverlay(energyInfoArea, 0,0);
 
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 86, 61).addItemStack(recipe.getResultItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 81, 54).addItemStack(recipe.getResultItem());
     }
 
     @Override
     public void draw(SlimeExtractCleaningStationRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-        animatedProgressArrow.draw(stack, 105, 33);
+        animatedProgressArrow.draw(stack, 100, 26);
     }
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {

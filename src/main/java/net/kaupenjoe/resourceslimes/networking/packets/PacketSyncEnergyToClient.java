@@ -13,6 +13,7 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
+@Deprecated(forRemoval = true) // Not in use anymore
 public class PacketSyncEnergyToClient {
     private final int energy;
     private final BlockPos pos;

@@ -36,8 +36,8 @@ public class GemInfusingStationRecipeCategory implements IRecipeCategory<GemInfu
     private JEIEnergyInfoArea energyInfoArea;
 
     public GemInfusingStationRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ModBlocks.GEM_INFUSING_STATION.get()));
+        this.background = helper.createDrawable(TEXTURE, 5, 5, 166, 76);
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.GEM_INFUSING_STATION.get()));
         IDrawableStatic progressArrow = helper.createDrawable(TEXTURE, 176, 0, 8, 26);
         this.animatedProgressArrow = helper.createAnimatedDrawable(progressArrow, 18, IDrawableAnimated.StartDirection.TOP, false);
     }
@@ -69,7 +69,7 @@ public class GemInfusingStationRecipeCategory implements IRecipeCategory<GemInfu
 
     @Override
     public List<Component> getTooltipStrings(GemInfusingStationRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        if(isMouseAboveArea((int) Math.round(mouseX), (int) Math.round(mouseY),0, 0,156, 13, energyInfoArea.getWidth(), energyInfoArea.getHeight())) {
+        if(isMouseAboveArea((int) Math.round(mouseX), (int) Math.round(mouseY),0, 0,151, 6, energyInfoArea.getWidth(), energyInfoArea.getHeight())) {
             return energyInfoArea.getTooltips();
         }
 
@@ -78,21 +78,21 @@ public class GemInfusingStationRecipeCategory implements IRecipeCategory<GemInfu
 
     @Override
     public void setRecipe(@Nonnull IRecipeLayoutBuilder builder, @Nonnull GemInfusingStationRecipe recipe, @Nonnull IFocusGroup focusGroup) {
-        energyInfoArea = new JEIEnergyInfoArea(156, 13, 8, 64, 60000,7800);
+        energyInfoArea = new JEIEnergyInfoArea(151, 6, 8, 64, 60000,7800);
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 86, 15).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.INPUT, 55, 15)
+        builder.addSlot(RecipeIngredientRole.INPUT, 81, 8).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.INPUT, 50, 8)
                 .addIngredients(ForgeTypes.FLUID_STACK, List.of(recipe.getFluid()))
                 .setFluidRenderer(64000, false, 16, 61);
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 0, 0)
                 .setOverlay(energyInfoArea, 0,0);
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 86, 60).addItemStack(recipe.getResultItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 81, 53).addItemStack(recipe.getResultItem());
     }
 
     @Override
     public void draw(GemInfusingStationRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-        animatedProgressArrow.draw(stack, 105, 33);
+        animatedProgressArrow.draw(stack, 100, 26);
     }
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {

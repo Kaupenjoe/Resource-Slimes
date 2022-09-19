@@ -31,7 +31,7 @@ public class GemInfusingStationBlock extends BaseEntityBlock {
         super(properties);
     }
 
-    private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 8, 16);
+    private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 12, 16);
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
@@ -102,7 +102,8 @@ public class GemInfusingStationBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        if (pLevel.isClientSide) return null;
         return createTickerHelper(pBlockEntityType, ModBlockEntities.GEM_INFUSING_STATION_BLOCK_ENTITY.get(),
-                GemInfusingStationBlockEntity::tick);
+                GemInfusingStationBlockEntity::serverTick);
     }
 }

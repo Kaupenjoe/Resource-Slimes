@@ -2,7 +2,6 @@ package net.kaupenjoe.resourceslimes.block.entity.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
 import net.kaupenjoe.resourceslimes.block.custom.GemInfusingStationBlock;
 import net.kaupenjoe.resourceslimes.block.entity.GemInfusingStationBlockEntity;
 import net.minecraft.client.Minecraft;
@@ -19,29 +18,23 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 
 public class GemInfusingStationBlockEntityRenderer implements BlockEntityRenderer<GemInfusingStationBlockEntity> {
-    public GemInfusingStationBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
 
+    private final ItemRenderer itemRenderer;
+
+    public GemInfusingStationBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+        itemRenderer = Minecraft.getInstance().getItemRenderer();
     }
 
     @Override
     public void render(GemInfusingStationBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack,
                        MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
 
-        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-
         ItemStack itemStack = pBlockEntity.getRenderStack();
         pPoseStack.pushPose();
         pPoseStack.translate(0.5f, 0.75f, 0.5f);
         pPoseStack.scale(0.35f, 0.35f, 0.35f);
-        pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90));
-
-        switch (pBlockEntity.getBlockState().getValue(GemInfusingStationBlock.FACING)) {
-            case NORTH -> pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(0));
-            case EAST -> pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(90));
-            case SOUTH -> pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(180));
-            case WEST -> pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(270));
-        }
-
+        pPoseStack.mulPose(Vector3f.YN.rotationDegrees(pBlockEntity.getBlockState().getValue(GemInfusingStationBlock.FACING).toYRot()));
+        pPoseStack.mulPose(Vector3f.XP.rotationDegrees(270));
         itemRenderer.renderStatic(itemStack, ItemTransforms.TransformType.GUI, getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()),
                 OverlayTexture.NO_OVERLAY, pPoseStack, pBufferSource, 1);
         pPoseStack.popPose();

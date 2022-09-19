@@ -29,6 +29,7 @@ public class ModTags {
         public static final TagKey<Item> EXTRACTS = tag("extracts/extracts");
 
         public static final TagKey<Item> OILS = tag("oils");
+        public static final TagKey<Item> SLIME_PEARL = tag("gems/slime_pearl");
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(ResourceSlimes.MOD_ID, name));

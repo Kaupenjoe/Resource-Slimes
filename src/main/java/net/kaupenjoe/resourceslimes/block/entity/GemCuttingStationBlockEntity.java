@@ -1,19 +1,16 @@
 package net.kaupenjoe.resourceslimes.block.entity;
 
 import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
-import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModItems;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncEnergyToClient;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncItemStackToClient;
 import net.kaupenjoe.resourceslimes.recipe.GemCuttingStationRecipe;
 import net.kaupenjoe.resourceslimes.screen.GemCuttingStationMenu;
-import net.kaupenjoe.resourceslimes.networking.ModMessages;
-import net.kaupenjoe.resourceslimes.networking.packets.PacketSyncFluidStackToClient;
 import net.kaupenjoe.resourceslimes.util.KaupenEnergyStorage;
 import net.kaupenjoe.resourceslimes.util.ModTags;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.Packet;
@@ -26,8 +23,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
@@ -46,7 +41,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
@@ -57,7 +51,7 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
         protected void onContentsChanged(int slot) {
             setChanged();
             if(!level.isClientSide()) {
-                ModMessages.sendToClients(new PacketSyncItemStackToClient(this, worldPosition));
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         }
 
@@ -88,8 +82,8 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
             @Override
             protected void onContentsChanged() {
                 setChanged();
-                if (!level.isClientSide()) {
-                    ModMessages.sendToClients(new PacketSyncFluidStackToClient(this.fluid, worldPosition));
+                if (!level.isClientSide) {
+                    level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
                 }
             }
 
@@ -108,7 +102,7 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
             @Override
             public void onEnergyChanged() {
                 setChanged();
-                ModMessages.sendToClients(new PacketSyncEnergyToClient(this.energy, worldPosition));
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         };
     }
@@ -149,10 +143,12 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
     }
 
     @Override
+    @Deprecated(forRemoval = true)
     public void setHandler(ItemStackHandler handler) {
         copyHandlerContents(handler);
     }
 
+    @Deprecated(forRemoval = true)
     private void copyHandlerContents(ItemStackHandler handler) {
         for (int i = 0; i < handler.getSlots(); i++) {
             itemHandler.setStackInSlot(i, handler.getStackInSlot(i));
@@ -163,7 +159,7 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
     public ItemStackHandler getItemStackHandler() {
         return this.itemHandler;
     }
-
+    @Deprecated(forRemoval = true)
     public void setFluid(FluidStack fluidStack) {
         this.FLUID_TANK.setFluid(fluidStack);
     }
@@ -171,7 +167,7 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
     public FluidStack getFluid() {
         return this.FLUID_TANK.getFluid();
     }
-
+    @Deprecated(forRemoval = true)
     public void setEnergyLevel(int energyLevel) {
         this.ENERGY_STORAGE.setEnergy(energyLevel);
     }
@@ -208,7 +204,6 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        ModMessages.sendToClients(new PacketSyncFluidStackToClient(this.FLUID_TANK.getFluid(), worldPosition));
         return new GemCuttingStationMenu(pContainerId, pInventory, this, this.data);
     }
 
@@ -275,7 +270,7 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
         tag.put("inventory", itemHandler.serializeNBT());
         tag.putInt("gem_cutting_station.progress", progress);
         tag = FLUID_TANK.writeToNBT(tag);
-        tag.putInt("energy", ENERGY_STORAGE.getEnergyStored());
+        tag.put("energy", ENERGY_STORAGE.serializeNBT());
 
         super.saveAdditional(tag);
     }
@@ -286,7 +281,7 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         progress = nbt.getInt("gem_cutting_station.progress");
         FLUID_TANK.readFromNBT(nbt);
-        ENERGY_STORAGE.setEnergy(nbt.getInt("energy"));
+        ENERGY_STORAGE.deserializeNBT(nbt.get("energy"));
     }
 
     public void drops() {
@@ -298,24 +293,22 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, GemCuttingStationBlockEntity pBlockEntity) {
-        if(pLevel.isClientSide()) {
-            return;
-        }
-
-        if(hasRecipe(pBlockEntity) && hasEnoughEnergy(pBlockEntity)) {
-            pBlockEntity.progress++;
-            extractEnergy(pBlockEntity);
-            setChanged(pLevel, pPos, pState);
-            if(pBlockEntity.progress >= pBlockEntity.maxProgress) {
-                craftItem(pBlockEntity);
+    public static void serverTick(Level pLevel, BlockPos pPos, BlockState pState, GemCuttingStationBlockEntity pBlockEntity) {
+        if (!pBlockEntity.itemHandler.getStackInSlot(1).isEmpty() && !pBlockEntity.itemHandler.getStackInSlot(2).isEmpty()) {
+            if (hasRecipe(pBlockEntity) && hasEnoughEnergy(pBlockEntity)) {
+                pBlockEntity.progress++;
+                extractEnergy(pBlockEntity);
+                if (pBlockEntity.progress >= pBlockEntity.maxProgress) {
+                    craftItem(pBlockEntity);
+                }
+                setChanged(pLevel, pPos, pState);
+            } else {
+                pBlockEntity.resetProgress();
             }
         } else {
             pBlockEntity.resetProgress();
-            setChanged(pLevel, pPos, pState);
         }
-
-        if(hasWaterSourceInSlot(pBlockEntity)) {
+        if (hasWaterSourceInSlot(pBlockEntity)) {
             transferItemWaterToWaterTank(pBlockEntity);
         }
     }
@@ -399,7 +392,11 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
     }
 
     private void resetProgress() {
-        this.progress = 0;
+        if (this.progress != 0) {
+            this.progress = 0;
+            setChanged();
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+        }
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack output) {
@@ -418,9 +415,13 @@ public class GemCuttingStationBlockEntity extends ModSlimeBlockEntity {
 
     @Override
     public CompoundTag getUpdateTag() {
-        CompoundTag compound = saveWithoutMetadata();
-        load(compound);
-
-        return compound;
+        return saveWithoutMetadata();
+    }
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+        if (Minecraft.getInstance().player.containerMenu instanceof GemCuttingStationMenu gemCuttingStationMenu && gemCuttingStationMenu.blockEntity == this) {
+            gemCuttingStationMenu.setFluid(getFluid());
+        }
     }
 }

@@ -13,6 +13,7 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
+@Deprecated(forRemoval = true) // Not in use anymore
 public class PacketSyncFluidStackToClient {
     private final FluidStack fluidStack;
     private final BlockPos pos;

@@ -43,14 +43,14 @@ public class GemInfusingStationScreen extends AbstractContainerScreen<GemInfusin
     }
 
     private void renderFluidArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 55, 15)) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 55, 13)) {
             renderTooltip(pPoseStack, renderer.getTooltip(menu.getFluid(), TooltipFlag.Default.NORMAL),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }
 
     private void renderEnergyArea(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 13, 8, 64)) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 11, 8, 64)) {
             renderTooltip(pPoseStack, energyInfoArea.getTooltips(),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
@@ -68,13 +68,13 @@ public class GemInfusingStationScreen extends AbstractContainerScreen<GemInfusin
 
         renderProgressArrow(pPoseStack, x, y);
 
-        renderer.render(pPoseStack, x + 55,y + 15, menu.getFluid());
+        renderer.render(pPoseStack, x + 55,y + 13, menu.getFluid());
         energyInfoArea.draw(pPoseStack);
     }
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y) {
         if(menu.isCrafting()) {
-            blit(pPoseStack, x + 105, y + 33, 176, 0, 8, menu.getScaledProgress());
+            blit(pPoseStack, x + 105, y + 31, 176, 0, 8, menu.getScaledProgress());
         }
     }
 
@@ -91,7 +91,7 @@ public class GemInfusingStationScreen extends AbstractContainerScreen<GemInfusin
 
     private void assignEnergyInfoArea() {
         energyInfoArea = new EnergyInfoArea(((width - imageWidth) / 2) +  156,
-                ((height - imageHeight) / 2) + 13, menu.blockEntity.getEnergyStorage());
+                ((height - imageHeight) / 2) + 11, menu.blockEntity.getEnergyStorage());
     }
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY) {
