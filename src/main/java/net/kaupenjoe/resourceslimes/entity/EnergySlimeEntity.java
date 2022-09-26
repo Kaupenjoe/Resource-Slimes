@@ -1,5 +1,6 @@
 package net.kaupenjoe.resourceslimes.entity;
 
+import net.kaupenjoe.resourceslimes.block.entity.EnergyReceiverBlockEntity;
 import net.kaupenjoe.resourceslimes.particle.ModParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -24,7 +25,7 @@ public class EnergySlimeEntity extends Slime {
         if(!isDeadOrDying()) {
             AABB boundingBox = this.getBoundingBox().inflate(5);
             List<BlockEntity> availableEnergyBlockEntities = BlockPos.betweenClosedStream(boundingBox)
-                    .filter(p -> level.getBlockState(p).hasBlockEntity())
+                    .filter(p -> level.getBlockState(p).hasBlockEntity() && level.getBlockEntity(p) instanceof EnergyReceiverBlockEntity)
                     .map(this::getEntityFromState)
                     .filter(bE -> bE != null && bE.getCapability(CapabilityEnergy.ENERGY).isPresent()).toList();
 

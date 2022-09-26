@@ -33,6 +33,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(SlimeIncubationStationBlockEntity::new,
                             ModBlocks.SLIME_INCUBATION_STATION.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<EnergyReceiverBlockEntity>> ENERGY_RECEIVER =
+            BLOCK_ENTITIES.register("energy_receiver", () ->
+                    BlockEntityType.Builder.of(EnergyReceiverBlockEntity::new,
+                            ModBlocks.ENERGY_RECEIVER.get()).build(null));
+
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

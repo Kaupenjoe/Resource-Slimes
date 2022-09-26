@@ -1,10 +1,7 @@
 package net.kaupenjoe.resourceslimes.block;
 
 import net.kaupenjoe.resourceslimes.ResourceSlimes;
-import net.kaupenjoe.resourceslimes.block.custom.GemCuttingStationBlock;
-import net.kaupenjoe.resourceslimes.block.custom.GemInfusingStationBlock;
-import net.kaupenjoe.resourceslimes.block.custom.SlimeExtractCleaningStationBlock;
-import net.kaupenjoe.resourceslimes.block.custom.SlimeIncubationStationBlock;
+import net.kaupenjoe.resourceslimes.block.custom.*;
 import net.kaupenjoe.resourceslimes.fluid.ModFluids;
 import net.kaupenjoe.resourceslimes.item.ModCreativeModeTab;
 import net.kaupenjoe.resourceslimes.item.ModItems;
@@ -101,6 +98,10 @@ public class ModBlocks {
             ModCreativeModeTab.RESOURCE_SLIMES);
     public static final RegistryObject<Block> SLIME_INCUBATION_STATION = registerBlock("slime_incubation_station",
             () -> new SlimeIncubationStationBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),
+            ModCreativeModeTab.RESOURCE_SLIMES);
+
+    public static final RegistryObject<Block> ENERGY_RECEIVER = registerBlock("energy_receiver",
+            () -> new EnergyReceiverBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.5f).noOcclusion()),
             ModCreativeModeTab.RESOURCE_SLIMES);
 
 
