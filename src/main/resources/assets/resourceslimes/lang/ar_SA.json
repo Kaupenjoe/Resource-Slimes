@@ -57,7 +57,7 @@
   "fluid.resourceslimes.black_opal_slime_fluid": "سائل السلايم الأوبال أسود",
   "fluid.resourceslimes.pink_slime_pearl_slime_fluid": "سائل السلايم اللؤلؤ الوردي",
   "itemGroup.resourceslimetab": "قائمة موارد السلايم",
-  "itemGroup.resourceslime_extract_tab": "Resource Slimes Extract Tab",
+  "itemGroup.resourceslime_extract_tab": "قائمة مستخلصات موارد السلايم",
   "jei.integration.resourceslimes.tooltip.liquid.amount.with.capacity": "%s / %s ملي دلو",
   "jei.integration.resourceslimes.tooltip.liquid.amount": "%s ملي دلو",
   "entity.resourceslimes.resource_slime": "موارد السلايم",
